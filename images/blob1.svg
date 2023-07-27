@@ -1,0 +1,10 @@
+<svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <clipPath id="a">
+            <path fill="currentColor" d="M812.5 637Q658 774 493.5 785.5t-302-137Q54 500 158.5 294.5T462 155q199 66 352 205.5T812.5 637Z"/>
+        </clipPath>
+    </defs>
+    <g clip-path="url(#a)">
+        <path fill="#000000" d="M812.5 637Q658 774 493.5 785.5t-302-137Q54 500 158.5 294.5T462 155q199 66 352 205.5T812.5 637Z"/>
+    </g>
+</svg>
