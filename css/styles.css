@@ -7,7 +7,7 @@ body {
     margin:0;
     padding: 0;
     
-    background-color:rgb(11, 28, 47);
+    background-color:#0b1c2f;
 
     fill:rgba(255, 255, 255, 0.2);
     background-size:656px 656px;
@@ -36,20 +36,22 @@ h1 {
 }
 
 h1 span.box {
-    background-color: #141553;
+    background-color: #FFB1A4;
+    color: #0b1c2f;
 
-    color:#FFF;
     display: inline-block;
     padding:0 1vw;
     margin-left:-1vw;
 }
 
+/*
 h1 span.cutout {
     background-image: linear-gradient(45deg, rgb(127,201,221) 0%, rgb(139,149,245) 100%);
     background-clip:text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+*/
 
 a, a:visited {
     font-weight:800;
@@ -81,7 +83,7 @@ h2 + h3 {
 
 h2 span {
     background: #FFB1A4;
-    color: rgb(11, 28, 47);
+    color: #0b1c2f;
     display: inline-block;
     padding:0 1vw;
 }
