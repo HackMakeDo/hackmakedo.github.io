@@ -116,3 +116,7 @@ img.blob2 {
 a[href^="mailto:"] {
     font-size:2vw;
 }
+
+#links {
+ text-align: center;
+}
