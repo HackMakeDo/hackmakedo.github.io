@@ -120,3 +120,7 @@ a[href^="mailto:"] {
 #links {
  text-align: center;
 }
+
+small.company-info {
+    margin-top:1rem;
+}
