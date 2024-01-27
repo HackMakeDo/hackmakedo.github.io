@@ -122,5 +122,6 @@ a[href^="mailto:"] {
 }
 
 small.company-info {
-    margin-top:1rem;
+    margin-top:3rem;
+    color:#fff;
 }
