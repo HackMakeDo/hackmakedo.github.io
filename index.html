@@ -4,7 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hack Make Do: Warren Buckley</title>
+    <meta name="description"
+        content="A developer consultant who loves to hack, make and do and improve the developer experience journey.">
+    <link rel="canonical" href="https://hackmakedo.com/">
+    <link rel="icon" href="/images/hack-make-do-logo-sq.png">
 
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Hack Make Do: Warren Buckley">
+    <meta property="og:description"
+        content="A developer consultant who loves to hack, make and do and improve the developer experience journey.">
+    <meta property="og:url" content="https://hackmakedo.com/">
+    <meta property="og:image" content="https://hackmakedo.com/images/hack-make-do-logo-sq.png">
+    <meta name="twitter:card" content="summary">
 
     <!-- Google Font: Montserrat-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,25 +29,61 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "url": "https://hackmakedo.com",
-        "sameAs": ["https://www.linkedin.com/company/hackmakedo/", "https://www.youtube.com/@WarrenBuckley"],
-        "logo": "https://hackmakedo.com/images/hack-make-do-logo-sq.png",
-        "name": "Hack Make Do Ltd",
-        "description": "A developer consultant who loves to hack, make and do and improve the developer experience journey",
-        "email": "warren@hackmakedo.com",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Castle House, Castle Street",
-            "addressLocality": "Guildford",
-            "addressRegion": "Surrey",
-            "addressCountry": "UK",
-            "postalCode": "GU1 3UW"
-        },
-        "numberOfEmployees": {
-            "@type": "QuantitativeValue",
-            "value": 2
-        }
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "https://hackmakedo.com/#organization",
+                "url": "https://hackmakedo.com",
+                "sameAs": ["https://www.linkedin.com/company/hackmakedo/", "https://www.youtube.com/@WarrenBuckley"],
+                "logo": "https://hackmakedo.com/images/hack-make-do-logo-sq.png",
+                "name": "Hack Make Do Ltd",
+                "description": "A developer consultant who loves to hack, make and do and improve the developer experience journey",
+                "email": "warren@hackmakedo.com",
+                "founder": { "@id": "https://hackmakedo.com/#person" },
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Castle House, Castle Street",
+                    "addressLocality": "Guildford",
+                    "addressRegion": "Surrey",
+                    "addressCountry": "UK",
+                    "postalCode": "GU1 3UW"
+                },
+                "numberOfEmployees": {
+                    "@type": "QuantitativeValue",
+                    "value": 2
+                }
+            },
+            {
+                "@type": "Person",
+                "@id": "https://hackmakedo.com/#person",
+                "name": "Warren Buckley",
+                "url": "https://hackmakedo.com",
+                "image": "https://hackmakedo.com/images/warren-buckley.jpg",
+                "jobTitle": "Freelance Software Engineer",
+                "description": "Hacker, maker, do'er. About twenty years of building with Umbraco, from a panicked first search to the rebuilt backoffice.",
+                "worksFor": { "@id": "https://hackmakedo.com/#organization" },
+                "sameAs": [
+                    "https://github.com/warrenbuckley",
+                    "https://www.linkedin.com/in/warrenbuckley/",
+                    "https://www.youtube.com/@WarrenBuckley",
+                    "https://umbracocommunity.social/@warrenbuckley",
+                    "https://twitter.com/warrenbuckley",
+                    "https://forum.umbraco.com/u/warren"
+                ],
+                "knowsAbout": ["Umbraco CMS", "ASP.NET Core", "C#", "TypeScript", "Content management systems", "Developer experience"],
+                "award": [
+                    "Umbraco MVP 2007",
+                    "Umbraco MVP 2008",
+                    "Umbraco MVP 2009",
+                    "Umbraco MVP 2010",
+                    "Umbraco MVP 2014",
+                    "Umbraco Lifetime MVP 2015",
+                    "Umbraco MVP 2024",
+                    "Umbraco MVP 2025",
+                    "Umbraco MVP 2026"
+                ]
+            }
+        ]
     }
     </script>
 </head>

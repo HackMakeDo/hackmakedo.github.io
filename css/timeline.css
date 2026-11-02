@@ -1,0 +1,796 @@
+/* Layout: one long vertical spine. Years hang left of it, entries sit right.
+   A WebGL contour field sits behind everything and drifts with scroll. */
+:root {
+    --bg: #0b1c2f;
+    --fg: #eceaf7;
+    --muted: #a9abd2;
+    --rule: #2a2f66;
+    --glow-a: #6f7dff;
+    --glow-b: #ffb1a4;
+    --c-role: #8e99ff;
+    --c-award: #ffb1a4;
+    --c-proj: #eceaf7;
+    --c-comm: #7fe0c3;
+    --panel: #16293dcc;
+    --display: "Montserrat", "Avenir Next", "Segoe UI", sans-serif;
+    --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+    --spine-x: 8px;
+    color-scheme: dark;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg);
+    color: var(--fg);
+    font: 400 1.0625rem/1.6 var(--body);
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+#field {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    display: block;
+}
+
+.page {
+    position: relative;
+    z-index: 1;
+    max-width: 62rem;
+    margin: 0 auto;
+    padding-block: clamp(2.5rem, 8vw, 6rem) 5rem;
+}
+
+a {
+    color: inherit;
+    text-decoration-color: var(--glow-b);
+    text-underline-offset: .2em;
+}
+
+a:focus-visible,
+label:focus-within {
+    outline: 3px solid var(--glow-a);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* hero */
+.hero {
+    padding-bottom: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.hero h1 {
+    font: 800 clamp(3.2rem, 13vw, 7rem)/.88 var(--display);
+    letter-spacing: -.015em;
+    margin: 0 0 1.5rem;
+    text-wrap: balance;
+}
+
+.hero p {
+    max-width: 36rem;
+    font-size: clamp(1.15rem, 2.4vw, 1.4rem);
+    line-height: 1.45;
+    margin: 0 0 2rem;
+    color: var(--fg);
+}
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem 1.6rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: var(--muted);
+    font-size: .95rem;
+}
+
+.legend.tight {
+    margin: 0 0 1rem;
+}
+
+.visually-hidden {
+    position: absolute;
+    left: -9999px;
+}
+
+/* shapes shared by legend, tags and spine nodes */
+.shape {
+    display: inline-block;
+    width: .8rem;
+    height: .8rem;
+    flex: none;
+    vertical-align: -.08em;
+    margin-right: .5rem;
+}
+
+.t-role .shape {
+    background: var(--c-role);
+    border-radius: 50%;
+}
+
+.t-award .shape {
+    background: var(--c-award);
+    transform: rotate(45deg) scale(.85);
+}
+
+.t-proj .shape {
+    background: var(--c-proj);
+    border-radius: 50%;
+}
+
+.t-comm .shape {
+    background: var(--c-comm);
+    border-radius: 2px;
+}
+
+/* timeline */
+.tl {
+    position: relative;
+    --spine-x: 8px;
+}
+
+.tl::before,
+.tl::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--spine-x);
+    width: 2px;
+    margin-left: -1px;
+}
+
+.tl::before,
+.tl::after {
+    z-index: 0;
+}
+
+.tl::before {
+    background: var(--rule);
+}
+
+.tl::after {
+    background: linear-gradient(var(--glow-a), var(--glow-b));
+    transform-origin: top;
+    transform: scaleY(var(--p, 0));
+}
+
+/* Progressive enhancement: exact native replacement for the JS fill above.
+   onScroll() in scripts/timeline.js computes
+   p = clamp((innerHeight * 0.6 - entry.top) / entry.height, 0, 1) — i.e. the
+   fill starts when .tl's top crosses the line 60% down the viewport, and
+   finishes when .tl's bottom crosses that same line.
+   view-timeline-inset shrinks the scrollport's bottom edge inward by 40% of
+   its own height, moving that edge to exactly the 60%-down line. entry-crossing
+   is defined as 0% when the subject's top meets the scrollport's (inset) end
+   edge and 100% when the subject's bottom meets that same edge — algebraically
+   the same formula as above. animation-timing-function must be linear: the
+   default `ease` warps scroll-position into eased progress, which is what
+   caused the fill to race ahead mid-scroll in an earlier attempt — verified
+   against the live page with no diff at any tested scroll position once this
+   was added. JS keeps running regardless, as the fallback. */
+@supports (animation-timeline: view()) {
+    .tl {
+        view-timeline-name: --tl-progress;
+        view-timeline-axis: block;
+        view-timeline-inset: 0% 40%;
+    }
+
+    .tl::after {
+        animation-name: tl-fill;
+        animation-timeline: --tl-progress;
+        animation-range: entry-crossing 0% entry-crossing 100%;
+        animation-timing-function: linear;
+        animation-duration: 1ms;
+        animation-fill-mode: both;
+    }
+
+    @keyframes tl-fill {
+        from {
+            transform: scaleY(0);
+        }
+
+        to {
+            transform: scaleY(1);
+        }
+    }
+}
+
+.entry {
+    position: relative;
+    padding: 0 0 clamp(2.75rem, 7vw, 4.5rem) calc(var(--spine-x) + 1.6rem);
+}
+
+.node {
+    /* --node-align centers the dot on the first text line beside it (the year on
+       mobile, the tag on desktop); it's tuned by eye to the display font's
+       metrics, so re-check it if --display or the .year/.tag font sizes change. */
+    --node-size: 16px;
+    --node-align: .736rem;
+    z-index: 1;
+    position: absolute;
+    left: var(--spine-x);
+    top: calc(clamp(2rem, 6vw, 3.4rem) + .3rem + var(--node-align) - var(--node-size) / 2);
+    width: var(--node-size);
+    height: var(--node-size);
+    margin-left: calc(var(--node-size) / -2);
+    background: var(--bg);
+    transition: transform .35s ease, opacity .35s ease;
+    opacity: .45;
+    transform: scale(.75);
+}
+
+.entry.reached .node {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.node i {
+    position: absolute;
+    inset: 0;
+}
+
+.t-role .node i {
+    background: var(--c-role);
+    border-radius: 50%;
+}
+
+.t-award .node i {
+    background: var(--c-award);
+    transform: rotate(45deg) scale(.8);
+}
+
+.t-proj .node i {
+    background: var(--c-proj);
+    border-radius: 50%;
+}
+
+.t-comm .node i {
+    background: var(--c-comm);
+    border-radius: 3px;
+}
+
+.year {
+    font: 700 clamp(2rem, 6vw, 3.4rem)/1 var(--display);
+    letter-spacing: -.03em;
+    margin: 0 0 .3rem;
+}
+
+.year small {
+    font: 400 1rem var(--body);
+    letter-spacing: 0;
+    color: var(--muted);
+    margin-left: .6rem;
+}
+
+.tag {
+    margin: 0 0 .35rem;
+    font-size: .95rem;
+    color: var(--muted);
+}
+
+.entry h2 {
+    font: 700 clamp(1.4rem, 3.2vw, 1.9rem)/1.15 var(--display);
+    letter-spacing: -.02em;
+    margin: 0 0 .6rem;
+    text-wrap: balance;
+}
+
+.entry p.body {
+    margin: 0;
+    max-width: 38rem;
+}
+
+.entry p.body+p.body {
+    margin-top: .6rem;
+}
+
+@media (min-width: 760px) {
+    .tl {
+        --spine-x: 11rem;
+    }
+
+    .entry {
+        padding-left: calc(var(--spine-x) + 2.5rem);
+    }
+
+    .year-wrap {
+        position: absolute;
+        left: 0;
+        width: calc(var(--spine-x) - 1.75rem);
+        text-align: right;
+        top: 0;
+    }
+
+    .year {
+        margin: 0;
+    }
+
+    .year small {
+        display: block;
+        margin: .25rem 0 0;
+    }
+
+    .node {
+        top: calc(var(--node-align) - var(--node-size) / 2);
+    }
+}
+
+.links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem 1.6rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* hire nudge, bridging the timeline into the numbers/CTA sections below */
+.hire-nudge {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    margin: clamp(2rem, 6vw, 3.5rem) 0;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border: 1px solid var(--rule);
+    border-radius: 18px;
+    background: var(--panel);
+}
+
+.hire-nudge p {
+    margin: 0;
+    font: 600 clamp(1.15rem, 2.4vw, 1.4rem)/1.3 var(--display);
+    max-width: 30rem;
+}
+
+.hire-btn {
+    flex: none;
+    display: inline-block;
+    padding: .9rem 2rem;
+    border-radius: 999px;
+    background: var(--glow-b);
+    color: var(--bg);
+    font: 700 1.1rem var(--body);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform .15s ease;
+}
+
+.hire-btn:hover {
+    transform: scale(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hire-btn {
+        transition: none;
+    }
+}
+
+/* commit chart */
+.cms {
+    padding-top: clamp(3rem, 8vw, 6rem);
+}
+
+.cms h2 {
+    font: 800 clamp(2rem, 6vw, 3.6rem)/1 var(--display);
+    letter-spacing: -.035em;
+    margin: 0 0 1rem;
+}
+
+.cms .lede {
+    max-width: 38rem;
+    margin: 0 0 1.75rem;
+}
+
+.facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2.5rem;
+    margin: 0 0 2rem;
+    padding: 0;
+    list-style: none;
+}
+
+.facts b {
+    display: block;
+    font: 800 clamp(2rem, 5vw, 3rem)/1 var(--display);
+    letter-spacing: -.03em;
+    font-variant-numeric: tabular-nums;
+}
+
+.facts span {
+    color: var(--muted);
+    font-size: .95rem;
+}
+
+.chartbox {
+    margin: 0;
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+.chart {
+    display: block;
+    width: 100%;
+    min-width: 30rem;
+    height: auto;
+}
+
+.chart .grid {
+    stroke: var(--rule);
+    stroke-width: 1;
+}
+
+.chart .axis {
+    fill: var(--muted);
+    font: 400 12px var(--body);
+    font-variant-numeric: tabular-nums;
+}
+
+.sw {
+    display: inline-block;
+    width: .8rem;
+    height: .8rem;
+    border-radius: 2px;
+    margin-right: .5rem;
+    vertical-align: -.08em;
+}
+
+.cms .note {
+    max-width: 38rem;
+    margin: 1rem 0 0;
+    color: var(--muted);
+    font-size: .95rem;
+}
+
+.mvp-badge {
+    float: right;
+    width: 7.5rem;
+    height: auto;
+    margin: 0 0 .5rem 1.5rem;
+}
+
+.entry::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* 3D chart */
+.c3d-toggles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin: 0 0 .75rem;
+}
+
+.c3d-toggles button,
+#cta-copy {
+    font: 600 .95rem var(--body);
+    color: var(--fg);
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: .4rem .9rem;
+    cursor: pointer;
+}
+
+.c3d-toggles button[aria-pressed="false"] {
+    opacity: .5;
+    text-decoration: line-through;
+}
+
+.c3d-toggles button:hover,
+#cta-copy:hover {
+    border-color: var(--glow-a);
+}
+
+.c3d-toggles button:focus-visible,
+#cta-copy:focus-visible,
+.c3d:focus-visible {
+    outline: 3px solid var(--glow-a);
+    outline-offset: 3px;
+}
+
+.sw.s0 {
+    background: var(--glow-a);
+}
+
+.sw.s1 {
+    background: var(--glow-b);
+}
+
+.sw.s2 {
+    background: var(--c-comm);
+}
+
+.c3d {
+    position: relative;
+    height: clamp(320px, 54vw, 540px);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    background: var(--panel);
+    overflow: hidden;
+    touch-action: pan-y;
+    cursor: grab;
+}
+
+.c3d.drag {
+    cursor: grabbing;
+}
+
+.c3d canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: pan-y;
+}
+
+.c3d-labels {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    font: 600 .8rem var(--body);
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.c3d-labels span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+}
+
+.c3d-tip {
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    background: var(--fg);
+    color: var(--bg);
+    font: 600 .9rem var(--body);
+    padding: .3rem .6rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 2;
+}
+
+.datatable {
+    margin: 1rem 0 0;
+}
+
+.datatable summary {
+    cursor: pointer;
+    color: var(--muted);
+}
+
+.tablewrap {
+    overflow-x: auto;
+    max-width: 100%;
+    margin-top: .75rem;
+}
+
+.tablewrap table {
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+    min-width: 28rem;
+}
+
+.tablewrap caption {
+    text-align: left;
+    color: var(--muted);
+    padding-bottom: .5rem;
+}
+
+.tablewrap th,
+.tablewrap td {
+    padding: .35rem .9rem .35rem 0;
+    text-align: left;
+    border-bottom: 1px solid var(--rule);
+}
+
+.chart .line {
+    fill: none;
+    stroke-width: 3;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+.chart .dot {
+    stroke: var(--bg);
+    stroke-width: 2;
+}
+
+.chart .l-cs {
+    stroke: var(--glow-a);
+    fill: var(--glow-a);
+}
+
+.chart .l-js {
+    stroke: var(--glow-b);
+    fill: var(--glow-b);
+}
+
+.chart .l-ts {
+    stroke: var(--c-comm);
+    fill: var(--c-comm);
+}
+
+.chart polyline.line {
+    fill: none;
+}
+
+.facts b span {
+    color: inherit;
+    font-size: inherit;
+}
+
+.od {
+    display: inline-block;
+    height: 1.08em;
+    overflow: hidden;
+    vertical-align: top;
+}
+
+.od-strip {
+    display: block;
+    transform: translateY(calc(var(--d) * -1.08em));
+}
+
+.od-strip>span {
+    display: block;
+    height: 1.08em;
+    line-height: 1.08;
+}
+
+.facts b.spin .od-strip {
+    animation: roll 1.5s cubic-bezier(.2, .75, .2, 1) backwards;
+    animation-delay: calc(var(--i) * 90ms);
+}
+
+@keyframes roll {
+    from {
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .facts b.spin .od-strip {
+        animation: none;
+    }
+}
+
+/* call to action */
+.cta {
+    padding-top: clamp(3rem, 8vw, 6rem);
+}
+
+.cta h2 {
+    font: 800 clamp(2.2rem, 7vw, 4.6rem)/.95 var(--display);
+    letter-spacing: -.04em;
+    margin: 0 0 1rem;
+    text-wrap: balance;
+}
+
+.cta h3 {
+    font: 600 clamp(1.4rem, 3.2vw, 1.9rem)/1.15 var(--display);
+    letter-spacing: -.02em;
+    margin: 2.5rem 0 .5rem;
+}
+
+.cta .lede {
+    max-width: 38rem;
+    margin: 0 0 1rem;
+}
+
+.offers {
+    margin: 0 0 1.5rem;
+    padding-left: 1.2rem;
+    max-width: 38rem;
+}
+
+.cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 2rem;
+}
+
+.cta .mail {
+    margin: 0;
+    font: 600 1.25rem var(--display);
+}
+
+.cta .mail #cta-mail {
+    user-select: all;
+    margin-right: .5rem;
+}
+
+#cta-copied {
+    margin-left: .6rem;
+    font: 400 .95rem var(--body);
+    color: var(--muted);
+}
+
+/* order toggle */
+.order {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin: 1.5rem 0 0;
+}
+
+.order span {
+    color: var(--muted);
+    font-size: .95rem;
+}
+
+#order-btn {
+    font: 600 .95rem var(--body);
+    color: var(--fg);
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: .45rem 1rem;
+    cursor: pointer;
+}
+
+#order-btn:hover {
+    border-color: var(--fg);
+}
+
+#order-btn:focus-visible {
+    outline: 2px solid var(--glow-a);
+    outline-offset: 2px;
+}
+
+/* project links */
+.proj-link {
+    display: inline-block;
+    margin-top: .75rem;
+    font: 600 .9rem var(--body);
+    color: var(--glow-b);
+    background: transparent;
+    border: 2px solid var(--glow-b);
+    border-radius: 999px;
+    padding: .4rem 1rem;
+    text-decoration: none;
+}
+
+.proj-link:hover {
+    background: var(--glow-b);
+    color: var(--bg);
+}
+
+/* year ticker */
+#ticker {
+    position: fixed;
+    z-index: 2;
+    right: max(16px, env(safe-area-inset-right, 0px));
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    font: 800 clamp(1.4rem, 4vw, 2.2rem)/1 var(--display);
+    letter-spacing: -.03em;
+    font-variant-numeric: tabular-nums;
+    background: var(--panel);
+    border: 2px solid var(--glow-b);
+    border-radius: 999px;
+    padding: .35rem .9rem;
+    pointer-events: none;
+    backdrop-filter: blur(6px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .node {
+        transition: none;
+    }
+}
