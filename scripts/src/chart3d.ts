@@ -1,4 +1,4 @@
-/* 3D commits/PRs bar chart, built on the global THREE loaded via <script> in timeline.html. */
+/* 3D commits/PRs bar chart, built on the global THREE loaded via <script> in timeline/index.html. */
 declare global {
     interface Window {
         THREE?: typeof import('three');

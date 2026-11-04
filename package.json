@@ -2,7 +2,7 @@
   "name": "hackmakedo-timeline",
   "private": true,
   "version": "1.0.0",
-  "description": "Source for the timeline page scripts at hackmakedo.com/timeline.html",
+  "description": "Source for the timeline page scripts at hackmakedo.com/timeline/",
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch"

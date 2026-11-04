@@ -1,18 +1,21 @@
 # Warren Buckley
 
-> Warren Buckley is a freelance software engineer and nine-time Umbraco MVP (including the Umbraco Lifetime MVP), consulting through Hack Make Do on Umbraco CMS and developer experience.
+> Warren Buckley is a freelance Umbraco developer and consultant, and one of the few in the UK who has worked inside Umbraco HQ itself — on the CMS Core team and as a Developer Advocate. He is a nine-time Umbraco MVP (including the Umbraco Lifetime MVP), and is available for hire through Hack Make Do for Umbraco CMS development, consulting, and developer experience work, working remotely with clients across the UK.
 
 Warren has worked with Umbraco since 2005. He worked at Umbraco HQ in Copenhagen twice: as a web developer and events organiser (2011-2012), then on the CMS Core team and later as a developer advocate (2016-2023). He left Umbraco HQ in June 2023 and started consulting independently through Hack Make Do in September 2023, focused on Umbraco and improving the developer experience for teams building on it.
 
 ## Pages
 
 - [Homepage](https://hackmakedo.com/): Who Warren is, what Hack Make Do offers, and how to contact him.
-- [Career timeline](https://hackmakedo.com/timeline.html): A full year-by-year history of his roles, Umbraco MVP awards, open source projects, and community contributions from 2002 to today, plus his commit and pull request history to the Umbraco-CMS repository.
+- [Career timeline](https://hackmakedo.com/timeline/): A full year-by-year history of his roles, Umbraco MVP awards, open source projects, and community contributions from 2002 to today, plus his commit and pull request history to the Umbraco-CMS repository.
+- [Using SignalR and IOptionsMonitor with Umbraco Bellissima for reactive .NET Options](https://blog.hackmakedo.com/2025/04/28/using-signalr-ioptionsmonitor-with-umbraco-bellissima-for-reactive-net-options/): A technical walkthrough on building reactive .NET configuration options in Umbraco using SignalR and IOptionsMonitor.
+- [Quick Tip: How to prevent HTML in Umbraco Form fields](https://blog.hackmakedo.com/2025/04/09/quick-tip-how-to-prevent-html-in-umbraco-form-fields/): A short fix for stopping raw HTML being submitted through Umbraco Forms fields.
 
 ## Key facts
 
+- Available for hire: freelance Umbraco developer and consultant, working remotely with clients across the UK.
 - Umbraco MVP: 2007, 2008, 2009, 2010, 2014, and Umbraco Lifetime MVP in 2015; MVP again in 2024, 2025, and 2026 (9 years total).
-- Current role: freelance software engineer at Hack Make Do, since September 2023.
+- Current role: freelance Umbraco developer and consultant at Hack Make Do, since September 2023.
 - Volunteer member of the Umbraco Package Team.
 - Contact: warren@hackmakedo.com
 
