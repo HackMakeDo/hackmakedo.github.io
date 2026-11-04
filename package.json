@@ -1,0 +1,14 @@
+{
+  "name": "hackmakedo-timeline",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Source for the timeline page scripts at hackmakedo.com/timeline/",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.0",
+    "@types/three": "^0.128.0"
+  }
+}

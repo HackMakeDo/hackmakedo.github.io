@@ -121,6 +121,18 @@ a[href^="mailto:"] {
  text-align: center;
 }
 
+.tagline {
+    color: #fff;
+    max-width: 60vw;
+    margin: 1rem 0 0 0;
+}
+
+.tagline a {
+    margin: 0;
+    color: #FFB1A4;
+    text-decoration: underline;
+}
+
 small.company-info {
     margin-top:3rem;
     color:#fff;
