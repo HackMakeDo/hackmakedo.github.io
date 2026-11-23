@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import PageHeader from '../../../../components/PageHeader.astro';
+import Section from '../../../../components/Section.astro';
+import HireBanner from '../../../../components/HireBanner.astro';
+import BlogListing from '../../../../components/BlogListing.astro';
+import { getCollection } from 'astro:content';
+import { extraPagePaths, pageSlice } from '../../../../lib/blog-pagination';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+  return extraPagePaths('/blog/', allPosts.length);
+}
+
+const { page, totalPages } = Astro.props as { page: number; totalPages: number };
+const allPosts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+const posts = pageSlice(allPosts, page);
+---
+
+<BaseLayout
+  title={`Blog — page ${page} — Hack Make Do`}
+  description="Tutorials, code snippets and notes on Umbraco, the Bellissima backoffice, .NET and developer tooling, written since 2013."
+  ogImage="/og/blog.png"
+  currentPath="/blog/"
+>
+  <PageHeader
+    trail={[{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog/' }, { label: `Page ${page}` }]}
+    eyebrow="Blog"
+    title="Blog"
+    lead="Tutorials, code snippets and notes on Umbraco, the Bellissima backoffice, .NET and developer tooling, written since 2013."
+  />
+
+  <BlogListing posts={posts} page={page} totalPages={totalPages} base="/blog/" />
+
+  <Section class="hmd-pink" ariaLabel="Hire">
+    <HireBanner message="Need a hand with Umbraco? I'm available as a freelancer or contractor." />
+  </Section>
+</BaseLayout>

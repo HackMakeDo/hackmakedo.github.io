@@ -1,0 +1,25 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import Button from './Button.astro';
+
+/** The contact block: heading, one sentence, and the email address shown large with a copy button. */
+interface Props {
+  heading: { lead?: string; boxed: string; trail?: string; eyebrow?: string; id: string };
+  intro: string;
+  email: string;
+}
+const { heading, intro, email } = Astro.props;
+---
+
+<section class="hmd-contact">
+  <SectionHeading {...heading} />
+  <p>{intro}</p>
+  <div class="hmd-contact__email">
+    <a class="hmd-contact__address" href={`mailto:${email}`}>{email}</a>
+    <hmd-copy value={email}>
+      <Button variant="secondary" size="sm">Copy email</Button>
+    </hmd-copy>
+  </div>
+</section>
+
+<script src="../elements/index.ts"></script>

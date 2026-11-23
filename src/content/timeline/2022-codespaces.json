@@ -1,0 +1,9 @@
+{
+  "year": 2022,
+  "yearLabel": "2022",
+  "type": "project",
+  "title": "Codespaces for contributors",
+  "body": "Sets up the Umbraco-CMS dev container so a contributor can start in GitHub Codespaces. He writes a SQLite dev container feature when GitHub doesn't provide one, and wires up SMTP4Dev port forwarding.",
+  "links": [],
+  "order": 0
+}

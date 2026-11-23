@@ -1,0 +1,14 @@
+{
+  "year": 2024,
+  "yearLabel": "2024",
+  "type": "community",
+  "title": "Writes an article for Skrift",
+  "body": "Writes a Skrift tutorial on custom user permissions in the rebuilt Umbraco backoffice.",
+  "links": [
+    {
+      "label": "Skrift tutorial ↗",
+      "href": "https://skrift.io/issues/how-to-create-custom-umbraco-user-permissions-in-belissima/"
+    }
+  ],
+  "order": 6
+}

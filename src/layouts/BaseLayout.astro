@@ -1,0 +1,113 @@
+---
+import SkipLink from '../components/SkipLink.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import JsonLd from '../components/JsonLd.astro';
+import tokensCssRaw from '../styles/tokens.css?raw';
+import bundleCssRaw from '../styles/bundle.css?raw';
+import { personOrgGraph, SITE_URL } from '../lib/structured-data';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Overlay header (Home only) instead of the default sticky header. */
+  headerVariant?: 'sticky' | 'overlay';
+  currentPath?: string;
+  hireHref?: string;
+  /** Excludes this page from the Pagefind search index built after `astro build` (the styleguide). */
+  pagefindIgnore?: boolean;
+  /** Keeps this page out of search engines too (the styleguide). */
+  noindex?: boolean;
+  /** false for a page with no address of its own (the 404, served at any missing URL): no canonical or og:url. */
+  canonical?: boolean;
+  /** Additional schema.org objects for this page (BreadcrumbList, Article, FAQPage, SoftwareSourceCode…), alongside the sitewide Person/Organization graph. */
+  jsonLd?: object[];
+  /** og:image / twitter:image; defaults to the generic brand card for any page that doesn't pass its own. */
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  headerVariant = 'sticky',
+  currentPath,
+  hireHref,
+  pagefindIgnore = false,
+  noindex = false,
+  canonical = true,
+  jsonLd = [],
+  ogImage = '/og/home.png',
+} = Astro.props;
+
+/** Strip comments and collapse whitespace; no build dependency needed for ~30KB of hand-written CSS. */
+function minifyCss(css: string): string {
+  return css
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/\s+/g, ' ')
+    .replace(/\s*([{}:;,])\s*/g, '$1')
+    .replace(/;}/g, '}')
+    .trim();
+}
+
+const baseCss = `
+  * { box-sizing: border-box; }
+  :root { --hmd-sprinkles-image: url("/images/sprinkles.svg"); }
+  html { background: var(--ground); }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font-body); min-height: 100vh; }
+  img, svg { max-width: 100%; display: block; }
+  a { color: var(--accent-text); }
+  a:hover { color: var(--ink); }
+`;
+
+const inlineCss = minifyCss(tokensCssRaw) + minifyCss(bundleCssRaw) + minifyCss(baseCss);
+---
+
+<!doctype html>
+<html lang="en-GB" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#0b1c2f" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    {!noindex && canonical && <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />}
+    <link rel="alternate" type="application/rss+xml" title="Hack Make Do" href="/blog/rss.xml" />
+    {canonical && !noindex && (
+      <link rel="alternate" type="text/markdown" href={`${Astro.url.pathname.replace(/\/?$/, '/')}index.html.md`} />
+    )}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Hack Make Do" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {!noindex && canonical && <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />}
+    <meta property="og:image" content={new URL(ogImage, SITE_URL)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, SITE_URL)} />
+
+    {!noindex && <JsonLd data={personOrgGraph()} />}
+    {jsonLd.map((item) => <JsonLd data={item} />)}
+
+    <link rel="preload" href="/fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/source-sans-3-400.woff2" as="font" type="font/woff2" crossorigin />
+
+    <style set:html={inlineCss} />
+  </head>
+  <body>
+    <SkipLink />
+    {headerVariant === 'sticky' && <SiteHeader variant="sticky" currentPath={currentPath} hireHref={hireHref} />}
+    <main id="main" tabindex="-1" data-pagefind-body={pagefindIgnore ? undefined : true} data-pagefind-ignore={pagefindIgnore ? true : undefined}>
+      <span class="hmd-sr" data-pagefind-meta="title">{title}</span>
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

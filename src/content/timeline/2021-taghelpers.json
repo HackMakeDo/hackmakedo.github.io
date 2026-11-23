@@ -1,0 +1,18 @@
+{
+  "year": 2021,
+  "yearLabel": "2021",
+  "type": "project",
+  "title": "Our Umbraco TagHelpers",
+  "body": "Creates a community project of C# ASP.NET TagHelpers for Umbraco in October, kept in the umbraco-community organisation.",
+  "links": [
+    {
+      "label": "View on GitHub ↗",
+      "href": "https://github.com/umbraco-community/Our-Umbraco-TagHelpers"
+    },
+    {
+      "label": "View on Umbraco Marketplace ↗",
+      "href": "https://marketplace.umbraco.com/package/our.umbraco.taghelpers"
+    }
+  ],
+  "order": 2
+}

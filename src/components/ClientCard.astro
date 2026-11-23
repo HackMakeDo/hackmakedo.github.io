@@ -1,0 +1,62 @@
+---
+/**
+ * A wide card for client work: pink tag, client name, summary, a fact row, and either a
+ * recommendation or a project list beside it. Matches page-designs/Work.dc.html and
+ * CaseCouncil.dc.html exactly: every client card is the same size (no "hero" treatment),
+ * and only a client with its own case study page gets a name link and "Read the case
+ * study" - most don't (the agency-attributed cards are summary-only).
+ */
+interface Fact {
+  label: string;
+  value: string;
+}
+interface Quote {
+  text: string;
+  name: string;
+  role: string;
+}
+interface Props {
+  name: string;
+  href?: string;
+  summary: string;
+  agency?: string;
+  facts?: Fact[];
+  quote?: Quote;
+  projects?: string[];
+}
+const { name, href, summary, agency, facts, quote, projects } = Astro.props;
+const tag = agency ? `Client work · with ${agency}` : 'Client work';
+---
+
+<article class="hmd-card hmd-client">
+  <div class="hmd-client__story">
+    <p class="hmd-client__tag">{tag}</p>
+    <h3>{href ? <a href={href}>{name}</a> : name}</h3>
+    <p class="hmd-client__summary">{summary}</p>
+    {facts && facts.length > 0 && (
+      <dl class="hmd-client__facts">
+        {facts.map((fact) => (
+          <div><dt>{fact.label}</dt><dd>{fact.value}</dd></div>
+        ))}
+      </dl>
+    )}
+    {href && (
+      <div class="hmd-links">
+        <a class="hmd-link" href={href}>Read the case study</a>
+      </div>
+    )}
+  </div>
+  {quote ? (
+    <figure class="hmd-client__quote">
+      <blockquote>{quote.text}</blockquote>
+      <figcaption>{quote.name}<span>{quote.role}</span></figcaption>
+    </figure>
+  ) : projects && projects.length > 0 ? (
+    <div class="hmd-client__quote">
+      <p class="hmd-client__quote-label">Projects</p>
+      <ul class="hmd-client__project-list">
+        {projects.map((project) => <li>{project}</li>)}
+      </ul>
+    </div>
+  ) : null}
+</article>

@@ -1,0 +1,37 @@
+name: Lighthouse CI (full site)
+
+# Audits every built page, not just one per template (see lighthouse.yml, which runs
+# on every pull request). This list grows with the site - every blog post, case study,
+# topic and pagination page - so it's deliberately NOT on the pull_request trigger;
+# run it by hand from the Actions tab (or `npm run lighthouse:full` locally) whenever
+# you want the full picture, e.g. after a big content batch.
+on:
+  workflow_dispatch:
+
+jobs:
+  lighthouse-full:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        device: [mobile, desktop]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - run: npx lhci autorun --config=./lighthouserc.full.${{ matrix.device }}.cjs
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-full-${{ matrix.device }}
+          path: .lighthouseci/full-${{ matrix.device }}
+          retention-days: 14

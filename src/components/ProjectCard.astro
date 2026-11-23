@@ -1,0 +1,34 @@
+---
+/**
+ * A Work-page card for one project: optional screenshot, name, one-line purpose, and a bottom row of
+ * technologies (plain text, not chips: pills are links elsewhere on the site) and links.
+ * Without a screenshot the card is text-only. Give every card in a grid a screenshot, or none.
+ */
+interface Props {
+  screenshotSrc?: string;
+  screenshotAlt?: string;
+  name: string;
+  summary: string;
+  chips: string[];
+  caseStudyHref?: string;
+  sourceHref?: string;
+}
+const { screenshotSrc, screenshotAlt, name, summary, chips, caseStudyHref, sourceHref } = Astro.props;
+---
+
+<article class="hmd-card">
+  {screenshotSrc && (
+    <img class="hmd-shot" src={screenshotSrc} alt={screenshotAlt ?? ''} width="400" height="250" loading="lazy" decoding="async" />
+  )}
+  <h3>{caseStudyHref ? <a href={caseStudyHref}>{name}</a> : name}</h3>
+  <p>{summary}</p>
+  <div class="hmd-card__foot">
+    <p class="hmd-card__tech"><span class="hmd-sr">Built with: </span>{chips.join(' · ')}</p>
+    {(caseStudyHref || sourceHref) && (
+      <div class="hmd-links">
+        {caseStudyHref && <a class="hmd-link" href={caseStudyHref}>Case study</a>}
+        {sourceHref && <a class="hmd-link" href={sourceHref}>GitHub ↗</a>}
+      </div>
+    )}
+  </div>
+</article>

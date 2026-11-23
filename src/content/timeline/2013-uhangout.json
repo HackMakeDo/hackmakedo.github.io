@@ -1,0 +1,14 @@
+{
+  "year": 2013,
+  "yearLabel": "2013 to 2016",
+  "type": "community",
+  "title": "Starts uHangout",
+  "body": "Creates a YouTube channel for weekly Google Hangouts where community members show off tips, tricks, packages and site builds. It runs for three years, and the idea later carries on as umbraCoffee.",
+  "links": [
+    {
+      "label": "Watch on YouTube ↗",
+      "href": "https://www.youtube.com/@uhangout/streams"
+    }
+  ],
+  "order": 2
+}

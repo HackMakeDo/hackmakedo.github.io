@@ -1,0 +1,39 @@
+<!-- @dsCard group="Work" height=520 subtitle="Three project cards with placeholder screenshots" -->
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+  body { margin: 0; background: var(--ground); padding: var(--space-8); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-8); }
+  .links { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: auto; }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <article class="hmd-card">
+      <div class="hmd-shot">Screenshot</div>
+      <h3>ContentLock</h3>
+      <p>Stops Umbraco editors overwriting each other by locking a node while someone works on it.</p>
+      <div class="hmd-chips"><span class="hmd-chip">Umbraco</span><span class="hmd-chip">SignalR</span><span class="hmd-chip">Lit</span></div>
+      <div class="links"><a class="hmd-link" href="#">Case study</a><a class="hmd-link" href="https://github.com/warrenbuckley/Umbraco.Community.ContentLock">GitHub ↗</a></div>
+    </article>
+    <article class="hmd-card">
+      <div class="hmd-shot">Screenshot</div>
+      <h3>Compact Log Format Viewer</h3>
+      <p>A cross-platform desktop app for reading and querying the JSON log files that Serilog writes.</p>
+      <div class="hmd-chips"><span class="hmd-chip">Serilog</span><span class="hmd-chip">Desktop</span></div>
+      <div class="links"><a class="hmd-link" href="#">Case study</a><a class="hmd-link" href="https://github.com/warrenbuckley/Compact-Log-Format-Viewer">GitHub ↗</a></div>
+    </article>
+    <article class="hmd-card">
+      <div class="hmd-shot">Screenshot</div>
+      <h3>IIS Express Code</h3>
+      <p>A Visual Studio Code extension that runs the open folder as a website with IIS Express.</p>
+      <div class="hmd-chips"><span class="hmd-chip">VS Code</span><span class="hmd-chip">IIS Express</span></div>
+      <div class="links"><a class="hmd-link" href="#">Case study</a><a class="hmd-link" href="https://github.com/warrenbuckley/IIS-Express-Code">GitHub ↗</a></div>
+    </article>
+  </div>
+</body>
+</html>

@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import Container from '../../components/Container.astro';
+import BioCard from '../../components/BioCard.astro';
+import Button from '../../components/Button.astro';
+import Prose from '../../components/Prose.astro';
+import Credentials from '../../components/Credentials.astro';
+import Testimonial from '../../components/Testimonial.astro';
+import FAQ from '../../components/FAQ.astro';
+import HireBanner from '../../components/HireBanner.astro';
+import { getCollection } from 'astro:content';
+import { faqPageSchema, profilePageSchema } from '../../lib/structured-data';
+const cornelia = (await getCollection('testimonials')).find((t) => t.id === 'cornelia-vasile')!;
+
+const faqItems = [
+  { 
+    question: 'Where are you based?',
+    answer: 'I am based in North Essex in the UK and typically work remotely for clients in the UK and Europe.'
+  },
+  {
+    question: 'What is Hack Make Do?',
+    answer: 'Hack Make Do Limited is my company, incorporated in England. I consult and contract through it, and publish open source Umbraco packages and developer tools under it.',
+  }
+];
+---
+
+<BaseLayout
+  title="About — Hack Make Do"
+  description="Warren Buckley is a UK-based Umbraco freelancer and contractor, a nine-time Umbraco MVP, and the person behind Hack Make Do. Hacker, Maker, Do'er."
+  ogImage="/og/about.png"
+  currentPath="/about/"
+  jsonLd={[profilePageSchema(), faqPageSchema(faqItems)]}
+>
+  <PageHeader
+    trail={[{ label: 'Home', href: '/' }, { label: 'About' }]}
+    eyebrow="About"
+    title="Warren Buckley"
+    lead="Warren Buckley is a UK-based Umbraco freelancer and contractor, a nine-time Umbraco MVP, and the person behind Hack Make Do. Hacker, Maker, Do'er."
+  />
+
+  <section class="hmd-section hmd-section--flush-top" aria-label="Bio">
+    <Container>
+      <BioCard heading={{ lead: "Hi, I'm", boxed: 'Warren', id: 'bio-h' }} photoSrc="/images/warren-buckley.jpg">
+        <p>
+          I'm a freelance Umbraco developer and contractor based in the UK, and a nine-time Umbraco MVP. I found
+          Umbraco around 2005, later worked at Umbraco HQ on the CMS core team and as a developer advocate, and now
+          help teams through Hack Make Do.
+        </p>
+        <p>I ❤️ to improve the Umbraco DX (Developer Experience) journey.</p>
+      </BioCard>
+    </Container>
+  </section>
+
+  <section class="hmd-section hmd-section--flush-top" aria-labelledby="story-h">
+    <Container variant="text">
+      <Prose>
+        <h2 id="story-h">Twenty years with Umbraco</h2>
+        <p>I have been building with Umbraco for over twenty years, here is some of my journey:</p>
+        <ul>
+          <li>Started as a junior web developer at Momo Web Communications in 2002, and found Umbraco in 2005, after the lead developer leaving the company.</li>
+          <li>Joined the Umbraco agency XEED in Oslo, then Umbraco HQ in 2011, where I helped organise Codegarden & other early startup dev.</li>
+          <li>Built Umbraco sites at The Cogworks, and ran uHangout, a weekly community show on YouTube.</li>
+          <li>Went back to Umbraco HQ in 2016 on the CMS core team, then became a developer advocate in 2021.</li>
+          <li>Started Hack Make Do in September 2023, and volunteer on the Umbraco Package Team.</li>
+        </ul>
+      </Prose>
+      <!-- Outside Prose: .hmd-prose a would recolour and underline the button. -->
+      <div class="hmd-mt-6">
+        <Button variant="primary" href="/timeline/">See the entire timeline</Button>
+      </div>
+    </Container>
+  </section>
+
+  <section class="hmd-section hmd-section--panel" aria-label="Credentials">
+    <Container>
+      <Credentials
+        heading="9× Umbraco MVP"
+        stats={[
+          { label: 'First Umbraco MVP award', value: '2007' },
+          { label: 'years building with Umbraco', value: '20' },
+        ]}
+        badge={{ year: 2026, src: '/images/mvp/umbraco-mvp-2026.png' }}
+        timelineLabel="See every award on the timeline"
+      />
+    </Container>
+  </section>
+
+  <Section heading={{ lead: "In other people's", boxed: 'words', id: 'said-h' }} containerVariant="text">
+    <Testimonial
+      paragraphs={cornelia.data.quote.slice(0, 1)}
+      name={cornelia.data.name}
+      profileHref={cornelia.data.linkedinUrl}
+      roleAndCompany={`${cornelia.data.role}, ${cornelia.data.company} · via LinkedIn`}
+    />
+    <p class="hmd-mt-6"><a class="hmd-link" href="/kind-words/">Read every recommendation</a></p>
+  </Section>
+
+  <Section panel heading={{ lead: 'Quick', boxed: 'answers', id: 'faq-h' }} containerVariant="text">
+    <FAQ items={faqItems} />
+  </Section>
+
+  <Section class="hmd-pink" ariaLabel="Hire">
+    <HireBanner message="Available for hire — freelance Umbraco developer and contractor, focused on developer experience." />
+  </Section>
+</BaseLayout>

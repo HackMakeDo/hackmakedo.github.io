@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import Container from '../../components/Container.astro';
+import Credentials from '../../components/Credentials.astro';
+import Testimonial from '../../components/Testimonial.astro';
+import FAQ from '../../components/FAQ.astro';
+import ContactCard from '../../components/ContactCard.astro';
+import Button from '../../components/Button.astro';
+import { getCollection } from 'astro:content';
+import { faqPageSchema } from '../../lib/structured-data';
+const pete = (await getCollection('testimonials')).find((t) => t.id === 'pete-cooper')!;
+
+const faqItems = [
+  { question: 'Are you available as an Umbraco contractor?', answer: 'I have open availability for freelance work and contract roles. Please email me with the project details and dates.' },
+  { question: 'Do you work outside IR35?', answer: 'I prefer contracts outside IR35, through my own company, Hack Make Do Limited. My contracts have usually been extended month by month, sometimes alongside work for other clients. I will also consider roles inside IR35 at an adjusted rate.' },
+  { question: 'How much notice do you need?', answer: 'I can usually start within a week of agreeing the contract.' },
+  { question: 'Where do you work from?', answer: 'Remotely, from the UK.' },
+];
+---
+
+<BaseLayout
+  title="Umbraco contractor — Hack Make Do"
+  description="Warren Buckley is a UK-based Umbraco contractor and nine-time Umbraco MVP, available to join agency and in-house teams."
+  ogImage="/og/umbraco-contractor.png"
+  currentPath="/umbraco-contractor/"
+  hireHref="#contact-h"
+  jsonLd={[faqPageSchema(faqItems)]}
+>
+  <PageHeader
+    trail={[{ label: 'Home', href: '/' }, { label: 'Umbraco contractor' }]}
+    eyebrow="Hire"
+    title="Umbraco contractor"
+    lead="Warren Buckley is a UK-based Umbraco contractor and nine-time Umbraco MVP, available to join agency and in-house teams."
+  >
+    <div class="hmd-hero__actions hmd-mt-8">
+      <Button href="#contact-h">Check availability</Button>
+      <Button variant="secondary" href="/umbraco-freelancer/">Need a freelancer instead?</Button>
+    </div>
+  </PageHeader>
+
+  <section class="hmd-section" aria-label="Credentials">
+    <Container>
+      <Credentials
+        heading="9× Umbraco MVP"
+        stats={[
+          { label: 'First Umbraco MVP award', value: '2007' },
+          { label: 'years building with Umbraco', value: '20' },
+        ]}
+        badge={{ year: 2026, src: '/images/mvp/umbraco-mvp-2026.png' }}
+      />
+    </Container>
+  </section>
+
+  <Section panel heading={{ boxed: 'contract', lead: 'From a', id: 'said-h' }} containerVariant="text">
+    <Testimonial
+      paragraphs={pete.data.quote}
+      name={pete.data.name}
+      profileHref={pete.data.linkedinUrl}
+      roleAndCompany={`${pete.data.role}, ${pete.data.company} · via LinkedIn`}
+    />
+  </Section>
+
+  <Section heading={{ boxed: 'questions', lead: 'Common', id: 'faq-h' }} containerVariant="text">
+    <FAQ items={faqItems} />
+  </Section>
+
+  <Section class="hmd-pink" ariaLabel="Contact" containerVariant="text">
+    <ContactCard
+      heading={{ boxed: 'talk', lead: "Let's", id: 'contact-h' }}
+      intro="Tell me about the team, the dates and the length of the contract."
+      email="warren@hackmakedo.com"
+    />
+  </Section>
+</BaseLayout>

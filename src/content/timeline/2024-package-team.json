@@ -1,0 +1,14 @@
+{
+  "year": 2024,
+  "yearLabel": "2024",
+  "type": "community",
+  "title": "Umbraco Package Team",
+  "body": "Joins the Umbraco Package Team in August, a volunteer role. The team helps developers build, share and maintain backoffice extensions, meeting every two weeks to talk through CMS changes and tooling that could make package development easier.",
+  "links": [
+    {
+      "label": "Umbraco Package Team ↗",
+      "href": "https://community.umbraco.com/contribute/community-teams/the-package-team/"
+    }
+  ],
+  "order": 5
+}

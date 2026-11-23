@@ -1,0 +1,404 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SkipLink from '../components/SkipLink.astro';
+import Logotype from '../components/Logotype.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Backdrop from '../components/Backdrop.astro';
+import Container from '../components/Container.astro';
+import Section from '../components/Section.astro';
+import Grid from '../components/Grid.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Button from '../components/Button.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import HireBanner from '../components/HireBanner.astro';
+import ContactCard from '../components/ContactCard.astro';
+import Hero from '../components/Hero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import Credentials from '../components/Credentials.astro';
+import BioCard from '../components/BioCard.astro';
+import Testimonial from '../components/Testimonial.astro';
+import FAQ from '../components/FAQ.astro';
+import ClientCard from '../components/ClientCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ProjectFacts from '../components/ProjectFacts.astro';
+import FeatureList from '../components/FeatureList.astro';
+import Figure from '../components/Figure.astro';
+import BlogPostCard from '../components/BlogPostCard.astro';
+import PostHeader from '../components/PostHeader.astro';
+import Prose from '../components/Prose.astro';
+import Callout from '../components/Callout.astro';
+import CodeBlock from '../components/CodeBlock.astro';
+import VideoEmbed from '../components/VideoEmbed.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import Pagination from '../components/Pagination.astro';
+import TimelineEntry from '../components/TimelineEntry.astro';
+import FilterBar from '../components/FilterBar.astro';
+import Chip from '../components/Chip.astro';
+---
+
+<BaseLayout
+  title="Styleguide | Hack Make Do"
+  description="Every Hack Make Do component, rendered for comparison against the design system."
+  pagefindIgnore
+  noindex
+>
+  <Section ariaLabel="Styleguide intro" containerVariant="text">
+    <h1 class="h1">Styleguide</h1>
+    <p class="body-lg">
+      Every component in <code>src/components/</code>, rendered with real site copy where it exists and a plain
+      "Placeholder" where it doesn't. Compare this against <code>design-system/components/*/preview.html</code>.
+    </p>
+  </Section>
+
+  <!-- ============ Brand ============ -->
+  <Section ariaLabel="Brand components" panel>
+    <h2 class="h2">Brand</h2>
+
+    <div class="hmd-stack">
+      <h3 class="h3">Logotype — stacked</h3>
+      <div class="sg-logo">
+        <Logotype maskId="sg-make-stacked" size="80px" />
+      </div>
+
+      <h3 class="h3">Logotype — inline</h3>
+      <Logotype maskId="sg-make-inline" variant="inline" size="28px" href="#" />
+
+      <h3 class="h3">SectionHeading</h3>
+      <SectionHeading eyebrow="Hire" lead="How I can" boxed="help" id="sg-heading" />
+
+      <h3 class="h3">Backdrop — sprinkles</h3>
+      <div class="hmd-backdrop-host sg-backdrop">
+        <Backdrop variant="sprinkles" drift />
+      </div>
+    </div>
+  </Section>
+
+  <!-- ============ Layout ============ -->
+  <Section ariaLabel="Layout components">
+    <h2 class="h2">Layout</h2>
+
+    <div class="hmd-stack">
+      <h3 class="h3">SkipLink (tab to it to see it appear)</h3>
+      <div class="sg-skiplink"><SkipLink /></div>
+
+      <h3 class="h3">SiteHeader — sticky</h3>
+      <SiteHeader variant="sticky" currentPath="/work/" />
+
+      <h3 class="h3">PageHeader</h3>
+      <PageHeader
+        trail={[{ label: 'Home', href: '/' }, { label: 'Work' }]}
+        eyebrow="Case study"
+        title="ContentLock"
+        lead="ContentLock is an Umbraco package that lets editors lock content nodes and see who else is online, with live presence pushed over SignalR."
+      />
+
+      <h3 class="h3">Container / Section / Grid</h3>
+      <Container>
+        <Grid>
+          <div class="hmd-card">Card A</div>
+          <div class="hmd-card">Card B</div>
+          <div class="hmd-card">Card C</div>
+        </Grid>
+      </Container>
+
+      <h3 class="h3">SiteFooter</h3>
+      <SiteFooter />
+    </div>
+  </Section>
+
+  <!-- ============ Actions ============ -->
+  <Section ariaLabel="Action components" panel>
+    <h2 class="h2">Actions</h2>
+
+    <div class="hmd-stack">
+      <h3 class="h3">Button</h3>
+      <div class="hmd-links">
+        <Button variant="primary" href="/umbraco-freelancer/">Hire me</Button>
+        <Button variant="secondary" href="#">Read the case study</Button>
+        <Button variant="primary" size="sm" href="#">Hire me</Button>
+        <Button variant="link" href="https://github.com/warrenbuckley" external>View on GitHub</Button>
+      </div>
+
+      <h3 class="h3">HireBanner (on a pink end band)</h3>
+      <div class="hmd-pink">
+        <Container>
+          <HireBanner message="Available for hire — freelance Umbraco developer and contractor, focused on developer experience." />
+        </Container>
+      </div>
+
+      <h3 class="h3">ContactCard</h3>
+      <ContactCard
+        heading={{ lead: 'Get in', boxed: 'touch', id: 'sg-contact' }}
+        intro="Tell me your dates, the scope, and whether you're after freelance project work or a contract engagement."
+        email="warren@hackmakedo.com"
+      />
+    </div>
+  </Section>
+
+  <!-- ============ Home and about ============ -->
+  <Section ariaLabel="Home and about components">
+    <h2 class="h2">Home and about</h2>
+
+    <div class="hmd-stack">
+      <h3 class="h3">Hero</h3>
+      <div class="sg-hero">
+        <Hero lead="Warren Buckley, a freelance Umbraco developer and contractor and nine-time Umbraco MVP, making Umbraco better for the developers who build with it." />
+      </div>
+
+      <h3 class="h3">ServiceCard</h3>
+      <Grid variant="2">
+        <ServiceCard number="01" title="Improve your product's developer experience" description="Templates, tooling and backoffice extensions that make your Umbraco product easier to build on." />
+        <ServiceCard number="02" title="Add capacity to your development team" description="An experienced Umbraco contractor who can join your team and contribute from the first week." />
+      </Grid>
+
+      <h3 class="h3">Credentials</h3>
+      <Credentials
+        heading="9× Umbraco MVP"
+        stats={[
+          { label: 'First Umbraco MVP award', value: '2007' },
+          { label: 'years building with Umbraco', value: '20' },
+        ]}
+        badge={{ year: 2026, src: '/images/mvp/umbraco-mvp-2026.png' }}
+      />
+
+      <h3 class="h3">BioCard</h3>
+      <BioCard heading={{ lead: "Hi, I'm", boxed: 'Warren', id: 'sg-bio' }} photoSrc="/images/warren-buckley.jpg">
+        <p>Placeholder — Warren's bio, in his own words.</p>
+      </BioCard>
+
+      <h3 class="h3">Testimonial</h3>
+      <Grid variant="2">
+        <Testimonial
+          paragraphs={[
+            "Warren is an absolute pleasure to work with. Ever professional, great with clients, solutions focussed and an incomparable knowledge of Umbraco!",
+            "I would 100% recommend Warren to anyone looking for a trusted pair of hands on large and complex Umbraco builds.",
+          ]}
+          name="Ceri Broussine"
+          profileHref="https://www.linkedin.com/in/ceri-broussine-a8819155/"
+          roleAndCompany="Programme Lead, manifesto · via LinkedIn"
+        />
+        <Testimonial
+          paragraphs={[
+            'Warren worked with Manifesto as a contractor on a large and complex Umbraco project, and his experience was invaluable throughout.',
+            'He brought strong technical knowledge, helped steer the team through some challenging areas, and was a calm and trusted presence with the client.',
+          ]}
+          name="Pete Cooper"
+          profileHref="https://www.linkedin.com/in/pete-cooper-ba3834b1/"
+          roleAndCompany="Engineering Director, manifesto · via LinkedIn"
+        />
+      </Grid>
+
+      <h3 class="h3">FAQ</h3>
+      <FAQ
+        items={[
+          { question: 'Are you available as an Umbraco contractor?', answer: 'Placeholder — availability line, kept current.' },
+          { question: 'Do you work outside IR35?', answer: 'Placeholder — IR35 position, to confirm.' },
+          { question: 'Which Umbraco versions do you work with?', answer: 'Placeholder — supported version range.' },
+        ]}
+      />
+    </div>
+  </Section>
+
+  <!-- ============ Work ============ -->
+  <Section ariaLabel="Work components" panel>
+    <h2 class="h2">Work</h2>
+
+    <div class="hmd-stack">
+      <h3 class="h3">ClientCard</h3>
+      <div class="hmd-clients-list">
+        <ClientCard
+          name="Council of the European Union"
+          href="/work/council-of-the-european-union/"
+          summary="Drove the migration of the Council's Umbraco site from version 13 to 16, and brought the in-house team up to speed on the new backoffice technology."
+          facts={[
+            { label: 'Scope', value: 'Umbraco 13 to 16 migration' },
+            { label: 'Role', value: 'Placeholder' },
+            { label: 'Engagement', value: 'Placeholder' },
+          ]}
+          quote={{
+            text: 'He played a fundamental role in the success of the project, not only by driving the migration itself but also by bringing our team up to speed with the new UI technology introduced in v16.',
+            name: 'Simone Chiaretta',
+            role: 'Technical Lead and Web Architect',
+          }}
+        />
+      </div>
+
+      <h3 class="h3">ProjectCard</h3>
+      <Grid>
+        <ProjectCard
+          name="ContentLock"
+          summary="Stops Umbraco editors overwriting each other by locking a node while someone works on it."
+          chips={['Umbraco', 'SignalR', 'Lit']}
+          caseStudyHref="/work/contentlock/"
+          sourceHref="https://github.com/warrenbuckley/Umbraco.Community.ContentLock"
+        />
+        <ProjectCard
+          name="Compact Log Format Viewer"
+          summary="A cross-platform desktop app for reading and querying the JSON log files that Serilog writes."
+          chips={['Serilog', 'Desktop']}
+          sourceHref="https://github.com/warrenbuckley/Compact-Log-Format-Viewer"
+        />
+      </Grid>
+
+      <h3 class="h3">ProjectFacts</h3>
+      <ProjectFacts
+        facts={[
+          { label: 'Role', value: 'Creator and maintainer' },
+          { label: 'First released', value: 'Placeholder' },
+          { label: 'Built with', value: 'Umbraco, SignalR, Lit' },
+          { label: 'Licence', value: 'Placeholder' },
+        ]}
+      />
+
+      <h3 class="h3">FeatureList</h3>
+      <FeatureList
+        items={[
+          { title: 'Locks update live for every editor', description: 'Placeholder — a concrete, checkable point about ContentLock.' },
+          { title: 'Placeholder second point', description: 'Placeholder description.' },
+        ]}
+      />
+
+      <h3 class="h3">Figure</h3>
+      <Figure caption="Placeholder caption — real screenshots go here before this ships." />
+    </div>
+  </Section>
+
+  <!-- ============ Blog ============ -->
+  <Section ariaLabel="Blog components">
+    <h2 class="h2">Blog</h2>
+
+    <div class="hmd-stack">
+      <h3 class="h3">BlogPostCard</h3>
+      <Grid variant="2">
+        <BlogPostCard
+          href="/blog/signalr-ioptionsmonitor-umbraco-bellissima/"
+          title="Using SignalR, IOptionsMonitor with Umbraco Bellissima for reactive .NET Options"
+          date={new Date('2025-04-28')}
+          summary="How to switch package features on and off at runtime, without a deployment, by pairing IOptionsMonitor with a SignalR hub and a Bellissima global context."
+          tags={[{ label: 'Umbraco', href: '#' }, { label: 'Bellissima', href: '#' }, { label: 'SignalR', href: '#' }]}
+        />
+        <BlogPostCard
+          href="/blog/prevent-html-in-umbraco-forms/"
+          title="Quick Tip: How to prevent HTML in Umbraco Form fields"
+          date={new Date('2025-04-09')}
+          summary="A FormValidateNotification handler that uses a regular expression to reject HTML submitted to Umbraco Forms fields."
+          tags={[{ label: 'Umbraco', href: '#' }, { label: 'Umbraco Forms', href: '#' }, { label: 'Code Snippet', href: '#' }]}
+        />
+      </Grid>
+
+      <h3 class="h3">PostHeader</h3>
+      <PostHeader
+        title="Using SignalR, IOptionsMonitor with Umbraco Bellissima for reactive .NET Options"
+        published={new Date('2025-04-28')}
+        tags={[{ label: 'Umbraco', href: '#' }, { label: 'Bellissima', href: '#' }, { label: 'SignalR', href: '#' }]}
+      />
+
+      <h3 class="h3">Prose</h3>
+      <Prose>
+        <p>Hello 👋</p>
+        <p>
+          I have been working on a community package for Umbraco Bellissima called ContentLock, which lets users
+          lock content nodes and see who else is logged in to the backoffice.
+        </p>
+        <h2 id="sg-prose-heading">Lets take a look at it in action</h2>
+      </Prose>
+
+      <h3 class="h3">Callout</h3>
+      <Callout label="Tip">For registering the SignalR route, follow the Umbraco documentation; it covers the pipeline filter.</Callout>
+      <Callout label="Archive" archive>Written for Umbraco 7. The approach may differ in current versions.</Callout>
+
+      <h3 class="h3">CodeBlock</h3>
+      <CodeBlock lang="C#" file="src/ContentLock/SignalR/ContentLockHub.cs">
+        <span class="line"><span class="o">[</span><span class="t">Authorize</span><span class="o">(</span>Policy <span class="o">=</span> <span class="t">AuthorizationPolicies</span><span class="o">.</span>BackOfficeAccess<span class="o">)]</span></span>
+        <span class="line"><span class="k">public class</span> <span class="t">ContentLockHub</span> <span class="o">:</span> <span class="t">Hub</span><span class="o">&lt;</span><span class="t">IContentLockHubEvents</span><span class="o">&gt;</span></span>
+        <span class="line"><span class="o">{'{'}</span></span>
+        <span class="line">    <span class="k">private readonly</span> <span class="t">IOptionsMonitor</span><span class="o">&lt;</span><span class="t">ContentLockOptions</span><span class="o">&gt;</span> _options<span class="o">;</span></span>
+        <span class="line highlighted">    _options <span class="o">=</span> options<span class="o">;</span></span>
+        <span class="line"><span class="o">{'}'}</span></span>
+      </CodeBlock>
+
+      <h3 class="h3">VideoEmbed</h3>
+      <VideoEmbed videoId="MZfeUKSO8h4" label="ContentLock: reactive options with SignalR" />
+
+      <h3 class="h3">TableOfContents</h3>
+      <TableOfContents
+        sticky={false}
+        items={[
+          { id: 'action', label: 'Lets take a look at it in action' },
+          { id: 'code', label: 'Show me the code' },
+          { id: 'context', label: 'Creating a Bellissima global context' },
+        ]}
+      />
+
+      <h3 class="h3">Pagination</h3>
+      <Pagination page={2} totalPages={32} prevHref="#" nextHref="#" />
+    </div>
+  </Section>
+
+  <!-- ============ Timeline ============ -->
+  <Section ariaLabel="Timeline components" panel>
+    <h2 class="h2">Timeline</h2>
+
+    <div class="hmd-stack">
+      <h3 class="h3">FilterBar</h3>
+      <FilterBar
+        types={[
+          { type: 'role', label: 'Role' },
+          { type: 'award', label: 'Award' },
+          { type: 'project', label: 'Project' },
+          { type: 'community', label: 'Community' },
+        ]}
+      />
+
+      <h3 class="h3">TimelineEntry</h3>
+      <TimelineEntry
+        id="sg-2025-contentlock"
+        year="2025"
+        type="project"
+        typeLabel="Project"
+        title="ContentLock"
+        description="Placeholder — real timeline entries are migrated from the live /timeline page in a later session."
+        links={[{ label: 'Read the case study', href: '/work/contentlock/' }]}
+      />
+      <TimelineEntry
+        id="sg-2026-mvp"
+        year="2026"
+        type="award"
+        typeLabel="Award"
+        title="Umbraco MVP 2026"
+        description="Ninth Umbraco MVP award."
+        badgeSrc="/images/mvp/umbraco-mvp-2026.png"
+        badgeYear={2026}
+      />
+
+      <h3 class="h3">Chip</h3>
+      <div class="hmd-chips">
+        <Chip>Umbraco</Chip>
+        <Chip>Bellissima</Chip>
+        <Chip>Lit</Chip>
+        <Chip variant="year">2025</Chip>
+        <Chip variant="marker" markerType="role" /> <Chip variant="marker" markerType="award" />
+        <Chip variant="marker" markerType="project" /> <Chip variant="marker" markerType="community" />
+      </div>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .sg-logo {
+    padding: 48px 0;
+  }
+  .sg-backdrop {
+    position: relative;
+    height: 160px;
+    overflow: hidden;
+  }
+  .sg-skiplink {
+    position: relative;
+    height: 60px;
+  }
+  .sg-hero {
+    position: relative;
+  }
+</style>

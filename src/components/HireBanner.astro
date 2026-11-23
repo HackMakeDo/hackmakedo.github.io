@@ -1,0 +1,15 @@
+---
+import Button from './Button.astro';
+
+/** The hire call to action: one sentence of availability, in Warren's voice, plus "Get in touch". Sits inside a pink end band. */
+interface Props {
+  message: string;
+  href?: string;
+}
+const { message, href = '/contact/' } = Astro.props;
+---
+
+<aside class="hmd-hire">
+  <p>{message}</p>
+  <Button href={href}>Get in touch</Button>
+</aside>

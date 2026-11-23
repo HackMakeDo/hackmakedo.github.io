@@ -1,0 +1,22 @@
+---
+/** A single LinkedIn recommendation, word for word, with the author linked to their profile. */
+interface Props {
+  paragraphs: string[];
+  name: string;
+  profileHref?: string;
+  roleAndCompany: string;
+  /** Span the full width of a grid, with the quote set in two columns where there is room. For long quotes. */
+  wide?: boolean;
+}
+const { paragraphs, name, profileHref, roleAndCompany, wide = false } = Astro.props;
+---
+
+<figure class:list={['hmd-quote', { 'hmd-quote--wide': wide }]}>
+  <blockquote>
+    {paragraphs.map((p) => <p>{p}</p>)}
+  </blockquote>
+  <figcaption>
+    {profileHref ? <a href={profileHref}>{name}</a> : name}
+    <span>{roleAndCompany}</span>
+  </figcaption>
+</figure>

@@ -1,0 +1,18 @@
+{
+  "year": 2024,
+  "yearLabel": "2024",
+  "type": "project",
+  "title": "Manifest Peek",
+  "body": "Builds a small utility for Umbraco 14 and later that shows the Umbraco manifests registered for each backoffice extension type, to make extension development easier.",
+  "links": [
+    {
+      "label": "View on GitHub ↗",
+      "href": "https://github.com/warrenbuckley/Umbraco.Community.ManifestPeek"
+    },
+    {
+      "label": "View on Umbraco Marketplace ↗",
+      "href": "https://marketplace.umbraco.com/package/umbraco.community.manifestpeek"
+    }
+  ],
+  "order": 3
+}

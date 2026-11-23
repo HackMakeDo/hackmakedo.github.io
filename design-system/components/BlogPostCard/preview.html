@@ -1,0 +1,28 @@
+<!-- @dsCard group="Blog" height=380 subtitle="Two migrated posts as index cards" -->
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+  body { margin: 0; background: var(--ground); padding: var(--space-8); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-8); }
+  .hmd-card h3 a { color: var(--ink); text-decoration: none; }
+  .hmd-card h3 a:hover { color: var(--accent-text); text-decoration: underline; text-underline-offset: 0.2em; }
+</style>
+</head>
+<body>
+  <article class="hmd-card">
+    <p class="hmd-meta"><time datetime="2025-04-28">28 April 2025</time></p>
+    <h3><a href="#">Using SignalR, IOptionsMonitor with Umbraco Bellissima for reactive .NET Options</a></h3>
+    <p>How to switch package features on and off at runtime, without a deployment, by pairing IOptionsMonitor with a SignalR hub and a Bellissima global context.</p>
+    <div class="hmd-chips"><span class="hmd-chip">Umbraco</span><span class="hmd-chip">Bellissima</span><span class="hmd-chip">SignalR</span></div>
+  </article>
+  <article class="hmd-card">
+    <p class="hmd-meta"><time datetime="2025-04-09">9 April 2025</time></p>
+    <h3><a href="#">Quick Tip: How to prevent HTML in Umbraco Form fields</a></h3>
+    <p>A FormValidateNotification handler that uses a regular expression to reject HTML submitted to Umbraco Forms fields.</p>
+    <div class="hmd-chips"><span class="hmd-chip">Umbraco</span><span class="hmd-chip">Umbraco Forms</span><span class="hmd-chip">Code Snippet</span></div>
+  </article>
+</body>
+</html>

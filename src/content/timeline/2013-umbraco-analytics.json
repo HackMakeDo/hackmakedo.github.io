@@ -1,0 +1,14 @@
+{
+  "year": 2013,
+  "yearLabel": "2013",
+  "type": "project",
+  "title": "Umbraco Analytics",
+  "body": "Starts a package for Umbraco v7 that puts Google Analytics inside the Umbraco backoffice. It later moves to the umbraco-community organisation.",
+  "links": [
+    {
+      "label": "View on GitHub ↗",
+      "href": "https://github.com/umbraco-community/umbraco-analytics"
+    }
+  ],
+  "order": 3
+}

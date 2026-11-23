@@ -1,0 +1,14 @@
+{
+  "year": 2013,
+  "yearLabel": "2013",
+  "type": "project",
+  "title": "CWS Start, rebuilt for Umbraco 6",
+  "body": "Rebuilds the starter site from scratch in MVC for Umbraco 6, and open sources it on GitHub so people can pull it apart and learn how an Umbraco MVC site is put together.",
+  "links": [
+    {
+      "label": "View on GitHub ↗",
+      "href": "https://github.com/warrenbuckley/cws-start"
+    }
+  ],
+  "order": 1
+}

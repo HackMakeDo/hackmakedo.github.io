@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Timeline</title>
+<link rel="stylesheet" href="ds/hackmakedo/tokens.css">
+<link rel="stylesheet" href="ds/hackmakedo/components/bundle.css">
+<script src="ds/hackmakedo/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0b1c2f}
+a{color:#ffb1a4}a:hover{color:#eceaf7}
+.hmd-pink{--ground:#ffb1a4;--panel:#ffb1a4;--ink:#0b1c2f;--ink-muted:#0b1c2f;--accent-text:#0b1c2f;--border-strong:#0b1c2f;--rule:#0b1c2f;--focus-ring:#0b1c2f;--pink:#0b1c2f;--on-pink:#ffb1a4;background:var(--ground);color:var(--ink)}
+.hmd-pink a:not(.hmd-btn){color:#0b1c2f;text-decoration:underline}
+.hmd-pink .hmd-btn--primary:hover{background:transparent;color:#0b1c2f;box-shadow:inset 0 0 0 2px #0b1c2f}
+.field{position:absolute;inset:0;width:100%;height:100%}
+.entry-links{display:flex;flex-wrap:wrap;gap:16px}
+.tl{position:relative}
+.tl::before,.tl::after{content:"";position:absolute;top:0;bottom:0;left:89px;width:2px;background:var(--rule)}
+.tl::after{width:4px;left:88px;background:var(--pink);transform-origin:top;transform:scaleY(1)}
+@supports (animation-timeline: view()){@media (prefers-reduced-motion: no-preference){.tl::after{animation:tl-grow linear both;animation-timeline:view();animation-range:entry 20% exit 80%}}}
+@keyframes tl-grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.tl .hmd-entry{grid-template-columns:180px minmax(0,1fr)}
+.tl .hmd-entry__spine::after{display:none}
+.tl .hmd-year{position:relative;z-index:1;background:var(--ground)}
+.entry-body{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:24px;align-items:start}
+.entry-body > *{grid-column:1}
+.entry-body > .hmd-entry__badge{grid-column:2;grid-row:1 / span 4}
+</style>
+</helmet>
+<div data-theme="dark" style="background: var(--ground); color: var(--ink); font-family: var(--font-body); min-height: 100vh; position: relative;">
+
+  <div class="hmd-backdrop hmd-backdrop--fixed" aria-hidden="true" style="position: absolute;">
+    <svg class="field" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <g fill="none" stroke="#6f7dff" stroke-opacity="0.35" stroke-width="1.3">
+        <path d="M0 80 C 240 40, 480 130, 720 80 S 1200 30, 1440 90"></path>
+        <path d="M0 160 C 240 120, 480 210, 720 160 S 1200 110, 1440 170"></path>
+        <path d="M0 240 C 240 200, 480 290, 720 240 S 1200 190, 1440 250"></path>
+        <path d="M0 320 C 240 280, 480 370, 720 320 S 1200 270, 1440 330"></path>
+        <path d="M0 400 C 240 360, 480 450, 720 400 S 1200 350, 1440 410"></path>
+        <path d="M0 480 C 240 440, 480 530, 720 480 S 1200 430, 1440 490"></path>
+        <path d="M0 560 C 240 520, 480 610, 720 560 S 1200 510, 1440 570"></path>
+        <path d="M0 640 C 240 600, 480 690, 720 640 S 1200 590, 1440 650"></path>
+        <path d="M0 720 C 240 680, 480 770, 720 720 S 1200 670, 1440 730"></path>
+        <path d="M0 800 C 240 760, 480 850, 720 800 S 1200 750, 1440 810"></path>
+      </g>
+    </svg>
+  </div>
+
+  <div style="position: relative;">
+
+  <a class="hmd-skip" href="#main">Skip to content</a>
+
+  <header class="hmd-header hmd-header--sticky">
+    <div class="hmd-container hmd-header__inner">
+      <a class="hmd-header__home" href="Main.dc.html" aria-label="Hack Make Do, home">
+        <span class="hmd-logotype hmd-logotype--inline">
+          <span>Hack</span>
+          <span class="hmd-logotype__make"><svg class="hmd-knockout" viewBox="0 0 292 100" aria-hidden="true" focusable="false"><mask id="hmd-make-timeline" maskUnits="userSpaceOnUse" x="0" y="0" width="292" height="100"><rect width="292" height="100" fill="#fff"></rect><text x="11" y="84" textLength="270" lengthAdjust="spacingAndGlyphs" fill="#000">Make</text></mask><rect class="hmd-knockout__under" width="292" height="100"></rect><rect class="hmd-knockout__box" width="292" height="100" mask="url(#hmd-make-timeline)"></rect></svg></span>
+          <span>Do</span>
+        </span>
+      </a>
+      <nav class="hmd-nav" aria-label="Main">
+        <ul>
+          <li><a href="Work.dc.html">Work</a></li>
+          <li><a href="BlogIndex.dc.html">Blog</a></li>
+          <li><a href="Timeline.dc.html" aria-current="page">Timeline</a></li>
+          <li><a href="About.dc.html">About</a></li>
+        </ul>
+      </nav>
+      <a class="hmd-btn hmd-btn--primary hmd-btn--sm" href="Freelancer.dc.html">Hire me</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <header class="hmd-pagehead hmd-container">
+      <nav class="hmd-breadcrumbs" aria-label="Breadcrumb">
+        <ol><li><a href="Main.dc.html">Home</a></li><li aria-current="page">Timeline</li></ol>
+      </nav>
+      <p class="hmd-eyebrow">Timeline</p>
+      <h1 class="hmd-pagehead__title">Twenty years with Umbraco</h1>
+      <p class="hmd-pagehead__lead">Every role, MVP award, project and community contribution since I started as a junior web developer in 2002.</p>
+    </header>
+
+    <section class="hmd-section" aria-label="Timeline" style="padding-top: 0;">
+      <div class="hmd-container hmd-container--text" style="margin-inline: auto;">
+
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-bottom: 48px;">
+          <div class="hmd-filter" role="group" aria-label="Filter the timeline">
+            <span class="hmd-filter__label">Show</span>
+            <button type="button" aria-pressed="true"><span class="hmd-marker hmd-marker--role"></span>Role</button>
+            <button type="button" aria-pressed="true"><span class="hmd-marker hmd-marker--award"></span>Award</button>
+            <button type="button" aria-pressed="true"><span class="hmd-marker hmd-marker--project"></span>Project</button>
+            <button type="button" aria-pressed="true"><span class="hmd-marker hmd-marker--community"></span>Community</button>
+            <span class="hmd-filter__sep" aria-hidden="true"></span>
+            <button type="button" aria-pressed="false">Newest first ⇅</button>
+          </div>
+          <p role="status" style="margin: 0; font-size: 14px; color: var(--ink-muted);">Showing all 34 entries</p>
+        </div>
+
+        <div class="tl">
+          <article class="hmd-entry">
+            <div class="hmd-entry__spine"><span class="hmd-year">Now</span></div>
+            <div class="entry-body">
+              <div class="hmd-entry__type"><span class="hmd-marker hmd-marker--project"></span>Project</div>
+              <h3 id="now">Tools that make developers' lives easier</h3>
+              <p>Consulting through Hack Make Do and maintaining a growing set of open source Umbraco packages and developer tools.</p>
+            </div>
+          </article>
+
+          <article class="hmd-entry">
+            <div class="hmd-entry__spine"><span class="hmd-year">2026</span></div>
+            <div class="entry-body">
+              <img class="hmd-entry__badge" src="images/mvp/umbraco-mvp-2026.png" alt="Official Umbraco MVP 2026 badge" width="56" height="56">
+              <div class="hmd-entry__type"><span class="hmd-marker hmd-marker--award"></span>Award</div>
+              <h3 id="2026-mvp">Ninth Umbraco MVP award</h3>
+              <p>Renewed as an Umbraco MVP for 2026.</p>
+              <div class="entry-links"><a class="hmd-link" href="https://community.umbraco.com/contribute/mvp-program/mvp-archive/#mvp-2026">MVP archive ↗</a></div>
+            </div>
+          </article>
+
+          <article class="hmd-entry">
+            <div class="hmd-entry__spine"><span class="hmd-year">2025</span></div>
+            <div class="entry-body">
+              <div class="hmd-entry__type"><span class="hmd-marker hmd-marker--project"></span>Project</div>
+              <h3 id="2025-contentlock">ContentLock</h3>
+              <p>An open source package that lets editors lock a content node while they work on it, with quick audio calls between backoffice users.</p>
+              <div class="entry-links"><a class="hmd-link" href="CaseContentLock.dc.html">Read the case study</a><a class="hmd-link" href="https://github.com/warrenbuckley/Umbraco.Community.ContentLock">View on GitHub ↗</a></div>
+            </div>
+          </article>
+
+          <article class="hmd-entry">
+            <div class="hmd-entry__spine"><span class="hmd-year">2024</span></div>
+            <div class="entry-body">
+              <div class="hmd-entry__type"><span class="hmd-marker hmd-marker--community"></span>Community</div>
+              <h3 id="2024-package-team">Umbraco Package Team</h3>
+              <p>Joined the volunteer team in August, which helps developers build, share and maintain backoffice extensions.</p>
+              <div class="entry-links"><a class="hmd-link" href="https://community.umbraco.com/contribute/community-teams/the-package-team/">Umbraco Package Team ↗</a></div>
+            </div>
+          </article>
+
+          <article class="hmd-entry">
+            <div class="hmd-entry__spine"><span class="hmd-year">2023</span></div>
+            <div class="entry-body">
+              <div class="hmd-entry__type"><span class="hmd-marker hmd-marker--role"></span>Role</div>
+              <h3 id="2023-hack-make-do">Hack Make Do</h3>
+              <p>Left Umbraco HQ in June and began consulting as Hack Make Do in September.</p>
+              <div class="entry-links"><a class="hmd-link" href="Freelancer.dc.html">Hire me</a></div>
+            </div>
+          </article>
+
+          <article class="hmd-entry">
+            <div class="hmd-entry__spine"><span class="hmd-year">2015</span></div>
+            <div class="entry-body">
+              <div class="hmd-entry__type"><span class="hmd-marker hmd-marker--project"></span>Project</div>
+              <h3 id="2015-iis-express-code">IIS Express Code</h3>
+              <p>A Visual Studio Code extension that runs the open folder as a website using IIS Express.</p>
+              <div class="entry-links"><a class="hmd-link" href="#">Read the case study</a><a class="hmd-link" href="https://github.com/warrenbuckley/IIS-Express-Code">View on GitHub ↗</a></div>
+            </div>
+          </article>
+
+          <article class="hmd-entry">
+            <div class="hmd-entry__spine"><span class="hmd-year">2015</span></div>
+            <div class="entry-body">
+              <img class="hmd-entry__badge" src="images/mvp/umbraco-mvp-2015.png" alt="Official Umbraco MVP 2015 badge" width="56" height="56">
+              <div class="hmd-entry__type"><span class="hmd-marker hmd-marker--award"></span>Award</div>
+              <h3 id="2015-lifetime-mvp">Umbraco Lifetime MVP</h3>
+              <p>Received the lifetime title for Codegarden 15. I couldn't attend, so Niels Hartvig presented it at my home, and the moment was filmed.</p>
+              <div class="entry-links"><a class="hmd-link" href="https://www.youtube.com/watch?v=7cl5Ze9KZec&amp;t=162s">Watch the moment ↗</a><a class="hmd-link" href="https://community.umbraco.com/contribute/mvp-program/mvp-archive/#mvp-2015">MVP archive ↗</a></div>
+            </div>
+          </article>
+
+          <article class="hmd-entry">
+            <div class="hmd-entry__spine"><span class="hmd-year">2011 to 2012</span></div>
+            <div class="entry-body">
+              <div class="hmd-entry__type"><span class="hmd-marker hmd-marker--role"></span>Role</div>
+              <h3 id="2011-hq">Joins Umbraco HQ</h3>
+              <p>Web developer and events organiser, including organising Codegarden in Copenhagen, and writing tutorials for Umbraco.TV and .NET Magazine.</p>
+            </div>
+          </article>
+
+          <article class="hmd-entry">
+            <div class="hmd-entry__spine"><span class="hmd-year">2007</span></div>
+            <div class="entry-body">
+              <img class="hmd-entry__badge" src="images/mvp/umbraco-mvp-2007.png" alt="Official Umbraco MVP 2007 badge" width="56" height="56">
+              <div class="hmd-entry__type"><span class="hmd-marker hmd-marker--award"></span>Award</div>
+              <h3 id="2007-mvp">First Umbraco MVP award</h3>
+              <p>Named an Umbraco MVP for the first time.</p>
+              <div class="entry-links"><a class="hmd-link" href="https://community.umbraco.com/contribute/mvp-program/mvp-archive/#mvp-2007">MVP archive ↗</a></div>
+            </div>
+          </article>
+
+          <article class="hmd-entry">
+            <div class="hmd-entry__spine"><span class="hmd-year">2005</span></div>
+            <div class="entry-body">
+              <div class="hmd-entry__type"><span class="hmd-marker hmd-marker--community"></span>Community</div>
+              <h3 id="2005-umbraco">Finds Umbraco in a panic</h3>
+              <p>Promoted to senior when the lead developer left, then found Umbraco through a search for a Microsoft-based CMS.</p>
+            </div>
+          </article>
+
+          <article class="hmd-entry">
+            <div class="hmd-entry__spine"><span class="hmd-year">2002 to 2007</span></div>
+            <div class="entry-body">
+              <div class="hmd-entry__type"><span class="hmd-marker hmd-marker--role"></span>Role</div>
+              <h3 id="2002-momo">Junior web developer at Momo</h3>
+              <p>Started at Momo Web Communications in Southend-on-Sea in 2002 while studying, and became a full web developer in 2004.</p>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="hmd-section hmd-pink" aria-label="Hire">
+      <div class="hmd-container">
+        <aside class="hmd-hire">
+          <p>Twenty years of Umbraco experience, available for your next project.</p>
+          <a class="hmd-btn hmd-btn--primary" href="Freelancer.dc.html">Get in touch</a>
+        </aside>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="hmd-footer">
+    <div class="hmd-container">
+      <div class="hmd-footer__grid">
+        <div><h2>Hire</h2><ul><li><a href="Freelancer.dc.html">Umbraco freelancer</a></li><li><a href="Contractor.dc.html">Umbraco contractor</a></li><li><a href="Contact.dc.html">Contact</a></li></ul></div>
+        <div><h2>Work</h2><ul><li><a href="CaseContentLock.dc.html">ContentLock</a></li><li><a href="#">Compact Log Format Viewer</a></li><li><a href="#">IIS Express Code</a></li><li><a href="Work.dc.html">All work</a></li></ul></div>
+        <div><h2>Writing</h2><ul><li><a href="BlogIndex.dc.html">Blog</a></li><li><a href="Timeline.dc.html" aria-current="page">Timeline</a></li><li><a href="#">RSS feed</a></li></ul></div>
+        <div><h2>Elsewhere</h2><ul><li><a href="https://github.com/warrenbuckley" rel="me">GitHub</a></li><li><a href="#" rel="me">LinkedIn</a></li><li><a href="#" rel="me">YouTube</a></li><li><a href="#" rel="me">Mastodon</a></li></ul></div>
+      </div>
+      <div class="hmd-footer__legal">
+        <p>Hack Make Do Limited is incorporated in England. Company No: 15432884.<br>Registered Office: Castle House, Castle Street, Guildford, GU1 3UW.<br>VAT Number: GB 458891924 · <a href="Privacy.dc.html">Privacy</a></p>
+      </div>
+    </div>
+  </footer>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3680}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

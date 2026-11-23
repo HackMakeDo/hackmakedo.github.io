@@ -1,0 +1,15 @@
+{
+  "year": 2007,
+  "yearLabel": "2007",
+  "type": "award",
+  "title": "First Umbraco MVP award",
+  "body": "Named an Umbraco MVP for the first time.",
+  "badge": 2007,
+  "links": [
+    {
+      "label": "MVP archive ↗",
+      "href": "https://community.umbraco.com/contribute/mvp-program/mvp-archive/#mvp-2007"
+    }
+  ],
+  "order": 0
+}

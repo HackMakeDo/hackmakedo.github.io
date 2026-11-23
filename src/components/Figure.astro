@@ -1,0 +1,21 @@
+---
+/** A screenshot or diagram with a caption. Several of these inside a .hmd-gallery grid. */
+interface Props {
+  src?: string;
+  alt?: string;
+  caption: string;
+  width?: number;
+  height?: number;
+  placeholderLabel?: string;
+}
+const { src, alt, caption, width = 640, height = 400, placeholderLabel = 'Screenshot' } = Astro.props;
+---
+
+<figure class="hmd-figure">
+  {src ? (
+    <img src={src} alt={alt ?? ''} width={width} height={height} loading="lazy" decoding="async" />
+  ) : (
+    <div class="hmd-shot">{placeholderLabel}</div>
+  )}
+  <figcaption>{caption}</figcaption>
+</figure>

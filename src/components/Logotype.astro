@@ -1,0 +1,64 @@
+---
+/**
+ * The Hack Make Do wordmark. "Make" is a true SVG-mask knockout: whatever sits behind it shows through.
+ * The consumer must pass a page-unique `maskId` — two logotypes sharing one id render the wrong mask.
+ */
+interface Props {
+  maskId: string;
+  /** Stacked h1 (home hero) or inline (header/footer). */
+  variant?: 'stacked' | 'inline';
+  /** Force a mode when the theme guess is wrong; 'auto' lets the backdrop under it decide. */
+  mode?: 'auto' | 'see-through' | 'solid';
+  /** CSS size, e.g. "112px". */
+  size?: string;
+  href?: string;
+  ariaLabel?: string;
+}
+
+const {
+  maskId,
+  variant = 'stacked',
+  mode = 'auto',
+  size,
+  href,
+  ariaLabel = 'Hack Make Do, home',
+} = Astro.props;
+
+const modeClass = mode === 'see-through' ? ' hmd-logotype--see-through' : mode === 'solid' ? ' hmd-logotype--solid' : '';
+const style = size ? `--hmd-logo-size:${size}` : undefined;
+---
+
+{variant === 'stacked' ? (
+  <h1 class={`hmd-logotype${modeClass}`} aria-label="Hack Make Do" style={style}>
+    <span class="hmd-logotype__line">Hack</span>
+    <span class="hmd-logotype__line hmd-logotype__make">
+      <svg class="hmd-knockout" viewBox="0 0 292 100" aria-hidden="true" focusable="false">
+        <mask id={maskId} maskUnits="userSpaceOnUse" x="0" y="0" width="292" height="100">
+          <rect width="292" height="100" fill="#fff"></rect>
+          <text x="11" y="84" textLength="270" lengthAdjust="spacingAndGlyphs" fill="#000">Make</text>
+        </mask>
+        <rect class="hmd-knockout__under" width="292" height="100"></rect>
+        <rect class="hmd-knockout__box" width="292" height="100" mask={`url(#${maskId})`}></rect>
+      </svg>
+    </span>
+    <span class="hmd-logotype__line">Do</span>
+  </h1>
+) : (
+  <a class="hmd-header__home" href={href ?? '/'}>
+    <span class={`hmd-logotype hmd-logotype--inline${modeClass}`} style={style} aria-hidden="true">
+      <span>Hack</span>
+      <span class="hmd-logotype__make">
+        <svg class="hmd-knockout" viewBox="0 0 292 100" focusable="false">
+          <mask id={maskId} maskUnits="userSpaceOnUse" x="0" y="0" width="292" height="100">
+            <rect width="292" height="100" fill="#fff"></rect>
+            <text x="11" y="84" textLength="270" lengthAdjust="spacingAndGlyphs" fill="#000">Make</text>
+          </mask>
+          <rect class="hmd-knockout__under" width="292" height="100"></rect>
+          <rect class="hmd-knockout__box" width="292" height="100" mask={`url(#${maskId})`}></rect>
+        </svg>
+      </span>
+      <span>Do</span>
+    </span>
+    <span class="hmd-sr">{ariaLabel}</span>
+  </a>
+)}

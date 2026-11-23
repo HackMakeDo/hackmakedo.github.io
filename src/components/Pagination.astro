@@ -1,0 +1,16 @@
+---
+/** Previous/next links for the blog index and topic pages, with the page position between them. */
+interface Props {
+  prevHref?: string;
+  nextHref?: string;
+  page: number;
+  totalPages: number;
+}
+const { prevHref, nextHref, page, totalPages } = Astro.props;
+---
+
+<nav class="hmd-pagination" aria-label="Blog pages">
+  {prevHref ? <a rel="prev" href={prevHref}>← Newer posts</a> : <span aria-disabled="true">← Newer posts</span>}
+  <span>Page {page} of {totalPages}</span>
+  {nextHref ? <a rel="next" href={nextHref}>Older posts →</a> : <span aria-disabled="true">Older posts →</span>}
+</nav>

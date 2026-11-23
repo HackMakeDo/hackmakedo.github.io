@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Contact</title>
+<link rel="stylesheet" href="ds/hackmakedo/tokens.css">
+<link rel="stylesheet" href="ds/hackmakedo/components/bundle.css">
+<script src="ds/hackmakedo/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0b1c2f}
+a{color:#ffb1a4}a:hover{color:#eceaf7}
+.hmd-pink{--ground:#ffb1a4;--panel:#ffb1a4;--ink:#0b1c2f;--ink-muted:#0b1c2f;--accent-text:#0b1c2f;--border-strong:#0b1c2f;--rule:#0b1c2f;--focus-ring:#0b1c2f;--pink:#0b1c2f;--on-pink:#ffb1a4;background:var(--ground);color:var(--ink)}
+.hmd-pink a:not(.hmd-btn){color:#0b1c2f;text-decoration:underline}
+.hmd-pink .hmd-btn--primary:hover{background:transparent;color:#0b1c2f;box-shadow:inset 0 0 0 2px #0b1c2f}
+</style>
+</helmet>
+<div data-theme="dark" style="background: var(--ground); color: var(--ink); font-family: var(--font-body); min-height: 100vh;">
+
+  <a class="hmd-skip" href="#main">Skip to content</a>
+
+  <header class="hmd-header hmd-header--sticky">
+    <div class="hmd-container hmd-header__inner">
+      <a class="hmd-header__home" href="Main.dc.html" aria-label="Hack Make Do, home">
+        <span class="hmd-logotype hmd-logotype--inline">
+          <span>Hack</span>
+          <span class="hmd-logotype__make"><svg class="hmd-knockout" viewBox="0 0 292 100" aria-hidden="true" focusable="false"><mask id="hmd-make-contact" maskUnits="userSpaceOnUse" x="0" y="0" width="292" height="100"><rect width="292" height="100" fill="#fff"></rect><text x="11" y="84" textLength="270" lengthAdjust="spacingAndGlyphs" fill="#000">Make</text></mask><rect class="hmd-knockout__under" width="292" height="100"></rect><rect class="hmd-knockout__box" width="292" height="100" mask="url(#hmd-make-contact)"></rect></svg></span>
+          <span>Do</span>
+        </span>
+      </a>
+      <nav class="hmd-nav" aria-label="Main">
+        <ul>
+          <li><a href="Work.dc.html">Work</a></li>
+          <li><a href="BlogIndex.dc.html">Blog</a></li>
+          <li><a href="Timeline.dc.html">Timeline</a></li>
+          <li><a href="About.dc.html">About</a></li>
+        </ul>
+      </nav>
+      <a class="hmd-btn hmd-btn--primary hmd-btn--sm" href="Contact.dc.html" aria-current="page">Hire me</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <header class="hmd-pagehead hmd-container">
+      <nav class="hmd-breadcrumbs" aria-label="Breadcrumb">
+        <ol><li><a href="Main.dc.html">Home</a></li><li aria-current="page">Contact</li></ol>
+      </nav>
+      <p class="hmd-eyebrow">Contact</p>
+      <h1 class="hmd-pagehead__title">Get in touch</h1>
+      <p class="hmd-pagehead__lead">Email warren@hackmakedo.com about freelance Umbraco projects, contract roles or anything else. Placeholder: your usual reply time.</p>
+    </header>
+
+    <section class="hmd-section hmd-pink" aria-label="Contact">
+      <div class="hmd-container hmd-container--text" style="margin-inline: auto;">
+        <div class="hmd-contact">
+          <h2 class="hmd-heading" id="contact-h">Let's <span class="box">talk</span></h2>
+          <p>Tell me about the project, the dates, and whether you are after a freelancer or a contractor.</p>
+          <div class="hmd-contact__email">
+            <a class="hmd-contact__address" href="mailto:warren@hackmakedo.com">warren@hackmakedo.com</a>
+            <hmd-copy value="warren@hackmakedo.com"><button type="button" class="hmd-btn hmd-btn--secondary hmd-btn--sm">Copy email</button></hmd-copy>
+          </div>
+          <div class="hmd-links"><a class="hmd-link" href="#">LinkedIn ↗</a><a class="hmd-link" href="https://github.com/warrenbuckley">GitHub ↗</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hmd-section" aria-labelledby="faq-h">
+      <div class="hmd-container hmd-container--text" style="margin-inline: auto;">
+        <h2 class="hmd-heading" id="faq-h">Before you <span class="box">write</span></h2>
+        <div class="hmd-faq">
+          <details open>
+            <summary>Should I hire you as a freelancer or a contractor?</summary>
+            <div class="hmd-faq__answer"><p>Hire a freelancer for a defined piece of work, such as an upgrade or a package. Hire a contractor to add an experienced Umbraco developer to your team for a period. <a href="Freelancer.dc.html">Freelance</a> · <a href="Contractor.dc.html">Contract</a></p></div>
+          </details>
+          <details>
+            <summary>How quickly do you reply?</summary>
+            <div class="hmd-faq__answer"><p>Placeholder.</p></div>
+          </details>
+          <details>
+            <summary>Can I ask about an open source package?</summary>
+            <div class="hmd-faq__answer"><p>Yes, though issues and feature requests are best raised on the package's GitHub repository, where other users can see them.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="hmd-footer">
+    <div class="hmd-container">
+      <div class="hmd-footer__grid">
+        <div><h2>Hire</h2><ul><li><a href="Freelancer.dc.html">Umbraco freelancer</a></li><li><a href="Contractor.dc.html">Umbraco contractor</a></li><li><a href="Contact.dc.html" aria-current="page">Contact</a></li></ul></div>
+        <div><h2>Work</h2><ul><li><a href="CaseContentLock.dc.html">ContentLock</a></li><li><a href="#">Compact Log Format Viewer</a></li><li><a href="#">IIS Express Code</a></li><li><a href="Work.dc.html">All work</a></li></ul></div>
+        <div><h2>Writing</h2><ul><li><a href="BlogIndex.dc.html">Blog</a></li><li><a href="Timeline.dc.html">Timeline</a></li><li><a href="#">RSS feed</a></li></ul></div>
+        <div><h2>Elsewhere</h2><ul><li><a href="https://github.com/warrenbuckley" rel="me">GitHub</a></li><li><a href="#" rel="me">LinkedIn</a></li><li><a href="#" rel="me">YouTube</a></li><li><a href="#" rel="me">Mastodon</a></li></ul></div>
+      </div>
+      <div class="hmd-footer__legal">
+        <p>Hack Make Do Limited is incorporated in England. Company No: 15432884.<br>Registered Office: Castle House, Castle Street, Guildford, GU1 3UW.<br>VAT Number: GB 458891924 · <a href="Privacy.dc.html">Privacy</a></p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1920}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

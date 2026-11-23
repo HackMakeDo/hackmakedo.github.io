@@ -1,14 +1,52 @@
 {
-  "name": "hackmakedo-timeline",
+  "name": "hackmakedo-site",
   "private": true,
-  "version": "1.0.0",
-  "description": "Source for the timeline page scripts at hackmakedo.com/timeline/",
+  "version": "0.1.0",
+  "type": "module",
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc --watch"
+    "dev": "astro dev",
+    "build": "node scripts/video-posters.ts --check && astro check && astro build",
+    "postbuild": "pagefind --site dist && node scripts/markdown.ts",
+    "preview": "astro preview",
+    "astro": "astro",
+    "video-posters": "node scripts/video-posters.ts",
+    "check:links": "node scripts/check-post-links.ts",
+    "check:umbraco-versions": "node scripts/check-umbraco-versions.ts",
+    "lighthouse:mobile": "lhci autorun --config=./lighthouserc.mobile.cjs",
+    "lighthouse:desktop": "lhci autorun --config=./lighthouserc.desktop.cjs",
+    "lighthouse": "npm run lighthouse:mobile && npm run lighthouse:desktop",
+    "lighthouse:full:mobile": "lhci autorun --config=./lighthouserc.full.mobile.cjs",
+    "lighthouse:full:desktop": "lhci autorun --config=./lighthouserc.full.desktop.cjs",
+    "lighthouse:full": "npm run build && npm run lighthouse:full:mobile && npm run lighthouse:full:desktop",
+    "redirects": "node scripts/redirects.ts",
+    "markdown": "node scripts/markdown.ts",
+    "deploy:redirects": "wrangler deploy --config cloudflare/blog-redirects/wrangler.jsonc",
+    "deploy:markdown": "wrangler deploy --config cloudflare/markdown-negotiation/wrangler.jsonc"
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.6",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "@shikijs/transformers": "^4.6.0",
+    "astro": "^7.4.6",
+    "lit": "^3.2.1",
+    "satori": "^0.63.2",
+    "sharp": "^0.35.5",
+    "unist-util-visit": "^5.2.0"
   },
   "devDependencies": {
-    "typescript": "^5.9.0",
-    "@types/three": "^0.128.0"
+    "@astrojs/check": "^0.9.12",
+    "@lhci/cli": "^0.16.0",
+    "pagefind": "^1.6.0",
+    "rehype-parse": "^9.0.1",
+    "rehype-remark": "^10.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-stringify": "^11.0.0",
+    "typescript": "^5.7.2",
+    "wrangler": "^4.156.0"
+  },
+  "overrides": {
+    "basic-ftp": "^6.2.6",
+    "fflate": "^0.8.3"
   }
 }

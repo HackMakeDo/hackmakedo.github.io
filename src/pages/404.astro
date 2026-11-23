@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Backdrop from '../components/Backdrop.astro';
+import Container from '../components/Container.astro';
+import Section from '../components/Section.astro';
+import Grid from '../components/Grid.astro';
+import Button from '../components/Button.astro';
+---
+
+<BaseLayout title="Page not found — Hack Make Do" description="That page has moved. Search the blog or pick a place to start." currentPath="/404.html" canonical={false}>
+  <section class="hmd-backdrop-host nf" aria-labelledby="nf-h">
+    <Backdrop variant="sprinkles" />
+    <Container>
+      <div class="nf__body">
+        <p class="hmd-eyebrow">404 · Page not found</p>
+        <h1 class="hmd-heading nf__title" id="nf-h">
+          That page has <span class="box">moved</span>
+        </h1>
+        <p class="nf__lead">
+          The blog moved here from blog.hackmakedo.com, and most old links redirect on their own. If this one didn't,
+          search the blog or pick a place to start below.
+        </p>
+        <hmd-search>
+          <form class="search" role="search" action="https://www.google.com/search" method="get">
+            <label for="q">Search the blog</label>
+            <input id="q" name="q" type="search" placeholder="For example: Bellissima context" />
+            <input type="hidden" name="as_sitesearch" value="hackmakedo.com" />
+            <Button type="submit">Search</Button>
+          </form>
+          <div data-search-results></div>
+        </hmd-search>
+      </div>
+    </Container>
+  </section>
+
+  <Section heading={{ lead: 'Start', boxed: 'here', id: 'start-h' }}>
+    <Grid>
+      <article class="hmd-card">
+        <h3><a href="/blog/">Blog</a></h3>
+        <p>Tutorials and code snippets on Umbraco, Bellissima, .NET and developer tooling.</p>
+      </article>
+      <article class="hmd-card">
+        <h3><a href="/work/">Work</a></h3>
+        <p>Client work, open source Umbraco packages and developer tools.</p>
+      </article>
+      <article class="hmd-card">
+        <h3><a href="/umbraco-freelancer/">Hire me</a></h3>
+        <p>Freelance and contract Umbraco development from a nine-time Umbraco MVP.</p>
+      </article>
+    </Grid>
+  </Section>
+</BaseLayout>
+
+<script src="../elements/index.ts"></script>
+
+<style>
+  .nf,
+  .nf__body {
+    position: relative;
+  }
+  .nf__body {
+    padding-block: 96px;
+  }
+  .nf__title {
+    font-size: 64px;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .nf__lead {
+    font-size: 20px;
+    line-height: 1.6;
+    max-width: 36em;
+    margin: 24px 0 40px;
+  }
+  .search {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+    max-width: 640px;
+  }
+  .search label {
+    display: block;
+    width: 100%;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .search input[type='search'] {
+    flex: 1 1 320px;
+    min-width: 0;
+    height: 48px;
+    box-sizing: border-box;
+    padding: 0 16px;
+    border: 2px solid var(--border-strong);
+    border-radius: 8px;
+    background: var(--panel);
+    color: var(--ink);
+    font: 400 17px/1 var(--font-body);
+  }
+  .search input[type='search']:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+  [data-search-results]:not(:empty) {
+    margin-top: 32px;
+  }
+</style>

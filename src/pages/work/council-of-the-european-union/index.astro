@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import Section from '../../../components/Section.astro';
+import Container from '../../../components/Container.astro';
+import ProjectFacts from '../../../components/ProjectFacts.astro';
+import Prose from '../../../components/Prose.astro';
+import Figure from '../../../components/Figure.astro';
+import FeatureList from '../../../components/FeatureList.astro';
+import Testimonial from '../../../components/Testimonial.astro';
+import HireBanner from '../../../components/HireBanner.astro';
+import { getCollection } from 'astro:content';
+
+const allTestimonials = await getCollection('testimonials');
+const simone = allTestimonials.find((t) => t.id === 'simone-chiaretta')!;
+const cornelia = allTestimonials.find((t) => t.id === 'cornelia-vasile')!;
+---
+
+<BaseLayout
+  title="Council of the European Union — Hack Make Do"
+  description="Warren Buckley drove the migration of the Council of the European Union's Umbraco site from version 13 to 16, and brought the in-house team up to speed on the new backoffice technology."
+  ogImage="/og/work/council-of-the-european-union.png"
+  currentPath="/work/"
+>
+  <PageHeader
+    trail={[{ label: 'Home', href: '/' }, { label: 'Work', href: '/work/' }, { label: 'Council of the European Union' }]}
+    eyebrow="Client work"
+    title="Council of the European Union"
+    lead="Warren Buckley drove the migration of the Council of the European Union's Umbraco site from version 13 to 16, and brought the in-house team up to speed on the new backoffice technology."
+  />
+
+  <section class="hmd-section hmd-section--flush-top" aria-label="Project facts">
+    <Container>
+      <ProjectFacts
+        facts={[
+          { label: 'Client', value: 'Council of the European Union' },
+          { label: 'Scope', value: 'Umbraco 13 to 16 migration' },
+          { label: 'Role', value: 'Placeholder' },
+          { label: 'Engagement', value: 'Placeholder: direct or through an agency' },
+          { label: 'Built with', value: 'Umbraco 16, .NET, TypeScript, Lit' },
+        ]}
+      />
+    </Container>
+  </section>
+
+  <section class="hmd-section hmd-section--flush-top" aria-labelledby="challenge-h">
+    <Container variant="text">
+      <Prose>
+        <h2 id="challenge-h">The challenge</h2>
+        <p>
+          Placeholder: what the Council's site needed, why it had to move from Umbraco 13 to 16, and what made it
+          hard. Two or three sentences, opening with the plain fact.
+        </p>
+      </Prose>
+    </Container>
+  </section>
+
+  <section class="hmd-section hmd-section--flush-top" aria-label="Screenshot">
+    <Container>
+      <Figure
+        caption="Placeholder: a caption that explains what the screenshot shows."
+        placeholderLabel="Placeholder: screenshot, only with the Council's permission"
+      />
+    </Container>
+  </section>
+
+  <section class="hmd-section hmd-section--flush-top" aria-labelledby="did-h">
+    <Container variant="text">
+      <h2 class="hmd-heading" id="did-h">What I <span class="box">did</span></h2>
+      <FeatureList
+        items={[
+          {
+            title: 'Drove the migration',
+            description: 'Took the site from Umbraco 13 to 16, including the move to the rebuilt Bellissima backoffice. Placeholder: the specifics.',
+          },
+          {
+            title: 'Brought the team up to speed',
+            description: 'Helped the in-house team adopt the new UI technology introduced in version 16, so they could carry on without me. Placeholder: how.',
+          },
+          { title: 'Placeholder: a third thing you did', description: 'Placeholder.' },
+        ]}
+      />
+    </Container>
+  </section>
+
+  <Section panel heading={{ boxed: 'result', lead: 'The', id: 'result-h' }} containerVariant="text">
+    <p class="hmd-lead">Placeholder: a shareable result, approved by the Council.</p>
+    <div class="hmd-mt-8">
+      <Testimonial
+        paragraphs={simone.data.quote.slice(0, 2)}
+        name={simone.data.name}
+        profileHref={simone.data.linkedinUrl}
+        roleAndCompany={`${simone.data.role}, ${simone.data.company} · via LinkedIn`}
+      />
+    </div>
+    <div class="hmd-mt-6">
+      <Testimonial
+        paragraphs={cornelia.data.quote.slice(1, 2)}
+        name={cornelia.data.name}
+        profileHref={cornelia.data.linkedinUrl}
+        roleAndCompany={`${cornelia.data.role}, ${cornelia.data.company} · via LinkedIn`}
+      />
+    </div>
+  </Section>
+
+  <Section class="hmd-pink" ariaLabel="Hire">
+    <HireBanner message="Planning an Umbraco upgrade? I can help your team make the move." />
+  </Section>
+</BaseLayout>

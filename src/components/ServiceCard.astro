@@ -1,0 +1,22 @@
+---
+/** A card describing one thing a client can hire Warren for, numbered in a small pink square. */
+interface Props {
+  number: string;
+  title: string;
+  description: string;
+  linkHref?: string;
+  linkLabel?: string;
+}
+const { number, title, description, linkHref, linkLabel } = Astro.props;
+---
+
+<article class="hmd-card hmd-service">
+  <p class="hmd-service__n" aria-hidden="true">{number}</p>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  {linkHref && (
+    <div class="hmd-links">
+      <a class="hmd-link" href={linkHref}>{linkLabel}</a>
+    </div>
+  )}
+</article>

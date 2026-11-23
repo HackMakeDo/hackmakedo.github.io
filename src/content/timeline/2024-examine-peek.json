@@ -1,0 +1,18 @@
+{
+  "year": 2024,
+  "yearLabel": "2024",
+  "type": "project",
+  "title": "Examine Peek",
+  "body": "Starts a package for Umbraco 14 and later that lets you peek inside the Examine index for a content node.",
+  "links": [
+    {
+      "label": "View on GitHub ↗",
+      "href": "https://github.com/warrenbuckley/Examine-Peek"
+    },
+    {
+      "label": "View on Umbraco Marketplace ↗",
+      "href": "https://marketplace.umbraco.com/package/examinepeek"
+    }
+  ],
+  "order": 0
+}

@@ -1,0 +1,36 @@
+---
+/** The top of every inner page: breadcrumbs, an eyebrow, the page's one h1, and an answer-first lead. */
+import JsonLd from './JsonLd.astro';
+import { breadcrumbList } from '../lib/structured-data';
+
+interface Crumb {
+  label: string;
+  href?: string;
+}
+interface Props {
+  trail: Crumb[];
+  eyebrow?: string;
+  title: string;
+  lead: string;
+}
+const { trail, eyebrow, title, lead } = Astro.props;
+---
+
+<JsonLd data={breadcrumbList(trail, Astro.url.pathname)} />
+<header class="hmd-pagehead hmd-container">
+  <nav class="hmd-breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      {trail.map((crumb) =>
+        crumb.href ? (
+          <li><a href={crumb.href}>{crumb.label}</a></li>
+        ) : (
+          <li aria-current="page">{crumb.label}</li>
+        )
+      )}
+    </ol>
+  </nav>
+  {eyebrow && <p class="hmd-eyebrow">{eyebrow}</p>}
+  <h1 class="hmd-pagehead__title">{title}</h1>
+  <p class="hmd-pagehead__lead">{lead}</p>
+  <slot />
+</header>

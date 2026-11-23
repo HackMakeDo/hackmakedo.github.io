@@ -1,0 +1,43 @@
+---
+import Logotype from './Logotype.astro';
+import Button from './Button.astro';
+
+/** The site header: inline Logotype, main nav, and one "Hire me" button. */
+interface NavLink {
+  label: string;
+  href: string;
+}
+interface Props {
+  variant?: 'sticky' | 'overlay';
+  currentPath?: string;
+  /** Where the "Hire me" button points — a same-page anchor on the hire pages themselves. */
+  hireHref?: string;
+}
+
+const { variant = 'sticky', currentPath, hireHref = '/umbraco-freelancer/' } = Astro.props;
+
+const links: NavLink[] = [
+  { label: 'Work', href: '/work/' },
+  { label: 'Blog', href: '/blog/' },
+  { label: 'Timeline', href: '/timeline/' },
+  { label: 'About', href: '/about/' },
+];
+---
+
+<header class={`hmd-header${variant === 'overlay' ? ' hmd-header--overlay' : ' hmd-header--sticky'}`}>
+  <div class="hmd-container hmd-header__inner">
+    {variant === 'overlay' ? (
+      <span class="hmd-header__home"></span>
+    ) : (
+      <Logotype maskId="hmd-make-header" variant="inline" size="30px" />
+    )}
+    <nav class="hmd-nav" aria-label="Main">
+      <ul>
+        {links.map((link) => (
+          <li><a href={link.href} aria-current={currentPath === link.href ? 'page' : undefined}>{link.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <Button size="sm" href={hireHref} aria-current={hireHref.startsWith('#') || hireHref === currentPath ? 'page' : undefined}>Hire me</Button>
+  </div>
+</header>

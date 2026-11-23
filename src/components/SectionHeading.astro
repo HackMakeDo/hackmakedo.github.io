@@ -1,0 +1,18 @@
+---
+/** A Montserrat 700 h2 whose key word sits in a pink box, with an optional eyebrow above. */
+interface Props {
+  /** Text before the boxed word. */
+  lead?: string;
+  /** The one (or two) word(s) boxed in pink. */
+  boxed: string;
+  /** Text after the boxed word. */
+  trail?: string;
+  eyebrow?: string;
+  id?: string;
+}
+
+const { lead, boxed, trail, eyebrow, id } = Astro.props;
+---
+
+{eyebrow && <p class="hmd-eyebrow">{eyebrow}</p>}
+<h2 class="hmd-heading" id={id}>{lead && `${lead} `}<span class="box">{boxed}</span>{trail && ` ${trail}`}</h2>

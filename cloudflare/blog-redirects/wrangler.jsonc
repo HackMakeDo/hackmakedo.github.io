@@ -1,0 +1,8 @@
+{
+  // Old WordPress blog -> hackmakedo.com. See README.md before deploying: deploying switches the old blog off.
+  "name": "hackmakedo-blog-redirects",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": false,
+  "routes": [{ "pattern": "blog.hackmakedo.com/*", "zone_name": "hackmakedo.com" }]
+}

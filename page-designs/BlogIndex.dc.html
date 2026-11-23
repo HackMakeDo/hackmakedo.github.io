@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Blog</title>
+<link rel="stylesheet" href="ds/hackmakedo/tokens.css">
+<link rel="stylesheet" href="ds/hackmakedo/components/bundle.css">
+<script src="ds/hackmakedo/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0b1c2f}
+a{color:#ffb1a4}a:hover{color:#eceaf7}
+.hmd-pink{--ground:#ffb1a4;--panel:#ffb1a4;--ink:#0b1c2f;--ink-muted:#0b1c2f;--accent-text:#0b1c2f;--border-strong:#0b1c2f;--rule:#0b1c2f;--focus-ring:#0b1c2f;--pink:#0b1c2f;--on-pink:#ffb1a4;background:var(--ground);color:var(--ink)}
+.hmd-pink a:not(.hmd-btn){color:#0b1c2f;text-decoration:underline}
+.hmd-pink .hmd-btn--primary:hover{background:transparent;color:#0b1c2f;box-shadow:inset 0 0 0 2px #0b1c2f}
+.topics{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.topics a{text-decoration:none}
+.topics a[aria-current="page"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+</style>
+</helmet>
+<div data-theme="dark" style="background: var(--ground); color: var(--ink); font-family: var(--font-body); min-height: 100vh;">
+
+  <a class="hmd-skip" href="#main">Skip to content</a>
+
+  <header class="hmd-header hmd-header--sticky">
+    <div class="hmd-container hmd-header__inner">
+      <a class="hmd-header__home" href="Main.dc.html" aria-label="Hack Make Do, home">
+        <span class="hmd-logotype hmd-logotype--inline">
+          <span>Hack</span>
+          <span class="hmd-logotype__make"><svg class="hmd-knockout" viewBox="0 0 292 100" aria-hidden="true" focusable="false"><mask id="hmd-make-blogindex" maskUnits="userSpaceOnUse" x="0" y="0" width="292" height="100"><rect width="292" height="100" fill="#fff"></rect><text x="11" y="84" textLength="270" lengthAdjust="spacingAndGlyphs" fill="#000">Make</text></mask><rect class="hmd-knockout__under" width="292" height="100"></rect><rect class="hmd-knockout__box" width="292" height="100" mask="url(#hmd-make-blogindex)"></rect></svg></span>
+          <span>Do</span>
+        </span>
+      </a>
+      <nav class="hmd-nav" aria-label="Main">
+        <ul>
+          <li><a href="Work.dc.html">Work</a></li>
+          <li><a href="BlogIndex.dc.html" aria-current="page">Blog</a></li>
+          <li><a href="Timeline.dc.html">Timeline</a></li>
+          <li><a href="About.dc.html">About</a></li>
+        </ul>
+      </nav>
+      <a class="hmd-btn hmd-btn--primary hmd-btn--sm" href="Freelancer.dc.html">Hire me</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <header class="hmd-pagehead hmd-container">
+      <nav class="hmd-breadcrumbs" aria-label="Breadcrumb">
+        <ol><li><a href="Main.dc.html">Home</a></li><li aria-current="page">Blog</li></ol>
+      </nav>
+      <p class="hmd-eyebrow">Blog</p>
+      <h1 class="hmd-pagehead__title">Blog</h1>
+      <p class="hmd-pagehead__lead">Tutorials, code snippets and notes on Umbraco, the Bellissima backoffice, .NET and developer tooling, written since 2013.</p>
+    </header>
+
+    <section class="hmd-section" aria-label="Posts" style="padding-top: 0;">
+      <div class="hmd-container">
+
+        <nav aria-label="Topics" style="margin-bottom: 48px;">
+          <ul class="topics">
+            <li><a class="hmd-chip" href="BlogIndex.dc.html" aria-current="page">All posts</a></li>
+            <li><a class="hmd-chip" href="#">Umbraco</a></li>
+            <li><a class="hmd-chip" href="#">Bellissima</a></li>
+            <li><a class="hmd-chip" href="#">Umbraco packages</a></li>
+            <li><a class="hmd-chip" href="#">Umbraco Forms</a></li>
+            <li><a class="hmd-chip" href="#">.NET</a></li>
+            <li><a class="hmd-chip" href="#">JavaScript and TypeScript</a></li>
+            <li><a class="hmd-chip" href="#">Logging</a></li>
+            <li><a class="hmd-chip" href="#">Tooling</a></li>
+            <li><a class="hmd-chip" href="#">Community</a></li>
+            <li><a class="hmd-chip" href="#">Tutorials</a></li>
+            <li><a class="hmd-chip" href="#">Personal</a></li>
+          </ul>
+        </nav>
+
+        <div class="hmd-grid">
+          <article class="hmd-card">
+            <p class="hmd-meta"><time datetime="2025-04-28">28 April 2025</time></p>
+            <h3><a href="BlogPost.dc.html">Using SignalR, IOptionsMonitor with Umbraco Bellissima for reactive .NET Options</a></h3>
+            <p>How to switch package features on and off at runtime, without a deployment, by pairing IOptionsMonitor with a SignalR hub and a Bellissima global context.</p>
+            <div class="hmd-chips"><span class="hmd-chip">Bellissima</span><span class="hmd-chip">.NET</span></div>
+          </article>
+          <article class="hmd-card">
+            <p class="hmd-meta"><time datetime="2025-04-09">9 April 2025</time></p>
+            <h3><a href="#">Quick Tip: How to prevent HTML in Umbraco Form fields</a></h3>
+            <p>A FormValidateNotification handler that uses a regular expression to reject HTML submitted to Umbraco Forms fields.</p>
+            <div class="hmd-chips"><span class="hmd-chip">Umbraco Forms</span></div>
+          </article>
+          <article class="hmd-card">
+            <p class="hmd-meta"><time datetime="2025-01-16">16 January 2025</time></p>
+            <h3><a href="#">How to refresh the Umbraco v14 Bellissima content tree with code</a></h3>
+            <p>Placeholder: excerpt.</p>
+            <div class="hmd-chips"><span class="hmd-chip">Bellissima</span></div>
+          </article>
+          <article class="hmd-card">
+            <p class="hmd-meta"><time datetime="2024-07-12">12 July 2024</time></p>
+            <h3><a href="#">How to overwrite the Save &amp; Publish button and more in Umbraco v14</a></h3>
+            <p>Placeholder: excerpt.</p>
+            <div class="hmd-chips"><span class="hmd-chip">Bellissima</span></div>
+          </article>
+          <article class="hmd-card">
+            <p class="hmd-meta"><time datetime="2024-07-10">10 July 2024</time></p>
+            <h3><a href="#">Why I have still stuck around in the Umbraco community after all these years</a></h3>
+            <p>Placeholder: excerpt.</p>
+            <div class="hmd-chips"><span class="hmd-chip">Community</span></div>
+          </article>
+          <article class="hmd-card">
+            <p class="hmd-meta"><time datetime="2024-06-10">10 June 2024</time></p>
+            <h3><a href="#">Automate Umbraco project setup using GitHub template repositories and Actions</a></h3>
+            <p>Placeholder: excerpt.</p>
+            <div class="hmd-chips"><span class="hmd-chip">Tooling</span></div>
+          </article>
+          <article class="hmd-card">
+            <p class="hmd-meta"><time datetime="2024-06-03">3 June 2024</time></p>
+            <h3><a href="#">Scaffold an Umbraco v14 package development project with Vite, TypeScript and Lit</a></h3>
+            <p>Placeholder: excerpt.</p>
+            <div class="hmd-chips"><span class="hmd-chip">Bellissima</span><span class="hmd-chip">Umbraco packages</span></div>
+          </article>
+          <article class="hmd-card">
+            <p class="hmd-meta"><time datetime="2024-05-28">28 May 2024</time></p>
+            <h3><a href="#">How to disable the Umbraco v14 Getting Started dashboard</a></h3>
+            <p>Placeholder: excerpt.</p>
+            <div class="hmd-chips"><span class="hmd-chip">Bellissima</span></div>
+          </article>
+          <article class="hmd-card">
+            <p class="hmd-meta"><time datetime="2024-05-21">21 May 2024</time></p>
+            <h3><a href="#">How to create an Umbraco v14 Bellissima SVG icon pack with Node.js</a></h3>
+            <p>Placeholder: excerpt.</p>
+            <div class="hmd-chips"><span class="hmd-chip">Bellissima</span><span class="hmd-chip">JavaScript and TypeScript</span></div>
+          </article>
+        </div>
+
+        <nav class="hmd-pagination" aria-label="Blog pages" style="margin-top: 48px;">
+          <span aria-disabled="true">← Newer posts</span>
+          <span>Page 1 of 8</span>
+          <a rel="next" href="#">Older posts →</a>
+        </nav>
+      </div>
+    </section>
+
+    <section class="hmd-section hmd-pink" aria-label="Hire">
+      <div class="hmd-container">
+        <aside class="hmd-hire">
+          <p>Need a hand with Umbraco? I'm available as a freelancer or contractor.</p>
+          <a class="hmd-btn hmd-btn--primary" href="Freelancer.dc.html">Get in touch</a>
+        </aside>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="hmd-footer">
+    <div class="hmd-container">
+      <div class="hmd-footer__grid">
+        <div><h2>Hire</h2><ul><li><a href="Freelancer.dc.html">Umbraco freelancer</a></li><li><a href="Contractor.dc.html">Umbraco contractor</a></li><li><a href="Contact.dc.html">Contact</a></li></ul></div>
+        <div><h2>Work</h2><ul><li><a href="CaseContentLock.dc.html">ContentLock</a></li><li><a href="#">Compact Log Format Viewer</a></li><li><a href="#">IIS Express Code</a></li><li><a href="Work.dc.html">All work</a></li></ul></div>
+        <div><h2>Writing</h2><ul><li><a href="BlogIndex.dc.html" aria-current="page">Blog</a></li><li><a href="Timeline.dc.html">Timeline</a></li><li><a href="#">RSS feed</a></li></ul></div>
+        <div><h2>Elsewhere</h2><ul><li><a href="https://github.com/warrenbuckley" rel="me">GitHub</a></li><li><a href="#" rel="me">LinkedIn</a></li><li><a href="#" rel="me">YouTube</a></li><li><a href="#" rel="me">Mastodon</a></li></ul></div>
+      </div>
+      <div class="hmd-footer__legal">
+        <p>Hack Make Do Limited is incorporated in England. Company No: 15432884.<br>Registered Office: Castle House, Castle Street, Guildford, GU1 3UW.<br>VAT Number: GB 458891924 · <a href="Privacy.dc.html">Privacy</a></p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2560}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

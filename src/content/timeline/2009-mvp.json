@@ -1,0 +1,15 @@
+{
+  "year": 2009,
+  "yearLabel": "2009",
+  "type": "award",
+  "title": "Third Umbraco MVP award",
+  "body": "A third MVP award, still at XEED in Oslo.",
+  "badge": 2009,
+  "links": [
+    {
+      "label": "MVP archive ↗",
+      "href": "https://community.umbraco.com/contribute/mvp-program/mvp-archive/#mvp-2009"
+    }
+  ],
+  "order": 0
+}

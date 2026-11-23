@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Case study: ContentLock</title>
+<link rel="stylesheet" href="ds/hackmakedo/tokens.css">
+<link rel="stylesheet" href="ds/hackmakedo/components/bundle.css">
+<script src="ds/hackmakedo/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0b1c2f}
+a{color:#ffb1a4}a:hover{color:#eceaf7}
+.hmd-pink{--ground:#ffb1a4;--panel:#ffb1a4;--ink:#0b1c2f;--ink-muted:#0b1c2f;--accent-text:#0b1c2f;--border-strong:#0b1c2f;--rule:#0b1c2f;--focus-ring:#0b1c2f;--pink:#0b1c2f;--on-pink:#ffb1a4;background:var(--ground);color:var(--ink)}
+.hmd-pink a:not(.hmd-btn){color:#0b1c2f;text-decoration:underline}
+.hmd-pink .hmd-btn--primary:hover{background:transparent;color:#0b1c2f;box-shadow:inset 0 0 0 2px #0b1c2f}
+</style>
+</helmet>
+<div data-theme="dark" style="background: var(--ground); color: var(--ink); font-family: var(--font-body); min-height: 100vh;">
+
+  <a class="hmd-skip" href="#main">Skip to content</a>
+
+  <header class="hmd-header hmd-header--sticky">
+    <div class="hmd-container hmd-header__inner">
+      <a class="hmd-header__home" href="Main.dc.html" aria-label="Hack Make Do, home">
+        <span class="hmd-logotype hmd-logotype--inline">
+          <span>Hack</span>
+          <span class="hmd-logotype__make"><svg class="hmd-knockout" viewBox="0 0 292 100" aria-hidden="true" focusable="false"><mask id="hmd-make-contentlock" maskUnits="userSpaceOnUse" x="0" y="0" width="292" height="100"><rect width="292" height="100" fill="#fff"></rect><text x="11" y="84" textLength="270" lengthAdjust="spacingAndGlyphs" fill="#000">Make</text></mask><rect class="hmd-knockout__under" width="292" height="100"></rect><rect class="hmd-knockout__box" width="292" height="100" mask="url(#hmd-make-contentlock)"></rect></svg></span>
+          <span>Do</span>
+        </span>
+      </a>
+      <nav class="hmd-nav" aria-label="Main">
+        <ul>
+          <li><a href="Work.dc.html" aria-current="page">Work</a></li>
+          <li><a href="BlogIndex.dc.html">Blog</a></li>
+          <li><a href="Timeline.dc.html">Timeline</a></li>
+          <li><a href="About.dc.html">About</a></li>
+        </ul>
+      </nav>
+      <a class="hmd-btn hmd-btn--primary hmd-btn--sm" href="Freelancer.dc.html">Hire me</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <header class="hmd-pagehead hmd-container">
+      <nav class="hmd-breadcrumbs" aria-label="Breadcrumb">
+        <ol><li><a href="Main.dc.html">Home</a></li><li><a href="Work.dc.html">Work</a></li><li aria-current="page">ContentLock</li></ol>
+      </nav>
+      <p class="hmd-eyebrow">Open source · Umbraco package</p>
+      <h1 class="hmd-pagehead__title">ContentLock</h1>
+      <p class="hmd-pagehead__lead">ContentLock is a free, open source Umbraco package that stops editors overwriting each other's work, by letting them lock a content node while they work on it.</p>
+      <div class="hmd-hero__actions" style="margin-top: 32px;">
+        <a class="hmd-btn hmd-btn--primary" href="https://marketplace.umbraco.com/package/umbraco.community.contentlock">Get it on the Marketplace ↗</a>
+        <a class="hmd-btn hmd-btn--secondary" href="https://github.com/warrenbuckley/Umbraco.Community.ContentLock">View on GitHub ↗</a>
+      </div>
+    </header>
+
+    <section class="hmd-section" aria-label="Screenshot" style="padding-top: 0;">
+      <div class="hmd-container">
+        <figure class="hmd-figure">
+          <div class="hmd-shot" style="aspect-ratio: 16 / 10;">Placeholder: hero screenshot (also the Open Graph image)</div>
+          <figcaption>A locked node: other editors see who holds the lock and cannot save over their work.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="hmd-section" aria-label="Project facts" style="padding-top: 0;">
+      <div class="hmd-container">
+        <dl class="hmd-facts">
+          <div><dt>Role</dt><dd>Creator and maintainer</dd></div>
+          <div><dt>First released</dt><dd>2025</dd></div>
+          <div><dt>Built with</dt><dd>.NET, SignalR, Lit, TypeScript</dd></div>
+          <div><dt>Works with</dt><dd>The Umbraco backoffice (Bellissima)</dd></div>
+          <div><dt>Links</dt><dd><a href="https://github.com/warrenbuckley/Umbraco.Community.ContentLock">GitHub ↗</a> · <a href="https://marketplace.umbraco.com/package/umbraco.community.contentlock">Marketplace ↗</a></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="hmd-section" aria-labelledby="why-h" style="padding-top: 0;">
+      <div class="hmd-container hmd-container--text" style="margin-inline: auto;">
+        <div class="hmd-prose">
+          <h2 id="why-h">Why I built it</h2>
+          <p>Placeholder: the problem you saw, who it hurt, and why no existing package solved it. Two or three short paragraphs in your own words.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="hmd-section hmd-section--panel" aria-labelledby="good-h">
+      <div class="hmd-container hmd-container--text" style="margin-inline: auto;">
+        <h2 class="hmd-heading" id="good-h">What makes it <span class="box">good</span></h2>
+        <ol class="hmd-features">
+          <li><h3>No more overwritten work</h3><p>Editors lock a content node while they work on it, so two people cannot save over each other.</p></li>
+          <li><h3>Live for everyone</h3><p>Lock changes and online users are pushed to every backoffice through a SignalR hub.</p></li>
+          <li><h3>Switch features without a deploy</h3><p>Options are read through IOptionsMonitor, so turning a feature off in settings updates connected backoffices.</p></li>
+          <li><h3>Talk to each other</h3><p>Quick audio calls between connected backoffice users.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="hmd-section" aria-labelledby="see-h">
+      <div class="hmd-container">
+        <h2 class="hmd-heading" id="see-h">See it in <span class="box">action</span></h2>
+        <div class="hmd-gallery">
+          <figure class="hmd-figure"><div class="hmd-shot">Placeholder: screenshot</div><figcaption>A locked node: other editors see who holds the lock and cannot save over their work.</figcaption></figure>
+          <figure class="hmd-figure"><div class="hmd-shot">Placeholder: screenshot</div><figcaption>The online users panel shows who else is in the backoffice right now.</figcaption></figure>
+        </div>
+        <div style="max-width: 880px; margin: 48px auto 0;">
+          <hmd-video class="hmd-video" video-id="MZfeUKSO8h4" label="ContentLock: reactive options with SignalR"><a class="hmd-video__fallback" href="https://www.youtube.com/watch?v=MZfeUKSO8h4">Watch on YouTube ↗</a></hmd-video>
+        </div>
+      </div>
+    </section>
+
+    <section class="hmd-section hmd-section--panel" aria-labelledby="code-h">
+      <div class="hmd-container hmd-container--text" style="margin-inline: auto;">
+        <h2 class="hmd-heading" id="code-h">Under the <span class="box">hood</span></h2>
+        <p style="font-size: 19px; line-height: 1.6;">The options are bound in a composer and read through <code class="hmd-code">IOptionsMonitor</code>, so a change in settings reaches every connected backoffice.</p>
+        <figure class="hmd-codeblock" style="margin-top: 24px;">
+          <figcaption class="hmd-codeblock__bar">
+            <span class="hmd-codeblock__lang">C#</span>
+            <span class="hmd-codeblock__file">ContentLockComposer.cs</span>
+            <hmd-copy><button type="button" class="hmd-copybtn" aria-label="Copy code: ContentLockComposer.cs">Copy</button></hmd-copy>
+          </figcaption>
+          <pre tabindex="0" aria-label="C# code: ContentLockComposer.cs"><code><span class="line">builder<span class="o">.</span>Services</span>
+<span class="line">   <span class="o">.</span>AddOptions<span class="o">&lt;</span><span class="t">ContentLockOptions</span><span class="o">&gt;()</span></span>
+<span class="line">   <span class="o">.</span>Bind<span class="o">(</span>builder<span class="o">.</span>Config<span class="o">.</span>GetSection<span class="o">(</span><span class="t">ContentLockOptions</span><span class="o">.</span>ConfigName<span class="o">));</span></span></code></pre>
+        </figure>
+      </div>
+    </section>
+
+    <section class="hmd-section" aria-labelledby="more-h">
+      <div class="hmd-container">
+        <h2 class="hmd-heading" id="more-h">Read <span class="box">more</span></h2>
+        <div class="hmd-grid hmd-grid--2">
+          <article class="hmd-card">
+            <p class="hmd-meta"><time datetime="2025-04-28">28 April 2025</time></p>
+            <h3><a href="BlogPost.dc.html">Using SignalR, IOptionsMonitor with Umbraco Bellissima for reactive .NET Options</a></h3>
+            <p>How to switch package features on and off at runtime, without a deployment, by pairing IOptionsMonitor with a SignalR hub and a Bellissima global context.</p>
+            <div class="hmd-chips"><span class="hmd-chip">Umbraco</span><span class="hmd-chip">Bellissima</span><span class="hmd-chip">SignalR</span></div>
+          </article>
+          <article class="hmd-card">
+            <p class="hmd-meta">2025 on the timeline</p>
+            <h3><a href="Timeline.dc.html">Where ContentLock fits</a></h3>
+            <p>See ContentLock alongside the other packages and tools on the career timeline.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="hmd-section hmd-pink" aria-label="Hire">
+      <div class="hmd-container">
+        <aside class="hmd-hire">
+          <p>Need a backoffice extension like this for your Umbraco site? Let's talk.</p>
+          <a class="hmd-btn hmd-btn--primary" href="Freelancer.dc.html">Get in touch</a>
+        </aside>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="hmd-footer">
+    <div class="hmd-container">
+      <div class="hmd-footer__grid">
+        <div><h2>Hire</h2><ul><li><a href="Freelancer.dc.html">Umbraco freelancer</a></li><li><a href="Contractor.dc.html">Umbraco contractor</a></li><li><a href="Contact.dc.html">Contact</a></li></ul></div>
+        <div><h2>Work</h2><ul><li><a href="CaseContentLock.dc.html" aria-current="page">ContentLock</a></li><li><a href="#">Compact Log Format Viewer</a></li><li><a href="#">IIS Express Code</a></li><li><a href="Work.dc.html">All work</a></li></ul></div>
+        <div><h2>Writing</h2><ul><li><a href="BlogIndex.dc.html">Blog</a></li><li><a href="Timeline.dc.html">Timeline</a></li><li><a href="#">RSS feed</a></li></ul></div>
+        <div><h2>Elsewhere</h2><ul><li><a href="https://github.com/warrenbuckley" rel="me">GitHub</a></li><li><a href="#" rel="me">LinkedIn</a></li><li><a href="#" rel="me">YouTube</a></li><li><a href="#" rel="me">Mastodon</a></li></ul></div>
+      </div>
+      <div class="hmd-footer__legal">
+        <p>Hack Make Do Limited is incorporated in England. Company No: 15432884.<br>Registered Office: Castle House, Castle Street, Guildford, GU1 3UW.<br>VAT Number: GB 458891924 · <a href="Privacy.dc.html">Privacy</a></p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":5520}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

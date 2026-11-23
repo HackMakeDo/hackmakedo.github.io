@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Container from '../../components/Container.astro';
+import Prose from '../../components/Prose.astro';
+---
+
+<BaseLayout
+  title="Privacy — Hack Make Do"
+  description="This site sets no cookies and does not track you. This page explains what little data is involved when you visit or get in touch."
+  currentPath="/privacy/"
+>
+  <PageHeader
+    trail={[{ label: 'Home', href: '/' }, { label: 'Privacy' }]}
+    title="Privacy"
+    lead="This site sets no cookies and does not track you. This page explains what little data is involved when you visit or get in touch."
+  />
+
+  <section class="hmd-section hmd-section--flush-top" aria-label="Privacy notice">
+    <Container variant="text">
+      <Prose>
+        <p><small>Last updated: <time datetime="2026-11-19">19 November 2026</time></small></p>
+
+        <h2 id="who">Who is responsible</h2>
+        <p>
+          Hack Make Do Limited, incorporated in England, company number 15432884, registered office Castle House,
+          Castle Street, Guildford, GU1 3UW. Email <a href="mailto:warren@hackmakedo.com">warren@hackmakedo.com</a> 
+          with any question about your data.
+        </p>
+
+        <h2 id="hosting">Hosting</h2>
+        <p>
+          This site is hosted on GitHub Pages and delivered through Cloudflare. Both handle your IP address to send
+          you the pages and to protect the site from abuse.
+        </p>
+
+        <h2 id="analytics">Visitor statistics</h2>
+        <p>Page views are counted with Cloudflare Web Analytics, which does not use cookies and does not identify you.</p>
+
+        <h2 id="email">When you email me</h2>
+        <p>I use your name, email address and message to reply and, if we work together, to run the project. I keep emails only as long as I need them for that, and to meet legal record-keeping duties.</p>
+
+        <h2 id="video">Videos and code from YouTube, Vimeo, TED and GitHub</h2>
+        <p>
+          Videos on this site load nothing from YouTube, Vimeo or TED until you press play, and their preview images
+          are served from this site. Once you press play, a YouTube video plays from youtube-nocookie.com, a Vimeo
+          video plays from player.vimeo.com in its do-not-track mode, and a TED talk plays from embed.ted.com. That
+          company may then store data on your device under its own privacy policy.
+        </p>
+        <p>
+          Some posts show code kept on GitHub Gist. It loads from gist.github.com only when you press "Show code",
+          and GitHub may then store data on your device under its own privacy policy.
+        </p>
+
+        <h2 id="settings">Remembering a setting</h2>
+        <p>
+          If you pause the scrolling banner on the home page, your browser remembers that in its own storage on your
+          device, so the banner stays still next time. It holds only that setting, is never sent to me, and is removed
+          when you press play again or clear this site's data.
+        </p>
+
+        <h2 id="fonts">Fonts and other files</h2>
+        <p>Fonts and images are served from this site, so your browser does not contact a third party to show them.</p>
+
+        <h2 id="rights">Your rights</h2>
+        <p>
+          Under UK GDPR you can ask to see, correct or delete the personal data I hold about you. If you are
+          unhappy with how I handle it, you can complain to the Information Commissioner's Office.
+        </p>
+      </Prose>
+    </Container>
+  </section>
+</BaseLayout>
+

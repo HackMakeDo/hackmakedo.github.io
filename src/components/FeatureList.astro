@@ -1,0 +1,20 @@
+---
+/** "What makes it good" / "How I work": three to six numbered points, a heading and two sentences each. */
+interface Item {
+  title: string;
+  description: string;
+}
+interface Props {
+  items: Item[];
+}
+const { items } = Astro.props;
+---
+
+<ol class="hmd-features">
+  {items.map((item) => (
+    <li>
+      <h3>{item.title}</h3>
+      <p>{item.description}</p>
+    </li>
+  ))}
+</ol>

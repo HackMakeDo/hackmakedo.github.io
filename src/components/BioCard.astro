@@ -1,0 +1,18 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+/** The short bio: circular portrait beside a greeting heading and a few sentences in Warren's voice. */
+interface Props {
+  heading: { lead?: string; boxed: string; trail?: string; eyebrow?: string; id: string };
+  photoSrc: string;
+}
+const { heading, photoSrc } = Astro.props;
+---
+
+<section class="hmd-bio" aria-labelledby={heading.id}>
+  <img class="hmd-bio__photo" src={photoSrc} alt="Warren Buckley" width="240" height="240" />
+  <div>
+    <SectionHeading {...heading} />
+    <slot />
+  </div>
+</section>

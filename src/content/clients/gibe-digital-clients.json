@@ -1,0 +1,22 @@
+{
+  "name": "Dyson, Tottenham Hotspur and Wolverhampton Wanderers",
+  "permission": true,
+  "agency": "Gibe Digital",
+  "order": 2,
+  "summary": "Umbraco sites for Gibe Digital's clients, built as a contract Umbraco developer.",
+  "facts": [
+    {
+      "label": "Role",
+      "value": "Contract Umbraco developer"
+    },
+    {
+      "label": "Agency",
+      "value": "Gibe Digital"
+    }
+  ],
+  "quote": {
+    "text": "We've loved working with Warren a few times as a contractor on some large Umbraco projects. He's always positive, very knowledgeable and great fun to work with.",
+    "name": "Steve Temple",
+    "role": "Founder and Technical Director, Gibe Digital"
+  }
+}

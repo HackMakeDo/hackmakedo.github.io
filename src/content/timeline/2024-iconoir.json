@@ -1,0 +1,18 @@
+{
+  "year": 2024,
+  "yearLabel": "2024",
+  "type": "project",
+  "title": "Iconoir Icon Pack",
+  "body": "Packages the open source Iconoir icon library for Umbraco 14 and later.",
+  "links": [
+    {
+      "label": "View on GitHub ↗",
+      "href": "https://github.com/warrenbuckley/Umbraco.Community.IconPack.Iconoir"
+    },
+    {
+      "label": "View on Umbraco Marketplace ↗",
+      "href": "https://marketplace.umbraco.com/package/umbraco.community.iconpack.iconoir"
+    }
+  ],
+  "order": 1
+}

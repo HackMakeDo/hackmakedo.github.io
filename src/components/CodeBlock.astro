@@ -1,0 +1,26 @@
+---
+/**
+ * Code for posts and case studies: header bar (language, optional filename), copy button, numbered lines.
+ * Hand-write <span class="line"> rows into the default slot, or pass pre-highlighted Shiki output the same way.
+ */
+interface Props {
+  lang: string;
+  file?: string;
+  numbered?: boolean;
+}
+const { lang, file, numbered = true } = Astro.props;
+const ariaLabel = file ? `${lang} code: ${file}` : `${lang} code`;
+---
+
+<figure class={`hmd-codeblock${numbered ? ' hmd-codeblock--numbered' : ''}`}>
+  <figcaption class="hmd-codeblock__bar">
+    <span class="hmd-codeblock__lang">{lang}</span>
+    {file && <span class="hmd-codeblock__file">{file}</span>}
+    <hmd-copy>
+      <button type="button" class="hmd-copybtn" aria-label={`Copy code: ${file ?? lang}`}>Copy</button>
+    </hmd-copy>
+  </figcaption>
+  <pre tabindex="0" aria-label={ariaLabel}><code><slot /></code></pre>
+</figure>
+
+<script src="../elements/index.ts"></script>

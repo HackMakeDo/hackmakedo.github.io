@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Blog post: reactive .NET Options with SignalR and Bellissima</title>
+<link rel="stylesheet" href="ds/hackmakedo/tokens.css">
+<link rel="stylesheet" href="ds/hackmakedo/components/bundle.css">
+<script src="ds/hackmakedo/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0b1c2f}
+a{color:#ffb1a4}a:hover{color:#eceaf7}
+.hmd-pink{--ground:#ffb1a4;--panel:#ffb1a4;--ink:#0b1c2f;--ink-muted:#0b1c2f;--accent-text:#0b1c2f;--border-strong:#0b1c2f;--rule:#0b1c2f;--focus-ring:#0b1c2f;--pink:#0b1c2f;--on-pink:#ffb1a4;background:var(--ground);color:var(--ink)}
+.hmd-pink a:not(.hmd-btn){color:#0b1c2f;text-decoration:underline}
+.hmd-pink .hmd-btn--primary:hover{background:transparent;color:#0b1c2f;box-shadow:inset 0 0 0 2px #0b1c2f}
+</style>
+</helmet>
+<div data-theme="dark" style="background: var(--ground); color: var(--ink); font-family: var(--font-body); min-height: 100vh;">
+
+  <a class="hmd-skip" href="#main">Skip to content</a>
+
+  <header class="hmd-header hmd-header--sticky">
+    <div class="hmd-container hmd-header__inner">
+      <a class="hmd-header__home" href="Main.dc.html" aria-label="Hack Make Do, home">
+        <span class="hmd-logotype hmd-logotype--inline">
+          <span>Hack</span>
+          <span class="hmd-logotype__make"><svg class="hmd-knockout" viewBox="0 0 292 100" aria-hidden="true" focusable="false"><mask id="hmd-make-post" maskUnits="userSpaceOnUse" x="0" y="0" width="292" height="100"><rect width="292" height="100" fill="#fff"></rect><text x="11" y="84" textLength="270" lengthAdjust="spacingAndGlyphs" fill="#000">Make</text></mask><rect class="hmd-knockout__under" width="292" height="100"></rect><rect class="hmd-knockout__box" width="292" height="100" mask="url(#hmd-make-post)"></rect></svg></span>
+          <span>Do</span>
+        </span>
+      </a>
+      <nav class="hmd-nav" aria-label="Main">
+        <ul>
+          <li><a href="Work.dc.html">Work</a></li>
+          <li><a href="BlogIndex.dc.html" aria-current="page">Blog</a></li>
+          <li><a href="Timeline.dc.html">Timeline</a></li>
+          <li><a href="About.dc.html">About</a></li>
+        </ul>
+      </nav>
+      <a class="hmd-btn hmd-btn--primary hmd-btn--sm" href="Freelancer.dc.html">Hire me</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="hmd-container" style="padding-block: 64px 96px;">
+
+      <header class="hmd-posthead" style="max-width: 820px;">
+        <nav class="hmd-breadcrumbs" aria-label="Breadcrumb"><ol style="margin: 0;"><li><a href="Main.dc.html">Home</a></li><li><a href="BlogIndex.dc.html">Blog</a></li><li aria-current="page">This post</li></ol></nav>
+        <h1 class="hmd-posthead__title">Using SignalR, IOptionsMonitor with Umbraco Bellissima for reactive .NET Options</h1>
+        <p class="hmd-posthead__meta"><time datetime="2025-04-28">28 April 2025</time></p>
+        <ul class="hmd-chips"><li><a class="hmd-chip" href="#">Umbraco</a></li><li><a class="hmd-chip" href="#">Bellissima</a></li><li><a class="hmd-chip" href="#">SignalR</a></li></ul>
+      </header>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 64px; align-items: flex-start; margin-top: 48px;">
+
+        <article style="flex: 999 1 560px; min-width: 0; max-width: 720px;">
+          <div class="hmd-prose">
+            <p>Hello 👋</p>
+            <p>I have been working on a community package for Umbraco Bellissima called ContentLock, which lets users lock content nodes and see who else is logged in to the backoffice. Some of this work uses <a href="#">SignalR</a> to push realtime updates to the backoffice UI.</p>
+            <h2 id="action">Lets take a look at it in action</h2>
+          </div>
+
+          <div style="margin-block: 24px;">
+            <hmd-video class="hmd-video" video-id="MZfeUKSO8h4" label="ContentLock: reactive options with SignalR"><a class="hmd-video__fallback" href="https://www.youtube.com/watch?v=MZfeUKSO8h4">Watch on YouTube ↗</a></hmd-video>
+          </div>
+
+          <div class="hmd-prose">
+            <h2 id="code">Show me the code</h2>
+            <p>Bind the section with <code>AddOptions&lt;ContentLockOptions&gt;()</code> in a composer, then read it through <code>IOptionsMonitor</code>.</p>
+            <ul>
+              <li>Create an interface for the SignalR hub and its methods</li>
+              <li>Create the hub from that interface</li>
+              <li>Register the route in the <strong>UmbracoPipelineFilter</strong></li>
+            </ul>
+          </div>
+
+          <figure class="hmd-codeblock hmd-codeblock--numbered" style="margin-block: 24px;">
+            <figcaption class="hmd-codeblock__bar">
+              <span class="hmd-codeblock__lang">C#</span>
+              <span class="hmd-codeblock__file">src/ContentLock/SignalR/ContentLockHub.cs</span>
+              <hmd-copy><button type="button" class="hmd-copybtn" aria-label="Copy code: ContentLockHub.cs">Copy</button></hmd-copy>
+            </figcaption>
+            <pre tabindex="0" aria-label="C# code: ContentLockHub.cs"><code><span class="line"><span class="o">[</span><span class="t">Authorize</span><span class="o">(</span>Policy <span class="o">=</span> <span class="t">AuthorizationPolicies</span><span class="o">.</span>BackOfficeAccess<span class="o">)]</span></span>
+<span class="line"><span class="k">public class</span> <span class="t">ContentLockHub</span> <span class="o">:</span> <span class="t">Hub</span><span class="o">&lt;</span><span class="t">IContentLockHubEvents</span><span class="o">&gt;</span></span>
+<span class="line"><span class="o">{</span></span>
+<span class="line">    <span class="k">private readonly</span> <span class="t">IOptionsMonitor</span><span class="o">&lt;</span><span class="t">ContentLockOptions</span><span class="o">&gt;</span> _options<span class="o">;</span></span>
+<span class="line"></span>
+<span class="line">    <span class="k">public</span> <span class="t">ContentLockHub</span><span class="o">(</span><span class="t">IOptionsMonitor</span><span class="o">&lt;</span><span class="t">ContentLockOptions</span><span class="o">&gt;</span> options<span class="o">)</span></span>
+<span class="line">    <span class="o">{</span></span>
+<span class="line highlighted">        _options <span class="o">=</span> options<span class="o">;</span></span>
+<span class="line">    <span class="o">}</span></span>
+<span class="line"><span class="o">}</span></span></code></pre>
+          </figure>
+
+          <aside class="hmd-callout" style="margin-block: 24px;"><span class="hmd-callout__label">Tip</span><p>For registering the SignalR route, follow the <a href="#">Umbraco documentation</a>; it covers the pipeline filter.</p></aside>
+
+          <div class="hmd-prose">
+            <h2 id="context">Creating a Bellissima global context</h2>
+            <p>Placeholder: the rest of the migrated post body comes across from WordPress unchanged.</p>
+            <h3 id="settings">Settings</h3>
+            <table>
+              <thead><tr><th>Setting</th><th>Default</th></tr></thead>
+              <tbody><tr><td>OnlineUsers.Enable</td><td>true</td></tr><tr><td>OnlineUsers.Sounds.Enable</td><td>true</td></tr></tbody>
+            </table>
+            <blockquote><p>Hope this has inspired you to play around with SignalR and Bellissima.</p></blockquote>
+            <p>Until next time, Happy Hacking 😀</p>
+          </div>
+
+          <aside class="hmd-callout hmd-callout--archive" style="margin-block: 48px 0;"><span class="hmd-callout__label">Comments</span><p>Comments are closed. Placeholder: link to the archived comments for this post, if it has any.</p></aside>
+        </article>
+
+        <aside style="flex: 1 1 240px; min-width: 0; max-width: 300px;">
+          <nav class="hmd-toc hmd-toc--sticky" aria-labelledby="toc-h">
+            <h2 class="hmd-toc__title" id="toc-h">On this page</h2>
+            <ol>
+              <li><a href="#action">Lets take a look at it in action</a></li>
+              <li><a href="#code" aria-current="true">Show me the code</a></li>
+              <li><a href="#context">Creating a Bellissima global context</a></li>
+            </ol>
+          </nav>
+        </aside>
+
+      </div>
+
+      <section aria-labelledby="related-h" style="margin-top: 96px;">
+        <h2 class="hmd-heading" id="related-h">Keep <span class="box">reading</span></h2>
+        <div class="hmd-grid hmd-grid--2">
+          <article class="hmd-card">
+            <p class="hmd-meta"><time datetime="2025-04-09">9 April 2025</time></p>
+            <h3><a href="#">Quick Tip: How to prevent HTML in Umbraco Form fields</a></h3>
+            <p>A FormValidateNotification handler that uses a regular expression to reject HTML submitted to Umbraco Forms fields.</p>
+            <div class="hmd-chips"><span class="hmd-chip">Umbraco</span><span class="hmd-chip">Umbraco Forms</span></div>
+          </article>
+          <article class="hmd-card">
+            <h3><a href="CaseContentLock.dc.html">ContentLock</a></h3>
+            <p>The case study for the package this post is about: why I built it and what makes it good.</p>
+            <div class="hmd-links"><a class="hmd-link" href="#">Read the case study</a></div>
+          </article>
+        </div>
+      </section>
+
+    </div>
+
+    <section class="hmd-section hmd-pink" aria-label="Hire">
+      <div class="hmd-container">
+        <aside class="hmd-hire">
+          <p>Need a hand with Umbraco Bellissima? I'm available as a freelancer or contractor.</p>
+          <a class="hmd-btn hmd-btn--primary" href="Freelancer.dc.html">Get in touch</a>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="hmd-footer">
+    <div class="hmd-container">
+      <div class="hmd-footer__grid">
+        <div><h2>Hire</h2><ul><li><a href="Freelancer.dc.html">Umbraco freelancer</a></li><li><a href="Contractor.dc.html">Umbraco contractor</a></li><li><a href="Contact.dc.html">Contact</a></li></ul></div>
+        <div><h2>Work</h2><ul><li><a href="CaseContentLock.dc.html">ContentLock</a></li><li><a href="#">Compact Log Format Viewer</a></li><li><a href="#">IIS Express Code</a></li><li><a href="Work.dc.html">All work</a></li></ul></div>
+        <div><h2>Writing</h2><ul><li><a href="BlogIndex.dc.html">Blog</a></li><li><a href="Timeline.dc.html">Timeline</a></li><li><a href="#">RSS feed</a></li></ul></div>
+        <div><h2>Elsewhere</h2><ul><li><a href="#" rel="me">GitHub</a></li><li><a href="#" rel="me">LinkedIn</a></li><li><a href="#" rel="me">YouTube</a></li><li><a href="#" rel="me">Mastodon</a></li></ul></div>
+      </div>
+      <div class="hmd-footer__legal">
+        <p>Hack Make Do Limited is incorporated in England. Company No: 15432884.<br>Registered Office: Castle House, Castle Street, Guildford, GU1 3UW.<br>VAT Number: GB 458891924 · <a href="Privacy.dc.html">Privacy</a></p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4040}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import Grid from '../../components/Grid.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import ClientCard from '../../components/ClientCard.astro';
+import Testimonial from '../../components/Testimonial.astro';
+import Carousel from '../../components/Carousel.astro';
+import FAQ from '../../components/FAQ.astro';
+import ContactCard from '../../components/ContactCard.astro';
+import Button from '../../components/Button.astro';
+import { getCollection } from 'astro:content';
+import { faqPageSchema } from '../../lib/structured-data';
+import { caseStudyHref } from '../../data/case-studies';
+
+const allTestimonials = await getCollection('testimonials');
+const byId = (id: string) => allTestimonials.find((t) => t.id === id)!;
+const simone = byId('simone-chiaretta');
+const ceri = byId('ceri-broussine');
+const cornelia = byId('cornelia-vasile');
+const pete = byId('pete-cooper');
+
+const faqItems = [
+  {
+    question: 'Can you build custom Umbraco backoffice extensions?',
+    answer: 'Yes. ContentLock, Examine Peek and Manifest Peek are all extensions for the rebuilt backoffice in Umbraco 14 and later, and I volunteer on the Umbraco Package Team.',
+  },
+  {
+    question: 'Which Umbraco versions do you work with?',
+    answer: 'I work with all versions of Umbraco from legacy or unsupported versions of Umbraco up to the current release. I can help you upgrade your site to the latest version, or work with you on a new build.',
+  },
+  {
+    question: 'How soon can you start?',
+    answer: 'I have open availability for freelance work and contract roles. Please email me with the project details and dates.',
+  },
+  {
+    question: 'How do you charge?',
+    answer: "I work by the day, week or month. Before we start, I'll give you a rough idea of how long the work should take, so you can plan a budget. Projects often change as they go, and paying for time means we can adapt without renegotiating a quote.",
+  },
+];
+---
+
+<BaseLayout
+  title="Umbraco freelancer — Hack Make Do"
+  description="Warren Buckley is a UK-based freelance Umbraco developer and nine-time Umbraco MVP. He builds, upgrades and extends Umbraco sites and packages for agencies, product teams and organisations."
+  ogImage="/og/umbraco-freelancer.png"
+  currentPath="/umbraco-freelancer/"
+  hireHref="#contact-h"
+  jsonLd={[faqPageSchema(faqItems)]}
+>
+  <PageHeader
+    trail={[{ label: 'Home', href: '/' }, { label: 'Umbraco freelancer' }]}
+    eyebrow="Hire"
+    title="Umbraco freelancer"
+    lead="Warren Buckley is a UK-based freelance Umbraco developer and nine-time Umbraco MVP. He builds, upgrades and extends Umbraco sites and packages for agencies, product teams and organisations."
+  >
+    <div class="hmd-hero__actions hmd-mt-8">
+      <Button href="#contact-h">Get in touch</Button>
+      <Button variant="secondary" href="/umbraco-contractor/">Looking for a contractor?</Button>
+    </div>
+  </PageHeader>
+
+  <Section heading={{ eyebrow: 'What you get', lead: 'Freelance Umbraco', boxed: 'work', id: 'get-h' }}>
+    <Grid variant="2">
+      <ServiceCard
+        number="01"
+        title="Upgrades and migrations"
+        description="Moving sites to the current Umbraco release, including the rebuilt Bellissima backoffice, as I did for the Council of the European Union."
+        linkHref="/umbraco-upgrades/"
+        linkLabel="Umbraco upgrades"
+      />
+      <ServiceCard
+        number="02"
+        title="Backoffice extensions"
+        description="Custom dashboards, property editors and packages built with TypeScript and Lit web components."
+      />
+      <ServiceCard
+        number="03"
+        title="Finishing stalled builds"
+        description="Freelance Umbraco development to finish builds, upgrades and integrations that have stalled."
+      />
+      <ServiceCard
+        number="04"
+        title="Developer experience"
+        description="Templates, tooling and documentation that make your Umbraco product easier for other developers to build on."
+      />
+    </Grid>
+  </Section>
+
+  <Section panel heading={{ eyebrow: 'Proof', lead: 'Recent', boxed: 'client', trail: 'work', id: 'proof-h' }}>
+    <div class="hmd-clients-list">
+      <ClientCard
+        name="Council of the European Union"
+        href={caseStudyHref('council-of-the-european-union')}
+        summary="Drove the migration of the Council's Umbraco site from version 13 to 16, and brought the in-house team up to speed on the new backoffice technology."
+        quote={{
+          text: "Warren's expertise, professionalism, and ability to share knowledge made him an invaluable partner.",
+          name: 'Simone Chiaretta',
+          role: 'Technical Lead and Web Architect, Council of the European Union',
+        }}
+      />
+    </div>
+  </Section>
+
+  <Section heading={{ boxed: 'work', lead: 'How I', id: 'how-h' }} containerVariant="text">
+    <p class="hmd-lead hmd-lead--muted">
+      I'm booked by the day, week or month, so we can adapt as your project changes. I work remotely alongside your
+      team, and leave them able to carry the work on without me.
+    </p>
+    <dl class="hmd-facts">
+      <div><dt>Based in</dt><dd>United Kingdom</dd></div>
+      <div><dt>Works</dt><dd>Remotely</dd></div>
+      <div><dt>Availability</dt><dd><a href="/contact/">Available now</a></dd></div>
+      <div><dt>Company</dt><dd>Hack Make Do Limited</dd></div>
+    </dl>
+  </Section>
+
+  <Section panel heading={{ boxed: 'say', lead: 'What clients', id: 'said-h' }} viewAllHref="/kind-words/" viewAllLabel="All recommendations">
+    <Carousel ariaLabelledby="said-h">
+      <Testimonial paragraphs={simone.data.quote.slice(0, 1)} name={simone.data.name} profileHref={simone.data.linkedinUrl} roleAndCompany={`${simone.data.role}, ${simone.data.company} · via LinkedIn`} />
+      <Testimonial paragraphs={ceri.data.quote.slice(0, 1)} name={ceri.data.name} profileHref={ceri.data.linkedinUrl} roleAndCompany={`${ceri.data.role}, ${ceri.data.company} · via LinkedIn`} />
+      <Testimonial paragraphs={cornelia.data.quote.slice(1, 2)} name={cornelia.data.name} profileHref={cornelia.data.linkedinUrl} roleAndCompany={`${cornelia.data.role}, ${cornelia.data.company} · via LinkedIn`} />
+      <Testimonial paragraphs={pete.data.quote.slice(1, 2)} name={pete.data.name} profileHref={pete.data.linkedinUrl} roleAndCompany={`${pete.data.role}, ${pete.data.company} · via LinkedIn`} />
+    </Carousel>
+  </Section>
+
+  <Section heading={{ boxed: 'questions', lead: 'Common', id: 'faq-h' }} containerVariant="text">
+    <FAQ items={faqItems} />
+  </Section>
+
+  <Section class="hmd-pink" ariaLabel="Contact" containerVariant="text">
+    <ContactCard
+      heading={{ boxed: 'talk', lead: "Let's", id: 'contact-h' }}
+      intro="Tell me about the project, the dates, and whether you are after a freelancer or a contractor."
+      email="warren@hackmakedo.com"
+    />
+  </Section>
+</BaseLayout>

@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Marquee from '../components/Marquee.astro';
+import Section from '../components/Section.astro';
+import Container from '../components/Container.astro';
+import Grid from '../components/Grid.astro';
+import Credentials from '../components/Credentials.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import ClientCard from '../components/ClientCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Testimonial from '../components/Testimonial.astro';
+import Carousel from '../components/Carousel.astro';
+import BlogPostCard from '../components/BlogPostCard.astro';
+import HireBanner from '../components/HireBanner.astro';
+import { getCollection } from 'astro:content';
+import { topicLabel } from '../data/topics';
+import { caseStudyHref } from '../data/case-studies';
+
+const permittedClients = (await getCollection('clients', (c) => c.data.permission)).sort(
+  (a, b) => a.data.order - b.data.order || a.data.name.localeCompare(b.data.name),
+);
+const allTestimonials = await getCollection('testimonials');
+const byId = (id: string) => allTestimonials.find((t) => t.id === id)!;
+const simone = byId('simone-chiaretta');
+const ceri = byId('ceri-broussine');
+const steve = byId('steve-temple');
+const pete = byId('pete-cooper');
+const latestPosts = (await getCollection('posts', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 2);
+---
+
+<BaseLayout
+  title="Hack Make Do — Warren Buckley, Umbraco freelancer and contractor"
+  description="Warren Buckley, a freelance Umbraco developer and contractor and nine-time Umbraco MVP, making Umbraco better for the developers who build with it."
+  ogImage="/og/home.png"
+  headerVariant="overlay"
+  currentPath="/"
+>
+  <Hero lead="Warren Buckley, a freelance <strong>Umbraco developer and contractor</strong> and nine-time Umbraco MVP, making Umbraco better for the developers who build with it." />
+
+  <Marquee />
+
+  <section class="hmd-section hmd-section--compact" aria-label="Credentials">
+    <Container>
+      <Credentials
+        heading="9× Umbraco MVP"
+        stats={[
+          { label: 'First Umbraco MVP award', value: '2007' },
+          { label: 'years building with Umbraco', value: '20' },
+        ]}
+        badge={{ year: 2026, src: '/images/mvp/umbraco-mvp-2026.png' }}
+      />
+    </Container>
+  </section>
+
+  <Section
+    heading={{ eyebrow: 'Hire', lead: 'How I can', boxed: 'help', id: 'help-h' }}
+    viewAllHref="/umbraco-freelancer/"
+    viewAllLabel="Freelance or contract"
+  >
+    <Grid variant="2">
+      <ServiceCard
+        number="01"
+        title="Improve your product's developer experience"
+        description="Templates, tooling and backoffice extensions that make your Umbraco product easier to build on."
+      />
+      <ServiceCard
+        number="02"
+        title="Add capacity to your development team"
+        description="An experienced Umbraco contractor who can join your team and contribute from the first week."
+      />
+      <ServiceCard
+        number="03"
+        title="Bring your projects over the finish line"
+        description="Freelance Umbraco development to finish builds, upgrades and integrations that have stalled."
+      />
+      <ServiceCard
+        number="04"
+        title="Get involved in the Umbraco community"
+        description="Help your team, agency or organisation build its presence in the Umbraco community."
+      />
+    </Grid>
+  </Section>
+
+  <Section
+    panel
+    heading={{ eyebrow: 'Client work', lead: "Who I've", boxed: 'worked', trail: 'with', id: 'clients-h' }}
+    viewAllHref="/work/#clients-h"
+    viewAllLabel="All client work"
+  >
+    <div class="hmd-clients-list">
+      {permittedClients.slice(0, 1).map((client) => (
+        <ClientCard
+          name={client.data.name}
+          href={caseStudyHref(client.data.caseStudySlug)}
+          summary={client.data.summary ?? ''}
+          agency={client.data.agency}
+          facts={client.data.facts}
+          quote={client.data.quote}
+          projects={client.data.projects}
+        />
+      ))}
+    </div>
+  </Section>
+
+  <Section heading={{ eyebrow: 'Open source', lead: 'Things I', boxed: 'built', id: 'work-h' }} viewAllHref="/work/" viewAllLabel="All work">
+    <Grid>
+      <ProjectCard
+        name="ContentLock"
+        summary="Stops Umbraco editors overwriting each other by locking a node while someone works on it."
+        chips={['Umbraco', 'SignalR', 'Lit']}
+        caseStudyHref={caseStudyHref('contentlock')}
+        sourceHref="https://github.com/warrenbuckley/Umbraco.Community.ContentLock"
+      />
+      <ProjectCard
+        name="Compact Log Format Viewer"
+        summary="A cross-platform desktop app for reading and querying the JSON log files that Serilog writes."
+        chips={['Serilog', 'Desktop']}
+        caseStudyHref={caseStudyHref('compact-log-format-viewer')}
+        sourceHref="https://github.com/warrenbuckley/Compact-Log-Format-Viewer"
+      />
+      <ProjectCard
+        name="IIS Express Code"
+        summary="A Visual Studio Code extension that runs the open folder as a website with IIS Express."
+        chips={['VS Code', 'IIS Express']}
+        caseStudyHref={caseStudyHref('iis-express-code')}
+        sourceHref="https://github.com/warrenbuckley/IIS-Express-Code"
+      />
+    </Grid>
+  </Section>
+
+  <Section panel heading={{ eyebrow: 'Recommendations', lead: 'What people', boxed: 'say', id: 'said-h' }} viewAllHref="/kind-words/" viewAllLabel="All recommendations">
+    <Carousel ariaLabelledby="said-h">
+      <Testimonial
+        paragraphs={simone.data.quote.slice(0, 1)}
+        name={simone.data.name}
+        profileHref={simone.data.linkedinUrl}
+        roleAndCompany={`${simone.data.role}, ${simone.data.company} · via LinkedIn`}
+      />
+      <Testimonial
+        paragraphs={ceri.data.quote}
+        name={ceri.data.name}
+        profileHref={ceri.data.linkedinUrl}
+        roleAndCompany={`${ceri.data.role}, ${ceri.data.company} · via LinkedIn`}
+      />
+      <Testimonial
+        paragraphs={steve.data.quote.slice(0, 2)}
+        name={steve.data.name}
+        profileHref={steve.data.linkedinUrl}
+        roleAndCompany={`${steve.data.role}, ${steve.data.company} · via LinkedIn`}
+      />
+      <Testimonial
+        paragraphs={pete.data.quote.slice(0, 2)}
+        name={pete.data.name}
+        profileHref={pete.data.linkedinUrl}
+        roleAndCompany={`${pete.data.role}, ${pete.data.company} · via LinkedIn`}
+      />
+    </Carousel>
+  </Section>
+
+  <Section heading={{ eyebrow: 'Blog', lead: 'Latest', boxed: 'writing', id: 'blog-h' }} viewAllHref="/blog/" viewAllLabel="All posts">
+    <Grid variant="2">
+      {latestPosts.map((post) => (
+        <BlogPostCard
+          href={`/blog/${post.id}/`}
+          title={post.data.title}
+          date={post.data.date}
+          summary={post.data.excerpt}
+          tags={post.data.topics.map((t) => ({ label: topicLabel(t), href: `/blog/topic/${t}/` }))}
+        />
+      ))}
+    </Grid>
+  </Section>
+
+  <Section class="hmd-pink" ariaLabel="Hire">
+    <HireBanner message="Available for hire — freelance Umbraco developer and contractor, focused on developer experience." />
+  </Section>
+</BaseLayout>

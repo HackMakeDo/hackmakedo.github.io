@@ -1,0 +1,28 @@
+# Hack Make Do
+
+> Hack Make Do is the company of Warren Buckley, a UK-based freelance Umbraco developer and Umbraco contractor, and a nine-time Umbraco MVP. He builds Umbraco CMS sites, backoffice extensions and developer tooling, and is available for freelance projects and contract work.
+
+Warren has built with Umbraco for 20 years, including roles at Umbraco HQ on the CMS core team and as a developer advocate. Clients include the Council of the European Union. He maintains open source Umbraco packages including ContentLock, Examine Peek and Manifest Peek, and the Compact Log Format Viewer for Serilog log files. Contact: warren@hackmakedo.com
+
+## Hire
+
+- [Umbraco freelancer](https://hackmakedo.com/umbraco-freelancer/): Freelance Umbraco development for projects, upgrades and backoffice extensions
+- [Umbraco contractor](https://hackmakedo.com/umbraco-contractor/): Contract Umbraco development with agency and in-house teams in the UK
+- [Umbraco upgrades](https://hackmakedo.com/umbraco-upgrades/): Upgrades to Umbraco 17 LTS, with a table of which Umbraco versions are still supported
+- [About Warren Buckley](https://hackmakedo.com/about/): Background, MVP awards and how he works
+- [Career timeline](https://hackmakedo.com/timeline/): Twenty years of Umbraco roles, awards and projects
+
+## Work
+
+- [ContentLock](https://github.com/warrenbuckley/Umbraco.Community.ContentLock): Umbraco package that lets editors lock content nodes, with live presence via SignalR
+- [Compact Log Format Viewer](https://github.com/warrenbuckley/Compact-Log-Format-Viewer): Cross-platform desktop app for querying Serilog JSON log files
+- [IIS Express Code](https://github.com/warrenbuckley/IIS-Express-Code): VS Code extension that runs a folder as a website with IIS Express
+- [All work](https://hackmakedo.com/work/): Client work and open source packages
+
+## Writing
+
+- [Blog](https://hackmakedo.com/blog/): Umbraco, Bellissima and .NET tutorials
+
+## Optional
+
+- [GitHub](https://github.com/warrenbuckley)

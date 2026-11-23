@@ -1,0 +1,18 @@
+{
+  "name": "Council of the European Union",
+  "permission": true,
+  "caseStudySlug": "council-of-the-european-union",
+  "order": 0,
+  "summary": "Drove the migration of the Council's Umbraco site from version 13 to 16, and brought the in-house team up to speed on the new backoffice technology.",
+  "facts": [
+    {
+      "label": "Scope",
+      "value": "Umbraco 13 to 16 migration"
+    }
+  ],
+  "quote": {
+    "text": "He played a fundamental role in the success of the project, not only by driving the migration itself but also by bringing our team up to speed with the new UI technology introduced in v16.",
+    "name": "Simone Chiaretta",
+    "role": "Technical Lead and Web Architect, Council of the European Union"
+  }
+}

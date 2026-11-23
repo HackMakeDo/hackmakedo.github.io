@@ -1,0 +1,11 @@
+---
+interface Props {
+  /** Default fits 300px-minimum columns (three on desktop); '2' fits 420px columns (two on desktop). */
+  variant?: 'default' | '2';
+  class?: string;
+}
+const { variant = 'default', class: className } = Astro.props;
+const classes = ['hmd-grid', variant === '2' && 'hmd-grid--2', className].filter(Boolean).join(' ');
+---
+
+<div class={classes}><slot /></div>

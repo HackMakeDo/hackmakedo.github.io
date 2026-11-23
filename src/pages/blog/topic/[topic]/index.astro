@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import PageHeader from '../../../../components/PageHeader.astro';
+import Section from '../../../../components/Section.astro';
+import HireBanner from '../../../../components/HireBanner.astro';
+import BlogListing from '../../../../components/BlogListing.astro';
+import { getCollection } from 'astro:content';
+import { TOPICS, topicLabel } from '../../../../data/topics';
+import { pageSlice, totalPagesFor } from '../../../../lib/blog-pagination';
+
+export async function getStaticPaths() {
+  return TOPICS.map((topic) => ({ params: { topic: topic.slug } }));
+}
+
+const { topic } = Astro.params;
+const label = topicLabel(topic!);
+const allPosts = (await getCollection('posts', ({ data }) => !data.draft && data.topics.includes(topic!))).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+const totalPages = totalPagesFor(allPosts.length);
+const posts = pageSlice(allPosts, 1);
+---
+
+<BaseLayout
+  title={`${label} — Blog — Hack Make Do`}
+  description={`Posts about ${label} on Umbraco, the Bellissima backoffice, .NET and developer tooling.`}
+  ogImage="/og/blog.png"
+  currentPath="/blog/"
+>
+  <PageHeader
+    trail={[{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog/' }, { label }]}
+    eyebrow="Blog"
+    title={label}
+    lead={`Posts about ${label}.`}
+  />
+
+  <BlogListing posts={posts} page={1} totalPages={totalPages} base={`/blog/topic/${topic}/`} activeTopic={topic} />
+
+  <Section class="hmd-pink" ariaLabel="Hire">
+    <HireBanner message="Need a hand with Umbraco? I'm available as a freelancer or contractor." />
+  </Section>
+</BaseLayout>

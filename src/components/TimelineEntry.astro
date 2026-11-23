@@ -1,0 +1,75 @@
+---
+import Chip from './Chip.astro';
+
+/**
+ * One career-timeline entry: year pill on the spine, typed marker, title, a short paragraph,
+ * links, and (for award entries) the MVP badge floated to the right of the whole entry.
+ * The continuous line and fixed-width year column are drawn by the Timeline page itself
+ * (`.tl`), which this component's entries sit inside.
+ */
+interface Link {
+  label: string;
+  href: string;
+}
+interface Props {
+  id: string;
+  year: string;
+  type: 'role' | 'award' | 'project' | 'community';
+  typeLabel: string;
+  title: string;
+  description: string;
+  badgeSrc?: string;
+  badgeYear?: number;
+  links?: Link[];
+}
+const { id, year, type, typeLabel, title, description, badgeSrc, badgeYear, links } = Astro.props;
+// "2002 to 2007" is split into parts so phones can stack it inside a narrow year column.
+const range = /^(\d{4}) to (\d{4})$/.exec(year);
+---
+
+<article class="hmd-entry" data-type={type}>
+  <div class="hmd-entry__spine">
+    <Chip variant="year">
+      {range ? (
+        <Fragment><span class="hmd-year__part">{range[1]}</span> <span class="hmd-year__to">to</span> <span class="hmd-year__part">{range[2]}</span></Fragment>
+      ) : (
+        year
+      )}
+    </Chip>
+  </div>
+  <div class="hmd-entry__body">
+    {badgeSrc && <img class="hmd-entry__badge" src={badgeSrc} alt={`Official Umbraco MVP ${badgeYear} badge`} width="56" height="56" />}
+    <p class="hmd-entry__type">
+      <Chip variant="marker" markerType={type} />
+      {typeLabel}
+    </p>
+    <h3 id={id}>{title}</h3>
+    <p>{description}</p>
+    {links && links.length > 0 && (
+      <div class="hmd-entry__links">
+        {links.map((link) => <a class="hmd-link" href={link.href}>{link.label}</a>)}
+      </div>
+    )}
+  </div>
+</article>
+
+<style>
+  .hmd-entry__body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: var(--space-6, 24px);
+    align-items: start;
+  }
+  .hmd-entry__body > * {
+    grid-column: 1;
+  }
+  .hmd-entry__body > .hmd-entry__badge {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+  }
+  .hmd-entry__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4, 16px);
+  }
+</style>

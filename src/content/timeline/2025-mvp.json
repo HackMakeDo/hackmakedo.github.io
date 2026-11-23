@@ -1,0 +1,15 @@
+{
+  "year": 2025,
+  "yearLabel": "2025",
+  "type": "award",
+  "title": "Eighth Umbraco MVP award",
+  "body": "An eighth MVP award.",
+  "badge": 2025,
+  "links": [
+    {
+      "label": "MVP archive ↗",
+      "href": "https://community.umbraco.com/contribute/mvp-program/mvp-archive/#mvp-2025"
+    }
+  ],
+  "order": 0
+}
