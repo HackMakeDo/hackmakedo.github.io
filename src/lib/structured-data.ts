@@ -27,6 +27,8 @@ export function personOrgGraph() {
           'https://forum.umbraco.com/u/warren',
           'https://umb.fyi/@warrenbuckley',
           'https://sessionize.com/warrenbuckley/',
+          'https://www.nuget.org/profiles/warrenbuckley',
+          'https://marketplace.visualstudio.com/publishers/warren-buckley',
           'https://www.instagram.com/warrenbuckley/',
           'https://x.com/warrenbuckley',
           'https://www.flickr.com/photos/warrenbuckley/',
