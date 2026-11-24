@@ -2,7 +2,7 @@
 title: "Scaffold Umbraco V14+ Package Development Project with Vite, TypeScript & Lit"
 date: 2024-06-03
 topics: ["tutorials", "javascript", "tooling", "bellissima"]
-excerpt: "This Powershell script magically sets up an Umbraco V14+ project with Vite, TypeScript & Lit. It's like summoning a project with Umbraco, Vite, and Lit in one go. Hocus Pocus!"
+excerpt: "This PowerShell script magically sets up an Umbraco V14+ project with Vite, TypeScript & Lit, summoned in one go. Hocus Pocus!"
 draft: false
 ---
 

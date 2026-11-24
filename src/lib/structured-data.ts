@@ -3,6 +3,8 @@
 export const SITE_URL = 'https://hackmakedo.com';
 export const PERSON_ID = `${SITE_URL}/#person`;
 export const ORG_ID = `${SITE_URL}/#organization`;
+/** The author of every page and post. */
+export const AUTHOR_NAME = 'Warren Buckley';
 
 /** The Person + Organization graph, present on every page (CLAUDE.md / site-plan.md §5). */
 export function personOrgGraph() {
@@ -103,7 +105,10 @@ export function articleSchema(options: { title: string; description: string; dat
     dateModified: (options.dateModified ?? options.datePublished).toISOString(),
     url: new URL(options.url, SITE_URL).toString(),
     image: new URL(options.image, SITE_URL).toString(),
-    author: { '@id': PERSON_ID },
+    // Name and URL inline as well as the @id: LinkedIn (and other link previews) don't follow @id references,
+    // and Google's Article guidelines ask for author.name and author.url on the article itself.
+    author: { '@type': 'Person', '@id': PERSON_ID, name: AUTHOR_NAME, url: `${SITE_URL}/about/` },
+    publisher: { '@id': ORG_ID },
   };
 }
 

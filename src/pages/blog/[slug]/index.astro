@@ -56,6 +56,7 @@ const article = articleSchema({
   ogImage={`/og/blog/${post.id}.png`}
   currentPath="/blog/"
   jsonLd={[article]}
+  article={{ publishedTime: post.data.date, modifiedTime: post.data.updated }}
 >
   <div class="hmd-container post">
     <PostHeader
@@ -105,7 +106,7 @@ const article = articleSchema({
   </div>
 
   <Section class="hmd-pink" ariaLabel="Hire">
-    <HireBanner message="Need a hand with Umbraco Bellissima? I'm available as a freelancer or contractor." />
+    <HireBanner message="Need a hand with Umbraco? I'm available as a freelancer or contractor." />
   </Section>
 </BaseLayout>
 

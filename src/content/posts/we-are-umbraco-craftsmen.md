@@ -2,7 +2,7 @@
 title: "We are Umbraco Craftsmen"
 date: 2014-07-01
 topics: ["umbraco", "javascript", "community", "umbraco-packages"]
-excerpt: "I recently gave a talk at the annual Umbraco Developer Conference CodeGarden, about 'The Analytics for Umbraco Story'. In this talk I discussed that we are all digital craftsmen."
+excerpt: "At CodeGarden, the annual Umbraco developer conference, I gave a talk on 'The Analytics for Umbraco Story', and discussed how we are all digital craftsmen."
 heroImage: "/images/blog/we-are-umbraco-craftsmen/craftsman-workshop.png"
 draft: false
 ---

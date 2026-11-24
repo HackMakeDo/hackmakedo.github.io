@@ -16,8 +16,8 @@ git keeps the history, including the launch checklist this replaced.
       dashboard only
 - [x] Structured data validated: 0 errors and 0 warnings on every page type, live and built (24 November 2026,
       `npm run check:structured-data`)
-- [ ] Google's Rich Results Test (browser only) on About (ProfilePage), a post (Article) and the upgrades page
-      (Breadcrumb), to confirm Google treats them as eligible for rich results
+- [x] Google's Rich Results Test on About (ProfilePage), a post (Article) and the upgrades page (Breadcrumb): fine
+      (24 November 2026)
 - [x] Re-run the scan at isitagentready.com (level 3; all applicable checks pass)
 - [x] `www.hackmakedo.com` redirects to `hackmakedo.com` (proxied CNAME plus a Redirect Rule)
 - [ ] Cloudflare: turn off **JavaScript detections** (`enable_js`). It adds `/cdn-cgi/challenge-platform/…` to every
