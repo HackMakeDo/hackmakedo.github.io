@@ -1,0 +1,61 @@
+<!-- @dsCard group="Home and about" height=620 subtitle="Overlay header, see-through logotype over a moving canvas" -->
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+  body { margin: 0; background: var(--ground); }
+  .hmd-hero { min-height: 620px; padding-block: calc(var(--header-height) + var(--space-8)) var(--space-8); }
+</style>
+</head>
+<body data-theme="dark">
+  <section class="hmd-hero" aria-label="Introduction">
+    <div class="hmd-backdrop" aria-hidden="true"><canvas id="field"></canvas></div>
+    <header class="hmd-header hmd-header--overlay">
+      <div class="hmd-container hmd-header__inner">
+        <span class="hmd-header__home"></span>
+        <nav class="hmd-nav" aria-label="Main"><ul><li><a href="#">Work</a></li><li><a href="#">Blog</a></li><li><a href="#">Timeline</a></li><li><a href="#">About</a></li></ul></nav>
+        <a class="hmd-btn hmd-btn--primary hmd-btn--sm" href="#">Hire me</a>
+      </div>
+    </header>
+    <div class="hmd-container hmd-hero__body">
+      <h1 class="hmd-logotype" aria-label="Hack Make Do" style="--hmd-logo-size:104px">
+        <span class="hmd-logotype__line">Hack</span>
+        <span class="hmd-logotype__line hmd-logotype__make">
+          <svg class="hmd-knockout" viewBox="0 0 292 100" aria-hidden="true" focusable="false"><mask id="hmd-make-hero" maskUnits="userSpaceOnUse" x="0" y="0" width="292" height="100"><rect width="292" height="100" fill="#fff"/><text x="11" y="84" textLength="270" lengthAdjust="spacingAndGlyphs" fill="#000">Make</text></mask><rect class="hmd-knockout__under" width="292" height="100"/><rect class="hmd-knockout__box" width="292" height="100" mask="url(#hmd-make-hero)"/></svg>
+        </span>
+        <span class="hmd-logotype__line">Do</span>
+      </h1>
+      <p class="hmd-hero__lead">Warren Buckley, a freelance <strong>Umbraco developer and contractor</strong> and nine-time Umbraco MVP, making Umbraco better for the developers who build with it.</p>
+      <div class="hmd-hero__actions">
+        <a class="hmd-btn hmd-btn--primary" href="#">Hire me</a>
+        <a class="hmd-btn hmd-btn--secondary" href="#">See my work</a>
+      </div>
+    </div>
+  </section>
+  <script>
+    (function () {
+      var c = document.getElementById('field'), x = c.getContext('2d');
+      var line = getComputedStyle(document.body).getPropertyValue('--glow-indigo').trim() || '#6f7dff';
+      var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function size() { c.width = c.clientWidth * devicePixelRatio; c.height = c.clientHeight * devicePixelRatio; }
+      function draw(t) {
+        var w = c.width, h = c.height, d = devicePixelRatio; x.clearRect(0, 0, w, h);
+        x.strokeStyle = line; x.globalAlpha = 0.4; x.lineWidth = 1.3 * d;
+        for (var i = 0; i < 22; i++) {
+          x.beginPath();
+          for (var px = 0; px <= w; px += 8) {
+            var y = h * (i + 0.5) / 22 + Math.sin(px / (140 * d) + t / 2400 + i * 0.6) * 22 * d + Math.sin(px / (53 * d) - t / 3300 + i) * 7 * d;
+            px ? x.lineTo(px, y) : x.moveTo(px, y);
+          }
+          x.stroke();
+        }
+        if (!still) requestAnimationFrame(draw);
+      }
+      size(); addEventListener('resize', size); requestAnimationFrame(draw);
+    })();
+  </script>
+</body>
+</html>

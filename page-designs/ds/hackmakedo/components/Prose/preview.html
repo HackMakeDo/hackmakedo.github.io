@@ -1,0 +1,33 @@
+<!-- @dsCard group="Blog" height=760 subtitle="Every prose element on Paper" -->
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style> body { margin: 0; } article { background: var(--ground); padding: var(--space-8); } </style>
+</head>
+<body>
+  <article data-theme="light">
+    <div class="hmd-prose">
+      <p>I have been working on a community package for Umbraco Bellissima called ContentLock, which lets users lock content nodes and see who else is logged in to the backoffice. Some of this work uses <a href="#">SignalR</a> to push realtime updates to the backoffice UI.</p>
+      <h2 id="options">Registering the options</h2>
+      <p>Bind the section with <code>AddOptions&lt;ContentLockOptions&gt;()</code> in a composer, then read it through <code>IOptionsMonitor</code>.</p>
+      <ul>
+        <li>Create an interface for the SignalR hub and its methods</li>
+        <li>Create the hub from that interface</li>
+        <li>Register the route in the <strong>UmbracoPipelineFilter</strong></li>
+      </ul>
+      <pre><code>builder.Services
+   .AddOptions&lt;ContentLockOptions&gt;()
+   .Bind(builder.Config.GetSection(ContentLockOptions.ConfigName));</code></pre>
+      <blockquote><p>Hope this has inspired you to play around with SignalR and Bellissima.</p></blockquote>
+      <h3 id="settings">Settings</h3>
+      <table>
+        <thead><tr><th>Setting</th><th>Default</th></tr></thead>
+        <tbody><tr><td>OnlineUsers.Enable</td><td>true</td></tr><tr><td>OnlineUsers.Sounds.Enable</td><td>true</td></tr></tbody>
+      </table>
+    </div>
+  </article>
+</body>
+</html>

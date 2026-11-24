@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import Container from '../../components/Container.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import Grid from '../../components/Grid.astro';
+import ClientCard from '../../components/ClientCard.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import HireBanner from '../../components/HireBanner.astro';
+import { getCollection } from 'astro:content';
+import { caseStudyHref } from '../../data/case-studies';
+
+const clients = (await getCollection('clients', (c) => c.data.permission)).sort(
+  (a, b) => a.data.order - b.data.order || a.data.name.localeCompare(b.data.name),
+);
+---
+
+<BaseLayout
+  title="Work — Hack Make Do"
+  description="Client projects come first, followed by the open source Umbraco packages and developer tools Warren Buckley builds and maintains through Hack Make Do."
+  ogImage="/og/work.png"
+  currentPath="/work/"
+>
+  <PageHeader
+    trail={[{ label: 'Home', href: '/' }, { label: 'Work' }]}
+    eyebrow="Work"
+    title="Client work and open source"
+    lead="Client projects come first, followed by the open source Umbraco packages and developer tools I build and maintain through Hack Make Do."
+  />
+
+  {/*
+    Client cards are data-driven from src/content/clients/*.json (CLAUDE.md: "make the
+    client list data-driven so a name can be dropped in one place"). Dyson, Tottenham
+    Hotspur, Wolverhampton Wanderers (via Gibe Digital) and a food safety standards body (via Manifesto Digital)
+    exist there already, ready to publish, but stay permission: false - and so invisible
+    here and unbuilt as pages - until each client confirms. Flip one to true to publish it.
+  */}
+  <section class="hmd-section hmd-section--flush-top" aria-labelledby="clients-h">
+    <Container>
+      <div class="hmd-section__head">
+        <div>
+          <SectionHeading eyebrow="Client work" lead="For" boxed="clients" id="clients-h" />
+        </div>
+      </div>
+      <div class="hmd-clients-list">
+        {clients.map((client) => (
+          <ClientCard
+            name={client.data.name}
+            href={caseStudyHref(client.data.caseStudySlug)}
+            summary={client.data.summary ?? ''}
+            agency={client.data.agency}
+            facts={client.data.facts}
+            quote={client.data.quote}
+            projects={client.data.projects}
+          />
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <Section panel heading={{ eyebrow: 'Open source', lead: 'Umbraco', boxed: 'packages', id: 'pkg-h' }} viewAllHref="https://marketplace.umbraco.com/" viewAllLabel="On the Umbraco Marketplace ↗">
+    <Grid>
+      <ProjectCard
+        name="ContentLock"
+        summary="Stops Umbraco editors overwriting each other by locking a node while someone works on it."
+        chips={['Umbraco', 'SignalR', 'Lit']}
+        caseStudyHref={caseStudyHref('contentlock')}
+        sourceHref="https://github.com/warrenbuckley/Umbraco.Community.ContentLock"
+      />
+      <ProjectCard
+        name="Examine Peek"
+        summary="Inspect the Examine index for a content node, in Umbraco 14 and later."
+        chips={['Umbraco', 'Examine']}
+        caseStudyHref={caseStudyHref('examine-peek')}
+        sourceHref="https://github.com/warrenbuckley/Examine-Peek"
+      />
+      <ProjectCard
+        name="Manifest Peek"
+        summary="Shows the manifests registered for each backoffice extension type, in Umbraco 14 and later."
+        chips={['Umbraco', 'Bellissima']}
+        caseStudyHref={caseStudyHref('manifest-peek')}
+        sourceHref="https://github.com/warrenbuckley/Umbraco.Community.ManifestPeek"
+      />
+      <ProjectCard
+        name="User 2FA"
+        summary="Adds two-factor login for Umbraco backoffice users."
+        chips={['Umbraco', 'Security']}
+        caseStudyHref={caseStudyHref('user-2fa')}
+        sourceHref="https://github.com/warrenbuckley/Umbraco.Community.User2FA"
+      />
+      <ProjectCard
+        name="Iconoir Icon Pack"
+        summary="The open source Iconoir icon library, packaged for Umbraco 14 and later."
+        chips={['Umbraco', 'Icons']}
+        caseStudyHref={caseStudyHref('iconoir-icon-pack')}
+        sourceHref="https://github.com/warrenbuckley/Umbraco.Community.IconPack.Iconoir"
+      />
+      <ProjectCard
+        name="Our Umbraco TagHelpers"
+        summary="A community project of C# ASP.NET TagHelpers for Umbraco."
+        chips={['Umbraco', '.NET']}
+        caseStudyHref={caseStudyHref('our-umbraco-taghelpers')}
+        sourceHref="https://github.com/umbraco-community/Our-Umbraco-TagHelpers"
+      />
+    </Grid>
+  </Section>
+
+  <Section heading={{ eyebrow: 'Open source', lead: 'Developer', boxed: 'tools', id: 'tools-h' }}>
+    <Grid>
+      <ProjectCard
+        name="Compact Log Format Viewer"
+        summary="A cross-platform desktop app for reading and querying the JSON log files that Serilog writes."
+        chips={['Serilog', 'Desktop']}
+        caseStudyHref={caseStudyHref('compact-log-format-viewer')}
+        sourceHref="https://github.com/warrenbuckley/Compact-Log-Format-Viewer"
+      />
+      <ProjectCard
+        name="IIS Express Code"
+        summary="A Visual Studio Code extension that runs the open folder as a website with IIS Express."
+        chips={['VS Code', 'IIS Express']}
+        caseStudyHref={caseStudyHref('iis-express-code')}
+        sourceHref="https://github.com/warrenbuckley/IIS-Express-Code"
+      />
+    </Grid>
+  </Section>
+
+  <Section class="hmd-pink" ariaLabel="Hire">
+    <HireBanner message="Want something like this built for your team? I'm available as a freelancer or contractor." />
+  </Section>
+</BaseLayout>

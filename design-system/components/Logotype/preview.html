@@ -1,0 +1,76 @@
+<!-- @dsCard group="Brand" height=560 subtitle="True knockout over moving sprinkles, inline form, Paper fallback" -->
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+  body { margin: 0; background: var(--ground); display: grid; grid-template-columns: 1.2fr 1fr; min-height: 560px; }
+  .stage {
+    --hmd-sprinkles-image: url("/_blob/024be5d3ab026252da6bf5eb53e5f2d7");
+    --hmd-sprinkles-size: 656px;
+    display: grid; place-items: center; padding: var(--space-8);
+  }
+  .side { display: flex; flex-direction: column; justify-content: center; gap: var(--space-6); padding: var(--space-8); }
+  .cap { font-family: var(--font-body); font-size: 14px; color: var(--ink-muted); margin: 0; }
+  .paper { background: var(--ground); padding: var(--space-6); border-radius: var(--radius-md); border: 1px solid var(--rule); display: grid; gap: var(--space-3); }
+</style>
+</head>
+<body>
+  <div class="stage hmd-backdrop-host" data-theme="dark">
+    <div class="hmd-backdrop hmd-backdrop--sprinkles hmd-backdrop--drift" aria-hidden="true"></div>
+    <h1 class="hmd-logotype" aria-label="Hack Make Do" style="--hmd-logo-size:104px">
+      <span class="hmd-logotype__line">Hack</span>
+      <span class="hmd-logotype__line hmd-logotype__make">
+        <svg class="hmd-knockout" viewBox="0 0 292 100" aria-hidden="true" focusable="false">
+          <mask id="hmd-make-hero" maskUnits="userSpaceOnUse" x="0" y="0" width="292" height="100">
+            <rect width="292" height="100" fill="#fff"/>
+            <text x="11" y="84" textLength="270" lengthAdjust="spacingAndGlyphs" fill="#000">Make</text>
+          </mask>
+          <rect class="hmd-knockout__under" width="292" height="100"/>
+          <rect class="hmd-knockout__box" width="292" height="100" mask="url(#hmd-make-hero)"/>
+        </svg>
+      </span>
+      <span class="hmd-logotype__line">Do</span>
+    </h1>
+  </div>
+  <div class="side">
+    <p class="cap">The sprinkles drift behind and show through the Make letters.</p>
+    <a href="#" aria-label="Hack Make Do, home" style="text-decoration:none">
+      <span class="hmd-logotype hmd-logotype--inline" style="--hmd-logo-size:30px">
+        <span>Hack</span>
+        <span class="hmd-logotype__make">
+          <svg class="hmd-knockout" viewBox="0 0 292 100" aria-hidden="true" focusable="false">
+            <mask id="hmd-make-inline" maskUnits="userSpaceOnUse" x="0" y="0" width="292" height="100">
+              <rect width="292" height="100" fill="#fff"/>
+              <text x="11" y="84" textLength="270" lengthAdjust="spacingAndGlyphs" fill="#000">Make</text>
+            </mask>
+            <rect class="hmd-knockout__under" width="292" height="100"/>
+            <rect class="hmd-knockout__box" width="292" height="100" mask="url(#hmd-make-inline)"/>
+          </svg>
+        </span>
+        <span>Do</span>
+      </span>
+    </a>
+    <p class="cap">Inline form for the header and footer</p>
+    <div class="paper" data-theme="light">
+      <span class="hmd-logotype hmd-logotype--inline" style="--hmd-logo-size:30px">
+        <span>Hack</span>
+        <span class="hmd-logotype__make">
+          <svg class="hmd-knockout" viewBox="0 0 292 100" aria-hidden="true" focusable="false">
+            <mask id="hmd-make-paper" maskUnits="userSpaceOnUse" x="0" y="0" width="292" height="100">
+              <rect width="292" height="100" fill="#fff"/>
+              <text x="11" y="84" textLength="270" lengthAdjust="spacingAndGlyphs" fill="#000">Make</text>
+            </mask>
+            <rect class="hmd-knockout__under" width="292" height="100"/>
+            <rect class="hmd-knockout__box" width="292" height="100" mask="url(#hmd-make-paper)"/>
+          </svg>
+        </span>
+        <span>Do</span>
+      </span>
+      <p class="cap">On Paper, logo-cutout fills the letters navy so they stay readable</p>
+    </div>
+  </div>
+</body>
+</html>

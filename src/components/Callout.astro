@@ -1,0 +1,13 @@
+---
+/** A boxed note inside long-form content: a tip, a warning, or the archive notice on old posts. */
+interface Props {
+  label: string;
+  archive?: boolean;
+}
+const { label, archive = false } = Astro.props;
+---
+
+<aside class={`hmd-callout${archive ? ' hmd-callout--archive' : ''}`}>
+  <span class="hmd-callout__label">{label}</span>
+  <p><slot /></p>
+</aside>

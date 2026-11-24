@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Page not found</title>
+<link rel="stylesheet" href="ds/hackmakedo/tokens.css">
+<link rel="stylesheet" href="ds/hackmakedo/components/bundle.css">
+<script src="ds/hackmakedo/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0b1c2f}
+:root{--hmd-sprinkles-image:url("images/sprinkles.svg")}
+a{color:#ffb1a4}a:hover{color:#eceaf7}
+.search{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;max-width:640px}
+.search label{display:block;width:100%;font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-muted)}
+.search input{flex:1 1 320px;min-width:0;height:48px;box-sizing:border-box;padding:0 16px;border:2px solid var(--border-strong);border-radius:8px;background:var(--panel);color:var(--ink);font:400 17px/1 var(--font-body)}
+.search input:focus-visible{outline:3px solid var(--focus-ring);outline-offset:3px}
+</style>
+</helmet>
+<div data-theme="dark" style="background: var(--ground); color: var(--ink); font-family: var(--font-body); min-height: 100vh;">
+
+  <a class="hmd-skip" href="#main">Skip to content</a>
+
+  <header class="hmd-header hmd-header--sticky">
+    <div class="hmd-container hmd-header__inner">
+      <a class="hmd-header__home" href="Main.dc.html" aria-label="Hack Make Do, home">
+        <span class="hmd-logotype hmd-logotype--inline">
+          <span>Hack</span>
+          <span class="hmd-logotype__make"><svg class="hmd-knockout" viewBox="0 0 292 100" aria-hidden="true" focusable="false"><mask id="hmd-make-404" maskUnits="userSpaceOnUse" x="0" y="0" width="292" height="100"><rect width="292" height="100" fill="#fff"></rect><text x="11" y="84" textLength="270" lengthAdjust="spacingAndGlyphs" fill="#000">Make</text></mask><rect class="hmd-knockout__under" width="292" height="100"></rect><rect class="hmd-knockout__box" width="292" height="100" mask="url(#hmd-make-404)"></rect></svg></span>
+          <span>Do</span>
+        </span>
+      </a>
+      <nav class="hmd-nav" aria-label="Main">
+        <ul>
+          <li><a href="Work.dc.html">Work</a></li>
+          <li><a href="BlogIndex.dc.html">Blog</a></li>
+          <li><a href="Timeline.dc.html">Timeline</a></li>
+          <li><a href="About.dc.html">About</a></li>
+        </ul>
+      </nav>
+      <a class="hmd-btn hmd-btn--primary hmd-btn--sm" href="Freelancer.dc.html">Hire me</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="hmd-backdrop-host" aria-labelledby="nf-h" style="position: relative;">
+      <div class="hmd-backdrop hmd-backdrop--sprinkles" aria-hidden="true"></div>
+      <div class="hmd-container" style="position: relative; padding-block: 96px;">
+        <p class="hmd-eyebrow">404 · Page not found</p>
+        <h1 class="hmd-heading" id="nf-h" style="font-size: 64px; line-height: 1; font-weight: 800; letter-spacing: -0.02em;">That page has <span class="box">moved</span></h1>
+        <p style="font-size: 20px; line-height: 1.6; max-width: 36em; margin: 24px 0 40px;">The blog moved here from blog.hackmakedo.com, and most old links redirect on their own. If this one didn't, search the blog or pick a place to start below.</p>
+        <form class="search" role="search" action="#">
+          <label for="q">Search the blog</label>
+          <input id="q" name="q" type="search" placeholder="For example: Bellissima context">
+          <button class="hmd-btn hmd-btn--primary" type="submit">Search</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="hmd-section" aria-labelledby="start-h">
+      <div class="hmd-container">
+        <h2 class="hmd-heading" id="start-h">Start <span class="box">here</span></h2>
+        <div class="hmd-grid">
+          <article class="hmd-card">
+            <h3><a href="BlogIndex.dc.html">Blog</a></h3>
+            <p>Tutorials and code snippets on Umbraco, Bellissima, .NET and developer tooling.</p>
+          </article>
+          <article class="hmd-card">
+            <h3><a href="Work.dc.html">Work</a></h3>
+            <p>Client work, open source Umbraco packages and developer tools.</p>
+          </article>
+          <article class="hmd-card">
+            <h3><a href="Freelancer.dc.html">Hire me</a></h3>
+            <p>Freelance and contract Umbraco development from a nine-time Umbraco MVP.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="hmd-footer">
+    <div class="hmd-container">
+      <div class="hmd-footer__grid">
+        <div><h2>Hire</h2><ul><li><a href="Freelancer.dc.html">Umbraco freelancer</a></li><li><a href="Contractor.dc.html">Umbraco contractor</a></li><li><a href="Contact.dc.html">Contact</a></li></ul></div>
+        <div><h2>Work</h2><ul><li><a href="CaseContentLock.dc.html">ContentLock</a></li><li><a href="#">Compact Log Format Viewer</a></li><li><a href="#">IIS Express Code</a></li><li><a href="Work.dc.html">All work</a></li></ul></div>
+        <div><h2>Writing</h2><ul><li><a href="BlogIndex.dc.html">Blog</a></li><li><a href="Timeline.dc.html">Timeline</a></li><li><a href="#">RSS feed</a></li></ul></div>
+        <div><h2>Elsewhere</h2><ul><li><a href="https://github.com/warrenbuckley" rel="me">GitHub</a></li><li><a href="#" rel="me">LinkedIn</a></li><li><a href="#" rel="me">YouTube</a></li><li><a href="#" rel="me">Mastodon</a></li></ul></div>
+      </div>
+      <div class="hmd-footer__legal">
+        <p>Hack Make Do Limited is incorporated in England. Company No: 15432884.<br>Registered Office: Castle House, Castle Street, Guildford, GU1 3UW.<br>VAT Number: GB 458891924 · <a href="Privacy.dc.html">Privacy</a></p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1480}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

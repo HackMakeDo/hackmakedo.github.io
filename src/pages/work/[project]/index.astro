@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import Section from '../../../components/Section.astro';
+import Container from '../../../components/Container.astro';
+import Figure from '../../../components/Figure.astro';
+import ProjectFacts from '../../../components/ProjectFacts.astro';
+import Prose from '../../../components/Prose.astro';
+import FeatureList from '../../../components/FeatureList.astro';
+import HireBanner from '../../../components/HireBanner.astro';
+import Button from '../../../components/Button.astro';
+import { PROJECTS, type ProjectCaseStudy } from '../../../data/projects';
+import { softwareSourceCodeSchema, softwareApplicationSchema } from '../../../lib/structured-data';
+
+export async function getStaticPaths() {
+  return PROJECTS.map((project) => ({ params: { project: project.slug }, props: { project } }));
+}
+
+const { project } = Astro.props as { project: ProjectCaseStudy };
+
+const jsonLd = [
+  ...(project.githubHref
+    ? [
+        softwareSourceCodeSchema({
+          name: project.name,
+          description: project.summary,
+          codeRepository: project.githubHref,
+          programmingLanguage: project.builtWith.split(',').map((s) => s.trim()),
+        }),
+      ]
+    : []),
+  // "Software App" structured data - only for a project with a real marketplace/store
+  // listing, since that's what url/applicationCategory describe (see data/projects.ts).
+  ...(project.marketplaceHref
+    ? [
+        softwareApplicationSchema({
+          name: project.name,
+          description: project.summary,
+          url: project.marketplaceHref,
+          applicationCategory: 'DeveloperApplication',
+          aggregateRating: project.aggregateRating,
+        }),
+      ]
+    : []),
+];
+---
+
+<BaseLayout
+  title={`${project.name} — Hack Make Do`}
+  description={project.summary}
+  ogImage={`/og/work/${project.slug}.png`}
+  currentPath="/work/"
+  jsonLd={jsonLd}
+>
+  <PageHeader
+    trail={[{ label: 'Home', href: '/' }, { label: 'Work', href: '/work/' }, { label: project.name }]}
+    eyebrow={project.eyebrow}
+    title={project.name}
+    lead={project.summary}
+  >
+    {(project.githubHref || project.marketplaceHref) && (
+      <div class="hmd-hero__actions hmd-mt-8">
+        {project.marketplaceHref && (
+          <Button external href={project.marketplaceHref}>Get it on the Marketplace</Button>
+        )}
+        {project.githubHref && (
+          <Button external variant={project.marketplaceHref ? 'secondary' : 'primary'} href={project.githubHref}>View on GitHub</Button>
+        )}
+      </div>
+    )}
+  </PageHeader>
+
+  <section class="hmd-section hmd-section--flush-top" aria-label="Screenshot">
+    <Container>
+      <Figure caption={`Placeholder: a screenshot showing ${project.name} in action.`} placeholderLabel="Placeholder: hero screenshot (also the Open Graph image)" />
+    </Container>
+  </section>
+
+  <section class="hmd-section hmd-section--flush-top" aria-label="Project facts">
+    <Container>
+      <ProjectFacts
+        facts={[
+          { label: 'Role', value: 'Creator and maintainer' },
+          { label: 'First released', value: 'Placeholder' },
+          { label: 'Built with', value: project.builtWith },
+          ...(project.worksWith ? [{ label: 'Works with', value: project.worksWith }] : []),
+        ]}
+      />
+      {(project.githubHref || project.marketplaceHref) && (
+        <dl class="hmd-facts">
+          <div>
+            <dt>Links</dt>
+            <dd>
+              {project.githubHref && <a href={project.githubHref}>GitHub ↗</a>}
+              {project.githubHref && project.marketplaceHref && ' · '}
+              {project.marketplaceHref && <a href={project.marketplaceHref}>Marketplace ↗</a>}
+            </dd>
+          </div>
+        </dl>
+      )}
+    </Container>
+  </section>
+
+  <section class="hmd-section hmd-section--flush-top" aria-labelledby="why-h">
+    <Container variant="text">
+      <Prose>
+        <h2 id="why-h">Why I built it</h2>
+        <p>Placeholder: the problem you saw, who it hurt, and why no existing tool solved it. Two or three short paragraphs in your own words.</p>
+      </Prose>
+    </Container>
+  </section>
+
+  <Section panel heading={{ lead: 'What makes it', boxed: 'good', id: 'good-h' }} containerVariant="text">
+    <FeatureList
+      items={[
+        { title: 'Placeholder feature', description: `Placeholder — a concrete, checkable point about ${project.name}.` },
+        { title: 'Placeholder second point', description: 'Placeholder description.' },
+      ]}
+    />
+  </Section>
+
+  <Section class="hmd-pink" ariaLabel="Hire">
+    <HireBanner message="Need something like this for your Umbraco site? Let's talk." />
+  </Section>
+</BaseLayout>

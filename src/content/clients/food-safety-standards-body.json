@@ -1,0 +1,26 @@
+{
+  "name": "A global food safety standards body",
+  "permission": true,
+  "agency": "Manifesto Digital",
+  "order": 1,
+  "summary": "An Umbraco Commerce website with complex integrations into the client's existing systems, built as a contract Umbraco developer with Manifesto Digital, part of TPX Impact.",
+  "facts": [
+    {
+      "label": "Role",
+      "value": "Contract Umbraco developer"
+    },
+    {
+      "label": "Agency",
+      "value": "Manifesto Digital"
+    },
+    {
+      "label": "Scope",
+      "value": "Umbraco Commerce and integrations"
+    }
+  ],
+  "quote": {
+    "text": "He brought strong technical knowledge, helped steer the team through some challenging areas, and was a calm and trusted presence with the client.",
+    "name": "Pete Cooper",
+    "role": "Engineering Director, manifesto"
+  }
+}

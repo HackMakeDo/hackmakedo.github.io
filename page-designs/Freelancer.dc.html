@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Umbraco freelancer</title>
+<link rel="stylesheet" href="ds/hackmakedo/tokens.css">
+<link rel="stylesheet" href="ds/hackmakedo/components/bundle.css">
+<script src="ds/hackmakedo/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0b1c2f}
+a{color:#ffb1a4}a:hover{color:#eceaf7}
+.hmd-pink{--ground:#ffb1a4;--panel:#ffb1a4;--ink:#0b1c2f;--ink-muted:#0b1c2f;--accent-text:#0b1c2f;--border-strong:#0b1c2f;--rule:#0b1c2f;--focus-ring:#0b1c2f;--pink:#0b1c2f;--on-pink:#ffb1a4;background:var(--ground);color:var(--ink)}
+.hmd-pink a:not(.hmd-btn){color:#0b1c2f;text-decoration:underline}
+.hmd-pink .hmd-btn--primary:hover{background:transparent;color:#0b1c2f;box-shadow:inset 0 0 0 2px #0b1c2f}
+.carousel{display:grid;grid-auto-flow:column;grid-auto-columns:min(520px,85%);gap:32px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:16px;overscroll-behavior-x:contain}
+.carousel > *{scroll-snap-align:start;margin:0}
+.carousel:focus-visible{outline:3px solid var(--focus-ring);outline-offset:3px}
+</style>
+</helmet>
+<div data-theme="dark" style="background: var(--ground); color: var(--ink); font-family: var(--font-body); min-height: 100vh;">
+
+  <a class="hmd-skip" href="#main">Skip to content</a>
+
+  <header class="hmd-header hmd-header--sticky">
+    <div class="hmd-container hmd-header__inner">
+      <a class="hmd-header__home" href="Main.dc.html" aria-label="Hack Make Do, home">
+        <span class="hmd-logotype hmd-logotype--inline">
+          <span>Hack</span>
+          <span class="hmd-logotype__make"><svg class="hmd-knockout" viewBox="0 0 292 100" aria-hidden="true" focusable="false"><mask id="hmd-make-freelancer" maskUnits="userSpaceOnUse" x="0" y="0" width="292" height="100"><rect width="292" height="100" fill="#fff"></rect><text x="11" y="84" textLength="270" lengthAdjust="spacingAndGlyphs" fill="#000">Make</text></mask><rect class="hmd-knockout__under" width="292" height="100"></rect><rect class="hmd-knockout__box" width="292" height="100" mask="url(#hmd-make-freelancer)"></rect></svg></span>
+          <span>Do</span>
+        </span>
+      </a>
+      <nav class="hmd-nav" aria-label="Main">
+        <ul>
+          <li><a href="Work.dc.html">Work</a></li>
+          <li><a href="BlogIndex.dc.html">Blog</a></li>
+          <li><a href="Timeline.dc.html">Timeline</a></li>
+          <li><a href="About.dc.html">About</a></li>
+        </ul>
+      </nav>
+      <a class="hmd-btn hmd-btn--primary hmd-btn--sm" href="#contact-h" aria-current="page">Hire me</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <header class="hmd-pagehead hmd-container">
+      <nav class="hmd-breadcrumbs" aria-label="Breadcrumb">
+        <ol><li><a href="Main.dc.html">Home</a></li><li><a href="Freelancer.dc.html">Hire</a></li><li aria-current="page">Umbraco freelancer</li></ol>
+      </nav>
+      <p class="hmd-eyebrow">Hire</p>
+      <h1 class="hmd-pagehead__title">Umbraco freelancer</h1>
+      <p class="hmd-pagehead__lead">Warren Buckley is a UK-based freelance Umbraco developer and nine-time Umbraco MVP. He builds, upgrades and extends Umbraco sites and packages for agencies, product teams and organisations.</p>
+      <div class="hmd-hero__actions" style="margin-top: 32px;">
+        <a class="hmd-btn hmd-btn--primary" href="#contact-h">Get in touch</a>
+        <a class="hmd-btn hmd-btn--secondary" href="Contractor.dc.html">Looking for a contractor?</a>
+      </div>
+    </header>
+
+    <section class="hmd-section" aria-labelledby="get-h">
+      <div class="hmd-container">
+        <div class="hmd-section__head">
+          <div>
+            <p class="hmd-eyebrow">What you get</p>
+            <h2 class="hmd-heading" id="get-h">Freelance Umbraco <span class="box">work</span></h2>
+          </div>
+        </div>
+        <div class="hmd-grid hmd-grid--2">
+          <article class="hmd-card hmd-service">
+            <p class="hmd-service__n" aria-hidden="true">01</p>
+            <h3>Upgrades and migrations</h3>
+            <p>Moving sites to the current Umbraco release, including the rebuilt Bellissima backoffice, as I did for the Council of the European Union.</p>
+          </article>
+          <article class="hmd-card hmd-service">
+            <p class="hmd-service__n" aria-hidden="true">02</p>
+            <h3>Backoffice extensions</h3>
+            <p>Custom dashboards, property editors and packages built with TypeScript and Lit web components.</p>
+          </article>
+          <article class="hmd-card hmd-service">
+            <p class="hmd-service__n" aria-hidden="true">03</p>
+            <h3>Finishing stalled builds</h3>
+            <p>Freelance Umbraco development to finish builds, upgrades and integrations that have stalled.</p>
+          </article>
+          <article class="hmd-card hmd-service">
+            <p class="hmd-service__n" aria-hidden="true">04</p>
+            <h3>Developer experience</h3>
+            <p>Templates, tooling and documentation that make your Umbraco product easier for other developers to build on.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="hmd-section hmd-section--panel" aria-labelledby="proof-h">
+      <div class="hmd-container">
+        <div class="hmd-section__head">
+          <div>
+            <p class="hmd-eyebrow">Proof</p>
+            <h2 class="hmd-heading" id="proof-h">Recent <span class="box">client</span> work</h2>
+          </div>
+        </div>
+        <div class="hmd-clients-list">
+          <article class="hmd-card hmd-client">
+            <div class="hmd-client__story">
+              <p class="hmd-client__tag">Client work</p>
+              <h3><a href="CaseCouncil.dc.html">Council of the European Union</a></h3>
+              <p class="hmd-client__summary">Drove the migration of the Council's Umbraco site from version 13 to 16, and brought the in-house team up to speed on the new backoffice technology.</p>
+              <div class="hmd-links"><a class="hmd-link" href="CaseCouncil.dc.html">Read the case study</a></div>
+            </div>
+            <figure class="hmd-client__quote">
+              <blockquote>Warren's expertise, professionalism, and ability to share knowledge made him an invaluable partner.</blockquote>
+              <figcaption>Simone Chiaretta<span>Technical Lead and Web Architect</span></figcaption>
+            </figure>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="hmd-section" aria-labelledby="how-h">
+      <div class="hmd-container hmd-container--text" style="margin-inline: auto;">
+        <h2 class="hmd-heading" id="how-h">How I <span class="box">work</span></h2>
+        <p style="font-size: 20px; line-height: 1.6; color: var(--ink-muted);">Placeholder: one answer-first sentence on how a freelance engagement runs, in your own words.</p>
+        <dl class="hmd-facts">
+          <div><dt>Based in</dt><dd>United Kingdom</dd></div>
+          <div><dt>Works</dt><dd>Remotely</dd></div>
+          <div><dt>Availability</dt><dd>Placeholder</dd></div>
+          <div><dt>Company</dt><dd>Hack Make Do Limited</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="hmd-section hmd-section--panel" aria-labelledby="said-h">
+      <div class="hmd-container">
+                <div class="hmd-section__head">
+          <div>
+            <h2 class="hmd-heading" id="said-h">What clients <span class="box">say</span></h2>
+          </div>
+          <a class="hmd-link" href="KindWords.dc.html">All recommendations</a>
+        </div>
+        <div class="carousel" role="region" aria-labelledby="said-h" tabindex="0">
+          <figure class="hmd-quote">
+            <blockquote><p style="margin: 0;">I had the pleasure of working with Warren during our migration of an Umbraco site from v13 to v16. He played a fundamental role in the success of the project, not only by driving the migration itself but also by bringing our team up to speed with the new UI technology introduced in v16.</p></blockquote>
+            <figcaption><a href="https://www.linkedin.com/in/simonech/">Simone Chiaretta</a><span>Technical Lead and Web Architect · via LinkedIn</span></figcaption>
+          </figure>
+          <figure class="hmd-quote">
+            <blockquote><p style="margin: 0;">Warren is an absolute pleasure to work with. Ever professional, great with clients, solutions focussed and an incomparable knowledge of Umbraco!</p></blockquote>
+            <figcaption><a href="https://www.linkedin.com/in/ceri-broussine-a8819155/">Ceri Broussine</a><span>Programme Lead, manifesto · via LinkedIn</span></figcaption>
+          </figure>
+          <figure class="hmd-quote">
+            <blockquote><p style="margin: 0;">Having worked directly with Warren in complex Umbraco migration projects, I warmly recommend him as the professional you need to turn goals into reality and build a strong team.</p></blockquote>
+            <figcaption>Cornelia Vasile<span>Senior Project Manager · via LinkedIn</span></figcaption>
+          </figure>
+          <figure class="hmd-quote">
+            <blockquote><p style="margin: 0;">He brought strong technical knowledge, helped steer the team through some challenging areas, and was a calm and trusted presence with the client.</p></blockquote>
+            <figcaption><a href="https://www.linkedin.com/in/pete-cooper-ba3834b1/">Pete Cooper</a><span>Engineering Director, manifesto · via LinkedIn</span></figcaption>
+          </figure>
+        </div>
+        <p style="margin: 16px 0 0; font-size: 14px; color: var(--ink-muted);">Scroll or swipe for more →</p>
+      </div>
+    </section>
+
+    <section class="hmd-section" aria-labelledby="faq-h">
+      <div class="hmd-container hmd-container--text" style="margin-inline: auto;">
+        <h2 class="hmd-heading" id="faq-h">Common <span class="box">questions</span></h2>
+        <div class="hmd-faq">
+          <details open>
+            <summary>Can you build custom Umbraco backoffice extensions?</summary>
+            <div class="hmd-faq__answer"><p>Yes. ContentLock, Examine Peek and Manifest Peek are all extensions for the rebuilt backoffice in Umbraco 14 and later, and I volunteer on the Umbraco Package Team.</p></div>
+          </details>
+          <details>
+            <summary>Which Umbraco versions do you work with?</summary>
+            <div class="hmd-faq__answer"><p>Placeholder: the versions you take on, from legacy upgrades to the current release.</p></div>
+          </details>
+          <details>
+            <summary>How soon can you start?</summary>
+            <div class="hmd-faq__answer"><p>Placeholder: current availability and notice.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="hmd-section hmd-pink" aria-label="Contact">
+      <div class="hmd-container hmd-container--text" style="margin-inline: auto;">
+        <div class="hmd-contact">
+          <h2 class="hmd-heading" id="contact-h">Let's <span class="box">talk</span></h2>
+          <p>Tell me about the project, the dates, and whether you are after a freelancer or a contractor.</p>
+          <div class="hmd-contact__email">
+            <a class="hmd-contact__address" href="mailto:warren@hackmakedo.com">warren@hackmakedo.com</a>
+            <hmd-copy value="warren@hackmakedo.com"><button type="button" class="hmd-btn hmd-btn--secondary hmd-btn--sm">Copy email</button></hmd-copy>
+          </div>
+          <div class="hmd-links"><a class="hmd-link" href="#">LinkedIn ↗</a><a class="hmd-link" href="https://github.com/warrenbuckley">GitHub ↗</a></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="hmd-footer">
+    <div class="hmd-container">
+      <div class="hmd-footer__grid">
+        <div><h2>Hire</h2><ul><li><a href="Freelancer.dc.html" aria-current="page">Umbraco freelancer</a></li><li><a href="Contractor.dc.html">Umbraco contractor</a></li><li><a href="Contact.dc.html">Contact</a></li></ul></div>
+        <div><h2>Work</h2><ul><li><a href="CaseContentLock.dc.html">ContentLock</a></li><li><a href="#">Compact Log Format Viewer</a></li><li><a href="#">IIS Express Code</a></li><li><a href="Work.dc.html">All work</a></li></ul></div>
+        <div><h2>Writing</h2><ul><li><a href="BlogIndex.dc.html">Blog</a></li><li><a href="Timeline.dc.html">Timeline</a></li><li><a href="#">RSS feed</a></li></ul></div>
+        <div><h2>Elsewhere</h2><ul><li><a href="#" rel="me">GitHub</a></li><li><a href="#" rel="me">LinkedIn</a></li><li><a href="#" rel="me">YouTube</a></li><li><a href="#" rel="me">Mastodon</a></li></ul></div>
+      </div>
+      <div class="hmd-footer__legal">
+        <p>Hack Make Do Limited is incorporated in England. Company No: 15432884.<br>Registered Office: Castle House, Castle Street, Guildford, GU1 3UW.<br>VAT Number: GB 458891924 · <a href="Privacy.dc.html">Privacy</a></p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4640}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

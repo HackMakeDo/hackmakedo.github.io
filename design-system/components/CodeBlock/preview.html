@@ -1,0 +1,67 @@
+<!-- @dsCard group="Blog" height=900 subtitle="C# with filename, line numbers and a highlighted line; TypeScript; a JSON diff on Paper" -->
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+  body { margin: 0; background: var(--ground); padding: var(--space-8); display: grid; gap: var(--space-8); max-width: 780px; }
+  .paper { background: var(--ground); padding: var(--space-6); border-radius: var(--radius-md); border: 1px solid var(--rule); }
+</style>
+</head>
+<body>
+<figure class="hmd-codeblock hmd-codeblock--numbered">
+  <figcaption class="hmd-codeblock__bar">
+    <span class="hmd-codeblock__lang">C#</span>
+    <span class="hmd-codeblock__file">src/ContentLock/SignalR/ContentLockHub.cs</span>
+    <hmd-copy><button type="button" class="hmd-copybtn" aria-label="Copy code: ContentLockHub.cs">Copy</button></hmd-copy>
+  </figcaption>
+  <pre tabindex="0" aria-label="C# code: ContentLockHub.cs"><code><span class="line"><span class="o">[</span><span class="t">Authorize</span><span class="o">(</span>Policy <span class="o">=</span> <span class="t">AuthorizationPolicies</span><span class="o">.</span>BackOfficeAccess<span class="o">)]</span></span>
+<span class="line"><span class="k">public class</span> <span class="t">ContentLockHub</span> <span class="o">:</span> <span class="t">Hub</span><span class="o">&lt;</span><span class="t">IContentLockHubEvents</span><span class="o">&gt;</span></span>
+<span class="line"><span class="o">{</span></span>
+<span class="line">    <span class="k">private readonly</span> <span class="t">IOptionsMonitor</span><span class="o">&lt;</span><span class="t">ContentLockOptions</span><span class="o">&gt;</span> _options<span class="o">;</span></span>
+<span class="line"></span>
+<span class="line">    <span class="k">public</span> <span class="t">ContentLockHub</span><span class="o">(</span><span class="t">IOptionsMonitor</span><span class="o">&lt;</span><span class="t">ContentLockOptions</span><span class="o">&gt;</span> options<span class="o">)</span></span>
+<span class="line">    <span class="o">{</span></span>
+<span class="line">        _options <span class="o">=</span> options<span class="o">;</span></span>
+<span class="line highlighted">        _options<span class="o">.</span>OnChange<span class="o">(</span>OnOptionsChanged<span class="o">);</span> <span class="c">// push new options to every backoffice</span></span>
+<span class="line">    <span class="o">}</span></span>
+<span class="line"><span class="o">}</span></span></code></pre>
+</figure>
+
+<figure class="hmd-codeblock">
+  <figcaption class="hmd-codeblock__bar">
+    <span class="hmd-codeblock__lang">TypeScript</span>
+    <span class="hmd-codeblock__file">online-users.headerapp.ts</span>
+    <hmd-copy><button type="button" class="hmd-copybtn" aria-label="Copy code: online-users.headerapp.ts">Copy</button></hmd-copy>
+  </figcaption>
+  <pre tabindex="0" aria-label="TypeScript code: online-users.headerapp.ts"><code><span class="line"><span class="k">import</span> <span class="o">{</span> customElement<span class="o">,</span> html<span class="o">,</span> state <span class="o">}</span> <span class="k">from</span> <span class="s">'@umbraco-cms/backoffice/external/lit'</span><span class="o">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="o">@</span>customElement<span class="o">(</span><span class="s">'contentlock-nousers-online-headerapp'</span><span class="o">)</span></span>
+<span class="line"><span class="k">export class</span> <span class="t">ContentLockNoUsersOnlineHeaderApp</span> <span class="k">extends</span> <span class="t">UmbHeaderAppButtonElement</span> <span class="o">{</span></span>
+<span class="line">    <span class="o">@</span>state<span class="o">()</span></span>
+<span class="line">    <span class="k">private</span> _totalConnectedUsers<span class="o">:</span> <span class="t">number</span> <span class="o">|</span> <span class="n">undefined</span><span class="o">;</span></span>
+<span class="line"><span class="o">}</span></span></code></pre>
+</figure>
+
+<div class="paper" data-theme="light">
+<figure class="hmd-codeblock">
+  <figcaption class="hmd-codeblock__bar">
+    <span class="hmd-codeblock__lang">JSON</span>
+    <span class="hmd-codeblock__file">appsettings.json</span>
+    <hmd-copy><button type="button" class="hmd-copybtn" aria-label="Copy code: appsettings.json">Copy</button></hmd-copy>
+  </figcaption>
+  <pre tabindex="0" aria-label="JSON code: appsettings.json"><code><span class="line"><span class="o">{</span></span>
+<span class="line">  <span class="p">"ContentLock"</span><span class="o">: {</span></span>
+<span class="line">    <span class="p">"OnlineUsers"</span><span class="o">: {</span></span>
+<span class="line">      <span class="p">"Enable"</span><span class="o">:</span> <span class="n">true</span><span class="o">,</span></span>
+<span class="line diff remove">      <span class="p">"Sounds"</span><span class="o">: {</span> <span class="p">"Enable"</span><span class="o">:</span> <span class="n">true</span> <span class="o">}</span></span>
+<span class="line diff add">      <span class="p">"Sounds"</span><span class="o">: {</span> <span class="p">"Enable"</span><span class="o">:</span> <span class="n">false</span> <span class="o">}</span></span>
+<span class="line">    <span class="o">}</span></span>
+<span class="line">  <span class="o">}</span></span>
+<span class="line"><span class="o">}</span></span></code></pre>
+</figure>
+</div>
+</body>
+</html>

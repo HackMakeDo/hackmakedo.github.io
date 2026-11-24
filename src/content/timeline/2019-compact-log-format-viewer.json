@@ -1,0 +1,14 @@
+{
+  "year": 2019,
+  "yearLabel": "2019",
+  "type": "project",
+  "title": "Compact Log Format Viewer",
+  "body": "Starts a cross platform desktop application for reading and querying the JSON log files that Serilog writes.",
+  "links": [
+    {
+      "label": "View on GitHub ↗",
+      "href": "https://github.com/warrenbuckley/Compact-Log-Format-Viewer"
+    }
+  ],
+  "order": 0
+}

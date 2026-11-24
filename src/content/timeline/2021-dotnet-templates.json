@@ -1,0 +1,9 @@
+{
+  "year": 2021,
+  "yearLabel": "2021",
+  "type": "project",
+  "title": "Templates for the new .NET Umbraco",
+  "body": "Builds out the dotnet new templates for the .NET Core version of Umbraco: unattended installs, HTTPS redirect options, a JSON schema for appsettings and fixes for special characters in passwords and connection strings.",
+  "order": 1,
+  "links": []
+}

@@ -1,0 +1,28 @@
+<!-- @dsCard group="Actions" height=220 subtitle="Primary, secondary, small and text link on Night and Paper" -->
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+  body { margin: 0; background: var(--ground); padding: var(--space-8); display: flex; flex-direction: column; gap: var(--space-6); }
+  .row { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
+  .paper { background: var(--ground); padding: var(--space-6); border-radius: var(--radius-md); border: 1px solid var(--rule); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <a class="hmd-btn hmd-btn--primary" href="#">Hire me</a>
+    <a class="hmd-btn hmd-btn--secondary" href="#">Read the case study</a>
+    <a class="hmd-btn hmd-btn--primary hmd-btn--sm" href="#">Hire me</a>
+    <a class="hmd-link" href="#">View on GitHub ↗</a>
+  </div>
+  <div class="row paper" data-theme="light">
+    <a class="hmd-btn hmd-btn--primary" href="#">Hire me</a>
+    <a class="hmd-btn hmd-btn--secondary" href="#">Read the case study</a>
+    <a class="hmd-btn hmd-btn--primary hmd-btn--sm" href="#">Hire me</a>
+    <a class="hmd-link" href="#">View on GitHub ↗</a>
+  </div>
+</body>
+</html>

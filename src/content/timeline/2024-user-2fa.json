@@ -1,0 +1,18 @@
+{
+  "year": 2024,
+  "yearLabel": "2024",
+  "type": "project",
+  "title": "User 2FA",
+  "body": "Creates a simple package that adds two-factor login for Umbraco backoffice users.",
+  "links": [
+    {
+      "label": "View on GitHub ↗",
+      "href": "https://github.com/warrenbuckley/Umbraco.Community.User2FA"
+    },
+    {
+      "label": "View on Umbraco Marketplace ↗",
+      "href": "https://marketplace.umbraco.com/package/umbraco.community.user2fa"
+    }
+  ],
+  "order": 2
+}

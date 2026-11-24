@@ -1,0 +1,25 @@
+---
+import Backdrop from './Backdrop.astro';
+import Logotype from './Logotype.astro';
+import SiteHeader from './SiteHeader.astro';
+import Button from './Button.astro';
+
+/** The home page opening: stacked see-through Logotype over a Backdrop, one answer-first sentence, and the hire actions. One per site, Home only. */
+interface Props {
+  lead: string;
+}
+const { lead } = Astro.props;
+---
+
+<section class="hmd-hero hmd-backdrop-host" aria-label="Introduction">
+  <Backdrop variant="sprinkles" drift />
+  <SiteHeader variant="overlay" />
+  <div class="hmd-container hmd-hero__body">
+    <Logotype maskId="hmd-make-home" size="112px" />
+    <p class="hmd-hero__lead" set:html={lead} />
+    <div class="hmd-hero__actions">
+      <Button href="/umbraco-freelancer/">Hire me</Button>
+      <Button variant="secondary" href="/work/">See my work</Button>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import Grid from '../../components/Grid.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import Prose from '../../components/Prose.astro';
+import Testimonial from '../../components/Testimonial.astro';
+import FAQ from '../../components/FAQ.astro';
+import ContactCard from '../../components/ContactCard.astro';
+import Button from '../../components/Button.astro';
+import { getCollection } from 'astro:content';
+import { faqPageSchema } from '../../lib/structured-data';
+import {
+  UMBRACO_VERSIONS,
+  UMBRACO_LIFECYCLE_URL,
+  UMBRACO_LIFECYCLE_CHECKED,
+  supportStatus,
+  formatDate,
+} from '../../data/umbraco-versions';
+
+const simone = (await getCollection('testimonials')).find((t) => t.id === 'simone-chiaretta')!;
+
+const faqItems = [
+  {
+    question: 'Can I upgrade straight from Umbraco 13 to 17?',
+    answer:
+      'Yes. <a href="https://releases.umbraco.com/release/umbraco/Umbraco-CMS/17.0.0">Umbraco 17\'s release notes</a> confirm a direct upgrade from one long-term support release to the next, with the database migrations applied for you. Custom backoffice code and packages still need updating for the new backoffice.',
+  },
+  {
+    question: 'My site is on Umbraco 8 or older. Can you help?',
+    answer:
+      'Yes. Older sites cannot be upgraded in place to the current release, so the content and code move to a new Umbraco 17 site instead.',
+  },
+  {
+    question: 'How do you charge?',
+    answer:
+      "I work by the day, week or month. Before we start, I'll give you a rough idea of how long the work should take, so you can plan a budget. Projects often change as they go, and paying for time means we can adapt without renegotiating a quote.",
+  },
+  {
+    question: 'How soon can you start?',
+    answer: 'I have open availability for freelance work and contract roles. Please email me with the project details and dates.',
+  },
+];
+---
+
+<BaseLayout
+  title="Umbraco upgrades — Hack Make Do"
+  description="Umbraco 13 reaches end of life on 14 December 2026. Warren Buckley upgrades Umbraco sites to Umbraco 17, the current long-term support release."
+  ogImage="/og/umbraco-upgrades.png"
+  currentPath="/umbraco-upgrades/"
+  hireHref="#contact-h"
+  jsonLd={[faqPageSchema(faqItems)]}
+>
+  <PageHeader
+    trail={[{ label: 'Home', href: '/' }, { label: 'Umbraco upgrades' }]}
+    eyebrow="Hire"
+    title="Umbraco upgrades"
+    lead="Umbraco 13 reaches end of life on 14 December 2026, and the .NET 8 it runs on is already out of support. I upgrade Umbraco sites to Umbraco 17, the current long-term support release."
+  >
+    <div class="hmd-hero__actions hmd-mt-8">
+      <Button href="#contact-h">Get in touch</Button>
+      <Button variant="secondary" href="#versions-h">Is my version supported?</Button>
+    </div>
+  </PageHeader>
+
+  <Section heading={{ eyebrow: 'Why upgrade', lead: 'Why it', boxed: 'matters', id: 'why-h' }}>
+    <Grid variant="2">
+      <ServiceCard
+        number="01"
+        title="Security fixes stop"
+        description="Once a version reaches end of life, Umbraco releases no more security fixes for it. For Umbraco 13 that is 14 December 2026."
+        linkHref="https://umbraco.com/products/knowledge-center/long-term-support-and-end-of-life/umbraco-13-end-of-life-eol/"
+        linkLabel="Umbraco on Umbraco 13's end of life ↗"
+      />
+      <ServiceCard
+        number="02"
+        title=".NET 8 support has ended"
+        description="Umbraco 13 runs on .NET 8, which Microsoft stopped supporting on 10 November 2026. Umbraco 17 runs on .NET 10, supported until 14 November 2028."
+        linkHref="https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core"
+        linkLabel="Microsoft's .NET support policy ↗"
+      />
+      <ServiceCard
+        number="03"
+        title="A rebuilt backoffice"
+        description="Since Umbraco 14 the backoffice is built with web components. Custom AngularJS dashboards and property editors need rebuilding to work in it."
+        linkHref="https://docs.umbraco.com/umbraco-cms/get-started/upgrading-and-migrating/upgrade-details"
+        linkLabel="Umbraco's upgrade guide ↗"
+      />
+      <ServiceCard
+        number="04"
+        title="Years of support ahead"
+        description="Umbraco 17 is a long-term support release, with security fixes until 27 November 2028."
+        linkHref="https://umbraco.com/blog/umbraco-17-lts-release/"
+        linkLabel="Umbraco 17 LTS announcement ↗"
+      />
+    </Grid>
+  </Section>
+
+  <Section panel heading={{ lead: 'Which versions are', boxed: 'supported', id: 'versions-h' }} containerVariant="text">
+    <Prose>
+      <table>
+        <caption class="hmd-sr">Umbraco CMS versions and their support dates</caption>
+        <thead>
+          <tr><th scope="col">Version</th><th scope="col">Status</th><th scope="col">Security fixes only from</th><th scope="col">End of life</th></tr>
+        </thead>
+        <tbody>
+          {UMBRACO_VERSIONS.map((v) => {
+            const status = supportStatus(v);
+            return (
+              <tr>
+                <th scope="row">Umbraco {v.version}{v.type && ` (${v.type})`}</th>
+                <td><span class:list={['upg-status', `upg-status--${status === 'Supported' ? 'ok' : status === 'End of life' ? 'eol' : 'security'}`]}>{status}</span></td>
+                <td>{formatDate(v.securityPhase)}</td>
+                <td>{formatDate(v.endOfLife)}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <p>
+        <small>
+          LTS is long-term support; STS is standard-term support. Versions before Umbraco 7 are no longer supported.
+          Dates from <a href={UMBRACO_LIFECYCLE_URL}>Umbraco's support lifecycle</a>, checked {formatDate(UMBRACO_LIFECYCLE_CHECKED)}.
+        </small>
+      </p>
+    </Prose>
+  </Section>
+
+  <Section heading={{ eyebrow: 'Why me', lead: 'Where I can', boxed: 'help', id: 'me-h' }}>
+    <Grid variant="2">
+      <ServiceCard
+        number="01"
+        title="Your custom backoffice code"
+        description="Custom AngularJS dashboards and property editors don't work in the new backoffice. I rebuild them as web components with Lit, the way I build my own extensions for Umbraco 14 and later, such as ContentLock, Examine Peek and Manifest Peek."
+        linkHref="/work/"
+        linkLabel="See my extensions"
+      />
+      <ServiceCard
+        number="02"
+        title="Most of the work on a big site"
+        description="Large sites rely on integrations and extensions built around their editors' needs. When I upgraded the Council of the European Union's site from Umbraco 13 to 16, about 90% of the work was rebuilding those as web components."
+      />
+    </Grid>
+  </Section>
+
+  <Section panel heading={{ lead: 'From an', boxed: 'upgrade', id: 'said-h' }} containerVariant="text">
+    <Testimonial
+      paragraphs={simone.data.quote.slice(0, 1)}
+      name={simone.data.name}
+      profileHref={simone.data.linkedinUrl}
+      roleAndCompany={`${simone.data.role}, ${simone.data.company} · via LinkedIn`}
+    />
+  </Section>
+
+  <Section heading={{ boxed: 'questions', lead: 'Common', id: 'faq-h' }} containerVariant="text">
+    <FAQ items={faqItems} />
+  </Section>
+
+  <Section class="hmd-pink" ariaLabel="Contact" containerVariant="text">
+    <ContactCard
+      heading={{ boxed: 'talk', lead: "Let's", id: 'contact-h' }}
+      intro="Tell me which Umbraco version you're on, roughly how big the site is, and any packages or custom backoffice code it uses."
+      email="warren@hackmakedo.com"
+    />
+  </Section>
+</BaseLayout>
+
+<style>
+  .upg-status { font-weight: 700; white-space: nowrap; }
+  .upg-status--ok { color: var(--type-community); }
+  .upg-status--security { color: var(--accent-text); }
+  .upg-status--eol { color: var(--ink-muted); }
+</style>

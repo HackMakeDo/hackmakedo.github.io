@@ -1,0 +1,28 @@
+---
+/**
+ * An "On this page" list of a long post's or case study's h2 sections. Show it with four
+ * or more sections. Wrapped in <hmd-toc> for scroll-spy: the section currently in view
+ * gets aria-current="true" (see src/elements/hmd-toc.ts), styled pink and bold below.
+ * Without JavaScript these are just plain anchor links to each heading.
+ */
+interface Item {
+  id: string;
+  label: string;
+}
+interface Props {
+  items: Item[];
+  sticky?: boolean;
+}
+const { items, sticky = true } = Astro.props;
+---
+
+<hmd-toc>
+  <nav class={`hmd-toc${sticky ? ' hmd-toc--sticky' : ''}`} aria-labelledby="toc-h">
+    <h2 class="hmd-toc__title" id="toc-h">On this page</h2>
+    <ol>
+      {items.map((item) => (
+        <li><a href={`#${item.id}`}>{item.label}</a></li>
+      ))}
+    </ol>
+  </nav>
+</hmd-toc>

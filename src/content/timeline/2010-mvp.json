@@ -1,0 +1,15 @@
+{
+  "year": 2010,
+  "yearLabel": "2010",
+  "type": "award",
+  "title": "Fourth Umbraco MVP award",
+  "body": "A fourth MVP award, in his last year at XEED before joining Umbraco HQ.",
+  "badge": 2010,
+  "links": [
+    {
+      "label": "MVP archive ↗",
+      "href": "https://community.umbraco.com/contribute/mvp-program/mvp-archive/#mvp-2010"
+    }
+  ],
+  "order": 0
+}

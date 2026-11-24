@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PostHeader from '../../../components/PostHeader.astro';
+import Prose from '../../../components/Prose.astro';
+import TableOfContents from '../../../components/TableOfContents.astro';
+import Section from '../../../components/Section.astro';
+import Grid from '../../../components/Grid.astro';
+import BlogPostCard from '../../../components/BlogPostCard.astro';
+import HireBanner from '../../../components/HireBanner.astro';
+import { getCollection, render } from 'astro:content';
+import { topicLabel } from '../../../data/topics';
+import { caseStudyHref } from '../../../data/case-studies';
+import { articleSchema } from '../../../lib/structured-data';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+
+const toc = headings
+  .filter((h) => h.depth === 2)
+  .map((h) => ({ id: h.slug, label: h.text }));
+
+// "Keep reading": the case study this post is explicitly about (relatedWork, hand-set
+// per post - see content.config.ts), if any, plus other posts sharing the most topics
+// with this one, newest first among ties - filling up to 2 cards total either way.
+const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+// Only while that case study is published (src/data/case-studies.ts); otherwise the post
+// shows two related posts instead.
+const relatedWork =
+  post.data.relatedWork && caseStudyHref(post.data.relatedWork.href.match(/^\/work\/([^/]+)\/$/)?.[1])
+    ? post.data.relatedWork
+    : undefined;
+const relatedPosts = allPosts
+  .filter((p) => p.id !== post.id)
+  .map((p) => ({ post: p, shared: p.data.topics.filter((t) => post.data.topics.includes(t)).length }))
+  .sort((a, b) => b.shared - a.shared || b.post.data.date.valueOf() - a.post.data.date.valueOf())
+  .slice(0, relatedWork ? 1 : 2)
+  .map((r) => r.post);
+const article = articleSchema({
+  title: post.data.title,
+  description: post.data.excerpt,
+  datePublished: post.data.date,
+  dateModified: post.data.updated,
+  url: `/blog/${post.id}/`,
+  image: `/og/blog/${post.id}.png`,
+});
+---
+
+<BaseLayout
+  title={`${post.data.title} — Hack Make Do`}
+  description={post.data.excerpt}
+  ogImage={`/og/blog/${post.id}.png`}
+  currentPath="/blog/"
+  jsonLd={[article]}
+>
+  <div class="hmd-container post">
+    <PostHeader
+      title={post.data.title}
+      published={post.data.date}
+      updated={post.data.updated}
+      tags={post.data.topics.map((t) => ({ label: topicLabel(t), href: `/blog/topic/${t}/` }))}
+    />
+
+    <div class="post__layout">
+      <article class:list={['post__article', { 'post__article--with-toc': toc.length >= 4 }]}>
+        <Prose>
+          <Content />
+        </Prose>
+      </article>
+
+      {toc.length >= 4 && (
+        <aside class="post__toc">
+          <TableOfContents items={toc} />
+        </aside>
+      )}
+    </div>
+
+    {(relatedWork || relatedPosts.length > 0) && (
+      <section class="post__related" aria-labelledby="related-h">
+        <h2 class="hmd-heading" id="related-h">Keep <span class="box">reading</span></h2>
+        <Grid variant="2">
+          {relatedWork && (
+            <article class="hmd-card">
+              <h3><a href={relatedWork.href}>{relatedWork.title}</a></h3>
+              <p>The case study for the project this post is about.</p>
+              <div class="hmd-links"><a class="hmd-link" href={relatedWork.href}>Read the case study</a></div>
+            </article>
+          )}
+          {relatedPosts.map((related) => (
+            <BlogPostCard
+              href={`/blog/${related.id}/`}
+              title={related.data.title}
+              date={related.data.date}
+              summary={related.data.excerpt}
+              tags={related.data.topics.map((t) => ({ label: topicLabel(t), href: `/blog/topic/${t}/` }))}
+            />
+          ))}
+        </Grid>
+      </section>
+    )}
+  </div>
+
+  <Section class="hmd-pink" ariaLabel="Hire">
+    <HireBanner message="Need a hand with Umbraco Bellissima? I'm available as a freelancer or contractor." />
+  </Section>
+</BaseLayout>
+
+<script src="../../../elements/index.ts"></script>
+
+<style>
+  .post {
+    padding-block: 64px 96px;
+  }
+  /* Phones: the post and its header both pad the top, which stacked up to ~100px of empty space
+     above the breadcrumbs. Keep one 32px gap there, and a smaller one before the article. */
+  @media (max-width: 640px) {
+    .post {
+      padding-block: 32px 64px;
+    }
+    .post :global(.hmd-posthead) {
+      padding-top: 0;
+    }
+    .post .post__layout {
+      margin-top: 16px;
+    }
+  }
+  /* Article and contents side by side when there is room; the contents wrap below on narrow screens. */
+  .post__layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 64px;
+    margin-top: 48px;
+  }
+  .post__article {
+    flex: 999 1 560px;
+    min-width: 0;
+    max-width: 760px;
+  }
+  .post__article--with-toc {
+    max-width: 720px;
+  }
+  /* Without the contents sidebar the right-hand space is free: text keeps its reading width,
+     but code blocks and gists may run wider so long lines don't need to scroll. */
+  .post__article:not(.post__article--with-toc) {
+    max-width: 1040px;
+  }
+  .post__article:not(.post__article--with-toc) :global(.hmd-prose) {
+    max-width: none;
+  }
+  .post__article:not(.post__article--with-toc) :global(.hmd-prose > :not(.hmd-codeblock, .hmd-gist)) {
+    max-width: 720px;
+  }
+  .post__toc {
+    flex: 1 1 240px;
+    min-width: 0;
+    max-width: 300px;
+  }
+  .post__related {
+    margin-top: 96px;
+  }
+</style>

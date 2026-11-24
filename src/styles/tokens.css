@@ -1,0 +1,193 @@
+/* Hack Make Do — generated from tokens.json */
+:root, [data-theme="dark"] {
+  --ground: #0b1c2f; /* Page background. Night navy is the brand ground; Paper is for blog posts and print. Every text token below names the grounds it reads on. */
+  --panel: #16293d; /* Raised surface for cards, code blocks, quotes and the hire banner. Sits on ground. */
+  --ink: #eceaf7; /* Primary text and headings on ground and panel. 14.5:1 on dark ground, 15:1 on light ground. */
+  --ink-muted: #a9abd2; /* Secondary text, captions, dates, metadata on ground and panel. 6.7:1 or better in both themes. */
+  --rule: #2a2f66; /* Decorative hairlines and the timeline spine. Decorative only: never the sole boundary of a control. */
+  --border-strong: #6a70a3; /* Outlines of controls, chips and input fields. 3.6:1 on dark ground, 3.1:1 on dark panel, 4.3:1 or better on both light surfaces. */
+  --pink: #ffb1a4; /* The brand fill: the Make box in the logotype, primary buttons, section-heading boxes, award markers. Always a fill, never body text on light ground. Text on it is on-pink. */
+  --on-pink: #0b1c2f; /* Text on pink fills (buttons, SectionHeading boxes, the skip link, service numbers). 9.9:1 on pink. */
+  --logo-cutout: #0b1c2f00; /* What shows through the Make letters in the Logotype: transparent on Night, navy on Paper. */
+  --accent-text: #ffb1a4; /* Links, inline emphasis and accent headings. Pink on Night (9.9:1), brick red on Paper (6.1:1) because pink fails as text on light. */
+  --type-role: #8e99ff; /* Timeline and tag colour for roles; also code keywords. 6.7:1 on dark ground, 6.1:1 on light ground. */
+  --type-award: #ffb1a4; /* Timeline colour for awards (MVP badges). Pairs with a diamond marker so it never relies on hue alone. */
+  --type-project: #eceaf7; /* Timeline colour for projects. Pairs with a filled-circle marker. */
+  --type-community: #7fe0c3; /* Timeline colour for community work; also code strings. 10.9:1 on dark ground, 5.9:1 on light ground. */
+  --glow-indigo: #6f7dff; /* Decorative glow and contour-line wash behind hero areas. Never text. */
+  --sprinkle: rgba(255, 255, 255, 0.2); /* Fill for the sprinkles background pattern on the home page. Decorative, kept to the page background. */
+  --focus-ring: #eceaf7; /* Solid 3px keyboard focus outline drawn with a 3px offset, so it always lands on the ground or panel around a control (never on a pink fill). 3:1 or better on ground and panel in both themes. */
+  --shadow-panel: 0 8px 32px rgba(0, 0, 0, 0.35); /* Lift for hovered cards only. Not a resting state. */
+}
+[data-theme="light"] {
+  --ground: #f6f3fa;
+  --panel: #ffffff;
+  --ink: #0b1c2f;
+  --ink-muted: #4a4f7a;
+  --rule: #d6d2e8;
+  --border-strong: #6a70a3;
+  --pink: #ffb1a4;
+  --on-pink: #0b1c2f;
+  --logo-cutout: #0b1c2f;
+  --accent-text: #a8321f;
+  --type-role: #3d4bd1;
+  --type-award: #a8321f;
+  --type-project: #0b1c2f;
+  --type-community: #0b6b57;
+  --glow-indigo: #6f7dff;
+  --sprinkle: rgba(11, 28, 47, 0.1);
+  --focus-ring: #0b1c2f;
+  --shadow-panel: 0 8px 32px rgba(11, 28, 47, 0.12);
+}
+:root {
+  --space-1: 4px; /* Icon-to-label gaps, chip inner gap. */
+  --space-2: 8px; /* Tight stacks, chip padding. */
+  --space-3: 12px; /* Button vertical padding, list gaps. */
+  --space-4: 16px; /* Default gap, page side gutter on phones. */
+  --space-6: 24px; /* Card padding, paragraph rhythm. */
+  --space-8: 32px; /* Gap between cards in a grid. */
+  --space-12: 48px; /* Gap between content groups. */
+  --space-16: 64px; /* Section padding on tablets. */
+  --space-24: 96px; /* Section padding on desktop. */
+  --radius-none: 0; /* The Make box and heading boxes. The brand's signature shapes are square. */
+  --radius-sm: 4px; /* Inline code, small tags. */
+  --radius-md: 8px; /* Code blocks, screenshots, input fields. */
+  --radius-lg: 16px; /* Cards, quotes, the hire banner. */
+  --radius-pill: 999px; /* Buttons, chips and the year pill on the timeline. Also the sprinkles motif. */
+  --radius-round: 50%; /* Portrait photo. */
+  --container-wide: 1200px; /* Maximum width of page content. */
+  --container-text: 720px; /* Maximum width of reading text. */
+  --header-height: 72px; /* Height of SiteHeader; scroll-margin-top for anchors. */
+  --font-display: "Montserrat", "Avenir Next", "Segoe UI", sans-serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Cascadia Code", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --text-display-xl: 800 96px/0.95 var(--font-display); /* Home hero and the logotype. One per page. */
+  --text-display-lg: 800 64px/1 var(--font-display); /* Page titles on timeline, about and case study pages. */
+  --text-h1: 700 48px/1.1 var(--font-display); /* Blog post titles and project page titles. */
+  --text-h2: 700 36px/1.15 var(--font-display); /* Section headings. In the hero and hire sections wrap the key word in the pink box (SectionHeading). */
+  --text-h3: 600 24px/1.25 var(--font-display); /* Sub-sections, card titles, timeline entry titles. */
+  --text-label: 700 13px/1.2 var(--font-display); /* Eyebrows, chips, timeline type labels. Set in uppercase. */
+  --text-body-lg: 400 20px/1.6 var(--font-body); /* Lead paragraphs, taglines, intro text under a title. */
+  --text-body: 400 17px/1.65 var(--font-body); /* Default reading text, 65 to 75 characters per line. */
+  --text-small: 400 14px/1.5 var(--font-body); /* Dates, captions, footer company details. */
+  --text-code: 400 15px/1.6 var(--font-mono); /* Inline code and code blocks in posts. */
+}
+.display-xl {
+  font-family: var(--font-display);
+  font-size: 96px;
+  line-height: 0.95;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.display-lg {
+  font-family: var(--font-display);
+  font-size: 64px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.h1 {
+  font-family: var(--font-display);
+  font-size: 48px;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.h2 {
+  font-family: var(--font-display);
+  font-size: 36px;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.h3 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.body-lg {
+  font-family: var(--font-body);
+  font-size: 20px;
+  line-height: 1.6;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.small {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.code {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1.6;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/montserrat-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/montserrat-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/montserrat-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/montserrat-800.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("/fonts/source-sans-3-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("/fonts/source-sans-3-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("/fonts/source-sans-3-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

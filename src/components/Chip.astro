@@ -1,0 +1,21 @@
+---
+/** Small outlined pills for tags/categories, the year pill, and the timeline type markers. */
+interface Props {
+  variant?: 'chip' | 'year' | 'marker';
+  /** For variant="marker": role | award | project | community. */
+  markerType?: 'role' | 'award' | 'project' | 'community';
+  href?: string;
+  current?: boolean;
+}
+const { variant = 'chip', markerType, href, current = false } = Astro.props;
+---
+
+{variant === 'marker' ? (
+  <span class={`hmd-marker hmd-marker--${markerType}`} aria-hidden="true"></span>
+) : variant === 'year' ? (
+  <span class="hmd-year"><slot /></span>
+) : href ? (
+  <a class="hmd-chip" href={href} aria-current={current ? 'page' : undefined}><slot /></a>
+) : (
+  <span class="hmd-chip"><slot /></span>
+)}

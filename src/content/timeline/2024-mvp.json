@@ -1,0 +1,15 @@
+{
+  "year": 2024,
+  "yearLabel": "2024",
+  "type": "award",
+  "title": "Seventh Umbraco MVP award",
+  "body": "A seventh MVP award, as a freelance developer with Hack Make Do.",
+  "badge": 2024,
+  "links": [
+    {
+      "label": "MVP archive ↗",
+      "href": "https://community.umbraco.com/contribute/mvp-program/mvp-archive/#mvp-2024"
+    }
+  ],
+  "order": 4
+}

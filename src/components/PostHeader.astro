@@ -1,0 +1,43 @@
+---
+/** The top of a blog post: breadcrumbs, title, date line and tags. */
+import JsonLd from './JsonLd.astro';
+import Chip from './Chip.astro';
+import { breadcrumbList } from '../lib/structured-data';
+
+interface Tag {
+  label: string;
+  href: string;
+}
+interface Props {
+  title: string;
+  published: Date;
+  updated?: Date;
+  readingTime?: string;
+  tags: Tag[];
+}
+const { title, published, updated, readingTime, tags } = Astro.props;
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const trail = [{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog/' }, { label: title }];
+---
+
+<JsonLd data={breadcrumbList(trail, Astro.url.pathname)} />
+<header class="hmd-posthead hmd-container--text">
+  <nav class="hmd-breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li aria-current="page">{title}</li>
+    </ol>
+  </nav>
+  <h1 class="hmd-posthead__title">{title}</h1>
+  <p class="hmd-posthead__meta">
+    <time datetime={published.toISOString()}>{fmt(published)}</time>
+    {readingTime && <> · {readingTime}</>}
+    {updated && <> · Updated <time datetime={updated.toISOString()}>{fmt(updated)}</time></>}
+  </p>
+  <ul class="hmd-chips">
+    {tags.map((tag) => (
+      <li><Chip href={tag.href}>{tag.label}</Chip></li>
+    ))}
+  </ul>
+</header>

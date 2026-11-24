@@ -1,0 +1,19 @@
+{
+  "year": 2015,
+  "yearLabel": "2015",
+  "type": "award",
+  "title": "Umbraco Lifetime MVP (Sixth)",
+  "body": "His sixth MVP award is the lifetime title, given for Codegarden 15. He can't be at the conference, so Umbraco founder Niels Hartvig hands it over in person at his home, and attendees watch a video of the moment.",
+  "badge": 2015,
+  "links": [
+    {
+      "label": "Watch the moment at Codegarden ↗",
+      "href": "https://www.youtube.com/watch?v=7cl5Ze9KZec&t=162s"
+    },
+    {
+      "label": "MVP archive ↗",
+      "href": "https://community.umbraco.com/contribute/mvp-program/mvp-archive/#mvp-2015"
+    }
+  ],
+  "order": 0
+}

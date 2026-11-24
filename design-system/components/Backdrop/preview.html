@@ -1,0 +1,51 @@
+<!-- @dsCard group="Brand" height=300 subtitle="Sprinkles layer and canvas layer (real sprinkles.svg; canvas stand-in for contour-field.js)" -->
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+  body { margin: 0; background: var(--ground); display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .tile {
+    --hmd-sprinkles-image: url("/_blob/024be5d3ab026252da6bf5eb53e5f2d7");
+    --hmd-sprinkles-size: 656px;
+    height: 300px; display: grid; place-items: end start; padding: var(--space-6); box-sizing: border-box;
+  }
+  .label { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--ink); margin: 0; }
+  .label span { display: block; font-family: var(--font-body); font-weight: 400; font-size: 14px; color: var(--ink-muted); }
+</style>
+</head>
+<body>
+  <div class="tile hmd-backdrop-host" data-theme="dark">
+    <div class="hmd-backdrop hmd-backdrop--sprinkles hmd-backdrop--drift" aria-hidden="true"></div>
+    <p class="label">hmd-backdrop--sprinkles<span>Home hero. Drift stops for reduced motion.</span></p>
+  </div>
+  <div class="tile hmd-backdrop-host" data-theme="dark">
+    <div class="hmd-backdrop" aria-hidden="true"><canvas id="field"></canvas></div>
+    <p class="label">hmd-backdrop + canvas<span>Timeline WebGL slot (2D stand-in drawn here).</span></p>
+  </div>
+  <script>
+    (function () {
+      var c = document.getElementById('field'), x = c.getContext('2d');
+      var line = getComputedStyle(document.documentElement).getPropertyValue('--glow-indigo').trim() || '#6f7dff';
+      var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function size() { c.width = c.clientWidth * devicePixelRatio; c.height = c.clientHeight * devicePixelRatio; }
+      function draw(t) {
+        var w = c.width, h = c.height; x.clearRect(0, 0, w, h);
+        x.strokeStyle = line; x.globalAlpha = 0.35; x.lineWidth = 1.2 * devicePixelRatio;
+        for (var i = 0; i < 14; i++) {
+          x.beginPath();
+          for (var px = 0; px <= w; px += 8) {
+            var y = h * (i + 0.5) / 14 + Math.sin(px / (90 * devicePixelRatio) + t / 2200 + i * 0.7) * 14 * devicePixelRatio + Math.sin(px / (37 * devicePixelRatio) - t / 3100 + i) * 5 * devicePixelRatio;
+            px ? x.lineTo(px, y) : x.moveTo(px, y);
+          }
+          x.stroke();
+        }
+        if (!still) requestAnimationFrame(draw);
+      }
+      size(); addEventListener('resize', size); requestAnimationFrame(draw);
+    })();
+  </script>
+</body>
+</html>

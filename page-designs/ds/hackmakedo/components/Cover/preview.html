@@ -1,0 +1,80 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Source+Sans+3:wght@400&display=swap">
+<style>
+  html, body { margin: 0; }
+  body { width: 960px; height: 288px; position: relative; overflow: hidden; background: var(--ground); }
+  svg { position: absolute; left: 0; top: 0; width: 960px; height: 288px; }
+  .b-pink { fill: var(--pink); }
+  .b-indigo { fill: var(--type-role); }
+  .b-mint { fill: var(--type-community); }
+  .b-ink { fill: var(--ink); }
+  .p { rx: 4px; }
+  .cut { fill: var(--ground); }
+  .s-pink { fill: var(--pink); }
+  .s-mint { fill: var(--type-community); }
+  .s-indigo { fill: var(--type-role); }
+  .text { position: absolute; left: 32px; bottom: 32px; width: 416px; }
+  .name { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: 68px; line-height: 0.95; letter-spacing: -0.02em; color: var(--ink); }
+  .name .box { display: inline-block; background: var(--pink); color: var(--on-pink); padding: 0 0.11em; }
+  .tag { margin: 12px 0 0; font-family: var(--font-body); font-size: 14px; line-height: 1.4; color: var(--ink-muted); }
+</style>
+</head>
+<body>
+<svg viewBox="0 0 960 288" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hack Make Do colour blocks with scattered sprinkles">
+  <!--
+    Blocks: pink 200x240 slab bleeding off the top (spacing 24 multiples), type-role 160x160, type-community 80x120 bleeding top-right, ink 160x64 bleeding bottom; about a third of the cover, all at full value.
+    Arrangement: one tall pink slab with satellites stepped down to the right, flush, sides on multiples of the 8px grid.
+    Pattern: sprinkles, because the live home page is a field of short rounded dashes at angles (the brand's own motif); pills 28x8 with rx 4 (half the short side, radius-pill).
+    Steps and radii: 4, 8, 24, 32; pills only, blocks square (radius-none) like the Make box.
+  -->
+  <rect class="b-pink" x="520" y="0" width="200" height="240"/>
+  <rect class="b-indigo" x="720" y="64" width="160" height="160"/>
+  <rect class="b-mint" x="880" y="0" width="80" height="120"/>
+  <rect class="b-ink" x="720" y="224" width="160" height="64"/>
+
+  <g class="cut">
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(560 40) rotate(-35)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(610 90) rotate(20)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(660 40) rotate(60)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(580 150) rotate(-70)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(640 190) rotate(35)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(690 120) rotate(-15)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(545 210) rotate(10)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(760 100) rotate(40)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(820 90) rotate(-30)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(850 150) rotate(75)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(770 180) rotate(-20)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(810 205) rotate(15)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(905 30) rotate(-45)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(940 70) rotate(25)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(915 100) rotate(70)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(760 255) rotate(-25)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(830 265) rotate(40)"/>
+  </g>
+  <g class="s-pink">
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(550 265) rotate(-30)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(610 260) rotate(45)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(670 270) rotate(10)"/>
+  </g>
+  <g class="s-mint">
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(740 25) rotate(30)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(800 35) rotate(-50)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(850 20) rotate(10)"/>
+  </g>
+  <g class="s-indigo">
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(920 160) rotate(-30)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(940 210) rotate(50)"/>
+    <rect class="p" x="-14" y="-4" width="28" height="8" transform="translate(905 255) rotate(15)"/>
+  </g>
+</svg>
+<div class="text">
+  <h1 class="name">Hack <span class="box">Make</span><br>Do</h1>
+  <p class="tag">Hacker, maker, do'er.</p>
+</div>
+</body>
+</html>

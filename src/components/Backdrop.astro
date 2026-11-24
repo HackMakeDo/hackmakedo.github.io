@@ -1,0 +1,25 @@
+---
+/**
+ * A background layer behind a section's content: the sprinkles pattern, or a slotted canvas.
+ * Give the parent `hmd-backdrop-host` (Hero already has it) and put this as its first child.
+ */
+interface Props {
+  variant?: 'sprinkles' | 'canvas';
+  drift?: boolean;
+  fixed?: boolean;
+}
+
+const { variant = 'sprinkles', drift = false, fixed = false } = Astro.props;
+const classes = [
+  'hmd-backdrop',
+  variant === 'sprinkles' && 'hmd-backdrop--sprinkles',
+  drift && 'hmd-backdrop--drift',
+  fixed && 'hmd-backdrop--fixed',
+]
+  .filter(Boolean)
+  .join(' ');
+---
+
+<div class={classes} aria-hidden="true">
+  {variant === 'canvas' && <slot />}
+</div>

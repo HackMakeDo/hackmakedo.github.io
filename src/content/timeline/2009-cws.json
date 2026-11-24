@@ -1,0 +1,14 @@
+{
+  "year": 2009,
+  "yearLabel": "2009",
+  "type": "project",
+  "title": "Creative Website Starter",
+  "body": "Publishes CWS, a website starter kit package for Umbraco 4 that shows how a full site fits together. Other Umbraco developers later credit it as the way they got started with Umbraco.",
+  "links": [
+    {
+      "label": "View on Web Archive ↗",
+      "href": "https://web.archive.org/web/20150108201903mp_/http://our.umbraco.org/projects/starter-kits/creative-website-starter-(cws)"
+    }
+  ],
+  "order": 1
+}

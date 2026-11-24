@@ -1,0 +1,8 @@
+{
+  // Markdown for agents: Accept: text/markdown gets <page>/index.html.md. See README.md.
+  "name": "hackmakedo-markdown-negotiation",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": false,
+  "routes": [{ "pattern": "hackmakedo.com/*", "zone_name": "hackmakedo.com" }]
+}

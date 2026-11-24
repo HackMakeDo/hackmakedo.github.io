@@ -1,0 +1,15 @@
+{
+  "year": 2008,
+  "yearLabel": "2008",
+  "type": "award",
+  "title": "Second Umbraco MVP award",
+  "body": "Named an Umbraco MVP again, while working at XEED in Oslo.",
+  "badge": 2008,
+  "links": [
+    {
+      "label": "MVP archive ↗",
+      "href": "https://community.umbraco.com/contribute/mvp-program/mvp-archive/#mvp-2008"
+    }
+  ],
+  "order": 0
+}

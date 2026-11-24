@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../../../../../layouts/BaseLayout.astro';
+import PageHeader from '../../../../../../components/PageHeader.astro';
+import Section from '../../../../../../components/Section.astro';
+import HireBanner from '../../../../../../components/HireBanner.astro';
+import BlogListing from '../../../../../../components/BlogListing.astro';
+import { getCollection } from 'astro:content';
+import { TOPICS, topicLabel } from '../../../../../../data/topics';
+import { extraPagePaths, pageSlice } from '../../../../../../lib/blog-pagination';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+  const paths = [];
+  for (const topic of TOPICS) {
+    const count = allPosts.filter((p) => p.data.topics.includes(topic.slug)).length;
+    for (const extra of extraPagePaths(`/blog/topic/${topic.slug}/`, count)) {
+      paths.push({ params: { topic: topic.slug, page: extra.params.page }, props: extra.props });
+    }
+  }
+  return paths;
+}
+
+const { topic, page: pageParam } = Astro.params;
+const { page, totalPages } = Astro.props as { page: number; totalPages: number };
+const label = topicLabel(topic!);
+const allPosts = (await getCollection('posts', ({ data }) => !data.draft && data.topics.includes(topic!))).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+const posts = pageSlice(allPosts, page);
+---
+
+<BaseLayout
+  title={`${label} — Blog — page ${pageParam} — Hack Make Do`}
+  description={`Posts about ${label} on Umbraco, the Bellissima backoffice, .NET and developer tooling.`}
+  ogImage="/og/blog.png"
+  currentPath="/blog/"
+>
+  <PageHeader
+    trail={[
+      { label: 'Home', href: '/' },
+      { label: 'Blog', href: '/blog/' },
+      { label, href: `/blog/topic/${topic}/` },
+      { label: `Page ${pageParam}` },
+    ]}
+    eyebrow="Blog"
+    title={label}
+    lead={`Posts about ${label}.`}
+  />
+
+  <BlogListing posts={posts} page={page} totalPages={totalPages} base={`/blog/topic/${topic}/`} activeTopic={topic} />
+
+  <Section class="hmd-pink" ariaLabel="Hire">
+    <HireBanner message="Need a hand with Umbraco? I'm available as a freelancer or contractor." />
+  </Section>
+</BaseLayout>

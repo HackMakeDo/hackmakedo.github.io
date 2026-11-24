@@ -1,0 +1,123 @@
+---
+/**
+ * Case study for a client whose work doesn't have a bespoke page (Council of the European
+ * Union does, and stays hand-written in src/pages/work/council-of-the-european-union/).
+ * getStaticPaths only emits a path for a client with permission: true - until Warren
+ * confirms permission, this route builds nothing for that client at all, so the page
+ * can't be reached by a guessed URL or picked up by the sitemap. Flipping permission to
+ * true in that client's JSON is the only change needed to publish it.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import Section from '../../../components/Section.astro';
+import Container from '../../../components/Container.astro';
+import ProjectFacts from '../../../components/ProjectFacts.astro';
+import Prose from '../../../components/Prose.astro';
+import Figure from '../../../components/Figure.astro';
+import FeatureList from '../../../components/FeatureList.astro';
+import HireBanner from '../../../components/HireBanner.astro';
+import Callout from '../../../components/Callout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const clients = await getCollection(
+    'clients',
+    (c) => c.data.permission && !!c.data.caseStudySlug && c.data.caseStudySlug !== 'council-of-the-european-union',
+  );
+  return clients.map((client) => ({ params: { client: client.data.caseStudySlug }, props: { client } }));
+}
+
+const { client } = Astro.props as { client: CollectionEntry<'clients'> };
+const { name, agency, summary, facts } = client.data;
+// `agency` is set when this entry is an *end client* Warren worked for through another
+// agency (Dyson/Spurs/Wolves via Gibe Digital, a food safety standards body via Manifesto Digital) - never word
+// that case as a direct engagement, and say so unambiguously wherever the name appears
+// (eyebrow, lead, the callout below, and this fact). An entry with no `agency` (the
+// agencies themselves, or Council of the EU) is a direct engagement; its own Engagement
+// fact value (if set) is used as-is instead of being overwritten here.
+const existingEngagement = facts?.find((f) => f.label === 'Engagement')?.value;
+const engagementLine = agency
+  ? `Contractor to ${agency} — not a direct engagement with ${name}`
+  : (existingEngagement ?? 'Placeholder: direct engagement or through an agency');
+---
+
+<BaseLayout
+  title={`${name} — Hack Make Do`}
+  description={summary ?? `Contract work for ${name}${agency ? `, delivered as a contractor to ${agency}` : ''}.`}
+  ogImage={`/og/work/${client.data.caseStudySlug}.png`}
+  currentPath="/work/"
+>
+  <PageHeader
+    trail={[{ label: 'Home', href: '/' }, { label: 'Work', href: '/work/' }, { label: name }]}
+    eyebrow={agency ? `Client work · via ${agency}` : 'Client work'}
+    title={name}
+    lead={summary ?? `Placeholder: what the project was and what it involved.`}
+  />
+
+  {agency && (
+    <section class="hmd-section hmd-section--flush-top" aria-label="Engagement notice">
+      <Container variant="text">
+        <Callout label="Contract work, not a direct client">
+          This was delivered while Warren was working as a contractor to <strong>{agency}</strong>, who held
+          the direct relationship with {name}. {name} was not Warren's own client.
+        </Callout>
+      </Container>
+    </section>
+  )}
+
+  <section class="hmd-section hmd-section--flush-top" aria-label="Project facts">
+    <Container>
+      <ProjectFacts
+        facts={[
+          { label: 'Client', value: name },
+          ...(facts ?? [
+            { label: 'Scope', value: 'Placeholder' },
+            { label: 'Role', value: 'Placeholder' },
+          ]).filter((f) => f.label !== 'Engagement'),
+          { label: 'Engagement', value: engagementLine },
+        ]}
+      />
+    </Container>
+  </section>
+
+  <section class="hmd-section hmd-section--flush-top" aria-labelledby="challenge-h">
+    <Container variant="text">
+      <Prose>
+        <h2 id="challenge-h">The challenge</h2>
+        <p>
+          Placeholder: what {name}'s project needed and what made it hard. Two or three sentences, opening with
+          the plain fact.
+        </p>
+      </Prose>
+    </Container>
+  </section>
+
+  <section class="hmd-section hmd-section--flush-top" aria-label="Screenshot">
+    <Container>
+      <Figure
+        caption="Placeholder: a caption that explains what the screenshot shows."
+        placeholderLabel={`Placeholder: screenshot, only with ${agency ?? name}'s permission`}
+      />
+    </Container>
+  </section>
+
+  <section class="hmd-section hmd-section--flush-top" aria-labelledby="did-h">
+    <Container variant="text">
+      <h2 class="hmd-heading" id="did-h">What I <span class="box">did</span></h2>
+      <FeatureList
+        items={[
+          { title: 'Placeholder: the first thing you did', description: 'Placeholder.' },
+          { title: 'Placeholder: the second thing you did', description: 'Placeholder.' },
+        ]}
+      />
+    </Container>
+  </section>
+
+  <Section panel heading={{ boxed: 'result', lead: 'The', id: 'result-h' }} containerVariant="text">
+    <p class="hmd-lead">Placeholder: a shareable result, approved by {agency ?? name}.</p>
+  </Section>
+
+  <Section class="hmd-pink" ariaLabel="Hire">
+    <HireBanner message="Want something like this built for your team? I'm available as a freelancer or contractor." />
+  </Section>
+</BaseLayout>

@@ -1,0 +1,173 @@
+---
+/**
+ * The recommendations carousel: whole quotes only (one per view on narrow screens, two from
+ * 760px of container width), snapping into place, never auto-advancing.
+ *
+ * Baseline, with no JavaScript: a native scroll-snap row that scrolls by mouse, touch or
+ * keyboard (the track is a focusable region), with a thin themed scrollbar and a
+ * "Scroll or swipe" hint as the cues that there is more.
+ *
+ * Enhanced by <hmd-carousel> (Lit, src/elements/hmd-carousel.ts): previous/next buttons,
+ * a marker per position and a polite status announcement, in every browser. The element
+ * marks itself [enhanced], which hides the scrollbar and the hint.
+ */
+interface Props {
+  ariaLabelledby: string;
+  /** Singular and plural names for one slide, for labels and announcements. */
+  item?: string;
+  items?: string;
+}
+const { ariaLabelledby, item = 'recommendation', items = 'recommendations' } = Astro.props;
+---
+
+<hmd-carousel role="region" aria-roledescription="carousel" aria-labelledby={ariaLabelledby} item={item} items={items}>
+  <div class="hmd-carousel__track" tabindex="0" role="group" aria-label={`${items[0].toUpperCase()}${items.slice(1)}`}>
+    <slot />
+  </div>
+  <p class="hmd-carousel__hint">Scroll or swipe for more <span aria-hidden="true">→</span></p>
+</hmd-carousel>
+
+<script src="../elements/index.ts"></script>
+
+<style is:global>
+  hmd-carousel {
+    display: block;
+    container-type: inline-size;
+  }
+
+  .hmd-carousel__track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    gap: var(--space-6, 24px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    /* Only the inline axis, so the page still scrolls vertically over the carousel. */
+    overscroll-behavior-x: contain;
+    /* No-JS cue: a thin scrollbar in brand colours. Thumb is 3.1:1 on panel. */
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) transparent;
+    padding-bottom: var(--space-4, 16px);
+    touch-action: pan-x pan-y;
+  }
+  @container (min-width: 760px) {
+    .hmd-carousel__track {
+      grid-auto-columns: calc((100% - var(--space-6, 24px)) / 2);
+    }
+  }
+  .hmd-carousel__track:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+  .hmd-carousel__track > * {
+    scroll-snap-align: start;
+    margin: 0;
+  }
+  /* Quotes sit on a panel section, so give each slide the page ground: every card has a visible edge.
+     height: 100% keeps the cards equal once the script wraps each one in a .hmd-carousel__slide. */
+  .hmd-carousel__track .hmd-quote {
+    background: var(--ground);
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  .hmd-carousel__hint {
+    margin: var(--space-4, 16px) 0 0;
+    font-size: 14px;
+    color: var(--ink-muted);
+  }
+
+  /* Enhanced: buttons and markers replace the scrollbar and the hint. */
+  hmd-carousel[enhanced] .hmd-carousel__track {
+    scrollbar-width: none;
+    padding-bottom: 0;
+  }
+  hmd-carousel[enhanced] .hmd-carousel__hint {
+    display: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    hmd-carousel[enhanced] .hmd-carousel__track {
+      scroll-behavior: smooth;
+    }
+  }
+
+  .hmd-carousel__controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-3, 12px);
+    margin-bottom: var(--space-6, 24px);
+  }
+  .hmd-carousel__controls:empty,
+  .hmd-carousel__markers:empty {
+    display: none;
+  }
+  .hmd-carousel__btn {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 50%;
+    /* 3.1:1 on panel (WCAG 1.4.11). */
+    border: 2px solid var(--border-strong);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: border-color 0.15s, color 0.15s, background-color 0.15s;
+  }
+  .hmd-carousel__btn:hover:not(:disabled) {
+    border-color: var(--accent-text);
+    color: var(--accent-text);
+  }
+  .hmd-carousel__btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  .hmd-carousel__markers {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-1, 4px);
+    margin-top: var(--space-6, 24px);
+  }
+  /* 24px hit target (WCAG 2.5.8) around a 10px dot. */
+  .hmd-carousel__marker {
+    display: grid;
+    place-items: center;
+    min-width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+  .hmd-carousel__marker::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    border: 2px solid var(--border-strong);
+    box-sizing: border-box;
+    transition: width 0.2s, background-color 0.2s, border-color 0.2s;
+  }
+  /* Current marker: a longer filled pill, so it differs in shape as well as colour (WCAG 1.4.1). */
+  .hmd-carousel__marker[aria-current='true'] {
+    min-width: 40px;
+  }
+  .hmd-carousel__marker[aria-current='true']::before {
+    width: 28px;
+    background: var(--accent-text);
+    border-color: var(--accent-text);
+  }
+  .hmd-carousel__marker:hover:not([aria-current='true'])::before {
+    border-color: var(--accent-text);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hmd-carousel__btn,
+    .hmd-carousel__marker::before {
+      transition: none;
+    }
+  }
+</style>

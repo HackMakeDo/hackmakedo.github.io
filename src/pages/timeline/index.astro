@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Container from '../../components/Container.astro';
+import FilterBar from '../../components/FilterBar.astro';
+import TimelineEntry from '../../components/TimelineEntry.astro';
+import Section from '../../components/Section.astro';
+import HireBanner from '../../components/HireBanner.astro';
+import { getCollection } from 'astro:content';
+
+const oldestFirst = (await getCollection('timeline')).sort(
+  (a, b) => a.data.year - b.data.year || a.data.order - b.data.order,
+);
+const newestFirst = oldestFirst.slice().reverse();
+
+const typeLabels = { role: 'Role', award: 'Award', project: 'Project', community: 'Community' } as const;
+---
+
+<BaseLayout
+  title="Timeline — Hack Make Do"
+  description="Every role, MVP award, project and community contribution since Warren Buckley started as a junior web developer in 2002."
+  ogImage="/og/timeline.png"
+  currentPath="/timeline/"
+>
+  <PageHeader
+    trail={[{ label: 'Home', href: '/' }, { label: 'Timeline' }]}
+    eyebrow="Timeline"
+    title="Twenty years with Umbraco"
+    lead="Every role, MVP award, project and community contribution since I started as a junior web developer in 2002."
+  />
+
+  <section class="hmd-section hmd-section--flush-top" aria-label="Timeline">
+    <Container variant="text">
+      <hmd-timeline>
+        <div class="tl-toolbar">
+          <FilterBar
+            types={[
+              { type: 'role', label: 'Role' },
+              { type: 'award', label: 'Award' },
+              { type: 'project', label: 'Project' },
+              { type: 'community', label: 'Community' },
+            ]}
+          />
+          <p class="tl-toolbar__status" data-timeline-status role="status">
+            Showing all {newestFirst.length} entries
+          </p>
+        </div>
+
+        <h2 class="hmd-sr">Entries</h2>
+        <div class="tl">
+          {newestFirst.map((entry) => (
+            <TimelineEntry
+              id={entry.id}
+              year={entry.data.yearLabel}
+              type={entry.data.type}
+              typeLabel={typeLabels[entry.data.type]}
+              title={entry.data.title}
+              description={entry.data.body}
+              badgeSrc={entry.data.badge ? `/images/mvp/umbraco-mvp-${entry.data.badge}.png` : undefined}
+              badgeYear={entry.data.badge}
+              links={entry.data.links}
+            />
+          ))}
+        </div>
+      </hmd-timeline>
+    </Container>
+  </section>
+
+  <Section class="hmd-pink" ariaLabel="Hire">
+    <HireBanner message="Twenty years of Umbraco experience, available for your next project." />
+  </Section>
+</BaseLayout>
+
+<script src="../../elements/index.ts"></script>
+
+<style>
+  /* Filter buttons and the live entry count on one wrapping row above the timeline. */
+  .tl-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .tl-toolbar__status {
+    margin: 0;
+    font-size: 14px;
+    color: var(--ink-muted);
+  }
+  .tl {
+    position: relative;
+  }
+  /* bundle.css's `.hmd-entry { display: grid }` otherwise beats the UA stylesheet's
+     `[hidden] { display: none }` at equal specificity, so a filtered-out entry never
+     actually disappears even though hmd-timeline.ts sets the attribute correctly. */
+  .tl :global(.hmd-entry[hidden]) {
+    display: none;
+  }
+  .tl::before,
+  .tl::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 89px;
+    width: 2px;
+    background: var(--rule);
+  }
+  .tl::after {
+    width: 4px;
+    left: 88px;
+    background: var(--pink);
+    transform-origin: top;
+    transform: scaleY(1);
+  }
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .tl::after {
+        animation: tl-grow linear both;
+        animation-timeline: view();
+        animation-range: entry 20% exit 80%;
+      }
+    }
+  }
+  @keyframes tl-grow {
+    from {
+      transform: scaleY(0);
+    }
+    to {
+      transform: scaleY(1);
+    }
+  }
+  .tl :global(.hmd-entry) {
+    grid-template-columns: 180px minmax(0, 1fr);
+  }
+  /* Phones: the year column shrinks to the year pill (bundle.css makes it smaller below 600px),
+     and the line moves to stay through the middle of it, so entries get the width. */
+  @media (max-width: 600px) {
+    .tl :global(.hmd-entry) {
+      grid-template-columns: 76px minmax(0, 1fr);
+    }
+    .tl::before {
+      left: 37px;
+    }
+    .tl::after {
+      left: 36px;
+    }
+    /* Ranges ("2002 to 2007") stack inside the pill so it fits the narrow column. */
+    .tl :global(.hmd-year:has(.hmd-year__to)) {
+      display: grid;
+      justify-items: center;
+      gap: 2px;
+      border-radius: var(--radius-md);
+      padding-inline: var(--space-2);
+    }
+    .tl :global(.hmd-year__to) {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink-muted);
+    }
+  }
+  .tl :global(.hmd-entry__spine::after) {
+    display: none;
+  }
+  .tl :global(.hmd-year) {
+    position: relative;
+    z-index: 1;
+    background: var(--ground);
+  }
+</style>

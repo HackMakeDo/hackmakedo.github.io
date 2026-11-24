@@ -1,0 +1,28 @@
+---
+/** Pill buttons and links: pink primary, outlined secondary, small size for the header, and a bold underlined text link. */
+interface Props {
+  variant?: 'primary' | 'secondary' | 'link';
+  size?: 'default' | 'sm';
+  href?: string;
+  type?: 'button' | 'submit';
+  external?: boolean;
+  class?: string;
+  [key: string]: unknown;
+}
+const { variant = 'primary', size = 'default', href, type = 'button', external = false, class: className, ...rest } = Astro.props;
+
+const classes =
+  variant === 'link'
+    ? ['hmd-link', className].filter(Boolean).join(' ')
+    : ['hmd-btn', `hmd-btn--${variant}`, size === 'sm' && 'hmd-btn--sm', className].filter(Boolean).join(' ');
+---
+
+{href ? (
+  <a class={classes} href={href} {...rest}>
+    <slot />{external && ' ↗'}
+  </a>
+) : (
+  <button type={type} class={classes} {...rest}>
+    <slot />
+  </button>
+)}

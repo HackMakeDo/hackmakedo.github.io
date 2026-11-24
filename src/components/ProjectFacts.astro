@@ -1,0 +1,17 @@
+---
+/** The fact row under a case study's PageHeader: role, dates, stack, compatibility and links. */
+interface Fact {
+  label: string;
+  value: string;
+}
+interface Props {
+  facts: Fact[];
+}
+const { facts } = Astro.props;
+---
+
+<dl class="hmd-facts">
+  {facts.map((fact) => (
+    <div><dt>{fact.label}</dt><dd>{fact.value}</dd></div>
+  ))}
+</dl>

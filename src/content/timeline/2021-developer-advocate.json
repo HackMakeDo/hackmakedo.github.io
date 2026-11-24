@@ -1,0 +1,14 @@
+{
+  "year": 2021,
+  "yearLabel": "2021",
+  "type": "role",
+  "title": "Developer advocate at Umbraco HQ",
+  "body": "Moves into a role built around the community, alongside Emma Potter (Burstow). He writes tutorials and makes videos on new features, gives the internal teams early feedback and contributes solutions to make the developer experience smoother, and helps people on Twitter, Discord and the forums.",
+  "links": [
+    {
+      "label": "Hack Make Do playlist ↗",
+      "href": "https://www.youtube.com/watch?v=CYdwW4DtK3o&list=PLG_nqaT-rbpxUDqLsr9v3b16JRbC0UryV"
+    }
+  ],
+  "order": 0
+}

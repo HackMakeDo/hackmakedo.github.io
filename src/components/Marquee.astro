@@ -1,0 +1,69 @@
+---
+/**
+ * A tilted pink ribbon of bold, scrolling phrases. The whole ribbon is one link; the moving copy is
+ * decoration (aria-hidden) and screen readers hear `message` as the link text instead. It only
+ * moves once hmd-marquee has loaded, pauses on hover, on keyboard focus and with its pause button
+ * (WCAG 2.2.2), and stands still under prefers-reduced-motion. Home only, under the hero: the tilt
+ * reads as a mistake directly under the straight header on other pages.
+ */
+interface Phrase {
+  text: string;
+  /** Optional words shown in a navy box after the text, e.g. a date. */
+  box?: string;
+}
+interface Props {
+  phrases?: Phrase[];
+  /** The whole message as one sentence: the link's accessible name. */
+  message?: string;
+  href?: string;
+}
+const {
+  phrases = [
+    { text: 'Is your Umbraco site out of support?' },
+    { text: 'Umbraco 13 end of life', box: '14 December 2026' },
+    { text: 'Upgrade to Umbraco 17 LTS' },
+    { text: 'I can help' },
+  ],
+  message = 'Umbraco 13 reaches end of life on 14 December 2026. If your Umbraco site is out of support, I can help you upgrade to Umbraco 17 LTS.',
+  href = '/umbraco-upgrades/',
+} = Astro.props;
+// Two identical groups: the track slides left by exactly one group, then loops seamlessly.
+const groups = [0, 1];
+---
+
+<section class="hmd-marquee" aria-label="Umbraco upgrades" data-pagefind-ignore>
+  <hmd-marquee class="hmd-marquee__band hmd-pink">
+    <a class="hmd-marquee__link" href={href}>
+      <span class="hmd-sr">{message}</span>
+      <span class="hmd-marquee__viewport" aria-hidden="true">
+        <span class="hmd-marquee__track">
+          {groups.map(() => (
+            <span class="hmd-marquee__group">
+              {phrases.map((phrase) => (
+                <>
+                  <span class="hmd-marquee__phrase">
+                    {phrase.text}
+                    {phrase.box && <span class="hmd-marquee__box">{phrase.box}</span>}
+                  </span>
+                  <span class="hmd-marquee__star"></span>
+                </>
+              ))}
+            </span>
+          ))}
+        </span>
+      </span>
+    </a>
+    <button class="hmd-marquee__pause" type="button" aria-pressed="false">
+      <svg class="hmd-marquee__icon-pause" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+        <rect x="3" y="2" width="3.5" height="12" rx="1" />
+        <rect x="9.5" y="2" width="3.5" height="12" rx="1" />
+      </svg>
+      <svg class="hmd-marquee__icon-play" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+        <path d="M4 2.5v11a1 1 0 0 0 1.5.86l9-5.5a1 1 0 0 0 0-1.72l-9-5.5A1 1 0 0 0 4 2.5Z" />
+      </svg>
+      <span class="hmd-sr">Pause the scrolling banner</span>
+    </button>
+  </hmd-marquee>
+</section>
+
+<script src="../elements/index.ts"></script>

@@ -1,0 +1,10 @@
+---
+interface Props {
+  variant?: 'wide' | 'text';
+  class?: string;
+}
+const { variant = 'wide', class: className } = Astro.props;
+const classes = ['hmd-container', variant === 'text' && 'hmd-container--text', className].filter(Boolean).join(' ');
+---
+
+<div class={classes}><slot /></div>

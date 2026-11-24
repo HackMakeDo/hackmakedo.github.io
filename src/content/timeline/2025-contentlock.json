@@ -1,0 +1,14 @@
+{
+  "year": 2025,
+  "yearLabel": "2025",
+  "type": "project",
+  "title": "ContentLock",
+  "body": "Creates an open source package that stops editors overwriting each other, by letting them lock a content node while they work on it and allowing them to make quick audio calls with other connected backoffice users.",
+  "links": [
+    {
+      "label": "View on GitHub ↗",
+      "href": "https://github.com/warrenbuckley/Umbraco.Community.ContentLock"
+    }
+  ],
+  "order": 1
+}

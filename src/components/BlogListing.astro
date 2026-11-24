@@ -1,0 +1,79 @@
+---
+/** The topics nav + post grid + pagination shared by /blog/, /blog/page/<n>/, /blog/topic/<topic>/ and /blog/topic/<topic>/page/<n>/. */
+import Container from './Container.astro';
+import Chip from './Chip.astro';
+import Grid from './Grid.astro';
+import BlogPostCard from './BlogPostCard.astro';
+import Pagination from './Pagination.astro';
+import { TOPICS, topicLabel } from '../data/topics';
+import { pageHref } from '../lib/blog-pagination';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  posts: CollectionEntry<'posts'>[];
+  page: number;
+  totalPages: number;
+  /** '/blog/' for the all-posts listing, or '/blog/topic/<topic>/' for a topic listing. */
+  base: string;
+  activeTopic?: string;
+}
+const { posts, page, totalPages, base, activeTopic } = Astro.props;
+---
+
+<section class="hmd-section hmd-section--flush-top" aria-label="Posts">
+  <Container>
+    <nav class="blog-topics" aria-label="Topics">
+      <ul class="hmd-topics">
+        <li><Chip href="/blog/" current={!activeTopic}>All posts</Chip></li>
+        {TOPICS.map((topic) => (
+          <li><Chip href={`/blog/topic/${topic.slug}/`} current={activeTopic === topic.slug}>{topic.label}</Chip></li>
+        ))}
+      </ul>
+    </nav>
+
+    <h2 class="hmd-sr">Posts</h2>
+    {posts.length > 0 ? (
+      <Grid>
+        {posts.map((post) => (
+          <BlogPostCard
+            href={`/blog/${post.id}/`}
+            title={post.data.title}
+            date={post.data.date}
+            summary={post.data.excerpt}
+            tags={post.data.topics.map((t) => ({ label: topicLabel(t), href: `/blog/topic/${t}/` }))}
+          />
+        ))}
+      </Grid>
+    ) : (
+      <p>No posts in {activeTopic ? topicLabel(activeTopic) : 'this topic'} yet.</p>
+    )}
+
+    <div class="hmd-mt-12">
+      <Pagination
+        page={page}
+        totalPages={totalPages}
+        prevHref={page > 1 ? pageHref(base, page - 1) : undefined}
+        nextHref={page < totalPages ? pageHref(base, page + 1) : undefined}
+      />
+    </div>
+  </Container>
+</section>
+
+<style>
+  .blog-topics {
+    margin-bottom: 48px;
+  }
+  .hmd-topics {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .hmd-topics :global(a[aria-current='page']) {
+    background: var(--ink);
+    color: var(--ground);
+    border-color: var(--ink);
+  }
+</style>

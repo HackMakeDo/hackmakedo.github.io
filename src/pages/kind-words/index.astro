@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Container from '../../components/Container.astro';
+import Grid from '../../components/Grid.astro';
+import Testimonial from '../../components/Testimonial.astro';
+import Section from '../../components/Section.astro';
+import HireBanner from '../../components/HireBanner.astro';
+import { getCollection } from 'astro:content';
+
+const allTestimonials = await getCollection('testimonials');
+const byId = (id: string) => allTestimonials.find((t) => t.id === id)!;
+const order = ['simone-chiaretta', 'pete-cooper', 'steve-temple', 'ceri-broussine', 'cornelia-vasile', 'bjarke-berg', 'morten-christensen'];
+// Long quotes span both grid columns so a short neighbour isn't left beside a block of empty space.
+const wide = new Set(['simone-chiaretta', 'bjarke-berg', 'morten-christensen']);
+const testimonials = order.map(byId);
+---
+
+<BaseLayout
+  title="Kind words — Hack Make Do"
+  description="What clients and colleagues say about working with Warren Buckley, copied word for word from his LinkedIn recommendations."
+  ogImage="/og/kind-words.png"
+  currentPath="/kind-words/"
+>
+  <PageHeader
+    trail={[{ label: 'Home', href: '/' }, { label: 'Recommendations' }]}
+    eyebrow="Kind words"
+    title="Recommendations"
+    lead="What clients and colleagues say about working with Warren Buckley, copied word for word from his LinkedIn recommendations."
+  />
+
+  <section class="hmd-section hmd-section--flush-top" aria-label="Recommendations">
+    <Container>
+      <Grid variant="2">
+        {testimonials.map((t) => (
+          <Testimonial
+            paragraphs={t.data.quote}
+            name={t.data.name}
+            profileHref={t.data.linkedinUrl}
+            wide={wide.has(t.id)}
+            roleAndCompany={t.data.company ? `${t.data.role}, ${t.data.company} · via LinkedIn` : `${t.data.role} · via LinkedIn`}
+          />
+        ))}
+      </Grid>
+      <p class="kw-more"><a class="hmd-link" href="https://www.linkedin.com/in/warrenbuckley/details/recommendations/">Read them all on LinkedIn ↗</a></p>
+    </Container>
+  </section>
+
+  <Section class="hmd-pink" ariaLabel="Hire">
+    <HireBanner message="Want to work together? I'm available as a freelancer or contractor." />
+  </Section>
+</BaseLayout>
+
+<style>
+  .kw-more {
+    margin-top: 48px;
+    text-align: center;
+  }
+</style>

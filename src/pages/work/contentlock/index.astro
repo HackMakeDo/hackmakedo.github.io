@@ -1,0 +1,151 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import Section from '../../../components/Section.astro';
+import Container from '../../../components/Container.astro';
+import Figure from '../../../components/Figure.astro';
+import ProjectFacts from '../../../components/ProjectFacts.astro';
+import Prose from '../../../components/Prose.astro';
+import FeatureList from '../../../components/FeatureList.astro';
+import VideoEmbed from '../../../components/VideoEmbed.astro';
+import CodeBlock from '../../../components/CodeBlock.astro';
+import Grid from '../../../components/Grid.astro';
+import BlogPostCard from '../../../components/BlogPostCard.astro';
+import HireBanner from '../../../components/HireBanner.astro';
+import Button from '../../../components/Button.astro';
+import { getCollection } from 'astro:content';
+import { topicLabel } from '../../../data/topics';
+import { softwareSourceCodeSchema } from '../../../lib/structured-data';
+
+const latestPost = (await getCollection('posts', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+)[0];
+
+const softwareSchema = softwareSourceCodeSchema({
+  name: 'ContentLock',
+  description: "A free, open source Umbraco package that stops editors overwriting each other's work, by letting them lock a content node while they work on it.",
+  codeRepository: 'https://github.com/warrenbuckley/Umbraco.Community.ContentLock',
+  programmingLanguage: ['C#', 'TypeScript'],
+});
+---
+
+<BaseLayout
+  title="ContentLock — Hack Make Do"
+  description="ContentLock is a free, open source Umbraco package that stops editors overwriting each other's work, by letting them lock a content node while they work on it."
+  ogImage="/og/work/contentlock.png"
+  currentPath="/work/"
+  jsonLd={[softwareSchema]}
+>
+  <PageHeader
+    trail={[{ label: 'Home', href: '/' }, { label: 'Work', href: '/work/' }, { label: 'ContentLock' }]}
+    eyebrow="Open source · Umbraco package"
+    title="ContentLock"
+    lead="ContentLock is a free, open source Umbraco package that stops editors overwriting each other's work, by letting them lock a content node while they work on it."
+  >
+    <div class="hmd-hero__actions hmd-mt-8">
+      <Button external href="https://marketplace.umbraco.com/package/umbraco.community.contentlock">Get it on the Marketplace</Button>
+      <Button external variant="secondary" href="https://github.com/warrenbuckley/Umbraco.Community.ContentLock">View on GitHub</Button>
+    </div>
+  </PageHeader>
+
+  <section class="hmd-section hmd-section--flush-top" aria-label="Screenshot">
+    <Container>
+      <Figure caption="A locked node: other editors see who holds the lock and cannot save over their work." placeholderLabel="Placeholder: hero screenshot (also the Open Graph image)" />
+    </Container>
+  </section>
+
+  <section class="hmd-section hmd-section--flush-top" aria-label="Project facts">
+    <Container>
+      <ProjectFacts
+        facts={[
+          { label: 'Role', value: 'Creator and maintainer' },
+          { label: 'First released', value: '2025' },
+          { label: 'Built with', value: '.NET, SignalR, Lit, TypeScript' },
+          { label: 'Works with', value: 'The Umbraco backoffice (Bellissima)' },
+        ]}
+      />
+      <dl class="hmd-facts">
+        <div>
+          <dt>Links</dt>
+          <dd><a href="https://github.com/warrenbuckley/Umbraco.Community.ContentLock">GitHub ↗</a> · <a href="https://marketplace.umbraco.com/package/umbraco.community.contentlock">Marketplace ↗</a></dd>
+        </div>
+      </dl>
+    </Container>
+  </section>
+
+  <section class="hmd-section hmd-section--flush-top" aria-labelledby="why-h">
+    <Container variant="text">
+      <Prose>
+        <h2 id="why-h">Why I built it</h2>
+        <p>Placeholder: the problem you saw, who it hurt, and why no existing package solved it. Two or three short paragraphs in your own words.</p>
+      </Prose>
+    </Container>
+  </section>
+
+  <Section panel heading={{ lead: 'What makes it', boxed: 'good', id: 'good-h' }} containerVariant="text">
+    <FeatureList
+      items={[
+        { title: 'No more overwritten work', description: 'Editors lock a content node while they work on it, so two people cannot save over each other.' },
+        { title: 'Live for everyone', description: 'Lock changes and online users are pushed to every backoffice through a SignalR hub.' },
+        { title: 'Switch features without a deploy', description: 'Options are read through IOptionsMonitor, so turning a feature off in settings updates connected backoffices.' },
+        { title: 'Talk to each other', description: 'Quick audio calls between connected backoffice users.' },
+      ]}
+    />
+  </Section>
+
+  <Section heading={{ lead: 'See it in', boxed: 'action', id: 'see-h' }}>
+    <div class="hmd-gallery">
+      <Figure caption="A locked node: other editors see who holds the lock and cannot save over their work." />
+      <Figure caption="The online users panel shows who else is in the backoffice right now." />
+    </div>
+    <div class="cl-video">
+      <VideoEmbed videoId="MZfeUKSO8h4" label="ContentLock: reactive options with SignalR" />
+    </div>
+  </Section>
+
+  <Section panel heading={{ lead: 'Under the', boxed: 'hood', id: 'code-h' }} containerVariant="text">
+    <p class="cl-code-intro">
+      The options are bound in a composer and read through <code class="hmd-code">IOptionsMonitor</code>, so a
+      change in settings reaches every connected backoffice.
+    </p>
+    <div class="hmd-mt-6">
+      <CodeBlock lang="C#" file="ContentLockComposer.cs">
+        <span class="line">builder<span class="o">.</span>Services</span>
+        <span class="line">   <span class="o">.</span>AddOptions<span class="o">&lt;</span><span class="t">ContentLockOptions</span><span class="o">&gt;()</span></span>
+        <span class="line">   <span class="o">.</span>Bind<span class="o">(</span>builder<span class="o">.</span>Config<span class="o">.</span>GetSection<span class="o">(</span><span class="t">ContentLockOptions</span><span class="o">.</span>ConfigName<span class="o">));</span></span>
+      </CodeBlock>
+    </div>
+  </Section>
+
+  <Section heading={{ lead: 'Read', boxed: 'more', id: 'more-h' }}>
+    <Grid variant="2">
+      <BlogPostCard
+        href={`/blog/${latestPost.id}/`}
+        title={latestPost.data.title}
+        date={latestPost.data.date}
+        summary={latestPost.data.excerpt}
+        tags={latestPost.data.topics.map((t) => ({ label: topicLabel(t), href: `/blog/topic/${t}/` }))}
+      />
+      <article class="hmd-card">
+        <p class="hmd-meta">2025 on the timeline</p>
+        <h3><a href="/timeline/">Where ContentLock fits</a></h3>
+        <p>See ContentLock alongside the other packages and tools on the career timeline.</p>
+      </article>
+    </Grid>
+  </Section>
+
+  <Section class="hmd-pink" ariaLabel="Hire">
+    <HireBanner message="Need a backoffice extension like this for your Umbraco site? Let's talk." />
+  </Section>
+</BaseLayout>
+
+<style>
+  .cl-video {
+    max-width: 880px;
+    margin: 48px auto 0;
+  }
+  .cl-code-intro {
+    font-size: 19px;
+    line-height: 1.6;
+  }
+</style>

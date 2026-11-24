@@ -1,0 +1,27 @@
+---
+import Chip from './Chip.astro';
+
+/** A blog index entry: title, date, topics as clickable chips (to /blog/topic/<slug>/), a two-sentence summary. */
+interface Tag {
+  label: string;
+  href: string;
+}
+interface Props {
+  href: string;
+  title: string;
+  date: Date;
+  summary: string;
+  tags: Tag[];
+}
+const { href, title, date, summary, tags } = Astro.props;
+const dateLabel = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<article class="hmd-card">
+  <p class="hmd-meta"><time datetime={date.toISOString()}>{dateLabel}</time></p>
+  <h3><a href={href}>{title}</a></h3>
+  <p>{summary}</p>
+  <div class="hmd-chips">
+    {tags.map((tag) => <Chip href={tag.href}>{tag.label}</Chip>)}
+  </div>
+</article>

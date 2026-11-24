@@ -1,0 +1,34 @@
+---
+import Container from './Container.astro';
+import SectionHeading from './SectionHeading.astro';
+
+/** A padded section with an optional heading row (SectionHeading + "View all" link) and a container. */
+interface Props {
+  ariaLabel?: string;
+  ariaLabelledby?: string;
+  panel?: boolean;
+  containerVariant?: 'wide' | 'text';
+  heading?: { lead?: string; boxed: string; trail?: string; eyebrow?: string; id: string };
+  viewAllHref?: string;
+  viewAllLabel?: string;
+  class?: string;
+}
+
+const { ariaLabel, ariaLabelledby, panel = false, containerVariant = 'wide', heading, viewAllHref, viewAllLabel, class: className } = Astro.props;
+const classes = ['hmd-section', panel && 'hmd-section--panel', className].filter(Boolean).join(' ');
+const labelledby = ariaLabelledby ?? heading?.id;
+---
+
+<section class={classes} aria-label={ariaLabel} aria-labelledby={labelledby}>
+  <Container variant={containerVariant}>
+    {heading && (
+      <div class="hmd-section__head">
+        <div>
+          <SectionHeading {...heading} />
+        </div>
+        {viewAllHref && <a class="hmd-link" href={viewAllHref}>{viewAllLabel}</a>}
+      </div>
+    )}
+    <slot />
+  </Container>
+</section>

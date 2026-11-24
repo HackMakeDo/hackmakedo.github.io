@@ -1,0 +1,31 @@
+---
+import Chip from './Chip.astro';
+
+/**
+ * The timeline's controls: a toggle button per entry type, plus a sort-order toggle.
+ * Rendered `hidden` by default — the hmd-timeline custom element (wrapping this and the
+ * entry list) reveals it once JS has wired up show/hide and sort, since without JavaScript
+ * the controls can't do anything and every entry should just show.
+ */
+interface TypeOption {
+  type: 'role' | 'award' | 'project' | 'community';
+  label: string;
+}
+interface Props {
+  types: TypeOption[];
+  sortLabel?: string;
+}
+const { types, sortLabel = 'Newest first ⇅' } = Astro.props;
+---
+
+<div class="hmd-filter" role="group" aria-label="Filter the timeline" hidden>
+  <span class="hmd-filter__label">Show</span>
+  {types.map((option) => (
+    <button type="button" aria-pressed="true" data-type={option.type}>
+      <Chip variant="marker" markerType={option.type} />
+      {option.label}
+    </button>
+  ))}
+  <span class="hmd-filter__sep" aria-hidden="true"></span>
+  <button type="button" aria-pressed="false" data-sort-toggle>{sortLabel}</button>
+</div>

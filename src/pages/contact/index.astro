@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import ContactCard from '../../components/ContactCard.astro';
+import FAQ from '../../components/FAQ.astro';
+import { faqPageSchema } from '../../lib/structured-data';
+
+const faqItems = [
+  {
+    question: 'Should I hire you as a freelancer or a contractor?',
+    answer: 'Hire me as a <a href="/umbraco-freelancer/">freelancer</a> for a defined piece of work, such as an upgrade or a package. Alternatively, hire me as a <a href="/umbraco-contractor/">contractor</a> to add an experienced Umbraco developer to your team for a period.',
+  },
+  {
+    question: 'Do you have availability?',
+    answer: 'Currently I am available for freelance work and contract roles. Please email me with the project details and dates.',
+  },
+  {
+    question: 'Can I ask about any of your open source packages?',
+    answer: "Yes, though issues and feature requests are best raised on the package's GitHub repository, where other users can see them.",
+  },
+];
+---
+
+<BaseLayout
+  title="Contact — Hack Make Do"
+  description="Email warren@hackmakedo.com about freelance Umbraco projects, contract roles or anything else you want to talk about."
+  ogImage="/og/contact.png"
+  currentPath="/contact/"
+  hireHref="/contact/"
+  jsonLd={[faqPageSchema(faqItems)]}
+>
+  <PageHeader
+    trail={[{ label: 'Home', href: '/' }, { label: 'Contact' }]}
+    eyebrow="Contact"
+    title="Get in touch"
+    lead="Talk to me about freelance Umbraco projects, contract roles or anything else you want to chinwag about."
+  />
+
+  <Section class="hmd-pink" ariaLabel="Contact" containerVariant="text">
+    <ContactCard
+      heading={{ boxed: 'talk', lead: "Let's", id: 'contact-h' }}
+      intro="Tell me about your project and dates, and whether you are after a freelancer or a contractor."
+      email="warren@hackmakedo.com"
+    />
+  </Section>
+
+  <Section heading={{ lead: 'Before you', boxed: 'write', id: 'faq-h' }} containerVariant="text">
+    <FAQ items={faqItems} />
+  </Section>
+</BaseLayout>

@@ -1,0 +1,14 @@
+{
+  "year": 2023,
+  "yearLabel": "2023",
+  "type": "community",
+  "title": "Contributes an Umbraco segment to Oh My Posh",
+  "body": "Spends Hacktoberfest learning Go by contributing an Umbraco segment to Oh My Posh, the cross-shell prompt theme engine, adding Umbraco project detection to the terminal prompt.",
+  "links": [
+    {
+      "label": "Read the post ↗",
+      "href": "/blog/how-i-learnt-a-new-programming-language-over-hacktoberfest-by-creating-an-umbraco-segment-for-oh-my-posh/"
+    }
+  ],
+  "order": 1
+}

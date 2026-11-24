@@ -1,0 +1,15 @@
+{
+  "year": 2026,
+  "yearLabel": "2026",
+  "type": "award",
+  "title": "Ninth Umbraco MVP award",
+  "body": "Renewed as an Umbraco MVP for 2026.",
+  "badge": 2026,
+  "links": [
+    {
+      "label": "MVP archive ↗",
+      "href": "https://community.umbraco.com/contribute/mvp-program/mvp-archive/#mvp-2026"
+    }
+  ],
+  "order": 0
+}

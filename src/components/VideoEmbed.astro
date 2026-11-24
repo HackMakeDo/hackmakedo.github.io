@@ -1,0 +1,16 @@
+---
+/** A click-to-load YouTube video: 16:9 poster with a pink play button; YouTube loads only on click. */
+interface Props {
+  videoId: string;
+  label: string;
+  poster?: string;
+  notice?: string;
+}
+const { videoId, label, poster, notice } = Astro.props;
+---
+
+<hmd-video class="hmd-video" video-id={videoId} label={label} poster={poster} notice={notice}>
+  <a class="hmd-video__fallback" href={`https://www.youtube.com/watch?v=${videoId}`}>Watch on YouTube ↗</a>
+</hmd-video>
+
+<script src="../elements/index.ts"></script>
