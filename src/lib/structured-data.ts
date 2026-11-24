@@ -27,6 +27,8 @@ export function personOrgGraph() {
           'https://forum.umbraco.com/u/warren',
           'https://umb.fyi/@warrenbuckley',
           'https://sessionize.com/warrenbuckley/',
+          'https://www.nuget.org/profiles/warrenbuckley',
+          'https://marketplace.visualstudio.com/publishers/warren-buckley',
           'https://www.instagram.com/warrenbuckley/',
           'https://x.com/warrenbuckley',
           'https://www.flickr.com/photos/warrenbuckley/',
@@ -47,9 +49,11 @@ export function personOrgGraph() {
           postalCode: 'GU1 3UW',
           addressCountry: 'GB',
         },
+        // Each Service is described in full (serviceSchema) on its own page; these @ids point to it.
         makesOffer: [
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Umbraco freelance development' } },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Umbraco contract development' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', '@id': `${SITE_URL}/umbraco-freelancer/#service`, name: 'Umbraco freelancer' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', '@id': `${SITE_URL}/umbraco-contractor/#service`, name: 'Umbraco contractor' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', '@id': `${SITE_URL}/umbraco-upgrades/#service`, name: 'Umbraco upgrades' } },
         ],
       },
     ],
@@ -100,6 +104,28 @@ export function articleSchema(options: { title: string; description: string; dat
     url: new URL(options.url, SITE_URL).toString(),
     image: new URL(options.image, SITE_URL).toString(),
     author: { '@id': PERSON_ID },
+  };
+}
+
+/** Where the hire services are offered (decided 24 November 2026): the UK first, and Europe (e.g. the Council of the EU). */
+const SERVICE_AREA = [
+  { '@type': 'Country', name: 'United Kingdom' },
+  { '@type': 'Place', name: 'Europe' },
+];
+
+/** A hire page's service, provided by Hack Make Do (the ProfessionalService node on every page). */
+export function serviceSchema(options: { name: string; serviceType: string; description: string; url: string }) {
+  const url = new URL(options.url, SITE_URL).toString();
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${url}#service`,
+    name: options.name,
+    serviceType: options.serviceType,
+    description: options.description,
+    url,
+    provider: { '@id': ORG_ID },
+    areaServed: SERVICE_AREA,
   };
 }
 

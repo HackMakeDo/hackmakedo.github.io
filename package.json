@@ -12,6 +12,8 @@
     "video-posters": "node scripts/video-posters.ts",
     "check:links": "node scripts/check-post-links.ts",
     "check:umbraco-versions": "node scripts/check-umbraco-versions.ts",
+    "check:structured-data": "node scripts/check-structured-data.ts",
+    "report:traffic": "node --env-file-if-exists=.env scripts/traffic-report.ts",
     "lighthouse:mobile": "lhci autorun --config=./lighthouse/lighthouserc.mobile.cjs",
     "lighthouse:desktop": "lhci autorun --config=./lighthouse/lighthouserc.desktop.cjs",
     "lighthouse": "npm run lighthouse:mobile && npm run lighthouse:desktop",
@@ -21,7 +23,8 @@
     "redirects": "node scripts/redirects.ts",
     "markdown": "node scripts/markdown.ts",
     "deploy:redirects": "wrangler deploy --config cloudflare/blog-redirects/wrangler.jsonc",
-    "deploy:markdown": "wrangler deploy --config cloudflare/markdown-negotiation/wrangler.jsonc"
+    "deploy:markdown": "wrangler deploy --config cloudflare/markdown-negotiation/wrangler.jsonc",
+    "deploy:personal-domains": "wrangler deploy --config cloudflare/personal-domains/wrangler.jsonc"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.3.6",

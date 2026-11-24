@@ -3,6 +3,9 @@ dist/
 .astro/
 .lighthouseci/
 npm-debug.log*
+
+# Local secrets (CLOUDFLARE_API_TOKEN for report:traffic)
+.env
 .DS_Store
 
 # Cloudflare Wrangler local state

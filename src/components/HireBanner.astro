@@ -1,15 +1,39 @@
 ---
 import Button from './Button.astro';
 
-/** The hire call to action: one sentence of availability, in Warren's voice, plus "Get in touch". Sits inside a pink end band. */
+/**
+ * The hire call to action: one sentence of availability, in Warren's voice, plus "Get in touch". Sits inside a pink end band.
+ * The first mention of "freelancer" (or "freelance Umbraco developer") and of "contractor" in the message links to that
+ * hire page, so every page using the banner links both with the words people search for.
+ */
 interface Props {
   message: string;
   href?: string;
 }
 const { message, href = '/contact/' } = Astro.props;
+
+const HIRE_PAGES: [RegExp, string][] = [
+  [/freelance Umbraco developer|freelancer/, '/umbraco-freelancer/'],
+  [/contractor/, '/umbraco-contractor/'],
+];
+
+type Part = { text: string; href?: string };
+let parts: Part[] = [{ text: message }];
+for (const [pattern, pageHref] of HIRE_PAGES) {
+  parts = parts.flatMap((part) => {
+    const match = part.href ? null : pattern.exec(part.text);
+    if (!match) return [part];
+    const end = match.index + match[0].length;
+    return [
+      { text: part.text.slice(0, match.index) },
+      { text: match[0], href: pageHref },
+      { text: part.text.slice(end) },
+    ];
+  });
+}
 ---
 
 <aside class="hmd-hire">
-  <p>{message}</p>
+  <p>{parts.map((part) => (part.href ? <a href={part.href}>{part.text}</a> : part.text))}</p>
   <Button href={href}>Get in touch</Button>
 </aside>

@@ -1,0 +1,11 @@
+{
+  // warren-buckley.co.uk and warrenbuckley.co.uk: redirect to hackmakedo.com, and retire the IIS Express sponsor check. See README.md.
+  "name": "hackmakedo-personal-domains",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": false,
+  "routes": [
+    { "pattern": "warren-buckley.co.uk/*", "zone_name": "warren-buckley.co.uk" },
+    { "pattern": "warrenbuckley.co.uk/*", "zone_name": "warrenbuckley.co.uk" }
+  ]
+}

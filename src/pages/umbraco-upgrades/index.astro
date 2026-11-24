@@ -10,7 +10,7 @@ import FAQ from '../../components/FAQ.astro';
 import ContactCard from '../../components/ContactCard.astro';
 import Button from '../../components/Button.astro';
 import { getCollection } from 'astro:content';
-import { faqPageSchema } from '../../lib/structured-data';
+import { faqPageSchema, serviceSchema } from '../../lib/structured-data';
 import {
   UMBRACO_VERSIONS,
   UMBRACO_LIFECYCLE_URL,
@@ -50,7 +50,10 @@ const faqItems = [
   ogImage="/og/umbraco-upgrades.png"
   currentPath="/umbraco-upgrades/"
   hireHref="#contact-h"
-  jsonLd={[faqPageSchema(faqItems)]}
+  jsonLd={[
+    serviceSchema({ name: 'Umbraco upgrades', serviceType: 'Umbraco upgrade', description: 'Moving Umbraco sites to the current Umbraco release, including the rebuilt Bellissima backoffice.', url: '/umbraco-upgrades/' }),
+    faqPageSchema(faqItems),
+  ]}
 >
   <PageHeader
     trail={[{ label: 'Home', href: '/' }, { label: 'Umbraco upgrades' }]}
