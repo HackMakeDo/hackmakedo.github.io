@@ -5,13 +5,17 @@ git keeps the history, including the launch checklist this replaced.
 
 ## Launch follow-ups
 
-- [ ] Cloudflare: set both Worker routes to **Fail open** (Workers & Pages › each Worker › Settings › Domains & Routes).
+- [x] Cloudflare: set both Worker routes to **Fail open** (Workers & Pages › each Worker › Settings › Domains & Routes).
       Wrangler can't set this
-- [ ] Google Search Console: in the `blog.hackmakedo.com` property, **Change of address** to `hackmakedo.com`; submit
+- [x] Google Search Console: in the `blog.hackmakedo.com` property, **Change of address** to `hackmakedo.com`; submit
       `https://hackmakedo.com/sitemap-index.xml` in the `hackmakedo.com` property
-- [ ] Bing Webmaster Tools: add the site (it can import from Search Console) and submit the same sitemap
+- [x] Bing Webmaster Tools: add the site and submit the same sitemap
 - [ ] Google's Rich Results Test on a few live pages (Home, About, a post, the upgrades page)
-- [ ] Re-run the scan at isitagentready.com (Link headers, Markdown negotiation and Content Signals should now pass)
+- [x] Re-run the scan at isitagentready.com (level 3; all applicable checks pass)
+- [x] `www.hackmakedo.com` redirects to `hackmakedo.com` (proxied CNAME plus a Redirect Rule)
+- [ ] Cloudflare: turn off **JavaScript detections** (`enable_js`). It adds `/cdn-cgi/challenge-platform/…` to every
+      page and costs live Lighthouse Best Practices points (deprecated APIs). Not in the dashboard on the Free plan: set it with the API
+      (`PUT /zones/{zone}/bot_management` with `{"enable_js": false}`). Bot fight mode is already off
 - [ ] Watch for 404s in Search Console and Cloudflare for a couple of weeks; a missed old link goes in
       `cloudflare/blog-redirects/blog-url-map.csv`, then `npm run redirects -- --build-map` and `npm run deploy:redirects`
 - [ ] After a few quiet weeks, cancel the WordPress.com plan. Keep the `blog` DNS record and the redirect Worker for good
@@ -27,8 +31,8 @@ git keeps the history, including the launch checklist this replaced.
 Research and the full plan are in Claude's project memory (`post-launch-seo-aeo-plan`). In short, in order:
 
 - [ ] Profiles say the same thing ("Umbraco freelancer and contractor · Hack Make Do · hackmakedo.com"): LinkedIn,
-      GitHub, Sessionize (still says Developer Advocate), Polywork, our.umbraco.com, the Umbraco community MVP profile,
-      YouTube, Mastodon, X, NuGet and Marketplace
+      GitHub, Sessionize (still says Developer Advocate), Polywork, our.umbraco.com, YouTube, Mastodon, X, NuGet and
+      Marketplace. Not the Umbraco community profile until Umbraco makes profiles public
 - [ ] Publish the Council of the EU case study (below) and write an "Upgrading Umbraco 13 to 17" guide
 - [ ] Link to hackmakedo.com from package READMEs, NuGet and Marketplace listings
 - [ ] Measure monthly: Search Console and Bing queries; ask ChatGPT, Perplexity and Claude who's a good Umbraco

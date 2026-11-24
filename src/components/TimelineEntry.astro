@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import { mvpBadge } from '../lib/mvp-badges';
 import Chip from './Chip.astro';
 
 /**
@@ -18,11 +20,10 @@ interface Props {
   typeLabel: string;
   title: string;
   description: string;
-  badgeSrc?: string;
   badgeYear?: number;
   links?: Link[];
 }
-const { id, year, type, typeLabel, title, description, badgeSrc, badgeYear, links } = Astro.props;
+const { id, year, type, typeLabel, title, description, badgeYear, links } = Astro.props;
 // "2002 to 2007" is split into parts so phones can stack it inside a narrow year column.
 const range = /^(\d{4}) to (\d{4})$/.exec(year);
 ---
@@ -38,7 +39,7 @@ const range = /^(\d{4}) to (\d{4})$/.exec(year);
     </Chip>
   </div>
   <div class="hmd-entry__body">
-    {badgeSrc && <img class="hmd-entry__badge" src={badgeSrc} alt={`Official Umbraco MVP ${badgeYear} badge`} width="56" height="56" />}
+    {badgeYear && <Image class="hmd-entry__badge" src={mvpBadge(badgeYear)} alt={`Official Umbraco MVP ${badgeYear} badge`} width={56} height={56} densities={[1, 2]} format="webp" />}
     <p class="hmd-entry__type">
       <Chip variant="marker" markerType={type} />
       {typeLabel}
