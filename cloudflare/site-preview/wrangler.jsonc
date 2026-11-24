@@ -1,0 +1,14 @@
+{
+  // Pull request previews of the built site (dist/), as Worker Previews on workers.dev. See README.md.
+  // Production stays on GitHub Pages: this Worker has no production deployment and no routes.
+  "name": "hackmakedo-preview",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "../../dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "workers_dev": false,
+  "preview_urls": true,
+  "previews": {}
+}
