@@ -42,7 +42,7 @@ npm run preview    # serve dist/
 | `lighthouse:full` | Builds, then Lighthouse on every page, mobile and desktop (slow; also a manual workflow in GitHub Actions) |
 | `redirects` | Checks the old-blog redirects against the map and `dist/`; `-- --live --targets` checks the live Worker and site; `-- --build-map` rebuilds the Worker's lookups from the CSV |
 | `markdown` | Checks every page has a Markdown copy and tests the Markdown Worker against `dist/`; `-- --live` checks the live site |
-| `deploy:redirects`, `deploy:markdown` | Deploy a Worker (`wrangler deploy`) |
+| `deploy:redirects`, `deploy:markdown`, `deploy:personal-domains` | Deploy a Worker (`wrangler deploy`) |
 
 ## Folders
 
