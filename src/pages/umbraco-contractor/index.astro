@@ -9,7 +9,7 @@ import FAQ from '../../components/FAQ.astro';
 import ContactCard from '../../components/ContactCard.astro';
 import Button from '../../components/Button.astro';
 import { getCollection } from 'astro:content';
-import { faqPageSchema } from '../../lib/structured-data';
+import { faqPageSchema, serviceSchema } from '../../lib/structured-data';
 const pete = (await getCollection('testimonials')).find((t) => t.id === 'pete-cooper')!;
 
 const faqItems = [
@@ -18,15 +18,19 @@ const faqItems = [
   { question: 'How much notice do you need?', answer: 'I can usually start within a week of agreeing the contract.' },
   { question: 'Where do you work from?', answer: 'Remotely, from the UK.' },
 ];
+const description = 'Warren Buckley is a UK-based Umbraco contractor and nine-time Umbraco MVP, available to join agency and in-house teams.';
 ---
 
 <BaseLayout
   title="Umbraco Contractor (UK): Warren Buckley, Umbraco MVP"
-  description="Warren Buckley is a UK-based Umbraco contractor and nine-time Umbraco MVP, available to join agency and in-house teams."
+  description={description}
   ogImage="/og/umbraco-contractor.png"
   currentPath="/umbraco-contractor/"
   hireHref="#contact-h"
-  jsonLd={[faqPageSchema(faqItems)]}
+  jsonLd={[
+    serviceSchema({ name: 'Umbraco contractor', serviceType: 'Contract Umbraco development', description, url: '/umbraco-contractor/' }),
+    faqPageSchema(faqItems),
+  ]}
 >
   <PageHeader
     trail={[{ label: 'Home', href: '/' }, { label: 'Umbraco contractor' }]}
