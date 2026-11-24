@@ -1,8 +1,8 @@
 ---
-/** The top of a blog post: breadcrumbs, title, date line and tags. */
+/** The top of a blog post: breadcrumbs, title, byline and date line, and tags. */
 import JsonLd from './JsonLd.astro';
 import Chip from './Chip.astro';
-import { breadcrumbList } from '../lib/structured-data';
+import { AUTHOR_NAME, breadcrumbList } from '../lib/structured-data';
 
 interface Tag {
   label: string;
@@ -31,7 +31,7 @@ const trail = [{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog/' }, 
   </nav>
   <h1 class="hmd-posthead__title">{title}</h1>
   <p class="hmd-posthead__meta">
-    <time datetime={published.toISOString()}>{fmt(published)}</time>
+    <a href="/about/" rel="author">{AUTHOR_NAME}</a>{' · '}<time datetime={published.toISOString()}>{fmt(published)}</time>
     {readingTime && <> · {readingTime}</>}
     {updated && <> · Updated <time datetime={updated.toISOString()}>{fmt(updated)}</time></>}
   </p>
