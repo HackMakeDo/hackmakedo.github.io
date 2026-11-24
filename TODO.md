@@ -10,6 +10,10 @@ git keeps the history, including the launch checklist this replaced.
 - [x] Google Search Console: in the `blog.hackmakedo.com` property, **Change of address** to `hackmakedo.com`; submit
       `https://hackmakedo.com/sitemap-index.xml` in the `hackmakedo.com` property
 - [x] Bing Webmaster Tools: add the site and submit the same sitemap
+- [ ] Cloudflare: turn on **Crawler Hints** (hackmakedo.com › Caching › Configuration › Crawler Hints). It tells Bing and
+      other IndexNow search engines when a page changes, so updates are recrawled sooner (Bing also feeds ChatGPT search).
+      Off as of 24 November 2026, and the API refuses to change it ("Method not allowed for this authentication scheme"):
+      dashboard only
 - [ ] Google's Rich Results Test on a few live pages (Home, About, a post, the upgrades page)
 - [x] Re-run the scan at isitagentready.com (level 3; all applicable checks pass)
 - [x] `www.hackmakedo.com` redirects to `hackmakedo.com` (proxied CNAME plus a Redirect Rule)
