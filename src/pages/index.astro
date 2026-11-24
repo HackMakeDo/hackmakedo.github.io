@@ -38,6 +38,7 @@ const latestPosts = (await getCollection('posts', ({ data }) => !data.draft))
   headerVariant="overlay"
   currentPath="/"
 >
+  <link slot="head" rel="preload" href="/images/sprinkles.svg" as="image" fetchpriority="high" />
   <Hero lead="Warren Buckley, a freelance <strong>Umbraco developer and contractor</strong> and nine-time Umbraco MVP, making Umbraco better for the developers who build with it." />
 
   <Marquee />
@@ -50,7 +51,7 @@ const latestPosts = (await getCollection('posts', ({ data }) => !data.draft))
           { label: 'First Umbraco MVP award', value: '2007' },
           { label: 'years building with Umbraco', value: '20' },
         ]}
-        badge={{ year: 2026, src: '/images/mvp/umbraco-mvp-2026.png' }}
+        badge={{ year: 2026 }}
       />
     </Container>
   </section>

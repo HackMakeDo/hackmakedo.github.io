@@ -98,6 +98,7 @@ const inlineCss = minifyCss(tokensCssRaw) + minifyCss(bundleCssRaw) + minifyCss(
     <link rel="preload" href="/fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/source-sans-3-400.woff2" as="font" type="font/woff2" crossorigin />
+    <slot name="head" />
 
     <style set:html={inlineCss} />
   </head>
