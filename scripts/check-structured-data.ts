@@ -42,7 +42,14 @@ async function validate(path: string): Promise<Result> {
     ? new URLSearchParams({ url: `${SITE}${path}` })
     : new URLSearchParams({ html: await readFile(new URL(`../dist${path}index.html`, import.meta.url), 'utf8') });
   const res = await fetch(VALIDATOR, { method: 'POST', body });
-  if (!res.ok) throw new Error(`The validator answered ${res.status} for ${path}`);
+  if (!res.ok || res.url.includes('google.com/sorry')) {
+    // Google rate-limits automated use: after a few dozen requests it answers 405 or redirects to google.com/sorry.
+    console.error(
+      `validator.schema.org refused the request for ${path} (HTTP ${res.status}). Google rate-limits automated use:\n` +
+        'try again later, or paste a page into https://validator.schema.org by hand.',
+    );
+    process.exit(2);
+  }
   const text = await res.text();
   return JSON.parse(text.slice(text.indexOf('{'))) as Result; // the response starts with an anti-JSON-hijacking prefix
 }
