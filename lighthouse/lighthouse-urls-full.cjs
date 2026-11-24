@@ -10,7 +10,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const distDir = path.join(__dirname, 'dist');
+const distDir = path.join(__dirname, '..', 'dist');
 
 function walk(dir) {
   let results = [];

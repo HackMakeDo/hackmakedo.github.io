@@ -81,6 +81,37 @@ function tidy(parent: Element): void {
       if (link) out.push(el('p', {}, [el('a', { href: link.properties?.href }, [t(`${label} (GitHub Gist)`)])]));
       continue;
     }
+    // Label/value lists (stats, project facts): "Label: value" lines read better than a nested list.
+    if (child.tagName === 'dl') {
+      const pairs: ElementContent[] = [];
+      for (const item of child.children) {
+        if (item.type !== 'element') continue;
+        const dt = item.tagName === 'dt' ? item : find(item, (e) => e.tagName === 'dt');
+        const dd = item.tagName === 'div' ? find(item, (e) => e.tagName === 'dd') : undefined;
+        if (!dt || !dd) continue;
+        const [label, value] = [text(dt).trim(), text(dd).trim()];
+        // A lowercase label finishes a sentence the value starts ("20" + "years building with Umbraco").
+        pairs.push(
+          /^[a-z]/.test(label)
+            ? el('p', {}, [t(`${value} ${label}`)])
+            : el('p', {}, [el('strong', {}, [t(label)]), t(`: ${value}`)]),
+        );
+      }
+      if (pairs.length) {
+        out.push(...pairs);
+        continue;
+      }
+    }
+    // FAQs are <details><summary>question</summary>answer</details>: make the question a heading.
+    if (child.tagName === 'details') {
+      tidy(child);
+      out.push(
+        ...child.children.map((c) =>
+          c.type === 'element' && c.tagName === 'summary' ? el('h3', {}, c.children) : c,
+        ),
+      );
+      continue;
+    }
     if (child.tagName === 'hmd-video') {
       const link = find(child, (e) => e.tagName === 'a');
       const label = String(child.properties?.label ?? '') || 'Video';

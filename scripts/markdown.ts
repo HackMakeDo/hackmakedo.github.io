@@ -17,6 +17,8 @@ const SITE = 'https://hackmakedo.com';
 const failures: string[] = [];
 const check = (ok: boolean, message: string) => void (ok || failures.push(`  ${message}`));
 const exists = (p: string) => access(p).then(() => true, () => false);
+/** True when a Vary header lists Accept itself (Accept-Encoding doesn't count). */
+const variesOnAccept = (vary: string | null) => (vary ?? '').split(',').some((t) => t.trim().toLowerCase() === 'accept');
 
 const BROWSER = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8';
 const AGENT = 'text/markdown, text/html;q=0.9, */*;q=0.1';
@@ -63,14 +65,14 @@ async function offline() {
     check(res.headers.get('content-type')?.startsWith('text/markdown') ?? false, `${path} with Accept: text/markdown should be Markdown, got ${res.headers.get('content-type')}`);
     check(/^(---|# )/.test(body), `${path} Markdown should start with front matter or a heading`);
     check(Number(res.headers.get('x-markdown-tokens')) > 0, `${path} should send x-markdown-tokens`);
-    check(/accept/i.test(res.headers.get('vary') ?? ''), `${path} Markdown should send Vary: Accept`);
+    check(variesOnAccept(res.headers.get('vary')), `${path} Markdown should send Vary: Accept`);
   }
   const head = await ask(post, AGENT, 'HEAD');
   check(head.headers.get('content-type')?.startsWith('text/markdown') ?? false, 'HEAD with Accept: text/markdown should be Markdown');
 
   const html = await ask(post, BROWSER);
   check(html.headers.get('content-type')?.startsWith('text/html') ?? false, 'a browser should still get HTML');
-  check(/accept/i.test(html.headers.get('vary') ?? ''), 'HTML should send Vary: Accept');
+  check(variesOnAccept(html.headers.get('vary')), 'HTML should send Vary: Accept');
 
   const home = await ask('/', BROWSER);
   const links = home.headers.get('link') ?? '';
@@ -95,7 +97,7 @@ async function live() {
   }
   const html = await fetch(post, { headers: { accept: BROWSER } });
   check((html.headers.get('content-type') ?? '').startsWith('text/html'), `${post}: a browser got ${html.headers.get('content-type')}`);
-  check(/accept/i.test(html.headers.get('vary') ?? ''), `${post}: HTML has no Vary: Accept (is the Worker deployed?)`);
+  check(variesOnAccept(html.headers.get('vary')), `${post}: HTML has no Vary: Accept (is the Worker deployed?)`);
   const home = await fetch(`${SITE}/`, { headers: { accept: BROWSER } });
   check(/rel="describedby"/.test(home.headers.get('link') ?? ''), `${SITE}/: no Link rel="describedby" header`);
   report('Live: hackmakedo.com answers Accept: text/markdown with Markdown, and browsers with HTML.');

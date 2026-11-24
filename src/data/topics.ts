@@ -1,5 +1,5 @@
 /**
- * The 11 blog topics (content/build.py TOPICS) that replace the old WordPress tags.
+ * The 11 blog topics (from the 2026 WordPress import) that replace the old WordPress tags.
  * Order matches BlogIndex.dc.html's topic nav.
  */
 export const TOPICS: { slug: string; label: string }[] = [

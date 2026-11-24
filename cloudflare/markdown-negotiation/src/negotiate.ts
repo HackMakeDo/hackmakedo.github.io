@@ -50,7 +50,9 @@ function decorateHtml(response: Response, pathname: string, mdPath: string | nul
   if (!type.startsWith('text/html') || !response.ok) return response;
   const copy = new Response(response.body, response);
   const vary = copy.headers.get('vary');
-  if (!vary || !/\baccept\b/i.test(vary)) copy.headers.set('vary', vary ? `${vary}, Accept` : 'Accept');
+  // Compare whole tokens: "Accept-Encoding" must not count as "Accept".
+  const hasAccept = (vary ?? '').split(',').some((t) => t.trim().toLowerCase() === 'accept');
+  if (!hasAccept) copy.headers.set('vary', vary ? `${vary}, Accept` : 'Accept');
   for (const link of discoveryLinks(pathname, mdPath)) copy.headers.append('link', link);
   return copy;
 }
