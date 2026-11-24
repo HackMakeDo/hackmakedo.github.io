@@ -14,11 +14,12 @@ export function personOrgGraph() {
       {
         '@type': 'Person',
         '@id': PERSON_ID,
-        name: 'Warren Buckley',
+        name: AUTHOR_NAME,
+        description: 'UK-based Umbraco freelancer and contractor, nine-time Umbraco MVP, and the person behind Hack Make Do.',
         jobTitle: 'Freelance Umbraco Developer and Contractor',
         url: SITE_URL,
         image: `${SITE_URL}/images/warren-buckley.jpg`,
-        knowsAbout: ['Umbraco', '.NET', 'C#', 'TypeScript', 'Lit', 'SignalR'],
+        knowsAbout: ['Umbraco', 'Umbraco upgrades', 'Umbraco backoffice extensions (Bellissima)', '.NET', 'C#', 'TypeScript', 'Lit', 'Web components', 'SignalR'],
         award: ['Umbraco MVP 2007', 'Umbraco MVP 2008', 'Umbraco MVP 2009', 'Umbraco MVP 2010', 'Umbraco MVP 2014', 'Umbraco MVP 2015', 'Umbraco MVP 2024', 'Umbraco MVP 2025', 'Umbraco MVP 2026'],
         sameAs: [
           'https://github.com/warrenbuckley',
