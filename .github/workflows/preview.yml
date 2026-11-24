@@ -1,0 +1,84 @@
+name: Preview
+
+# Every pull request gets its own copy of the built site at
+# https://pr-<number>-hackmakedo-preview.hackmakedo.workers.dev, as a Cloudflare Worker Preview
+# (cloudflare/site-preview/). The link is posted on the pull request and updated on every push;
+# the Preview is deleted when the pull request closes. workers.dev Preview URLs carry
+# X-Robots-Tag: noindex, and every page's canonical URL points at https://hackmakedo.com.
+#
+# Needs two repository secrets: CLOUDFLARE_API_TOKEN (Account › Workers Scripts › Edit) and
+# CLOUDFLARE_ACCOUNT_ID. Pull requests from forks don't get secrets, so they get no Preview.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+env:
+  PREVIEW_NAME: pr-${{ github.event.pull_request.number }}
+
+jobs:
+  deploy:
+    if: github.event.action != 'closed' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Deploy the Preview
+        id: preview
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -o pipefail
+          npx wrangler preview --config cloudflare/site-preview/wrangler.jsonc \
+            --name "$PREVIEW_NAME" --message "${{ github.event.pull_request.head.sha }}" --json > preview.out
+          # Wrangler prints its upload log before the JSON on stdout, so parse from the first line that opens it.
+          # Never print the JSON itself: it includes the token owner's email address, and this repo's logs are public.
+          url=$(sed -n '/^{/,$p' preview.out | jq -er '.preview.urls[0]')
+          rm preview.out
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+
+      - name: Link the Preview on the pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          URL: ${{ steps.preview.outputs.url }}
+        run: |
+          gh pr comment "${{ github.event.pull_request.number }}" --repo "${{ github.repository }}" --edit-last --create-if-none \
+            --body "**Preview:** $URL
+
+          Updated for ${{ github.event.pull_request.head.sha }}. Not indexed by search engines; deleted when this pull request closes."
+
+  cleanup:
+    if: github.event.action == 'closed' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Delete the Preview
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler preview delete --config cloudflare/site-preview/wrangler.jsonc --name "$PREVIEW_NAME" --skip-confirmation

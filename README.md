@@ -22,6 +22,9 @@ npm run preview    # serve dist/
 
 - **The site**: merging into `main` deploys it (`.github/workflows/deploy.yml`, GitHub Pages). Pull requests run
   Lighthouse CI on the main page types and must score 100 in every category.
+- **Pull request previews**: every pull request gets a copy of the built site at
+  `https://pr-<number>-hackmakedo-preview.hackmakedo.workers.dev`, linked on the pull request and deleted when it
+  closes (`.github/workflows/preview.yml`, `cloudflare/site-preview/README.md`).
 - **The Workers**: deployed by hand with Wrangler (pinned in `package.json`). Sign in once per machine with
   `npx wrangler login`, then `npm run deploy:redirects` or `npm run deploy:markdown`. Each Worker's README says what it
   does, how to check it and how to undo it.
