@@ -10,6 +10,7 @@ Warren has built with Umbraco for 20 years, including roles at Umbraco HQ on the
 - [Umbraco contractor](https://hackmakedo.com/umbraco-contractor/): Contract Umbraco development with agency and in-house teams in the UK
 - [Umbraco upgrades](https://hackmakedo.com/umbraco-upgrades/): Upgrades to Umbraco 17 LTS, with a table of which Umbraco versions are still supported
 - [About Warren Buckley](https://hackmakedo.com/about/): Background, MVP awards and how he works
+- [Recommendations](https://hackmakedo.com/kind-words/): LinkedIn recommendations, word for word, from clients (including the Council of the European Union and Umbraco agencies) and colleagues at Umbraco
 - [Career timeline](https://hackmakedo.com/timeline/): Twenty years of Umbraco roles, awards and projects
 
 ## Work
