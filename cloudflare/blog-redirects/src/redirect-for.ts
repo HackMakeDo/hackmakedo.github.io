@@ -1,6 +1,6 @@
 /**
- * Where an old blog.hackmakedo.com (WordPress) URL lives on the new site. A port of `target()` in
- * content/rules.py: the lookups come from content/blog-url-map.csv (built into map.json by
+ * Where an old blog.hackmakedo.com (WordPress) URL lives on the new site. The lookups come from
+ * cloudflare/blog-redirects/blog-url-map.csv (built into map.json by
  * `npm run redirects -- --build-map`), and the patterns catch URLs the map never listed, such as
  * other pages of a tag archive or a post URL with WordPress's query strings on it.
  * Anything unrecognised goes to the blog listing rather than a 404.

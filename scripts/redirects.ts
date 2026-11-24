@@ -1,5 +1,5 @@
 /**
- * Redirects from the old WordPress blog (blog.hackmakedo.com) to this site, from content/blog-url-map.csv.
+ * Redirects from the old WordPress blog (blog.hackmakedo.com) to this site, from cloudflare/blog-redirects/blog-url-map.csv.
  *
  *   npm run redirects -- --build-map   rebuild cloudflare/blog-redirects/src/map.json from the CSV
  *   npm run redirects                  offline: the Worker sends every old URL in the CSV to its new URL,
@@ -14,7 +14,7 @@ import { readFile, writeFile, access } from 'node:fs/promises';
 import { join } from 'node:path';
 
 const ROOT = new URL('..', import.meta.url).pathname;
-const CSV = join(ROOT, 'content/blog-url-map.csv');
+const CSV = join(ROOT, 'cloudflare/blog-redirects/blog-url-map.csv');
 const MAP = join(ROOT, 'cloudflare/blog-redirects/src/map.json');
 const DIST = join(ROOT, 'dist');
 const args = process.argv.slice(2);

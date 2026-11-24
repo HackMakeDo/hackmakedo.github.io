@@ -5,8 +5,9 @@ that hostname and answers every request with a permanent (301) redirect to the s
 posts to `/blog/<slug>/`, `?p=` shortlinks to their post, tags to their post or topic, images to their new home,
 and anything it doesn't recognise to `/blog/`. WordPress is never contacted again.
 
-- `src/redirect-for.ts`: the rules (a port of `target()` in `content/rules.py`)
-- `src/map.json`: lookups built from `content/blog-url-map.csv` (`npm run redirects -- --build-map`)
+- `blog-url-map.csv`: all 471 known old URLs, their new URL and the rule (R01 to R13) that sends them there
+- `src/redirect-for.ts`: the rules: lookups from the CSV, plus patterns for URLs it never listed
+- `src/map.json`: the lookups, built from the CSV (`npm run redirects -- --build-map`)
 - `npm run redirects`: offline check that all 471 old URLs go where the map says and every target exists in `dist/`
 
 ## Deploy (launch day, after the new site is live)
