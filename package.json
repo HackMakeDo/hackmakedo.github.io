@@ -12,6 +12,7 @@
     "video-posters": "node scripts/video-posters.ts",
     "check:links": "node scripts/check-post-links.ts",
     "check:umbraco-versions": "node scripts/check-umbraco-versions.ts",
+    "report:traffic": "node --env-file-if-exists=.env scripts/traffic-report.ts",
     "lighthouse:mobile": "lhci autorun --config=./lighthouse/lighthouserc.mobile.cjs",
     "lighthouse:desktop": "lhci autorun --config=./lighthouse/lighthouserc.desktop.cjs",
     "lighthouse": "npm run lighthouse:mobile && npm run lighthouse:desktop",
