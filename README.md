@@ -37,6 +37,7 @@ npm run preview    # serve dist/
 | `video-posters` | Saves a poster image for each new video embed (run after adding a video to a post) |
 | `check:links` | Checks external links in posts; `-- --write` swaps dead ones for Web Archive copies near the post's date |
 | `check:umbraco-versions` | Compares `src/data/umbraco-versions.ts` with Umbraco's lifecycle page; `-- --write` updates it |
+| `check:structured-data` | Checks the JSON-LD on one page of each type with the Schema Markup Validator (needs a build); `-- --live` checks the live site. Google rich-result eligibility still needs the Rich Results Test |
 | `report:traffic` | How people and crawlers reach the site, from Cloudflare: referrers, pages found through search or AI, crawlers by role (search, AI training, AI fetching for a user), what AI agents read (Markdown copies, `llms.txt`). `-- --days 30`, `-- --from YYYY-MM-DD --to YYYY-MM-DD`, `-- --json`. Needs `CLOUDFLARE_API_TOKEN` in `.env` (Zone Read, Zone Analytics Read, Account Analytics Read) |
 | `lighthouse`, `lighthouse:mobile`, `lighthouse:desktop` | Lighthouse CI on the main page types (needs a build). Configs in `lighthouse/` |
 | `lighthouse:full` | Builds, then Lighthouse on every page, mobile and desktop (slow; also a manual workflow in GitHub Actions) |
