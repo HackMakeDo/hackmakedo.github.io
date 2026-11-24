@@ -2,7 +2,7 @@
 title: "Quick Tip: Adding custom doctype icons to Umbraco 7"
 date: 2013-12-01
 topics: ["javascript", "umbraco"]
-excerpt: "I wanted to share a quick tip with you all. As with most of the Umbraco sites I build I use custom icons for document types such as a newspaper icon for a news article and so on."
+excerpt: "A quick tip: on most Umbraco sites I build, I use custom icons for document types, such as a newspaper icon for a news article."
 draft: false
 ---
 

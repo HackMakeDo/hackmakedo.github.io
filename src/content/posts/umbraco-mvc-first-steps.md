@@ -2,7 +2,7 @@
 title: "Umbraco MVC: First Steps"
 date: 2013-07-17T07:45:47Z
 topics: ["tutorials", "umbraco"]
-excerpt: "Like most people we fear change, but that should not be the case with the switch from WebForms to MVC in Umbraco. I've made the switch and am glad I have done it."
+excerpt: "Like most people we fear change, but that should not be the case with the switch from WebForms to MVC in Umbraco. I've made the switch and I'm glad."
 draft: false
 ---
 

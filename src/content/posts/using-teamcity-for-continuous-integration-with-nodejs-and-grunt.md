@@ -2,7 +2,7 @@
 title: "Using TeamCity for Continuous Integration with NodeJS and Grunt"
 date: 2014-02-19
 topics: ["javascript", "tooling"]
-excerpt: "Note: This is a cross post from my blog post over at Work's blog at CogWorks, this is a cross post to keep a record of my findings. What is TeamCity and Continuous Integration?"
+excerpt: "What is TeamCity and continuous integration? My findings on using it with NodeJS and Grunt, cross-posted from my work blog at CogWorks."
 draft: false
 ---
 
