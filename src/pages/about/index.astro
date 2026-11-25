@@ -7,6 +7,7 @@ import BioCard from '../../components/BioCard.astro';
 import Button from '../../components/Button.astro';
 import Prose from '../../components/Prose.astro';
 import Credentials from '../../components/Credentials.astro';
+import { CERTIFICATION } from '../../data/certification';
 import Testimonial from '../../components/Testimonial.astro';
 import FAQ from '../../components/FAQ.astro';
 import HireBanner from '../../components/HireBanner.astro';
@@ -80,6 +81,7 @@ const faqItems = [
         stats={[
           { label: 'First Umbraco MVP award', value: '2007' },
           { label: 'years building with Umbraco', value: '20' },
+          { label: 'Umbraco Certified', value: CERTIFICATION.level },
         ]}
         badge={{ year: 2026 }}
         timelineLabel="See every award on the timeline"

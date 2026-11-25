@@ -1,11 +1,12 @@
 ---
 import { Image } from 'astro:assets';
 import { mvpBadge } from '../lib/mvp-badges';
+import { CERTIFICATION } from '../data/certification';
 import Chip from './Chip.astro';
 
 /**
  * One career-timeline entry: year pill on the spine, typed marker, title, a short paragraph,
- * links, and (for award entries) the MVP badge floated to the right of the whole entry.
+ * links, and (for award entries) the MVP or certification badge floated to the right of the whole entry.
  * The continuous line and fixed-width year column are drawn by the Timeline page itself
  * (`.tl`), which this component's entries sit inside.
  */
@@ -21,9 +22,10 @@ interface Props {
   title: string;
   description: string;
   badgeYear?: number;
+  certificationBadge?: boolean;
   links?: Link[];
 }
-const { id, year, type, typeLabel, title, description, badgeYear, links } = Astro.props;
+const { id, year, type, typeLabel, title, description, badgeYear, certificationBadge, links } = Astro.props;
 // "2002 to 2007" is split into parts so phones can stack it inside a narrow year column.
 const range = /^(\d{4}) to (\d{4})$/.exec(year);
 ---
@@ -40,6 +42,7 @@ const range = /^(\d{4}) to (\d{4})$/.exec(year);
   </div>
   <div class="hmd-entry__body">
     {badgeYear && <Image class="hmd-entry__badge" src={mvpBadge(badgeYear)} alt={`Official Umbraco MVP ${badgeYear} badge`} width={56} height={56} densities={[1, 2]} format="webp" />}
+    {certificationBadge && <Image class="hmd-entry__badge hmd-entry__badge--cert" src={CERTIFICATION.badge} alt={`${CERTIFICATION.name} badge`} width={53} height={56} densities={[1, 2]} format="webp" />}
     <p class="hmd-entry__type">
       <Chip variant="marker" markerType={type} />
       {typeLabel}
@@ -67,6 +70,10 @@ const range = /^(\d{4}) to (\d{4})$/.exec(year);
   .hmd-entry__body > .hmd-entry__badge {
     grid-column: 2;
     grid-row: 1 / span 4;
+  }
+  /* bundle.css sizes every badge 56 × 56 (the round MVP badges); the certification badge isn't square. */
+  .hmd-entry__badge--cert {
+    width: 53px;
   }
   .hmd-entry__links {
     display: flex;

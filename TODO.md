@@ -28,6 +28,11 @@ git keeps the history, including the launch checklist this replaced.
 ## Dated
 
 - [ ] **10 December 2026**: Umbraco 19 is released. `npm run check:umbraco-versions -- --write`, then build and deploy
+- [ ] Umbraco Certified Master (25 November 2026; listed at
+      https://umbraco.com/training/certified-developers/developer/?uid=40013): add it on UmbraJobs, Sessionize, Gravatar
+      and the GitHub profile README (LinkedIn is done)
+- [ ] **Before 25 November 2028**: renew the Umbraco Certified Master certification, then update the dates in
+      `src/data/certification.ts`
 - [ ] **After 14 December 2026**: Umbraco 13 reaches end of life. Change the home page banner copy
       (`src/components/Marquee.astro`) and reread `/umbraco-upgrades/`
 

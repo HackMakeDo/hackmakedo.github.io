@@ -1,4 +1,5 @@
 /** Shared JSON-LD builders. Site-wide facts live here once, instead of being repeated per page. */
+import { CERTIFICATION } from '../data/certification';
 
 export const SITE_URL = 'https://hackmakedo.com';
 export const PERSON_ID = `${SITE_URL}/#person`;
@@ -15,7 +16,7 @@ export function personOrgGraph() {
         '@type': 'Person',
         '@id': PERSON_ID,
         name: AUTHOR_NAME,
-        description: 'UK-based Umbraco freelancer and contractor, nine-time Umbraco MVP, and the person behind Hack Make Do.',
+        description: 'UK-based Umbraco freelancer and contractor, nine-time Umbraco MVP, Umbraco Certified Master, and the person behind Hack Make Do.',
         jobTitle: 'Freelance Umbraco Developer and Contractor',
         url: SITE_URL,
         image: `${SITE_URL}/images/warren-buckley.jpg`,
@@ -28,6 +29,7 @@ export function personOrgGraph() {
           'https://umbracocommunity.social/@warrenbuckley',
           'https://stackoverflow.com/users/warren-buckley',
           'https://forum.umbraco.com/u/warren',
+          CERTIFICATION.profileUrl, // Umbraco's certified developer page for Warren
           'https://umb.fyi/@warrenbuckley',
           'https://sessionize.com/warrenbuckley/',
           'https://www.nuget.org/profiles/warrenbuckley',
@@ -36,6 +38,15 @@ export function personOrgGraph() {
           'https://x.com/warrenbuckley',
           'https://www.flickr.com/photos/warrenbuckley/',
         ],
+        hasCredential: {
+          '@type': 'EducationalOccupationalCredential',
+          name: CERTIFICATION.name,
+          credentialCategory: 'certification',
+          recognizedBy: { '@type': 'Organization', name: 'Umbraco', url: 'https://umbraco.com' },
+          dateCreated: CERTIFICATION.issued,
+          expires: CERTIFICATION.expires,
+          url: CERTIFICATION.profileUrl,
+        },
         worksFor: { '@id': ORG_ID },
       },
       {
