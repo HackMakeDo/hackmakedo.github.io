@@ -10,19 +10,17 @@ git keeps the history, including the launch checklist this replaced.
 - [x] Google Search Console: in the `blog.hackmakedo.com` property, **Change of address** to `hackmakedo.com`; submit
       `https://hackmakedo.com/sitemap-index.xml` in the `hackmakedo.com` property
 - [x] Bing Webmaster Tools: add the site and submit the same sitemap
-- [ ] Cloudflare: turn on **Crawler Hints** (hackmakedo.com › Caching › Configuration › Crawler Hints). It tells Bing and
-      other IndexNow search engines when a page changes, so updates are recrawled sooner (Bing also feeds ChatGPT search).
-      Off as of 24 November 2026, and the API refuses to change it ("Method not allowed for this authentication scheme"):
-      dashboard only
-- [x] Structured data validated: 0 errors and 0 warnings on every page type, live and built (24 November 2026,
-      `npm run check:structured-data`)
+- [x] Cloudflare: **Crawler Hints** on (24 November 2026). It tells Bing and other IndexNow search engines when a page
+      changes, so updates are recrawled sooner (Bing also feeds ChatGPT search)
+- [x] Structured data validated: 0 errors and 0 warnings on every page type, live and built (last run live
+      25 November 2026, `npm run check:structured-data -- --live`)
 - [x] Google's Rich Results Test on About (ProfilePage), a post (Article) and the upgrades page (Breadcrumb): fine
       (24 November 2026)
 - [x] Re-run the scan at isitagentready.com (level 3; all applicable checks pass)
 - [x] `www.hackmakedo.com` redirects to `hackmakedo.com` (proxied CNAME plus a Redirect Rule)
-- [ ] Cloudflare: turn off **JavaScript detections** (`enable_js`). It adds `/cdn-cgi/challenge-platform/…` to every
-      page and costs live Lighthouse Best Practices points (deprecated APIs). Not in the dashboard on the Free plan: set it with the API
-      (`PUT /zones/{zone}/bot_management` with `{"enable_js": false}`). Bot fight mode is already off
+- [x] Cloudflare: **JavaScript detections** (`enable_js`) off, set with the API (`PUT /zones/{zone}/bot_management`
+      with `{"enable_js": false}`; not in the dashboard on the Free plan). It added `/cdn-cgi/challenge-platform/…` to
+      every page and cost live Lighthouse Best Practices points. Bot fight mode is off too
 - [ ] Watch for 404s in Search Console and Cloudflare for a couple of weeks; a missed old link goes in
       `cloudflare/blog-redirects/blog-url-map.csv`, then `npm run redirects -- --build-map` and `npm run deploy:redirects`
 - [ ] After a few quiet weeks, cancel the WordPress.com plan. Keep the `blog` DNS record and the redirect Worker for good
@@ -37,13 +35,20 @@ git keeps the history, including the launch checklist this replaced.
 
 Research and the full plan are in Claude's project memory (`post-launch-seo-aeo-plan`). In short, in order:
 
-- [ ] Profiles say the same thing ("Umbraco freelancer and contractor · Hack Make Do · hackmakedo.com"): LinkedIn,
-      GitHub, Sessionize (still says Developer Advocate), Polywork, our.umbraco.com, YouTube, Mastodon, X, NuGet and
-      Marketplace. Not the Umbraco community profile until Umbraco makes profiles public
+- [x] Profiles say the same thing ("Umbraco freelancer and contractor", 9× MVP, linking to hackmakedo.com), done
+      25 November 2026: LinkedIn, GitHub (plus the profile README), Sessionize, Mastodon (`rel="me"` verified), Stack
+      Overflow, the Umbraco forum, YouTube, X, Gravatar, and the author panel of all six Umbraco Marketplace packages
+- [ ] Polywork has closed (polywork.com is a parked domain), so the profile can't be edited or deleted, but search
+      engines still show its 2023 copy (Developer Advocate, Frinton-on-Sea). Ask for its removal as outdated content:
+      Google's Remove Outdated Content tool and Bing's Content Removal Tool, URL `https://www.polywork.com/warrenbuckley`
+- [ ] Profiles still to do: the NuGet profile. Not the Umbraco community profile until Umbraco makes profiles
+      public
 - [ ] Publish the Council of the EU case study (below) and write an "Upgrading Umbraco 13 to 17" guide
-- [ ] Link to hackmakedo.com from package READMEs, NuGet and Marketplace listings
-- [ ] Measure monthly: Search Console and Bing queries; ask ChatGPT, Perplexity and Claude who's a good Umbraco
-      contractor in the UK
+- [ ] Link to hackmakedo.com from package READMEs and NuGet listings (the Marketplace author panels already do)
+- [ ] **Every Monday**: `npm run check:ai-answers` (about 15 minutes) and look at the trend it prints. Keep going until
+      Warren is named first for `freelancer`, `contractor` and `upgrade` on most assistants. Run the first one (the
+      baseline) now, before the 13 to 17 guide and the Council case study go live, so their effect shows
+- [ ] Monthly: Search Console and Bing Webmaster Tools queries for the hire and upgrade pages, and `npm run report:traffic`
 
 ## Blog posts: Umbraco versions
 

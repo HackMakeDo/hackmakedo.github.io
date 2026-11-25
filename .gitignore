@@ -4,6 +4,9 @@ dist/
 .lighthouseci/
 npm-debug.log*
 
+# AI-answer results from npm run check:ai-answers (kept local: the repo is public)
+ai-answers/
+
 # Local secrets (CLOUDFLARE_API_TOKEN for report:traffic)
 .env
 .DS_Store

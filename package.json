@@ -13,6 +13,7 @@
     "check:links": "node scripts/check-post-links.ts",
     "check:umbraco-versions": "node scripts/check-umbraco-versions.ts",
     "check:structured-data": "node scripts/check-structured-data.ts",
+    "check:ai-answers": "node scripts/ai-answers.ts",
     "report:traffic": "node --env-file-if-exists=.env scripts/traffic-report.ts",
     "lighthouse:mobile": "lhci autorun --config=./lighthouse/lighthouserc.mobile.cjs",
     "lighthouse:desktop": "lhci autorun --config=./lighthouse/lighthouserc.desktop.cjs",
