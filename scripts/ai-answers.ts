@@ -5,6 +5,7 @@
  *   npm run check:ai-answers -- --only chatgpt,claude  just these assistants (ids below)
  *   npm run check:ai-answers -- --questions freelancer,upgrade
  *   npm run check:ai-answers -- --report               show the trend only
+ *   npm run check:ai-answers -- --rescore              re-score saved answers after changing the rules below
  *
  * You ask; the script records. For each question it copies the question to the clipboard and opens the
  * assistant (with the question filled in where the site allows it). Ask it, copy the whole answer with the
@@ -55,8 +56,19 @@ const HEADER = 'date,assistant,question,named,position,listed,cited,stale\n';
 
 const NAMED = /Warren Buckley|Hack ?Make ?Do/i;
 const CITED = /hackmakedo\.com/i;
-/** Out-of-date claims worth fixing at the source (profiles, the Umbraco HQ blog post). */
-const STALE = /(works?|working) (at|for) Umbraco( HQ)?\b|currently at Umbraco|Developer Advocate at Umbraco|Umbraco HQ employee/i;
+/**
+ * Out-of-date claims worth fixing at the source (profiles, the Umbraco HQ blog post): a present-tense claim that he
+ * works at Umbraco, in a sentence about Warren. Past tense ("previously a Developer Advocate", "(2021–2023)") is right.
+ */
+const STALE = /\b(?:works?|is working|is employed) (?:at|for) Umbraco\b|\bcurrently (?:at|with|works? (?:at|for)) Umbraco\b|\b(?:is|as) (?:an? |the )?(?:Developer Advocate|Software Engineer|employee) (?:at|for) Umbraco\b|\bUmbraco HQ employee\b/i;
+const PAST = /previously|formerly|former|used to|until|left|spent|\b(?:19|20)\d\d\s*[–-]|\bwas\b|\bwere\b|\bserved\b/i;
+const ABOUT_WARREN = /Warren|Buckley|\bhe\b|\bhis\b|\bhim\b/i;
+
+function isStale(answer: string): boolean {
+  return answer
+    .split(/(?<=[.!?])\s+|\n+/)
+    .some((sentence) => STALE.test(sentence) && ABOUT_WARREN.test(sentence) && !PAST.test(sentence));
+}
 /** A recommendation item: a numbered or bulleted line, or a heading, at the start of a line. */
 const ITEM = /^ {0,1}(?:\d+[.)]|[-*•]|#{2,4})\s+\S/;
 
@@ -70,7 +82,7 @@ export function score(answer: string): Score {
     position: index === -1 ? null : index + 1,
     listed: items.length,
     cited: CITED.test(answer),
-    stale: STALE.test(answer),
+    stale: isStale(answer),
   };
 }
 
@@ -150,6 +162,26 @@ async function ask() {
 }
 
 /** The last few runs per question and assistant: "#2/7" = item 2 of 7, "✓" = named outside a list, "·" = not named. */
+/** --rescore: re-score every saved answer with the current rules (after changing NAMED, ITEM or STALE). */
+async function rescore() {
+  if (!existsSync(CSV)) return;
+  const lines = (await readFile(CSV, 'utf8')).trim().split('\n');
+  const out = [lines[0]];
+  for (const line of lines.slice(1)) {
+    const [date, assistant, question] = line.split(',');
+    const file = `${DIR}/${date}/${assistant}-${question}.md`;
+    if (!existsSync(file)) {
+      out.push(line);
+      continue;
+    }
+    const answer = (await readFile(file, 'utf8')).split('\n').slice(4).join('\n');
+    const s = score(answer);
+    out.push([date, assistant, question, s.named, s.position ?? '', s.listed, s.cited, s.stale].join(','));
+  }
+  await writeFile(CSV, out.join('\n') + '\n');
+  console.log(`Re-scored ${out.length - 1} answers.`);
+}
+
 async function report(runs = 6) {
   if (!existsSync(CSV)) {
     console.log('No results yet: run npm run check:ai-answers');
@@ -183,5 +215,6 @@ async function report(runs = 6) {
   }
 }
 
-if (!process.argv.includes('--report')) await ask();
+if (process.argv.includes('--rescore')) await rescore();
+else if (!process.argv.includes('--report')) await ask();
 await report();
