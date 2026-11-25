@@ -77,6 +77,8 @@ const timeline = defineCollection({
     title: z.string(),
     body: z.string(),
     badge: z.number().optional(),
+    /** Show the Umbraco Certified Master badge (src/data/certification.ts) instead of an MVP badge. */
+    certificationBadge: z.boolean().default(false),
     links: z.array(z.object({ label: z.string(), href: z.string() })).default([]),
     order: z.number().default(0),
   }),

@@ -1,0 +1,10 @@
+{
+  "year": 2026,
+  "yearLabel": "2026",
+  "type": "award",
+  "title": "Umbraco Certified Master",
+  "body": "Passed Umbraco's Master certification, the highest of its three developer certification levels.",
+  "certificationBadge": true,
+  "links": [],
+  "order": 1
+}

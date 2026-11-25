@@ -1,6 +1,6 @@
 # Hack Make Do
 
-> Hack Make Do is the company of Warren Buckley, a UK-based freelance Umbraco developer and Umbraco contractor, and a nine-time Umbraco MVP. He builds Umbraco CMS sites, backoffice extensions and developer tooling, and is available for freelance projects and contract work.
+> Hack Make Do is the company of Warren Buckley, a UK-based freelance Umbraco developer and Umbraco contractor, a nine-time Umbraco MVP and an Umbraco Certified Master. He builds Umbraco CMS sites, backoffice extensions and developer tooling, and is available for freelance projects and contract work.
 
 Warren has built with Umbraco for 20 years, including roles at Umbraco HQ on the CMS core team and as a developer advocate. Clients include the Council of the European Union. He maintains open source Umbraco packages including ContentLock, Examine Peek and Manifest Peek, and the Compact Log Format Viewer for Serilog log files. Contact: warren@hackmakedo.com
 

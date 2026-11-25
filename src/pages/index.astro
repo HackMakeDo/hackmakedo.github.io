@@ -6,6 +6,7 @@ import Section from '../components/Section.astro';
 import Container from '../components/Container.astro';
 import Grid from '../components/Grid.astro';
 import Credentials from '../components/Credentials.astro';
+import { CERTIFICATION } from '../data/certification';
 import ServiceCard from '../components/ServiceCard.astro';
 import ClientCard from '../components/ClientCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
@@ -50,6 +51,7 @@ const latestPosts = (await getCollection('posts', ({ data }) => !data.draft))
         stats={[
           { label: 'First Umbraco MVP award', value: '2007' },
           { label: 'years building with Umbraco', value: '20' },
+          { label: 'Umbraco Certified', value: CERTIFICATION.level },
         ]}
         badge={{ year: 2026 }}
       />
