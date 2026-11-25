@@ -11,14 +11,14 @@ export const CERTIFICATION: {
   level: string;
   issued: string;
   expires: string;
-  /** Umbraco's public list of certified developers: the proof. */
-  listUrl: string;
+  /** Warren's page on Umbraco's public list of certified developers: the proof. */
+  profileUrl: string;
   badge: ImageMetadata;
 } = {
   name: 'Umbraco Certified Master',
   level: 'Master',
   issued: '2026-11-25',
   expires: '2028-11-25',
-  listUrl: 'https://umbraco.com/training/certified-developers/',
+  profileUrl: 'https://umbraco.com/training/certified-developers/developer/?uid=40013',
   badge,
 };

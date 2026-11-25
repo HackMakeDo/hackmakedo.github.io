@@ -44,7 +44,7 @@ export function personOrgGraph() {
           recognizedBy: { '@type': 'Organization', name: 'Umbraco', url: 'https://umbraco.com' },
           dateCreated: CERTIFICATION.issued,
           expires: CERTIFICATION.expires,
-          url: CERTIFICATION.listUrl,
+          url: CERTIFICATION.profileUrl,
         },
         worksFor: { '@id': ORG_ID },
       },

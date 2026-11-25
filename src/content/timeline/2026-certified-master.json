@@ -5,6 +5,11 @@
   "title": "Umbraco Certified Master",
   "body": "Passed Umbraco's Master certification, the highest of its three developer certification levels.",
   "certificationBadge": true,
-  "links": [],
+  "links": [
+    {
+      "label": "Umbraco's certified developer listing ↗",
+      "href": "https://umbraco.com/training/certified-developers/developer/?uid=40013"
+    }
+  ],
   "order": 1
 }
