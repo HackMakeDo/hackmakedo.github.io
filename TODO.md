@@ -38,7 +38,10 @@ Research and the full plan are in Claude's project memory (`post-launch-seo-aeo-
 - [x] Profiles say the same thing ("Umbraco freelancer and contractor", 9× MVP, linking to hackmakedo.com), done
       25 November 2026: LinkedIn, GitHub (plus the profile README), Sessionize, Mastodon (`rel="me"` verified), Stack
       Overflow, the Umbraco forum, YouTube, X, Gravatar, and the author panel of all six Umbraco Marketplace packages
-- [ ] Profiles still to do: Polywork, the NuGet profile. Not the Umbraco community profile until Umbraco makes profiles
+- [ ] Polywork has closed (polywork.com is a parked domain), so the profile can't be edited or deleted, but search
+      engines still show its 2023 copy (Developer Advocate, Frinton-on-Sea). Ask for its removal as outdated content:
+      Google's Remove Outdated Content tool and Bing's Content Removal Tool, URL `https://www.polywork.com/warrenbuckley`
+- [ ] Profiles still to do: the NuGet profile. Not the Umbraco community profile until Umbraco makes profiles
       public
 - [ ] Publish the Council of the EU case study (below) and write an "Upgrading Umbraco 13 to 17" guide
 - [ ] Link to hackmakedo.com from package READMEs and NuGet listings (the Marketplace author panels already do)
