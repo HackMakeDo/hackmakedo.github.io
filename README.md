@@ -56,7 +56,7 @@ npm run preview    # serve dist/
 | `src/styles/` | `tokens.css` and `bundle.css`, the site's only CSS, inlined into every page |
 | `src/data/` | Data in TypeScript: projects, topics, published case studies, Umbraco versions |
 | `src/lib/` | Build helpers: structured data, the Markdown copies, code-block and Markdown plugins |
-| `public/` | Static files served as-is: images (blog images under `images/blog/<post>/`), fonts, `robots.txt`, `llms.txt` |
+| `public/` | Static files served as-is: images (blog images under `images/blog/<post>/`), fonts, `robots.txt`, `llms.txt`. Keep `images/warren_square.jpg` at that path: the Umbraco Marketplace author panel of every package loads it (`ImageUrl` in each package's `umbraco-marketplace.json`) |
 | `scripts/` | The check and maintenance scripts above |
 | `cloudflare/` | The two Workers: `blog-redirects/` (the old blog, with its URL map CSV) and `markdown-negotiation/` |
 | `lighthouse/` | Lighthouse CI configs and URL lists |
