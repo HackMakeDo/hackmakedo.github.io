@@ -101,7 +101,7 @@ Warren has worked with Umbraco since about 2005, including roles at Umbraco HQ o
 
 - [GitHub](https://github.com/warrenbuckley)
 - [LinkedIn](https://www.linkedin.com/in/warrenbuckley/)
-- [YouTube](https://youtube.com/warrenbuckley)
+- [YouTube](https://www.youtube.com/@WarrenBuckley)
 ```
 
 ### Draft `/robots.txt`

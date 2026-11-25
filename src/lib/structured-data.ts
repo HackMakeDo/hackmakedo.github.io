@@ -24,7 +24,7 @@ export function personOrgGraph() {
         sameAs: [
           'https://github.com/warrenbuckley',
           'https://www.linkedin.com/in/warrenbuckley/',
-          'https://www.youtube.com/warrenbuckley',
+          'https://www.youtube.com/@WarrenBuckley',
           'https://umbracocommunity.social/@warrenbuckley',
           'https://stackoverflow.com/users/warren-buckley',
           'https://forum.umbraco.com/u/warren',
