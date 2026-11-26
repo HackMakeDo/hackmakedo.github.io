@@ -107,10 +107,19 @@ export function breadcrumbList(trail: BreadcrumbItem[], currentPath: string) {
   };
 }
 
-export function articleSchema(options: { title: string; description: string; datePublished: Date; dateModified?: Date; url: string; image: string }) {
+export function articleSchema(options: {
+  title: string;
+  description: string;
+  datePublished: Date;
+  dateModified?: Date;
+  url: string;
+  image: string;
+  /** TechArticle for how-to guides (e.g. the upgrade guide); Article otherwise. */
+  type?: 'Article' | 'TechArticle';
+}) {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': options.type ?? 'Article',
     headline: options.title,
     description: options.description,
     datePublished: options.datePublished.toISOString(),

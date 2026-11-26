@@ -22,6 +22,7 @@ Warren has built with Umbraco for 20 years, including roles at Umbraco HQ on the
 
 ## Writing
 
+- [How to upgrade Umbraco 13 to 17](https://hackmakedo.com/umbraco-upgrades/13-to-17/): Step-by-step guide: what changed in Umbraco 14, 15, 16 and 17, a checklist before you start, and rebuilding backoffice extensions
 - [Blog](https://hackmakedo.com/blog/): Umbraco, Bellissima and .NET tutorials
 
 ## Optional

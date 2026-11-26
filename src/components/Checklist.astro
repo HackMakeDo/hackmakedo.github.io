@@ -1,0 +1,25 @@
+---
+/**
+ * A tickable checklist: real checkboxes with labels, styled to the brand (appearance: none, so no
+ * accent-color contrast bugs). Ticks are not saved: it is a reading aid, and works without JavaScript.
+ */
+import type { ChecklistItem } from '../data/upgrade-guide';
+
+interface Props {
+  /** Prefix for the checkbox ids, unique on the page. */
+  idPrefix: string;
+  items: ChecklistItem[];
+}
+const { idPrefix, items } = Astro.props;
+---
+
+<ul class="hmd-checklist">
+  {items.map((item) => (
+    <li>
+      <input type="checkbox" id={`${idPrefix}-${item.id}`} aria-describedby={item.html ? `${idPrefix}-${item.id}-d` : undefined} />
+      <label for={`${idPrefix}-${item.id}`}>{item.label}</label>
+      {/* Outside the label: a link inside a label would be a control inside a control. */}
+      {item.html && <p class="hmd-checklist__detail" id={`${idPrefix}-${item.id}-d`} set:html={item.html} />}
+    </li>
+  ))}
+</ul>

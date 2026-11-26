@@ -1,0 +1,353 @@
+---
+/**
+ * The Umbraco 13 to 17 upgrade guide: the how-to companion to the /umbraco-upgrades/ hire page.
+ * Its job is to be found and quoted for "upgrade Umbraco 13 to 17" questions, and to show readers the size of
+ * the job so the ones who'd rather hand it over get in touch. Content lives in src/data/upgrade-guide.ts.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import Section from '../../../components/Section.astro';
+import SectionHeading from '../../../components/SectionHeading.astro';
+import Prose from '../../../components/Prose.astro';
+import Callout from '../../../components/Callout.astro';
+import TableOfContents from '../../../components/TableOfContents.astro';
+import VersionJourney from '../../../components/VersionJourney.astro';
+import Checklist from '../../../components/Checklist.astro';
+import Steps from '../../../components/Steps.astro';
+import Compare from '../../../components/Compare.astro';
+import CodeBlock from '../../../components/CodeBlock.astro';
+import FAQ from '../../../components/FAQ.astro';
+import ContactCard from '../../../components/ContactCard.astro';
+import { getCollection } from 'astro:content';
+import { articleSchema, faqPageSchema } from '../../../lib/structured-data';
+import { UMBRACO_VERSIONS, formatDate } from '../../../data/umbraco-versions';
+import {
+  GUIDE_UPDATED,
+  VERSION_STOPS,
+  CHECKLIST,
+  STEPS,
+  FAQ_ITEMS,
+  BREAKING_CHANGES_URL,
+  UPGRADE_DETAILS_URL,
+} from '../../../data/upgrade-guide';
+
+const TITLE = 'How to upgrade Umbraco 13 to 17';
+const DESCRIPTION =
+  'A step-by-step guide to upgrading Umbraco 13 to 17: what changed in each version, a checklist before you start, and how to rebuild your backoffice extensions.';
+const updated = new Date(GUIDE_UPDATED);
+
+const v13 = UMBRACO_VERSIONS.find((v) => v.version === 13)!;
+const v17 = UMBRACO_VERSIONS.find((v) => v.version === 17)!;
+const v18 = UMBRACO_VERSIONS.find((v) => v.version === 18)!;
+
+/** Warren's posts about building for the new backoffice, newest first. */
+const BACKOFFICE_POSTS = [
+  'my-first-umbraco-bellissima-package',
+  'scaffold-umbraco-v14-package-development-project-with-vite-typescript-lit',
+  'creating-a-custom-condition-for-umbraco-bellissima-aka-v14',
+  'how-to-overwrite-the-save-publish-button-and-more-in-umbraco-v14',
+  'how-to-refresh-the-umbraco-v14-bellissima-content-tree-with-code',
+  'how-to-create-an-umbraco-v14-belissima-svg-icon-pack-with-node-js',
+  'using-signalr-ioptionsmonitor-with-umbraco-bellissima-for-reactive-net-options',
+];
+const backofficePosts = (await getCollection('posts', ({ id, data }) => BACKOFFICE_POSTS.includes(id) && !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const toc = [
+  { id: 'why-h', label: 'Why upgrade now' },
+  { id: 'rebuild-h', label: 'Upgrade or rebuild?' },
+  { id: 'target-h', label: 'Umbraco 17 or 18?' },
+  { id: 'changes-h', label: 'What changed from 13 to 17' },
+  { id: 'checklist-h', label: 'Before you start' },
+  { id: 'steps-h', label: 'The upgrade, step by step' },
+  { id: 'backoffice-h', label: 'Rebuilding backoffice extensions' },
+  { id: 'gotchas-h', label: 'What catches people out' },
+  { id: 'faq-h', label: 'Questions' },
+];
+---
+
+<BaseLayout
+  title={`${TITLE}: a step-by-step guide`}
+  description={DESCRIPTION}
+  ogImage="/og/umbraco-upgrades/13-to-17.png"
+  currentPath="/umbraco-upgrades/"
+  hireHref="#contact-h"
+  jsonLd={[
+    articleSchema({
+      type: 'TechArticle',
+      title: TITLE,
+      description: DESCRIPTION,
+      datePublished: updated,
+      dateModified: updated,
+      url: '/umbraco-upgrades/13-to-17/',
+      image: '/og/umbraco-upgrades/13-to-17.png',
+    }),
+    faqPageSchema(FAQ_ITEMS),
+  ]}
+>
+  <PageHeader
+    trail={[{ label: 'Home', href: '/' }, { label: 'Umbraco upgrades', href: '/umbraco-upgrades/' }, { label: '13 to 17 guide' }]}
+    eyebrow="Guide"
+    title={TITLE}
+    lead={`Umbraco 13 reaches end of life on ${formatDate(v13.endOfLife)}. You can upgrade straight to Umbraco 17, the current long-term support release, and the database migrations run for you. Most of the work is in what Umbraco 14 removed: the AngularJS backoffice, Nested Content, the old grid and macros.`}
+  >
+    <p class="hmd-meta guide__meta">
+      By <a href="/about/">Warren Buckley</a>, Umbraco Certified Master and nine-time Umbraco MVP · Updated{' '}
+      <time datetime={GUIDE_UPDATED}>{formatDate(GUIDE_UPDATED)}</time>, checked against{' '}
+      <a href={BREAKING_CHANGES_URL}>Umbraco’s breaking changes</a>
+    </p>
+  </PageHeader>
+
+  <div class="hmd-container guide">
+    <div class="guide__layout">
+      <article class="guide__article">
+        <section aria-labelledby="why-h">
+          <SectionHeading lead="Why upgrade" boxed="now" id="why-h" />
+          <Prose>
+            <p>
+              Because Umbraco 13 stops getting security fixes on {formatDate(v13.endOfLife)}, and the .NET 8 it runs on
+              is already out of support. The site won’t stop working that day, but any vulnerability found after it stays
+              open on your site.
+            </p>
+            <p>
+              Placeholder: the point about vulnerabilities being found faster, now that AI tools are used to look for
+              them. Needs a source Warren approves (published research or a security vendor’s report) before it goes in.
+            </p>
+            <p>
+              Umbraco 17 has security fixes until {formatDate(v17.endOfLife)}, so an upgrade now covers you for the next
+              two years. <a href="/umbraco-upgrades/#versions-h">Which Umbraco versions are supported</a>.
+            </p>
+          </Prose>
+        </section>
+
+        <section aria-labelledby="rebuild-h">
+          <SectionHeading lead="Upgrade or" boxed="rebuild?" id="rebuild-h" />
+          <Prose>
+            <p>
+              Most Umbraco 13 sites can be upgraded in place. A rebuild is worth weighing up when the site leans heavily
+              on what Umbraco 14 removed, or when a redesign is coming anyway.
+            </p>
+          </Prose>
+          <div class="hmd-mt-8">
+            <Compare
+              options={[
+                {
+                  title: 'Upgrade in place when…',
+                  points: [
+                    'The content model still fits what editors do today',
+                    'Custom backoffice code is modest, or there is none',
+                    'Content is in Block List or Block Grid, not Nested Content or the old grid',
+                    'Placeholder: Warren’s own rule of thumb',
+                  ],
+                },
+                {
+                  title: 'Consider a rebuild when…',
+                  points: [
+                    'Much of the content sits in Nested Content, Grid Layout or macros',
+                    'The backoffice relies on a lot of custom AngularJS',
+                    'A redesign or a new content model is due anyway',
+                    'Placeholder: Warren’s own rule of thumb',
+                  ],
+                },
+              ]}
+            />
+          </div>
+        </section>
+
+        <section aria-labelledby="target-h">
+          <SectionHeading lead="Umbraco" boxed="17 or 18?" id="target-h" />
+          <Prose>
+            <p>
+              Umbraco 17 for most sites. It is a long-term support release, with security fixes until
+              {' '}{formatDate(v17.endOfLife)}. Umbraco 18 is newer, but it is a short-term support release that reaches end
+              of life on {formatDate(v18.endOfLife)}, so you would be upgrading again within months.
+            </p>
+            <table>
+              <caption class="hmd-sr">Umbraco 17 and 18 support compared</caption>
+              <thead>
+                <tr><th scope="col">Version</th><th scope="col">Support</th><th scope="col">.NET</th><th scope="col">End of life</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Umbraco 17</th><td>Long-term (LTS)</td><td>.NET 10</td><td>{formatDate(v17.endOfLife)}</td></tr>
+                <tr><th scope="row">Umbraco 18</th><td>Short-term (STS)</td><td>.NET 10</td><td>{formatDate(v18.endOfLife)}</td></tr>
+              </tbody>
+            </table>
+          </Prose>
+        </section>
+
+        <section aria-labelledby="changes-h">
+          <SectionHeading lead="What changed from" boxed="13 to 17" id="changes-h" />
+          <Prose>
+            <p>
+              Four major versions sit between 13 and 17. You don’t install each one, but you do take on everything each
+              one changed. Umbraco 14 is where nearly all the work is.
+            </p>
+          </Prose>
+          <div class="hmd-mt-8">
+            <VersionJourney from={{ version: 13, dotnet: '.NET 8', label: 'Where you start: the latest Umbraco 13 release.' }} stops={VERSION_STOPS} />
+          </div>
+        </section>
+
+        <section aria-labelledby="checklist-h">
+          <SectionHeading lead="Before you" boxed="start" id="checklist-h" />
+          <Prose>
+            <p>
+              Work through this list before you change any code. It tells you how big your upgrade is. Tick items off as
+              you go (ticks aren’t saved).
+            </p>
+          </Prose>
+          <div class="hmd-mt-8">
+            <Checklist idPrefix="pre" items={CHECKLIST} />
+          </div>
+        </section>
+
+        <section aria-labelledby="steps-h">
+          <SectionHeading lead="The upgrade, step by" boxed="step" id="steps-h" />
+          <Prose>
+            <p>
+              The order matters: get the project building on .NET 10 first, then let the migrations run against a copy of
+              your data. Umbraco’s own steps are in its <a href={UPGRADE_DETAILS_URL}>upgrade guide</a>.
+            </p>
+          </Prose>
+          <div class="hmd-mt-8">
+            <Steps steps={STEPS} />
+          </div>
+          <div class="hmd-mt-8">
+            <CodeBlock lang="XML" file="YourSite.csproj">
+              <span class="line diff remove">  &lt;TargetFramework&gt;net8.0&lt;/TargetFramework&gt;</span>
+              <span class="line diff add">  &lt;TargetFramework&gt;net10.0&lt;/TargetFramework&gt;</span>
+            </CodeBlock>
+          </div>
+          <div class="hmd-mt-6">
+            <CodeBlock lang="Razor" file="Views/_ViewImports.cshtml">
+              <span class="line diff remove">@addTagHelper *, Smidge</span>
+              <span class="line diff remove">@inject Smidge.SmidgeHelper SmidgeHelper</span>
+            </CodeBlock>
+          </div>
+        </section>
+
+        <section aria-labelledby="backoffice-h">
+          <SectionHeading lead="Rebuilding backoffice" boxed="extensions" id="backoffice-h" />
+          <Prose>
+            <p>
+              Every AngularJS dashboard, property editor, section and tree has to be rebuilt as a web component. On a big
+              site this is most of the upgrade: when I upgraded the Council of the European Union’s site from Umbraco 13
+              to 16, about 90% of the work was rebuilding its integrations and extensions.
+            </p>
+            <p>
+              Placeholder: how Warren approaches a rebuild (inventory first, what to rebuild as-is, what to replace with
+              a built-in feature), and a short before-and-after code example if he has one he’s happy to show.
+            </p>
+            <p>I’ve written about building for the new backoffice:</p>
+            <ul>
+              {backofficePosts.map((post) => (
+                <li><a href={`/blog/${post.id}/`}>{post.data.title}</a></li>
+              ))}
+            </ul>
+          </Prose>
+          <div class="hmd-mt-8">
+            <Callout label="Rather hand it over?">
+              <p>
+                If you’d rather not do this yourself, <a href="/umbraco-upgrades/">I upgrade Umbraco sites</a> as a
+                freelancer or contractor, working remotely from the UK. <a href="#contact-h">Get in touch</a>.
+              </p>
+            </Callout>
+          </div>
+        </section>
+
+        <section aria-labelledby="gotchas-h">
+          <SectionHeading lead="What catches people" boxed="out" id="gotchas-h" />
+          <Prose>
+            <ul>
+              <li>
+                <strong>The site seems to hang on first boot.</strong> The Umbraco 15 block editor migration can take a long
+                time on a big site, and the site won’t respond until it finishes. Clean up old content versions first, and
+                if the host gives up, raise <code>startupTimeLimit</code> in <code>web.config</code>.
+              </li>
+              <li>
+                <strong>The connection string.</strong> Umbraco’s guide says it needs
+                {' '}<code>TrustServerCertificate=True</code> for the upgrade to complete.
+              </li>
+              <li>
+                <strong>Odd errors in the browser at startup.</strong> Umbraco’s guide warns that Chrome caches
+                aggressively: clear the cache and do a hard reload before chasing anything else.
+              </li>
+              <li>
+                <strong>System dates.</strong> Umbraco 17 converts stored dates to UTC, using the time zone it detects
+                for the server. If that might be wrong, set the time zone for the migration in
+                {' '}<code>appsettings.json</code> before you upgrade.
+              </li>
+              <li>Placeholder: what has caught Warren out on real upgrades, and isn’t in Umbraco’s docs.</li>
+            </ul>
+          </Prose>
+        </section>
+
+        <section aria-labelledby="faq-h">
+          <SectionHeading lead="Common" boxed="questions" id="faq-h" />
+          <div class="hmd-mt-8">
+            <FAQ items={FAQ_ITEMS} />
+          </div>
+        </section>
+      </article>
+
+      <aside class="guide__toc">
+        <TableOfContents items={toc} />
+      </aside>
+    </div>
+  </div>
+
+  <Section class="hmd-pink" ariaLabel="Contact" containerVariant="text">
+    <ContactCard
+      heading={{ boxed: 'talk', lead: "Let's", id: 'contact-h' }}
+      intro="Planning an Umbraco 13 to 17 upgrade? Tell me roughly how big the site is, which packages it uses, and what custom backoffice code it has."
+      email="warren@hackmakedo.com"
+    />
+  </Section>
+</BaseLayout>
+
+<script src="../../../elements/index.ts"></script>
+
+<style>
+  .guide {
+    padding-block: 0 96px;
+  }
+  .guide__meta {
+    margin-top: var(--space-4);
+  }
+  .guide__meta :global(a), .guide__meta a {
+    color: var(--accent-text);
+  }
+  /* Article and contents side by side when there is room, as on blog posts; the contents wrap below on narrow screens. */
+  .guide__layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 64px;
+    margin-top: 16px;
+  }
+  .guide__article {
+    flex: 999 1 560px;
+    min-width: 0;
+    max-width: 760px;
+    display: grid;
+    /* minmax(0, 1fr): without it the column grows to its widest child (code, the table) and the page scrolls sideways on phones. */
+    grid-template-columns: minmax(0, 1fr);
+    gap: 80px;
+  }
+  .guide__article > section > :global(.hmd-heading) {
+    margin-bottom: var(--space-6);
+  }
+  .guide__toc {
+    flex: 1 1 240px;
+    min-width: 0;
+    max-width: 300px;
+  }
+  @media (max-width: 640px) {
+    .guide {
+      padding-block: 0 64px;
+    }
+    .guide__article {
+      gap: 56px;
+    }
+  }
+</style>

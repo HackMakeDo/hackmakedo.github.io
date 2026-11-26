@@ -11,6 +11,7 @@ module.exports = [
   'http://localhost/umbraco-freelancer/',
   'http://localhost/umbraco-contractor/',
   'http://localhost/umbraco-upgrades/',
+  'http://localhost/umbraco-upgrades/13-to-17/',
   'http://localhost/about/',
   'http://localhost/work/',
   'http://localhost/blog/using-signalr-ioptionsmonitor-with-umbraco-bellissima-for-reactive-net-options/',
