@@ -733,6 +733,7 @@ hmd-marquee:not(:defined) .hmd-marquee__pause { display: none; }
 
 /* ============ Checklist ============ */
 /* Real checkboxes, drawn with appearance: none (a square box, pink with a navy tick when checked).
+   Ticking means "applies", not "done", so a ticked item is not struck through.
    Forced colours get the native control back, so the tick never disappears. */
 .hmd-checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); color: var(--ink); }
 .hmd-checklist li { display: grid; grid-template-columns: 24px 1fr; column-gap: var(--space-4); align-items: start; }
@@ -748,7 +749,6 @@ hmd-marquee:not(:defined) .hmd-marquee__pause { display: none; }
 .hmd-checklist input:checked::before { transform: translateY(-2px) rotate(-45deg) scale(1); }
 .hmd-checklist input:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; }
 .hmd-checklist label { grid-column: 2; cursor: pointer; font-family: var(--font-body); font-weight: 600; font-size: 17px; line-height: 1.5; }
-.hmd-checklist input:checked + label { color: var(--ink-muted); text-decoration: line-through; }
 .hmd-checklist__detail { grid-column: 2; margin: var(--space-1) 0 0; font-family: var(--font-body); font-size: 15px; line-height: 1.5; color: var(--ink-muted); }
 .hmd-checklist__detail a { color: var(--accent-text); }
 @media (forced-colors: active) { .hmd-checklist input { appearance: auto; } .hmd-checklist input::before { content: none; } }

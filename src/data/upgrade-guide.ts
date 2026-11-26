@@ -64,11 +64,11 @@ export const VERSION_STOPS: VersionStop[] = [
       },
       {
         title: 'XPath and Smidge are removed',
-        html: 'Use Dynamic Roots instead of XPath in the Multinode Treepicker. Remove the Smidge lines from <code>_ViewImports.cshtml</code>.',
+        html: 'XPath queries, such as in the Multinode Treepicker, need replacing, and Smidge no longer bundles assets.',
       },
       {
         title: 'Two-factor and external logins need registering in the backoffice',
-        html: 'Through the new <code>mfaLoginProvider</code> and <code>authProvider</code> extension types.',
+        html: 'Both now need a registration in the new backoffice before they appear.',
       },
     ],
   },
@@ -80,15 +80,15 @@ export const VERSION_STOPS: VersionStop[] = [
     changes: [
       {
         title: 'Snapshots are removed',
-        html: 'Code using <code>IPublishedSnapshot</code> or <code>IPublishedSnapshotAccessor</code> moves to <code>IPublishedContentCache</code> and <code>IPublishedMediaCache</code>. Models Builder models need regenerating.',
+        html: 'Code that reads published content through <code>IPublishedSnapshot</code> needs rewriting, and Models Builder models need regenerating.',
       },
       {
         title: 'Block editor content is migrated',
-        html: 'The internal data format of every block editor changes, and a migration converts it on first boot. The site does not respond until it finishes, so clean up old content versions first.',
+        html: 'The internal data format of every block editor changes, and a migration converts it on first boot. The site does not respond until it finishes, which can take a long time on a big site.',
       },
       {
         title: 'Static files are precompressed',
-        html: 'ASP.NET Core 9 adds <code>.br</code> and <code>.gz</code> files. Set <code>&lt;CompressionEnabled&gt;false&lt;/CompressionEnabled&gt;</code> in the Umbraco project.',
+        html: 'ASP.NET Core 9 adds <code>.br</code> and <code>.gz</code> copies of static files, which the Umbraco project needs configuring for.',
       },
     ],
   },
@@ -100,7 +100,7 @@ export const VERSION_STOPS: VersionStop[] = [
     changes: [
       {
         title: 'TinyMCE is removed',
-        html: 'Rich text data types are migrated to Tiptap during the upgrade, unless a third-party TinyMCE package is installed first. TinyMCE plugins and custom configuration need redoing for Tiptap.',
+        html: 'Rich text data types are migrated to Tiptap during the upgrade. TinyMCE plugins and custom configuration don’t come with them.',
       },
       {
         title: 'Package migrations are asynchronous',
@@ -120,11 +120,11 @@ export const VERSION_STOPS: VersionStop[] = [
     changes: [
       {
         title: 'System dates are stored in UTC',
-        html: 'A migration converts dates stored in server time to UTC. You can disable it, or tell it the server’s time zone, in <code>appsettings.json</code>.',
+        html: 'A migration converts dates stored in server time to UTC, based on the time zone it detects for the server.',
       },
       {
         title: 'InMemoryAuto has moved to its own package',
-        html: 'If you use the <code>InMemoryAuto</code> Models Builder mode, or edit templates in the backoffice, add <code>Umbraco.Cms.DevelopmentMode.Backoffice</code>.',
+        html: 'Sites using the <code>InMemoryAuto</code> Models Builder mode, or editing templates in the backoffice, need an extra package.',
       },
       {
         title: 'HTTPS is on by default',
@@ -132,7 +132,7 @@ export const VERSION_STOPS: VersionStop[] = [
       },
       {
         title: 'Backoffice extensions calling the Management API',
-        html: 'Their <code>fetch</code> requests must include <code>credentials: \'include\'</code>.',
+        html: 'Backoffice sign-in was tightened, so custom extensions that call the Management API may need changes.',
       },
       {
         title: 'URL providers and dependencies',
@@ -149,17 +149,21 @@ export interface ChecklistItem {
   html?: string;
 }
 
-/** Before you start. Each item follows from a change above or from Umbraco's "Before you upgrade" list. */
+/**
+ * "How big is your upgrade?": each item is something about a site that makes a 13 to 17 upgrade bigger, and
+ * follows from a change in VERSION_STOPS. Readers tick what applies; it sizes the job, it isn't a to-do list.
+ */
 export const CHECKLIST: ChecklistItem[] = [
-  { id: 'latest-13', label: 'Update to the latest Umbraco 13 release', html: 'Umbraco’s upgrade path to 17 starts from the latest 13.' },
-  { id: 'packages', label: 'Check every package has an Umbraco 17 version', html: 'Look at the “Umbraco versions” on each package’s page on the <a href="https://marketplace.umbraco.com/">Umbraco Marketplace</a>. Note any without one.' },
-  { id: 'backoffice', label: 'List your custom backoffice code', html: 'Every <code>package.manifest</code>, AngularJS dashboard, property editor, section and tree.' },
-  { id: 'editors', label: 'Find content using removed editors', html: 'Nested Content, Grid Layout, the legacy Media Picker and macros.' },
-  { id: 'rte', label: 'Note any TinyMCE plugins or custom configuration', html: 'They need redoing for Tiptap.' },
-  { id: 'code', label: 'Search your C# for removed APIs', html: '<code>IPublishedSnapshot</code>, <code>UmbracoAuthorizedApiController</code>, XPath queries and Newtonsoft.Json.' },
-  { id: 'hosting', label: 'Confirm your hosting and build pipeline support .NET 10' },
-  { id: 'versions', label: 'Clean up old content versions', html: 'It speeds up the Umbraco 15 block editor migration.' },
-  { id: 'backup', label: 'Back up the database and files', html: 'And plan to rehearse the upgrade on a copy of the production database.' },
+  { id: 'packages', label: 'The site uses Umbraco packages', html: 'Each needs a version for Umbraco 17. Check the “Umbraco versions” on its <a href="https://marketplace.umbraco.com/">Umbraco Marketplace</a> page.' },
+  { id: 'backoffice', label: 'You have custom backoffice code', html: 'Any <code>package.manifest</code>, AngularJS dashboard, property editor, section or tree. Every one needs rebuilding.' },
+  { id: 'editors', label: 'Content uses Nested Content or Grid Layout', html: 'Both were removed in Umbraco 14, so that content moves to Block List or Block Grid.' },
+  { id: 'macros', label: 'Pages or rich text use macros', html: 'Removed in Umbraco 14, along with the legacy Media Picker.' },
+  { id: 'rte', label: 'Rich text editors have TinyMCE plugins or custom settings', html: 'TinyMCE was replaced by Tiptap in Umbraco 16, and they don’t come across.' },
+  { id: 'code', label: 'Your C# uses APIs that were removed', html: 'Such as <code>IPublishedSnapshot</code>, <code>UmbracoAuthorizedApiController</code>, XPath queries or Newtonsoft.Json.' },
+  { id: 'integrations', label: 'Other systems call your APIs or receive your webhooks', html: 'From Umbraco 14, JSON from <code>UmbracoApiController</code> and webhook payloads changes from PascalCase to camelCase.' },
+  { id: 'logins', label: 'Backoffice users sign in with two-factor or an external login', html: 'Both need registering in the new backoffice.' },
+  { id: 'content', label: 'The site has a lot of content', html: 'The Umbraco 15 block editor migration takes longer, and the site is unavailable while it runs.' },
+  { id: 'hosting', label: 'Your hosting or build pipeline isn’t on .NET 10 yet', html: 'Umbraco 17 runs on .NET 10.' },
 ];
 
 export interface Step {
@@ -168,16 +172,21 @@ export interface Step {
   html: string;
 }
 
-export const STEPS: Step[] = [
-  { title: 'Back up and branch', html: 'Back up the database and files, and do the upgrade on its own branch. Umbraco recommends upgrading offline and testing fully before going live.' },
-  { title: 'Move to .NET 10', html: 'Change the target framework of each project to <code>net10.0</code>.' },
-  { title: 'Update the packages', html: 'Update Umbraco Forms, Deploy and any other Umbraco packages first, then <code>Umbraco.Cms</code> itself to 17.' },
-  { title: 'Tidy the startup code', html: 'Remove the Smidge lines from <code>_ViewImports.cshtml</code> and <code>u.UseInstallerEndpoints();</code> from <code>Program.cs</code>.' },
-  { title: 'Fix the build', html: 'Work through the compile errors from removed APIs: snapshots, the old backoffice controllers, and anything that relied on Newtonsoft.Json.' },
-  { title: 'Run it against a copy of the database', html: 'The migrations run on first boot: block editor content, TinyMCE to Tiptap, and dates to UTC. Watch the log. On a large site you may need a longer <code>startupTimeLimit</code>.' },
-  { title: 'Move content off removed editors', html: 'Nested Content to Block List, Grid Layout to Block Grid, and macros to blocks or partial views.' },
-  { title: 'Rebuild the backoffice extensions', html: 'Rebuild each AngularJS extension as a web component and register it in <code>umbraco-package.json</code>.' },
-  { title: 'Test, then deploy', html: 'Test what editors do every day as well as the front end. The upgrade runs again on first boot in each environment.' },
+/** The shape of the work, not a how-to: what each stage involves, so readers can see the size of it. */
+export const STAGES: Step[] = [
+  { title: 'Size it', html: 'Find everything on the list above that applies: packages, custom backoffice code, content in removed editors, code using removed APIs. This decides how long the upgrade takes, and whether to upgrade or rebuild.' },
+  { title: 'Upgrade the code', html: 'Move the project to .NET 10 and Umbraco 17, update the packages, and fix everything that no longer builds.' },
+  { title: 'Migrate the content', html: 'Rehearse on a copy of the live database, where the migrations for 14 to 17 run. Then move content off Nested Content, the old grid and macros.' },
+  { title: 'Rebuild the backoffice', html: 'Rebuild every custom dashboard, property editor and section as web components, then test what editors do every day before going live.' },
+];
+
+/** Problems worth planning for: named, not solved (the fixes are the job). */
+export const GOTCHAS: Change[] = [
+  { title: 'A long first boot', html: 'The Umbraco 15 block editor migration runs when the upgraded site first starts, and the site doesn’t respond until it finishes. On a big site, that can be a long time.' },
+  { title: 'Rich text that changes underneath editors', html: 'TinyMCE becomes Tiptap. Content comes across, but custom plugins and toolbar setups don’t.' },
+  { title: 'Dates that move', html: 'Umbraco 17 converts stored system dates to UTC, using the time zone it detects for the server.' },
+  { title: 'A package with no Umbraco 17 version', html: 'It has to be replaced, rebuilt or removed, and that can change the plan.' },
+  { title: 'Placeholder', html: 'What has caught Warren out on real upgrades that isn’t in Umbraco’s docs (named, not solved).' },
 ];
 
 export const FAQ_ITEMS = [
@@ -195,6 +204,16 @@ export const FAQ_ITEMS = [
     question: 'Should I upgrade to Umbraco 17 or 18?',
     answer:
       'Umbraco 17 for most sites. It is a long-term support release with security fixes until November 2028. Umbraco 18 is a short-term support release that reaches end of life in June 2027.',
+  },
+  {
+    question: 'Can you do the upgrade for us?',
+    answer:
+      'Yes. I upgrade Umbraco sites to Umbraco 17 as a freelancer or contractor, working remotely from the UK. <a href="#contact-h">Get in touch</a> with your Umbraco version, roughly how big the site is, and the packages and custom backoffice code it uses.',
+  },
+  {
+    question: 'How do you charge?',
+    answer:
+      "I work by the day, week or month. Before we start, I'll give you a rough idea of how long the work should take, so you can plan a budget. Projects often change as they go, and paying for time means we can adapt without renegotiating a quote.",
   },
   {
     question: 'How long does an upgrade from 13 to 17 take?',
