@@ -242,6 +242,6 @@ export const FAQ_ITEMS = [
   {
     question: 'How long does an upgrade from 13 to 17 take?',
     answer:
-      'It depends on the site. Every Umbraco site is built differently, with its own packages and customisations, so there is no set number of days for an upgrade. A call or an email about your site is the way to find out: I look into how it is built and what it needs, then give you a rough idea of how long it should take.',
+      'It depends on the site. Every Umbraco site is built differently, with its own packages and customisations, so there is no set number of days for an upgrade. A call or an email about your site is the way to find out: I look into how it is built and what it needs, and after that first call I can give you an estimate of how long it will take and what it will cost.',
   },
 ];
