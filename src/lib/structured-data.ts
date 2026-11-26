@@ -27,7 +27,7 @@ export function personOrgGraph() {
           'https://www.linkedin.com/in/warrenbuckley/',
           'https://www.youtube.com/@WarrenBuckley',
           'https://umbracocommunity.social/@warrenbuckley',
-          'https://stackoverflow.com/users/warren-buckley',
+          'https://stackoverflow.com/users/69795/warren-buckley',
           'https://forum.umbraco.com/u/warren',
           CERTIFICATION.profileUrl, // Umbraco's certified developer page for Warren
           'https://umb.fyi/@warrenbuckley',
