@@ -190,8 +190,7 @@ export const GOTCHAS: Change[] = [
   { title: 'A long first boot', html: 'The Umbraco 15 block editor migration runs when the upgraded site first starts, and the site doesn’t respond until it finishes. On a big site, that can be a long time.' },
   { title: 'Rich text that changes underneath editors', html: 'TinyMCE becomes Tiptap. Content comes across, but custom plugins and toolbar setups don’t.' },
   { title: 'Dates that move', html: 'Umbraco 17 converts stored system dates to UTC, using the time zone it detects for the server.' },
-  { title: 'A package with no Umbraco 17 version', html: 'It has to be replaced, rebuilt or removed, and that can change the plan.' },
-  { title: 'Placeholder', html: 'What has caught Warren out on real upgrades that isn’t in Umbraco’s docs (named, not solved).' },
+  { title: 'Finding alternatives to packages', html: 'Some packages are no longer supported, or haven’t been updated for newer versions of Umbraco. Each one needs an alternative that does the same job, or rebuilding, or removing, and that can change the plan.' },
 ];
 
 /**

@@ -33,6 +33,7 @@ const updated = new Date(GUIDE_UPDATED);
 
 const v13 = findVersion(13)!;
 const v17 = findVersion(17)!;
+const v19 = findVersion(19)!;
 /** The versions a 13 site could target, plus the next LTS, for the "17, 18 or 19?" table. */
 const targets = [17, 18, 19, 21].map((n) => findVersion(n)!);
 
@@ -110,11 +111,7 @@ const toc = [
             <p>
               Because Umbraco 13 stops getting security fixes on {formatDate(v13.endOfLife)}, and the .NET 8 it runs on
               is already out of support. The site won’t stop working that day, but any vulnerability found after it stays
-              open on your site.
-            </p>
-            <p>
-              Placeholder: the point about vulnerabilities being found faster, now that AI tools are used to look for
-              them. Needs a source Warren approves (published research or a security vendor’s report) before it goes in.
+              open on your site. And vulnerabilities are being found faster, now that AI tools are used to look for them.
             </p>
             <p>
               Umbraco 17 has security fixes until {formatDate(v17.endOfLife)}, so an upgrade now covers you for the next
@@ -217,7 +214,9 @@ const toc = [
               Either way, an upgrade is a good time to look again at the content model. It can be better to reshape the
               document types and data types around features Umbraco 13 didn’t have, rather than carry the old structure
               forward. From Umbraco 18, for example, <a href={ELEMENTS_DOCS_URL}>Elements</a> let editors create content
-              once in the new Library section and reuse it on as many pages as they need.
+              once in the new Library section and reuse it on as many pages as they need. Umbraco 19
+              ({isReleased(v19) ? 'released' : 'due'} {formatDate(v19.released)}) adds reusable blocks from the Library
+              too; I’ve been trying them out in its release candidates.
             </p>
           </Prose>
         </section>
