@@ -11,7 +11,8 @@ import PageHeader from '../../../components/PageHeader.astro';
 import Section from '../../../components/Section.astro';
 import SectionHeading from '../../../components/SectionHeading.astro';
 import Prose from '../../../components/Prose.astro';
-import Callout from '../../../components/Callout.astro';
+import CtaCard from '../../../components/CtaCard.astro';
+import Button from '../../../components/Button.astro';
 import TableOfContents from '../../../components/TableOfContents.astro';
 import VersionJourney from '../../../components/VersionJourney.astro';
 import Checklist from '../../../components/Checklist.astro';
@@ -93,6 +94,10 @@ const toc = [
       <time datetime={GUIDE_UPDATED}>{formatDate(GUIDE_UPDATED)}</time>, checked against{' '}
       <a href={BREAKING_CHANGES_URL}>Umbraco’s breaking changes</a>
     </p>
+    <div class="hmd-hero__actions hmd-mt-8">
+      <Button href="#contact-h">Get help with your upgrade</Button>
+      <Button variant="secondary" href="#checklist-h">How big is my upgrade?</Button>
+    </div>
   </PageHeader>
 
   <div class="hmd-container guide">
@@ -163,12 +168,12 @@ const toc = [
             <Checklist idPrefix="size" items={CHECKLIST} />
           </div>
           <div class="hmd-mt-8">
-            <Callout label="Ticked more than a couple?">
+            <CtaCard title="Ticked more than a couple?" buttonLabel="Tell me what you ticked">
               <p>
-                Placeholder: the offer Warren is happy to make here (for example, send him the answers and he’ll say how
-                big the upgrade is, or a short call). <a href="#contact-h">Get in touch</a>.
+                Placeholder: the offer Warren is happy to make here (for example, send him what you ticked and he’ll say
+                how big the upgrade is, or a short call).
               </p>
-            </Callout>
+            </CtaCard>
           </div>
         </section>
 
@@ -217,6 +222,14 @@ const toc = [
           <div class="hmd-mt-8">
             <Steps steps={STAGES} />
           </div>
+          <div class="hmd-mt-8">
+            <CtaCard title="Rather hand all four to someone?" buttonLabel="Talk about your upgrade">
+              <p>
+                I upgrade Umbraco sites to Umbraco 17 as a freelancer or contractor, working remotely from the UK, and I
+                build extensions for the new backoffice myself.
+              </p>
+            </CtaCard>
+          </div>
         </section>
 
         <section aria-labelledby="gotchas-h">
@@ -258,6 +271,9 @@ const toc = [
               roleAndCompany={`${simone.data.role}, ${simone.data.company} · via LinkedIn`}
             />
           </div>
+          <div class="hmd-hero__actions hmd-mt-8">
+            <Button href="#contact-h">Get in touch about your upgrade</Button>
+          </div>
         </section>
 
         <section aria-labelledby="faq-h">
@@ -269,7 +285,12 @@ const toc = [
       </article>
 
       <aside class="guide__toc">
-        <TableOfContents items={toc} />
+        <div class="guide__sticky">
+          <TableOfContents items={toc} sticky={false} />
+          <CtaCard compact headingTag="p" title="Upgrading from Umbraco 13?" buttonLabel="Get in touch">
+            <p>I upgrade Umbraco sites to Umbraco 17, as a freelancer or contractor.</p>
+          </CtaCard>
+        </div>
       </aside>
     </div>
   </div>
@@ -318,6 +339,13 @@ const toc = [
     flex: 1 1 240px;
     min-width: 0;
     max-width: 300px;
+  }
+  /* The contents and the sidebar CTA stay in view together while reading. */
+  .guide__sticky {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-6));
+    display: grid;
+    gap: var(--space-6);
   }
   @media (max-width: 640px) {
     .guide {

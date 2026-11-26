@@ -1,0 +1,25 @@
+---
+/**
+ * A call to action inside long-form content: a panel with a pink outline, a short heading, one or two sentences
+ * and a pink button. Placed where a reader has just seen the size of the job (after a checklist, after the stages).
+ * Not the pink end band: that stays one per page, at the end. `compact` is the sidebar size.
+ * A plain div, not an <aside>: it sits inside <main> and the sidebar, where a nested landmark fails accessibility checks.
+ */
+import Button from './Button.astro';
+
+interface Props {
+  title: string;
+  buttonLabel: string;
+  href?: string;
+  compact?: boolean;
+  /** Heading level: h3 in the article, p in the sidebar (not part of the page outline). */
+  headingTag?: 'h3' | 'p';
+}
+const { title, buttonLabel, href = '#contact-h', compact = false, headingTag: H = 'h3' } = Astro.props;
+---
+
+<div class:list={['hmd-cta', { 'hmd-cta--compact': compact }]}>
+  <H class="hmd-cta__title">{title}</H>
+  <div class="hmd-cta__body"><slot /></div>
+  <div><Button href={href} size={compact ? 'sm' : 'default'}>{buttonLabel}</Button></div>
+</div>
