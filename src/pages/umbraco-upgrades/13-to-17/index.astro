@@ -24,7 +24,7 @@ import ContactCard from '../../../components/ContactCard.astro';
 import { getCollection } from 'astro:content';
 import { articleSchema, faqPageSchema } from '../../../lib/structured-data';
 import { findVersion, formatDate, isReleased } from '../../../data/umbraco-versions';
-import { GUIDE_UPDATED, VERSION_STOPS, CHECKLIST, STAGES, GOTCHAS, FAQ_ITEMS, BREAKING_CHANGES_URL, whichVersionAnswer } from '../../../data/upgrade-guide';
+import { GUIDE_UPDATED, VERSION_STOPS, CHECKLIST, STAGES, GOTCHAS, FAQ_ITEMS, BREAKING_CHANGES_URL, ELEMENTS_DOCS_URL, whichVersionAnswer } from '../../../data/upgrade-guide';
 
 const TITLE = 'How to upgrade Umbraco 13 to 17';
 const DESCRIPTION =
@@ -171,10 +171,11 @@ const toc = [
             <Checklist idPrefix="size" items={CHECKLIST} />
           </div>
           <div class="hmd-mt-8">
-            <CtaCard title="Ticked more than a couple?" buttonLabel="Tell me what you ticked">
+            <CtaCard title="Ticked more than a couple?" buttonLabel="Get in touch">
               <p>
-                Placeholder: the offer Warren is happy to make here (for example, send him what you ticked and he’ll say
-                how big the upgrade is, or a short call).
+                Every Umbraco site is built differently, with its own packages and customisations, so I won’t guess at a
+                number of days. Let’s have a call, or send me an email about your site, and I’ll look into what your
+                upgrade needs.
               </p>
             </CtaCard>
           </div>
@@ -197,7 +198,6 @@ const toc = [
                     'The content model still fits what editors do today',
                     'Custom backoffice code is modest, or there is none',
                     'Content is in Block List or Block Grid, not Nested Content or the old grid',
-                    'Placeholder: Warren’s own rule of thumb',
                   ],
                 },
                 {
@@ -206,12 +206,20 @@ const toc = [
                     'Much of the content sits in Nested Content, Grid Layout or macros',
                     'The backoffice relies on a lot of custom AngularJS',
                     'A redesign or a new content model is due anyway',
-                    'Placeholder: Warren’s own rule of thumb',
+                    'The content would be better reshaped around newer features, such as reusable content',
                   ],
                 },
               ]}
             />
           </div>
+          <Prose>
+            <p class="hmd-mt-8">
+              Either way, an upgrade is a good time to look again at the content model. It can be better to reshape the
+              document types and data types around features Umbraco 13 didn’t have, rather than carry the old structure
+              forward. From Umbraco 18, for example, <a href={ELEMENTS_DOCS_URL}>Elements</a> let editors create content
+              once in the new Library section and reuse it on as many pages as they need.
+            </p>
+          </Prose>
         </section>
 
         <section aria-labelledby="stages-h">
@@ -256,8 +264,14 @@ const toc = [
               work was rebuilding its integrations and extensions as web components.
             </p>
             <p>
-              Placeholder: how Warren runs an upgrade, in his words (how he sizes it, what he does, what the client’s team
-              does, and what he hands back).
+              It starts with a call or an email about your site. Every Umbraco site is built differently, with its own
+              packages and customisations, so I look into how yours is built, and what it needs, before saying how long
+              the upgrade should take. That is also when we decide whether to upgrade as it is, or reshape the content
+              around newer Umbraco features.
+            </p>
+            <p>
+              Placeholder: what happens after that, in Warren’s words (what he does, what the client’s team does, and what
+              he hands back).
             </p>
             <p>I’ve written about building for the new backoffice:</p>
             <ul>

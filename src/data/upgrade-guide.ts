@@ -16,6 +16,9 @@ const DOCS = 'https://docs.umbraco.com/umbraco-cms/get-started/upgrading-and-mig
 export const BREAKING_CHANGES_URL = `${DOCS}/version-specific`;
 export const UPGRADE_PATH_URL = `${DOCS}/find-your-upgrade-path`;
 export const UPGRADE_DETAILS_URL = `${DOCS}/upgrade-details`;
+/** Umbraco 18's docs on Elements and the Library section (on GitHub: the published docs default to 17). */
+export const ELEMENTS_DOCS_URL =
+  'https://github.com/umbraco/UmbracoDocs/blob/main/18/umbraco-cms/model-your-content/content-types-and-structure/data/defining-content/elements.md';
 
 export interface Change {
   title: string;
@@ -238,6 +241,7 @@ export const FAQ_ITEMS = [
   },
   {
     question: 'How long does an upgrade from 13 to 17 take?',
-    answer: 'Placeholder: Warren to answer from experience (what it depends on, and rough ranges if he is happy to give them).',
+    answer:
+      'It depends on the site. Every Umbraco site is built differently, with its own packages and customisations, so there is no set number of days for an upgrade. A call or an email about your site is the way to find out: I look into how it is built and what it needs, then give you a rough idea of how long it should take.',
   },
 ];
