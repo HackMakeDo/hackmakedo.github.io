@@ -191,15 +191,23 @@ export const GOTCHAS: Change[] = [
   { title: 'Placeholder', html: 'What has caught Warren out on real upgrades that isn’t in Umbraco’s docs (named, not solved).' },
 ];
 
-/** "17, 18 or 19?", from Umbraco's lifecycle dates (src/data/umbraco-versions.ts), so it stays right as versions ship. */
+/**
+ * "17, 18 or 19?", from Umbraco's lifecycle dates (src/data/umbraco-versions.ts), so it stays right as versions ship.
+ * Warren's view (26 November 2026): get onto 17, then keep up with the short-term releases so the jump to the next
+ * LTS is small. Backed by Umbraco's docs: skipping versions means missing the warnings for obsolete code.
+ */
 export function whichVersionAnswer(): string {
   const [v17, v18, v19, v21] = [17, 18, 19, 21].map((n) => findVersion(n)!);
   const when19 = isReleased(v19) ? `released ${formatDate(v19.released)}` : `due ${formatDate(v19.released)}`;
-  const next = isReleased(v21) ? `Umbraco 21 is the next long-term support release.` : `The next long-term support release is Umbraco 21, due ${formatDate(v21.released)}.`;
+  const next = isReleased(v21)
+    ? 'the move to Umbraco 21, the next long-term support release,'
+    : `when Umbraco 21, the next long-term support release, arrives (due ${formatDate(v21.released)}), the move to it`;
   return (
-    `Umbraco 17 for most sites. It is the current long-term support release, with security fixes until ${formatDate(v17.endOfLife)}. ` +
-    `Umbraco 18 and 19 (${when19}) are short-term support releases that reach end of life on ${formatDate(v18.endOfLife)} and ${formatDate(v19.endOfLife)}, ` +
-    `so either would mean upgrading again within about a year. ${next}`
+    `Umbraco 17 first. It is the current long-term support release, with security fixes until ${formatDate(v17.endOfLife)}. ` +
+    `After that, it pays to keep up with the short-term releases, Umbraco 18 and 19 (${when19}), rather than sit on 17 until the next big jump. ` +
+    `Each one is a smaller step, and Umbraco marks code as obsolete before it removes it, so taking each release shows you what to fix before it breaks. ` +
+    `That way, ${next} won’t be so much work. ` +
+    `Short-term releases have shorter support: 18 reaches end of life on ${formatDate(v18.endOfLife)} and 19 on ${formatDate(v19.endOfLife)}.`
   );
 }
 
