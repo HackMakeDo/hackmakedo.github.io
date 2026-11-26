@@ -7,6 +7,8 @@
  * Anything that needs Warren's own experience is marked "Placeholder" and is listed in the PR.
  */
 
+import { findVersion, formatDate, isReleased } from './umbraco-versions';
+
 /** When the guide's facts were last checked against Umbraco's docs. Shown as "Updated …" on the page. */
 export const GUIDE_UPDATED = '2026-11-26';
 
@@ -189,6 +191,18 @@ export const GOTCHAS: Change[] = [
   { title: 'Placeholder', html: 'What has caught Warren out on real upgrades that isn’t in Umbraco’s docs (named, not solved).' },
 ];
 
+/** "17, 18 or 19?", from Umbraco's lifecycle dates (src/data/umbraco-versions.ts), so it stays right as versions ship. */
+export function whichVersionAnswer(): string {
+  const [v17, v18, v19, v21] = [17, 18, 19, 21].map((n) => findVersion(n)!);
+  const when19 = isReleased(v19) ? `released ${formatDate(v19.released)}` : `due ${formatDate(v19.released)}`;
+  const next = isReleased(v21) ? `Umbraco 21 is the next long-term support release.` : `The next long-term support release is Umbraco 21, due ${formatDate(v21.released)}.`;
+  return (
+    `Umbraco 17 for most sites. It is the current long-term support release, with security fixes until ${formatDate(v17.endOfLife)}. ` +
+    `Umbraco 18 and 19 (${when19}) are short-term support releases that reach end of life on ${formatDate(v18.endOfLife)} and ${formatDate(v19.endOfLife)}, ` +
+    `so either would mean upgrading again within about a year. ${next}`
+  );
+}
+
 export const FAQ_ITEMS = [
   {
     question: 'Can I upgrade straight from Umbraco 13 to 17?',
@@ -201,9 +215,8 @@ export const FAQ_ITEMS = [
       'From 14 December 2026, Umbraco releases no more security fixes for Umbraco 13, and the .NET 8 it runs on is already out of support. The site keeps working, but any vulnerability found from then on stays open.',
   },
   {
-    question: 'Should I upgrade to Umbraco 17 or 18?',
-    answer:
-      'Umbraco 17 for most sites. It is a long-term support release with security fixes until November 2028. Umbraco 18 is a short-term support release that reaches end of life in June 2027.',
+    question: 'Should I upgrade to Umbraco 17, 18 or 19?',
+    answer: whichVersionAnswer(),
   },
   {
     question: 'Can you do the upgrade for us?',

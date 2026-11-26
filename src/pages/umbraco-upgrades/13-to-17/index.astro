@@ -23,17 +23,18 @@ import FAQ from '../../../components/FAQ.astro';
 import ContactCard from '../../../components/ContactCard.astro';
 import { getCollection } from 'astro:content';
 import { articleSchema, faqPageSchema } from '../../../lib/structured-data';
-import { UMBRACO_VERSIONS, formatDate } from '../../../data/umbraco-versions';
-import { GUIDE_UPDATED, VERSION_STOPS, CHECKLIST, STAGES, GOTCHAS, FAQ_ITEMS, BREAKING_CHANGES_URL } from '../../../data/upgrade-guide';
+import { findVersion, formatDate, isReleased } from '../../../data/umbraco-versions';
+import { GUIDE_UPDATED, VERSION_STOPS, CHECKLIST, STAGES, GOTCHAS, FAQ_ITEMS, BREAKING_CHANGES_URL, whichVersionAnswer } from '../../../data/upgrade-guide';
 
 const TITLE = 'How to upgrade Umbraco 13 to 17';
 const DESCRIPTION =
   'What it takes to upgrade Umbraco 13 to 17: what changed in each version, a checklist to size your upgrade, and the problems worth planning for.';
 const updated = new Date(GUIDE_UPDATED);
 
-const v13 = UMBRACO_VERSIONS.find((v) => v.version === 13)!;
-const v17 = UMBRACO_VERSIONS.find((v) => v.version === 17)!;
-const v18 = UMBRACO_VERSIONS.find((v) => v.version === 18)!;
+const v13 = findVersion(13)!;
+const v17 = findVersion(17)!;
+/** The versions a 13 site could target, plus the next LTS, for the "17, 18 or 19?" table. */
+const targets = [17, 18, 19, 21].map((n) => findVersion(n)!);
 
 const simone = (await getCollection('testimonials')).find((t) => t.id === 'simone-chiaretta')!;
 
@@ -53,7 +54,7 @@ const backofficePosts = (await getCollection('posts', ({ id, data }) => BACKOFFI
 
 const toc = [
   { id: 'why-h', label: 'Why upgrade now' },
-  { id: 'target-h', label: 'Umbraco 17 or 18?' },
+  { id: 'target-h', label: 'Umbraco 17, 18 or 19?' },
   { id: 'changes-h', label: 'What changed from 13 to 17' },
   { id: 'checklist-h', label: 'How big is your upgrade?' },
   { id: 'rebuild-h', label: 'Upgrade or rebuild?' },
@@ -123,21 +124,23 @@ const toc = [
         </section>
 
         <section aria-labelledby="target-h">
-          <SectionHeading lead="Umbraco" boxed="17 or 18?" id="target-h" />
+          <SectionHeading lead="Umbraco" boxed="17, 18 or 19?" id="target-h" />
           <Prose>
-            <p>
-              Umbraco 17 for most sites. It is a long-term support release, with security fixes until
-              {' '}{formatDate(v17.endOfLife)}. Umbraco 18 is newer, but it is a short-term support release that reaches end
-              of life on {formatDate(v18.endOfLife)}, so you would be upgrading again within months.
-            </p>
+            <p>{whichVersionAnswer()}</p>
             <table>
-              <caption class="hmd-sr">Umbraco 17 and 18 support compared</caption>
+              <caption class="hmd-sr">Umbraco versions to upgrade to, with their support type and dates</caption>
               <thead>
-                <tr><th scope="col">Version</th><th scope="col">Support</th><th scope="col">.NET</th><th scope="col">End of life</th></tr>
+                <tr><th scope="col">Version</th><th scope="col">Support</th><th scope="col">Released</th><th scope="col">End of life</th></tr>
               </thead>
               <tbody>
-                <tr><th scope="row">Umbraco 17</th><td>Long-term (LTS)</td><td>.NET 10</td><td>{formatDate(v17.endOfLife)}</td></tr>
-                <tr><th scope="row">Umbraco 18</th><td>Short-term (STS)</td><td>.NET 10</td><td>{formatDate(v18.endOfLife)}</td></tr>
+                {targets.map((v) => (
+                  <tr>
+                    <th scope="row">Umbraco {v.version}</th>
+                    <td>{v.type === 'LTS' ? 'Long-term (LTS)' : 'Short-term (STS)'}</td>
+                    <td>{isReleased(v) ? formatDate(v.released) : `Due ${formatDate(v.released)}`}</td>
+                    <td>{formatDate(v.endOfLife)}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </Prose>

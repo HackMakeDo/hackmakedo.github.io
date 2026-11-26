@@ -4,13 +4,14 @@
  *   npm run check:umbraco-versions             compare; exits 1 if anything is missing or different
  *   npm run check:umbraco-versions -- --write  rewrite the list from Umbraco's page, then review the diff
  *
- * Only versions already released are written to the site; upcoming ones (e.g. the next LTS) are
- * listed so you know what is coming, and added by --write once their release date has passed.
+ * Released versions are written to UMBRACO_VERSIONS and announced ones to UMBRACO_UPCOMING (the upgrade
+ * guide uses those to say what is coming); --write moves a version across once its release date has passed.
  * Run with Node 22.18+ (it runs TypeScript directly).
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import {
   UMBRACO_VERSIONS,
+  UMBRACO_UPCOMING,
   UMBRACO_LIFECYCLE_URL,
   type UmbracoVersion,
 } from '../src/data/umbraco-versions.ts';
@@ -89,24 +90,36 @@ for (const v of released) {
 for (const v of UMBRACO_VERSIONS) {
   if (!released.some((s) => s.version === v.version)) problems.push(`Not on Umbraco's page (or not released yet): Umbraco ${v.version}`);
 }
+const oursUpcoming = new Map(UMBRACO_UPCOMING.map((v) => [v.version, v]));
+for (const v of upcoming) {
+  const mine = oursUpcoming.get(v.version);
+  if (!mine) problems.push(`Missing upcoming: ${describe(v)}`);
+  else if (!same(mine, v)) problems.push(`Different upcoming: Umbraco ${v.version}\n    Umbraco says: ${describe(v)}\n    site has:     ${describe(mine)}`);
+}
+for (const v of UMBRACO_UPCOMING) {
+  if (!upcoming.some((s) => s.version === v.version)) problems.push(`No longer upcoming (released, or dropped from Umbraco's page): Umbraco ${v.version}`);
+}
 
 console.log(`Umbraco's page: ${released.length} released versions, ${upcoming.length} upcoming.`);
 for (const v of upcoming) console.log(`  Upcoming: ${describe(v)}`);
 
-if (write) {
-  const file = await readFile(DATA_FILE, 'utf8');
-  const start = '  // <umbraco-versions:start>';
-  const end = '  // <umbraco-versions:end>';
-  const from = file.indexOf(start);
-  const to = file.indexOf(end);
-  if (from < 0 || to < 0) throw new Error('Markers not found in src/data/umbraco-versions.ts');
+/** Replaces the generated lines between `// <name:start>` and `// <name:end>` in the data file. */
+function replaceBlock(file: string, name: string, versions: UmbracoVersion[]): string {
+  const from = file.indexOf(`  // <${name}:start>`);
+  const to = file.indexOf(`  // <${name}:end>`);
+  if (from < 0 || to < 0) throw new Error(`<${name}> markers not found in src/data/umbraco-versions.ts`);
   const startLine = file.slice(from, file.indexOf('\n', from) + 1);
-  const entries = released
+  const entries = versions
     .map((v) =>
       `  { version: ${v.version}, type: ${v.type ? `'${v.type}'` : 'null'}, released: '${v.released}', securityPhase: '${v.securityPhase}', endOfLife: '${v.endOfLife}' },\n`,
     )
     .join('');
-  const updated = (file.slice(0, from) + startLine + entries + file.slice(to)).replace(
+  return file.slice(0, from) + startLine + entries + file.slice(to);
+}
+
+if (write) {
+  const file = await readFile(DATA_FILE, 'utf8');
+  const updated = replaceBlock(replaceBlock(file, 'umbraco-versions', released), 'umbraco-upcoming', upcoming).replace(
     /export const UMBRACO_LIFECYCLE_CHECKED = '[\d-]+';/,
     `export const UMBRACO_LIFECYCLE_CHECKED = '${today}';`,
   );
