@@ -93,7 +93,7 @@ export const VERSION_STOPS: VersionStop[] = [
       },
       {
         title: 'Static files are precompressed',
-        html: 'ASP.NET Core 9 adds <code>.br</code> and <code>.gz</code> copies of JavaScript and CSS files, which needs turning off in the project that contains the <code>/umbraco</code> folder.',
+        html: 'ASP.NET Core 9 adds <code>.br</code> and <code>.gz</code> copies of JavaScript and CSS files. This needs turning off in the project that contains the <code>/umbraco</code> folder.',
       },
     ],
   },
@@ -165,7 +165,7 @@ export const CHECKLIST: ChecklistItem[] = [
   { id: 'macros', label: 'Pages or rich text use macros', html: 'Removed in Umbraco 14, along with the legacy Media Picker.' },
   { id: 'rte', label: 'Rich text editors use TinyMCE plugins', html: 'TinyMCE was replaced by Tiptap in Umbraco 16, and TinyMCE plugins don’t work in Tiptap.' },
   { id: 'code', label: 'Your C# uses APIs that were removed', html: 'Such as <code>IPublishedSnapshot</code>, <code>UmbracoAuthorizedApiController</code> or XPath queries. Code that relied on Umbraco using Newtonsoft.Json is affected too: Umbraco 14 moved to System.Text.Json.' },
-  { id: 'integrations', label: 'Other systems call your APIs or receive your webhooks', html: 'From Umbraco 14, JSON from <code>UmbracoApiController</code> and webhook payloads changes from PascalCase to camelCase.' },
+  { id: 'integrations', label: 'Other systems call your APIs or receive your webhooks', html: 'From Umbraco 14, JSON from <code>UmbracoApiController</code> and webhook payloads change from PascalCase to camelCase.' },
   { id: 'logins', label: 'Backoffice users sign in with two-factor or an external login', html: 'Both need registering as extensions in the new backoffice.' },
   { id: 'content', label: 'The site has a lot of content', html: 'The Umbraco 15 block editor migration takes longer, and the site is unresponsive while it runs.' },
   { id: 'hosting', label: 'Your hosting or build pipeline isn’t on .NET 10 yet', html: 'Umbraco 17 runs on .NET 10.' },
