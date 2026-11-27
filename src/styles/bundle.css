@@ -699,18 +699,18 @@ hmd-marquee:not(:defined) .hmd-marquee__pause { display: none; }
 .hmd-hire .hmd-btn { padding: var(--space-4) var(--space-8); font-size: 17px; }
 
 /* ============ Version journey ============ */
-/* The route through Umbraco's major versions: square stops on one continuous line, like the timeline's spine.
-   The start stop is a panel square, each version an outlined square, the destination a pink one. */
+/* The route through Umbraco's major versions: solid dots on one continuous line, like stops on a transit map.
+   Dots, not squares: an outlined square here read as a checkbox next to the checklist (which is clickable).
+   Solid, not hollow, so they don't read as radio buttons either. The destination is a larger pink dot. */
 .hmd-journey { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-8); color: var(--ink); }
-/* The line runs from each stop to the next, so it ends at the destination. */
-.hmd-journey__stop:not(:last-child)::after { content: ""; position: absolute; left: 11px; top: 28px; bottom: calc(-4px - var(--space-8)); width: 2px; background: var(--rule); }
+/* The line runs from each stop's dot to the next, so it ends at the destination. */
+.hmd-journey__stop:not(:last-child)::after { content: ""; position: absolute; left: 11px; top: 16px; bottom: calc(-16px - var(--space-8)); width: 2px; background: var(--rule); }
 .hmd-journey__stop { position: relative; padding-left: var(--space-12); }
 .hmd-journey__stop::before {
-  content: ""; position: absolute; left: 0; top: 4px; width: 24px; height: 24px; box-sizing: border-box;
-  background: var(--ground); border: 2px solid var(--border-strong);
+  content: ""; position: absolute; z-index: 1; left: 5px; top: 9px; width: 14px; height: 14px;
+  border-radius: 50%; background: var(--border-strong);
 }
-.hmd-journey__stop--start::before { background: var(--panel); }
-.hmd-journey__stop--end::before { background: var(--pink); border-color: var(--pink); }
+.hmd-journey__stop--end::before { left: 0; top: 4px; width: 24px; height: 24px; background: var(--pink); }
 .hmd-journey__version {
   display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-3); margin: 0;
   font-family: var(--font-display); font-weight: 700; font-size: 24px; line-height: 1.3;
