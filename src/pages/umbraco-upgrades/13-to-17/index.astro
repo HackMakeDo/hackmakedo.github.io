@@ -25,7 +25,7 @@ import ContactCard from '../../../components/ContactCard.astro';
 import { getCollection } from 'astro:content';
 import { articleSchema, faqPageSchema } from '../../../lib/structured-data';
 import { findVersion, formatDate, isReleased } from '../../../data/umbraco-versions';
-import { GUIDE_UPDATED, VERSION_STOPS, CHECKLIST, STAGES, GOTCHAS, FAQ_ITEMS, ELEMENTS_DOCS_URL } from '../../../data/upgrade-guide';
+import { GUIDE_PUBLISHED, GUIDE_UPDATED, VERSION_STOPS, CHECKLIST, STAGES, GOTCHAS, FAQ_ITEMS, ELEMENTS_DOCS_URL } from '../../../data/upgrade-guide';
 
 const TITLE = 'How to upgrade Umbraco 13 to 17';
 const DESCRIPTION =
@@ -65,7 +65,7 @@ const toc = [
       type: 'TechArticle',
       title: TITLE,
       description: DESCRIPTION,
-      datePublished: updated,
+      datePublished: new Date(GUIDE_PUBLISHED),
       dateModified: updated,
       url: '/umbraco-upgrades/13-to-17/',
       image: '/og/umbraco-upgrades/13-to-17.png',

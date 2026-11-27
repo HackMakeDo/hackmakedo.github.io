@@ -9,7 +9,9 @@
 
 import { findVersion, formatDate, isReleased } from './umbraco-versions';
 
-/** When the guide's facts were last checked against Umbraco's docs. Shown as "Updated …" on the page. */
+/** When the guide was first published: the Article schema's datePublished. Set once; never bump it. */
+export const GUIDE_PUBLISHED = '2026-11-26';
+/** When the guide's facts were last checked against Umbraco's docs. Shown as "Updated …" on the page, and dateModified. */
 export const GUIDE_UPDATED = '2026-11-26';
 
 const DOCS = 'https://docs.umbraco.com/umbraco-cms/get-started/upgrading-and-migrating';

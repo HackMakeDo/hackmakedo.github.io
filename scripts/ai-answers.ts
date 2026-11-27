@@ -34,6 +34,8 @@ const QUESTIONS = [
   { id: 'freelancer', text: 'Who is a good Umbraco freelancer in the UK?' },
   { id: 'contractor', text: 'I need an Umbraco contractor in the UK. Who would you recommend?' },
   { id: 'upgrade', text: 'Who can upgrade our Umbraco 13 website to Umbraco 17? Recommend a specialist.' },
+  // Not a hire question: checks whether answers cite the 13 to 17 guide (/umbraco-upgrades/13-to-17/) as a source.
+  { id: 'upgrade-guide', text: 'What changed between Umbraco 13 and Umbraco 17, and how much work is the upgrade?' },
   { id: 'mvp', text: 'Can you recommend an Umbraco MVP who is available to hire?' },
   { id: 'backoffice', text: 'Who is an expert at building Umbraco backoffice extensions for the new Bellissima backoffice?' },
   // Not a ranking question: checks what they say about Warren (still at Umbraco HQ? still a Developer Advocate?).
