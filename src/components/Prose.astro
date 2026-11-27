@@ -1,7 +1,12 @@
 ---
 /** Long-form text styling for post bodies, case study bodies and About: headings, lists, quotes, tables, images, code. */
+interface Props {
+  /** Extra classes for the wrapper, such as a margin utility (hmd-mt-8). Margins on the first child are reset by .hmd-prose > *. */
+  class?: string;
+}
+const { class: className } = Astro.props;
 ---
 
-<div class="hmd-prose">
+<div class:list={['hmd-prose', className]}>
   <slot />
 </div>
