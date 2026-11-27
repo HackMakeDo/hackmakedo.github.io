@@ -37,7 +37,7 @@ OK so here is a quick lowdown of features:
 - Recent document support via Windows taskbar
 - Set your own theme for the JSON viewer
 
-![](/images/blog/peek-inside-umbraco-v8-nucache-files-with-the-nucache-explorer-tool/screenshot.png)
+![NuCache Explorer 1.1.0 showing one item from a NuCache file as JSON, with its draft data, culture names and properties](/images/blog/peek-inside-umbraco-v8-nucache-files-with-the-nucache-explorer-tool/screenshot.png)
 
 ### Where do I download it?
 

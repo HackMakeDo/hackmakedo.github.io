@@ -89,12 +89,12 @@ public class AddMoreWebHooksComposer : IComposer
 As you can see in the Umbraco backoffice I have a new event I can be notified and send out to a Webhook URL.
 
 <figure class="hmd-figure">
-  <img src="/images/blog/adding-a-custom-webhook-type-to-umbraco-v13/image-1.png" alt="" loading="lazy" />
+  <img src="/images/blog/adding-a-custom-webhook-type-to-umbraco-v13/image-1.png" alt="The Umbraco 13 Webhooks screen with the Select event panel open, and the custom MemberDeleted event circled in red" loading="lazy" />
   <figcaption>A screenshot of Umbraco v13 with our new custom Webhook Event</figcaption>
 </figure>
 
 <figure class="hmd-figure">
-  <img src="/images/blog/adding-a-custom-webhook-type-to-umbraco-v13/image.png" alt="" loading="lazy" />
+  <img src="/images/blog/adding-a-custom-webhook-type-to-umbraco-v13/image.png" alt="Webhook.site showing the request Umbraco sent for the MemberDeleted event, with the umb-webhook-event header and the deleted member as JSON" loading="lazy" />
   <figcaption>webhooks.site showing us the payload of the deleted member</figcaption>
 </figure>
 
