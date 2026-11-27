@@ -194,22 +194,17 @@ export const GOTCHAS: Change[] = [
 ];
 
 /**
- * "17, 18 or 19?", from Umbraco's lifecycle dates (src/data/umbraco-versions.ts), so it stays right as versions ship.
- * Warren's view (26 November 2026): get onto 17, then keep up with the short-term releases so the jump to the next
+ * The short FAQ answer to "17, 18 or 19?", from Umbraco's lifecycle dates (src/data/umbraco-versions.ts).
+ * The full answer is written out in the guide's "Umbraco 17, 18 or 19?" section: keep the two in step.
+ * Warren's view (26 November 2026): get onto 17, then keep up with the standard-term releases so the jump to the next
  * LTS is small. Backed by Umbraco's docs: skipping versions means missing the warnings for obsolete code.
  */
-export function whichVersionAnswer(): string {
-  const [v17, v18, v19, v21] = [17, 18, 19, 21].map((n) => findVersion(n)!);
-  const when19 = isReleased(v19) ? `released ${formatDate(v19.released)}` : `due ${formatDate(v19.released)}`;
-  const next = isReleased(v21)
-    ? 'the move to Umbraco 21, the next long-term support release,'
-    : `when Umbraco 21, the next long-term support release, arrives (due ${formatDate(v21.released)}), the move to it`;
+function whichVersionFaqAnswer(): string {
+  const [v17, v21] = [17, 21].map((n) => findVersion(n)!);
+  const next = isReleased(v21) ? 'Umbraco 21' : `Umbraco 21 (due ${formatDate(v21.released)})`;
   return (
     `Umbraco 17 first. It is the current long-term support release, with security fixes until ${formatDate(v17.endOfLife)}. ` +
-    `After that, it pays to keep up with the short-term releases, Umbraco 18 and 19 (${when19}), rather than sit on 17 until the next big jump. ` +
-    `Each one is a smaller step, and Umbraco marks code as obsolete before it removes it, so taking each release shows you what to fix before it breaks. ` +
-    `That way, ${next} won’t be so much work. ` +
-    `Short-term releases have shorter support: 18 reaches end of life on ${formatDate(v18.endOfLife)} and 19 on ${formatDate(v19.endOfLife)}.`
+    `After that, keep up with the standard-term releases, so the move to ${next}, the next long-term support release, won’t be so much work.`
   );
 }
 
@@ -226,7 +221,7 @@ export const FAQ_ITEMS = [
   },
   {
     question: 'Should I upgrade to Umbraco 17, 18 or 19?',
-    answer: whichVersionAnswer(),
+    answer: whichVersionFaqAnswer(),
   },
   {
     question: 'Can you do the upgrade for us?',

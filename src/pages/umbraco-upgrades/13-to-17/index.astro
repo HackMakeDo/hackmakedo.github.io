@@ -11,6 +11,7 @@ import PageHeader from '../../../components/PageHeader.astro';
 import Section from '../../../components/Section.astro';
 import SectionHeading from '../../../components/SectionHeading.astro';
 import Prose from '../../../components/Prose.astro';
+import TableScroll from '../../../components/TableScroll.astro';
 import CtaCard from '../../../components/CtaCard.astro';
 import Button from '../../../components/Button.astro';
 import TableOfContents from '../../../components/TableOfContents.astro';
@@ -24,7 +25,7 @@ import ContactCard from '../../../components/ContactCard.astro';
 import { getCollection } from 'astro:content';
 import { articleSchema, faqPageSchema } from '../../../lib/structured-data';
 import { findVersion, formatDate, isReleased } from '../../../data/umbraco-versions';
-import { GUIDE_UPDATED, VERSION_STOPS, CHECKLIST, STAGES, GOTCHAS, FAQ_ITEMS, ELEMENTS_DOCS_URL, whichVersionAnswer } from '../../../data/upgrade-guide';
+import { GUIDE_UPDATED, VERSION_STOPS, CHECKLIST, STAGES, GOTCHAS, FAQ_ITEMS, ELEMENTS_DOCS_URL } from '../../../data/upgrade-guide';
 
 const TITLE = 'How to upgrade Umbraco 13 to 17';
 const DESCRIPTION =
@@ -34,8 +35,9 @@ const updated = new Date(GUIDE_UPDATED);
 const v13 = findVersion(13)!;
 const v17 = findVersion(17)!;
 const v19 = findVersion(19)!;
-/** The versions a 13 site could target, plus the next LTS, for the "17, 18 or 19?" table. */
-const targets = [17, 18, 19, 21].map((n) => findVersion(n)!);
+const v21 = findVersion(21)!;
+/** Every version from 17 to the next LTS, so the table shows the whole path the copy recommends. */
+const targets = [17, 18, 19, 20, 21].map((n) => findVersion(n)!);
 
 const simone = (await getCollection('testimonials')).find((t) => t.id === 'simone-chiaretta')!;
 
@@ -91,7 +93,10 @@ const toc = [
     title={TITLE}
     lead={`Umbraco 13 reaches end of life on ${formatDate(v13.endOfLife)}.`}
   >
-    <p class="hmd-pagehead__lead">You can upgrade straight to Umbraco 17. Most of the work is in what Umbraco 14 removed: the AngularJS backoffice, Nested Content, the old grid and macros. Feeling overwhelmed, or short on time? As an Umbraco freelancer, I can upgrade your site for you.</p>
+    <p class="hmd-pagehead__lead">
+      You can upgrade straight to Umbraco 17. Most of the work is in what Umbraco 14 removed: the AngularJS backoffice, Nested Content, the old grid and macros. 
+      Feeling overwhelmed, or short on time? As an Umbraco freelancer, I can upgrade your site for you.
+    </p>
     <p class="hmd-meta guide__meta">
       By <a href="/about/">Warren Buckley</a> · Updated{' '}
       <time datetime={GUIDE_UPDATED}>{formatDate(GUIDE_UPDATED)}</time>
@@ -109,13 +114,17 @@ const toc = [
           <SectionHeading lead="Why upgrade" boxed="now" id="why-h" />
           <Prose>
             <p>
-              Because Umbraco 13 stops getting security fixes on {formatDate(v13.endOfLife)}, and the .NET 8 it runs on
-              is already out of support. The site won’t stop working that day, but any vulnerability found after it stays
+              Because Umbraco 13 stops getting security fixes on <strong>{formatDate(v13.endOfLife)}</strong>, and the <a href="https://devblogs.microsoft.com/dotnet/dotnet-8-9-end-of-support/">.NET 8 it runs on
+              is already out of support</a>. The site won’t stop working that day, but any vulnerability found after it stays
               open on your site. And vulnerabilities are being found faster, now that AI tools are used to look for them.
+              With more public cyber attacks on companies and governments in the public eye, staying secure is more important than ever.
             </p>
             <p>
-              Umbraco 17 has security fixes until {formatDate(v17.endOfLife)}, so an upgrade now covers you for the next
-              two years. <a href="/umbraco-upgrades/#versions-h">Which Umbraco versions are supported</a>.
+              Umbraco 17 has security fixes until <strong>{formatDate(v17.endOfLife)}</strong>, so an upgrade now covers you for the next
+              two years.
+            </p>
+            <p>
+              Does the thought of upgrading from 13 to 17 feel overwhelming, or perhaps you're short on time? I can do it for you as a <a href="/umbraco-freelancer/">freelancer</a> or <a href="/umbraco-contractor/">contractor</a>.
             </p>
           </Prose>
         </section>
@@ -123,24 +132,54 @@ const toc = [
         <section aria-labelledby="target-h">
           <SectionHeading lead="Umbraco" boxed="17, 18 or 19?" id="target-h" />
           <Prose>
-            <p>{whichVersionAnswer()}</p>
-            <table>
-              <caption class="hmd-sr">Umbraco versions to upgrade to, with their support type and dates</caption>
-              <thead>
-                <tr><th scope="col">Version</th><th scope="col">Support</th><th scope="col">Released</th><th scope="col">End of life</th></tr>
-              </thead>
-              <tbody>
-                {targets.map((v) => (
-                  <tr>
-                    <th scope="row">Umbraco {v.version}</th>
-                    <td>{v.type === 'LTS' ? 'Long-term (LTS)' : 'Short-term (STS)'}</td>
-                    <td>{isReleased(v) ? formatDate(v.released) : `Due ${formatDate(v.released)}`}</td>
-                    <td>{formatDate(v.endOfLife)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            {/* Dates come from src/data/umbraco-versions.ts; the 19 and 21 wording switches once each is released.
+                The FAQ has its own shorter answer in src/data/upgrade-guide.ts: keep the two in step. */}
+            <p>
+              I personally recommend upgrading to Umbraco 17 first. It is the current long-term support 
+              release, with security fixes until <strong>{formatDate(v17.endOfLife)}</strong>.
+            </p>
+            <p>
+              If you are able to, I recommend upgrading to the standard-term releases, Umbraco 18, 19 and 20, rather
+              than sit on 17 until the next big LTS jump. Each one is a much smaller step, and Umbraco marks code as obsolete before
+              it removes it, so taking each release shows you what to fix before it breaks.
+            </p>
+            <p>
+              That way,{' '}
+              {isReleased(v21)
+                ? 'the move to Umbraco 21, the next long-term support release,'
+                : `when Umbraco 21, the next long-term support release, arrives (due ${formatDate(v21.released)}), the move to it`}
+              {' '}won’t be so much work.
+            </p>
+            <p>
+              Long-term releases are supported for three years, and standard-term releases for one.
+            </p>
+            <TableScroll labelledby="targets-caption">
+              <table>
+                <caption id="targets-caption" class="hmd-sr">Umbraco versions to upgrade to, with their support type and dates</caption>
+                <thead>
+                  <tr><th scope="col">Version</th><th scope="col">Support</th><th scope="col">Released</th><th scope="col">End of life</th></tr>
+                </thead>
+                <tbody>
+                  {targets.map((v) => (
+                    <tr class:list={[v.type === 'LTS' ? 'guide__lts' : 'guide__sts']}>
+                      <th scope="row">Umbraco {v.version}</th>
+                      <td>{v.type === 'LTS' ? <span class="hmd-chip guide__lts-chip">Long-term (LTS)</span> : 'Standard-term (STS)'}</td>
+                      <td>{isReleased(v) ? formatDate(v.released) : `Due ${formatDate(v.released)}`}</td>
+                      <td>{formatDate(v.endOfLife)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </TableScroll>
           </Prose>
+          <div class="hmd-mt-8">
+            <CtaCard title="Tiring to keep on top of upgrades?" buttonLabel="Talk about keeping up to date">
+              <p>
+                Keeping up with each Umbraco release, and the upgrade that comes with it, takes time. I can do it for you,
+                as a <a href="/umbraco-freelancer/">freelancer</a> or <a href="/umbraco-contractor/">contractor</a>.
+              </p>
+            </CtaCard>
+          </div>
         </section>
 
         <section aria-labelledby="changes-h">
@@ -327,6 +366,17 @@ const toc = [
   }
   .guide__meta {
     margin-top: var(--space-4);
+  }
+  /* "17, 18 or 19?" table: the long-term releases are the ones to aim for, so they stand out; the label says LTS too. */
+  .guide__lts {
+    background: var(--panel);
+  }
+  .guide__lts-chip {
+    border-color: var(--accent-text);
+    white-space: nowrap;
+  }
+  .guide__sts td {
+    color: var(--ink-muted);
   }
   .guide__meta :global(a), .guide__meta a {
     color: var(--accent-text);

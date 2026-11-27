@@ -428,6 +428,8 @@ hmd-copy:not(:defined) { display: none; }
 .hmd-prose table { width: 100%; border-collapse: collapse; font-size: 15px; }
 .hmd-prose th, .hmd-prose td { text-align: left; padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--rule); vertical-align: top; }
 .hmd-prose th { font-family: var(--font-display); font-weight: 700; font-size: 14px; }
+/* A table wider than its column scrolls inside this box instead of widening the page (TableScroll.astro). */
+.hmd-table-scroll { overflow-x: auto; max-inline-size: 100%; }
 /* Inline code: "code:not(pre > code)", not ".hmd-prose :not(pre) > code" (the minifier drops the space before :not). */
 .hmd-prose code:not(pre > code), code.hmd-inline:not(pre > code),
 .hmd-journey code, .hmd-checklist code, .hmd-steps code, .hmd-compare code {

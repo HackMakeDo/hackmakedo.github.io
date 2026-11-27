@@ -5,6 +5,7 @@ import Section from '../../components/Section.astro';
 import Grid from '../../components/Grid.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
 import Prose from '../../components/Prose.astro';
+import TableScroll from '../../components/TableScroll.astro';
 import Testimonial from '../../components/Testimonial.astro';
 import FAQ from '../../components/FAQ.astro';
 import ContactCard from '../../components/ContactCard.astro';
@@ -103,25 +104,27 @@ const faqItems = [
 
   <Section panel heading={{ lead: 'Which versions are', boxed: 'supported', id: 'versions-h' }} containerVariant="text">
     <Prose>
-      <table>
-        <caption class="hmd-sr">Umbraco CMS versions and their support dates</caption>
-        <thead>
-          <tr><th scope="col">Version</th><th scope="col">Status</th><th scope="col">Security fixes only from</th><th scope="col">End of life</th></tr>
-        </thead>
-        <tbody>
-          {UMBRACO_VERSIONS.map((v) => {
-            const status = supportStatus(v);
-            return (
-              <tr>
-                <th scope="row">Umbraco {v.version}{v.type && ` (${v.type})`}</th>
-                <td><span class:list={['upg-status', `upg-status--${status === 'Supported' ? 'ok' : status === 'End of life' ? 'eol' : 'security'}`]}>{status}</span></td>
-                <td>{formatDate(v.securityPhase)}</td>
-                <td>{formatDate(v.endOfLife)}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <TableScroll labelledby="versions-caption">
+        <table>
+          <caption id="versions-caption" class="hmd-sr">Umbraco CMS versions and their support dates</caption>
+          <thead>
+            <tr><th scope="col">Version</th><th scope="col">Status</th><th scope="col">Security fixes only from</th><th scope="col">End of life</th></tr>
+          </thead>
+          <tbody>
+            {UMBRACO_VERSIONS.map((v) => {
+              const status = supportStatus(v);
+              return (
+                <tr>
+                  <th scope="row">Umbraco {v.version}{v.type && ` (${v.type})`}</th>
+                  <td><span class:list={['upg-status', `upg-status--${status === 'Supported' ? 'ok' : status === 'End of life' ? 'eol' : 'security'}`]}>{status}</span></td>
+                  <td>{formatDate(v.securityPhase)}</td>
+                  <td>{formatDate(v.endOfLife)}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </TableScroll>
       <p>
         <small>
           LTS is long-term support; STS is standard-term support. Versions before Umbraco 7 are no longer supported.
