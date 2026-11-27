@@ -789,8 +789,10 @@ hmd-marquee:not(:defined) .hmd-marquee__pause { display: none; }
 }
 .hmd-cta__title { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 24px; line-height: 1.25; }
 .hmd-cta__body p { margin: 0; font-family: var(--font-body); font-size: 17px; line-height: 1.6; }
+.hmd-cta__body p + p { margin-top: var(--space-3); }
 .hmd-cta__body a { color: var(--accent-text); }
 .hmd-cta > div:last-child { margin-top: var(--space-2); }
 .hmd-cta--compact { padding: var(--space-6); gap: var(--space-2); }
 .hmd-cta--compact .hmd-cta__title { font-size: 18px; }
 .hmd-cta--compact .hmd-cta__body p { font-size: 15px; line-height: 1.5; }
+.hmd-cta--compact .hmd-cta__body p + p { margin-top: var(--space-2); }
