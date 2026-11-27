@@ -1,0 +1,21 @@
+---
+/**
+ * A numbered walk-through: an ordered list with each step's number in a square pink box (the brand's
+ * square signature, like the ServiceCard number), joined by a hairline so the steps read as one path.
+ */
+import type { Step } from '../data/upgrade-guide';
+
+interface Props {
+  steps: Step[];
+}
+const { steps } = Astro.props;
+---
+
+<ol class="hmd-steps">
+  {steps.map((step) => (
+    <li>
+      <h3>{step.title}</h3>
+      <p set:html={step.html} />
+    </li>
+  ))}
+</ol>

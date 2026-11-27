@@ -1,0 +1,404 @@
+---
+/**
+ * The Umbraco 13 to 17 upgrade guide, companion to the /umbraco-upgrades/ hire page.
+ * Its job (decided 26 November 2026): be found on search engines and cited by AI assistants for
+ * "upgrade Umbraco 13 to 17" questions, so readers conclude Warren is the best person to hire for it.
+ * So it shows the size of the job in specific, sourced facts, but not the doing: no step-by-step code,
+ * config or fixes. Content lives in src/data/upgrade-guide.ts.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import Section from '../../../components/Section.astro';
+import SectionHeading from '../../../components/SectionHeading.astro';
+import Prose from '../../../components/Prose.astro';
+import TableScroll from '../../../components/TableScroll.astro';
+import CtaCard from '../../../components/CtaCard.astro';
+import Button from '../../../components/Button.astro';
+import TableOfContents from '../../../components/TableOfContents.astro';
+import VersionJourney from '../../../components/VersionJourney.astro';
+import Checklist from '../../../components/Checklist.astro';
+import Steps from '../../../components/Steps.astro';
+import Compare from '../../../components/Compare.astro';
+import Testimonial from '../../../components/Testimonial.astro';
+import FAQ from '../../../components/FAQ.astro';
+import ContactCard from '../../../components/ContactCard.astro';
+import { getCollection } from 'astro:content';
+import { articleSchema, faqPageSchema } from '../../../lib/structured-data';
+import { findVersion, formatDate, isReleased } from '../../../data/umbraco-versions';
+import { GUIDE_PUBLISHED, GUIDE_UPDATED, VERSION_STOPS, CHECKLIST, STAGES, GOTCHAS, FAQ_ITEMS, ELEMENTS_DOCS_URL } from '../../../data/upgrade-guide';
+
+const TITLE = 'How to upgrade Umbraco 13 to 17';
+const DESCRIPTION =
+  'What it takes to upgrade Umbraco 13 to 17: what changed in each version, a checklist to size your upgrade, and the problems worth planning for.';
+const updated = new Date(GUIDE_UPDATED);
+
+const v13 = findVersion(13)!;
+const v17 = findVersion(17)!;
+const v19 = findVersion(19)!;
+const v21 = findVersion(21)!;
+/** Every version from 17 to the next LTS, so the table shows the whole path the copy recommends. */
+const targets = [17, 18, 19, 20, 21].map((n) => findVersion(n)!);
+
+const simone = (await getCollection('testimonials')).find((t) => t.id === 'simone-chiaretta')!;
+
+const toc = [
+  { id: 'why-h', label: 'Why upgrade now' },
+  { id: 'target-h', label: 'Umbraco 17, 18 or 19?' },
+  { id: 'changes-h', label: 'What changed from 13 to 17' },
+  { id: 'checklist-h', label: 'How big is your upgrade?' },
+  { id: 'rebuild-h', label: 'Upgrade or rebuild?' },
+  { id: 'stages-h', label: 'The upgrade in four stages' },
+  { id: 'gotchas-h', label: 'What catches people out' },
+  { id: 'me-h', label: "How I'd do your upgrade" },
+  { id: 'faq-h', label: 'Questions' },
+];
+---
+
+<BaseLayout
+  title={`${TITLE}: what changed and what's involved`}
+  description={DESCRIPTION}
+  ogImage="/og/umbraco-upgrades/13-to-17.png"
+  currentPath="/umbraco-upgrades/"
+  hireHref="#contact-h"
+  jsonLd={[
+    articleSchema({
+      type: 'TechArticle',
+      title: TITLE,
+      description: DESCRIPTION,
+      datePublished: new Date(GUIDE_PUBLISHED),
+      dateModified: updated,
+      url: '/umbraco-upgrades/13-to-17/',
+      image: '/og/umbraco-upgrades/13-to-17.png',
+    }),
+    faqPageSchema(FAQ_ITEMS),
+  ]}
+>
+  <PageHeader
+    trail={[{ label: 'Home', href: '/' }, { label: 'Umbraco upgrades', href: '/umbraco-upgrades/' }, { label: '13 to 17 guide' }]}
+    eyebrow="Guide"
+    title={TITLE}
+    lead={`Umbraco 13 reaches end of life on ${formatDate(v13.endOfLife)}.`}
+  >
+    <p class="hmd-pagehead__lead">
+      You can upgrade straight to Umbraco 17. Most of the work is in what Umbraco 14 removed: the AngularJS backoffice, Nested Content, the old grid and macros. 
+      Feeling overwhelmed, or short on time? As an Umbraco freelancer, I can upgrade your site for you.
+    </p>
+    <p class="hmd-meta guide__meta">
+      By <a href="/about/">Warren Buckley</a> · Updated{' '}
+      <time datetime={GUIDE_UPDATED}>{formatDate(GUIDE_UPDATED)}</time>
+    </p>
+    <div class="hmd-hero__actions hmd-mt-8">
+      <Button href="#contact-h">Get help with your upgrade</Button>
+      <Button variant="secondary" href="#checklist-h">How big is my upgrade?</Button>
+    </div>
+  </PageHeader>
+
+  <div class="hmd-container guide">
+    <div class="guide__layout">
+      <article class="guide__article">
+        <section aria-labelledby="why-h">
+          <SectionHeading lead="Why upgrade" boxed="now" id="why-h" />
+          <Prose>
+            <p>
+              Because Umbraco 13 stops getting security fixes on <strong>{formatDate(v13.endOfLife)}</strong>, and the <a href="https://devblogs.microsoft.com/dotnet/dotnet-8-9-end-of-support/">.NET 8 it runs on
+              is already out of support</a>. The site won't stop working that day, but any vulnerability found after it stays
+              open on your site.
+            </p>
+            <p>
+              Umbraco 17 has security fixes until <strong>{formatDate(v17.endOfLife)}</strong>, so an upgrade now covers you for the next
+              two years.
+            </p>
+            <p>
+              I can do the upgrade for you, as a <a href="/umbraco-freelancer/">freelancer</a> or <a href="/umbraco-contractor/">contractor</a>.
+            </p>
+          </Prose>
+        </section>
+
+        <section aria-labelledby="target-h">
+          <SectionHeading lead="Umbraco" boxed="17, 18 or 19?" id="target-h" />
+          <Prose>
+            {/* Dates come from src/data/umbraco-versions.ts; the 19 and 21 wording switches once each is released.
+                The FAQ has its own shorter answer in src/data/upgrade-guide.ts: keep the two in step. */}
+            <p>
+              I personally recommend upgrading to Umbraco 17 first. It is the current long-term support 
+              release, with security fixes until <strong>{formatDate(v17.endOfLife)}</strong>.
+            </p>
+            <p>
+              If you can, keep going with the standard-term releases, Umbraco 18, 19 and 20, rather
+              than sit on 17 until the next big LTS jump. Each one is a much smaller step, and Umbraco marks code as obsolete before
+              it removes it, so taking each release shows you what to fix before it breaks.
+            </p>
+            <p>
+              That way,{' '}
+              {isReleased(v21)
+                ? 'the move to Umbraco 21, the next long-term support release,'
+                : `when Umbraco 21, the next long-term support release, arrives (due ${formatDate(v21.released)}), the move to it`}
+              {' '}won't be so much work.
+            </p>
+            <p>
+              Long-term releases are supported for three years, and standard-term releases for one.
+            </p>
+            <TableScroll labelledby="targets-caption">
+              <table>
+                <caption id="targets-caption" class="hmd-sr">Umbraco versions to upgrade to, with their support type and dates</caption>
+                <thead>
+                  <tr><th scope="col">Version</th><th scope="col">Support</th><th scope="col">Released</th><th scope="col">End of life</th></tr>
+                </thead>
+                <tbody>
+                  {targets.map((v) => (
+                    <tr class:list={[v.type === 'LTS' ? 'guide__lts' : 'guide__sts']}>
+                      <th scope="row">Umbraco {v.version}</th>
+                      <td>{v.type === 'LTS' ? <span class="hmd-chip guide__lts-chip">Long-term (LTS)</span> : 'Standard-term (STS)'}</td>
+                      <td>{isReleased(v) ? formatDate(v.released) : `Due ${formatDate(v.released)}`}</td>
+                      <td>{formatDate(v.endOfLife)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </TableScroll>
+          </Prose>
+          <div class="hmd-mt-8">
+            <CtaCard title="Tired of keeping up to date with upgrades?" buttonLabel="Talk about keeping up to date">
+              <p>
+                Keeping up with each Umbraco release, and the upgrade that comes with it, takes time.
+              </p>
+              <p>
+                Don't forget the regular Umbraco security patches too! I can handle both for you.
+              </p>
+            </CtaCard>
+          </div>
+        </section>
+
+        <section aria-labelledby="changes-h">
+          <SectionHeading lead="What changed from" boxed="13 to 17" id="changes-h" />
+          <Prose>
+            <p>
+              Four major versions sit between 13 and 17. You don't install each one, but you do take on the changes each
+              one brings. Most of them are in Umbraco 14, which replaced the whole backoffice.
+            </p>
+          </Prose>
+          <div class="hmd-mt-8">
+            <VersionJourney from={{ version: 13, dotnet: '.NET 8', label: 'Your current Umbraco 13 site, updated to the latest 13.x release first.' }} stops={VERSION_STOPS} />
+          </div>
+        </section>
+
+        <section aria-labelledby="checklist-h">
+          <SectionHeading lead="How big is your" boxed="upgrade?" id="checklist-h" />
+          <Prose>
+            <p>
+              Tick off what applies to your site (ticks aren't saved). The more you tick, the bigger the upgrade, and the
+              more it pays to plan it properly.
+            </p>
+          </Prose>
+          <div class="hmd-mt-8">
+            <Checklist idPrefix="size" items={CHECKLIST} />
+          </div>
+          <div class="hmd-mt-8">
+            <CtaCard title="Ticked more than a couple?" buttonLabel="Get in touch">
+              <p>
+                If you ticked more than a couple of items, the upgrade is likely to be a bigger job. I can help you plan
+                it, and do it for you if you like.
+              </p>
+            </CtaCard>
+          </div>
+        </section>
+
+        <section aria-labelledby="rebuild-h">
+          <SectionHeading lead="Upgrade or" boxed="rebuild?" id="rebuild-h" />
+          <Prose>
+            <p>
+              Most Umbraco 13 sites can be upgraded in place. A rebuild is worth weighing up when the site leans heavily
+              on what Umbraco 14 removed, or when a redesign is coming anyway.
+            </p>
+          </Prose>
+          <div class="hmd-mt-8">
+            <Compare
+              options={[
+                {
+                  title: 'Upgrade in place when…',
+                  points: [
+                    'The content model still fits what editors do today',
+                    'Custom backoffice code is modest, or there is none',
+                    'Content is in Block List or Block Grid, not Nested Content or the old grid',
+                  ],
+                },
+                {
+                  title: 'Consider a rebuild when…',
+                  points: [
+                    'Much of the content sits in Nested Content, Grid Layout or macros',
+                    'The backoffice relies on a lot of custom AngularJS',
+                    'A redesign or a new content model is due anyway',
+                    'The content would be better reshaped around newer features, such as reusable content',
+                  ],
+                },
+              ]}
+            />
+          </div>
+          <Prose class="hmd-mt-8">
+            <p>
+              Either way, an upgrade is a good time to look again at the content model. It can be better to reshape the
+              document types and data types around features Umbraco 13 didn't have, rather than carry the old structure
+              forward. From Umbraco 18, for example, <a href={ELEMENTS_DOCS_URL}>Elements</a> let editors create content
+              once in the new Library section and reuse it on as many pages as they need. Umbraco 19
+              ({isReleased(v19) ? 'released' : 'due'} {formatDate(v19.released)}) adds reusable blocks from the Library
+              too; I've been trying them out in its release candidates.
+            </p>
+          </Prose>
+        </section>
+
+        <section aria-labelledby="stages-h">
+          <SectionHeading lead="The upgrade in four" boxed="stages" id="stages-h" />
+          <Prose>
+            <p>
+              A 13 to 17 upgrade comes in four stages. How long each one takes depends on what you ticked above, and on a
+              big site with custom backoffice code, the last one can be most of the work.
+            </p>
+          </Prose>
+          <div class="hmd-mt-8">
+            <Steps steps={STAGES} />
+          </div>
+          <div class="hmd-mt-8">
+            <CtaCard title="Rather hand all four to someone?" buttonLabel="Talk about your upgrade">
+              <p>
+                I upgrade Umbraco sites to Umbraco 17 as a freelancer or contractor, working remotely from the UK, and I
+                build extensions for the new backoffice myself.
+              </p>
+            </CtaCard>
+          </div>
+        </section>
+
+        <section aria-labelledby="gotchas-h">
+          <SectionHeading lead="What catches people" boxed="out" id="gotchas-h" />
+          <Prose>
+            <p>Plan for these before you start.</p>
+            <ul>
+              {GOTCHAS.map((g) => (
+                <li><strong>{g.title}.</strong> <span set:html={g.html} /></li>
+              ))}
+            </ul>
+          </Prose>
+        </section>
+
+        <section aria-labelledby="me-h">
+          <SectionHeading lead="How I'd do your" boxed="upgrade" id="me-h" />
+          <Prose>
+            <p>
+              I'm an Umbraco Certified Master and nine-time Umbraco MVP, and I build extensions for the new backoffice
+              myself. When I upgraded the Council of the European Union's site from Umbraco 13 to 16, about 90% of the
+              work was rebuilding its integrations and extensions as web components.
+            </p>
+            <p>
+              It starts with a call or an email about your site. Every Umbraco site is built differently, with its own
+              packages and customisations, so I look into how yours is built, and what it needs, before saying how long
+              the upgrade should take. That is also when we decide whether to upgrade as it is, or reshape the content
+              around newer Umbraco features.
+            </p>
+            <p>
+              After that first call, I can give you an estimate of how long the upgrade will take and what it will cost.
+            </p>
+            <p>I've also written about <a href="/blog/topic/bellissima/">building for the new backoffice</a> on my blog.</p>
+          </Prose>
+          <div class="hmd-mt-8">
+            <Testimonial
+              paragraphs={simone.data.quote.slice(0, 1)}
+              name={simone.data.name}
+              profileHref={simone.data.linkedinUrl}
+              roleAndCompany={`${simone.data.role}, ${simone.data.company} · via LinkedIn`}
+            />
+          </div>
+          <div class="hmd-hero__actions hmd-mt-8">
+            <Button href="#contact-h">Get in touch about your upgrade</Button>
+          </div>
+        </section>
+
+        <section aria-labelledby="faq-h">
+          <SectionHeading lead="Common" boxed="questions" id="faq-h" />
+          <div class="hmd-mt-8">
+            <FAQ items={FAQ_ITEMS} />
+          </div>
+        </section>
+      </article>
+
+      <aside class="guide__toc">
+        <div class="guide__sticky">
+          <TableOfContents items={toc} sticky={false} />
+          <CtaCard compact headingTag="p" title="Upgrading from Umbraco 13?" buttonLabel="Get in touch">
+            <p>I upgrade Umbraco sites to Umbraco 17, as a freelancer or contractor.</p>
+          </CtaCard>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <Section class="hmd-pink" ariaLabel="Contact" containerVariant="text">
+    <ContactCard
+      heading={{ boxed: 'talk', lead: "Let's", id: 'contact-h' }}
+      intro="Planning an Umbraco 13 to 17 upgrade? Tell me roughly how big the site is, which packages it uses, and what custom backoffice code it has."
+      email="warren@hackmakedo.com"
+    />
+  </Section>
+</BaseLayout>
+
+<script src="../../../elements/index.ts"></script>
+
+<style>
+  .guide {
+    padding-block: 0 96px;
+  }
+  .guide__meta {
+    margin-top: var(--space-4);
+  }
+  /* "17, 18 or 19?" table: the long-term releases are the ones to aim for, so they stand out; the label says LTS too. */
+  .guide__lts {
+    background: var(--panel);
+  }
+  .guide__lts-chip {
+    border-color: var(--accent-text);
+    white-space: nowrap;
+  }
+  .guide__sts td {
+    color: var(--ink-muted);
+  }
+  .guide__meta :global(a), .guide__meta a {
+    color: var(--accent-text);
+  }
+  /* Article and contents side by side when there is room, as on blog posts; the contents wrap below on narrow screens. */
+  .guide__layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 64px;
+    margin-top: 16px;
+  }
+  .guide__article {
+    flex: 999 1 560px;
+    min-width: 0;
+    max-width: 760px;
+    display: grid;
+    /* minmax(0, 1fr): without it the column grows to its widest child (code, the table) and the page scrolls sideways on phones. */
+    grid-template-columns: minmax(0, 1fr);
+    gap: 80px;
+  }
+  .guide__article > section > :global(.hmd-heading) {
+    margin-bottom: var(--space-6);
+  }
+  .guide__toc {
+    flex: 1 1 240px;
+    min-width: 0;
+    max-width: 300px;
+  }
+  /* The contents and the sidebar CTA stay in view together while reading. */
+  .guide__sticky {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-6));
+    display: grid;
+    gap: var(--space-6);
+  }
+  @media (max-width: 640px) {
+    .guide {
+      padding-block: 0 64px;
+    }
+    .guide__article {
+      gap: 56px;
+    }
+  }
+</style>

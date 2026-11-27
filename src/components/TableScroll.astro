@@ -1,0 +1,16 @@
+---
+/**
+ * Wraps a table so that, when it is wider than its column (on a phone), it scrolls sideways inside this box
+ * rather than making the whole page scroll. Focusable so keyboard users can scroll it, and a named region
+ * (from the table's caption) so screen readers announce what it is.
+ */
+interface Props {
+  /** The id of the table's <caption>. */
+  labelledby: string;
+}
+const { labelledby } = Astro.props;
+---
+
+<div class="hmd-table-scroll" role="region" aria-labelledby={labelledby} tabindex="0">
+  <slot />
+</div>

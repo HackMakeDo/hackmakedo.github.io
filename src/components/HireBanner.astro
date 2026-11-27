@@ -4,7 +4,8 @@ import Button from './Button.astro';
 /**
  * The hire call to action: one sentence of availability, in Warren's voice, plus "Get in touch". Sits inside a pink end band.
  * The first mention of "freelancer" (or "freelance Umbraco developer") and of "contractor" in the message links to that
- * hire page, so every page using the banner links both with the words people search for.
+ * hire page, so every page using the banner links both with the words people search for. "Umbraco 13 to 17" links to
+ * the upgrade guide (used on the Bellissima blog posts).
  */
 interface Props {
   message: string;
@@ -15,6 +16,7 @@ const { message, href = '/contact/' } = Astro.props;
 const HIRE_PAGES: [RegExp, string][] = [
   [/freelance Umbraco developer|freelancer/, '/umbraco-freelancer/'],
   [/contractor/, '/umbraco-contractor/'],
+  [/Umbraco 13 to 17/, '/umbraco-upgrades/13-to-17/'],
 ];
 
 type Part = { text: string; href?: string };

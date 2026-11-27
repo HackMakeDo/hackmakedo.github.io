@@ -44,6 +44,11 @@ const relatedPosts = allPosts
 // Google cut titles off), when the site name is dropped rather than any of the post's own words. `seoTitle`, set
 // by hand per post, is a shorter title for search results only; the page heading always shows `title`.
 const SITE_SUFFIX = ' — Hack Make Do';
+// Posts about the new backoffice are read by people with backoffice code to upgrade, so their hire band points
+// at the 13 to 17 guide ("Umbraco 13 to 17" is linked by HireBanner).
+const hireMessage = post.data.topics.includes('bellissima')
+  ? "Upgrading from Umbraco 13 to 17? I'm available as a freelancer or contractor."
+  : "Need a hand with Umbraco? I'm available as a freelancer or contractor.";
 const searchTitle = post.data.seoTitle ?? post.data.title;
 const pageTitle = (searchTitle + SITE_SUFFIX).length <= 70 ? searchTitle + SITE_SUFFIX : searchTitle;
 const article = articleSchema({
@@ -112,7 +117,7 @@ const article = articleSchema({
   </div>
 
   <Section class="hmd-pink" ariaLabel="Hire">
-    <HireBanner message="Need a hand with Umbraco? I'm available as a freelancer or contractor." />
+    <HireBanner message={hireMessage} />
   </Section>
 </BaseLayout>
 

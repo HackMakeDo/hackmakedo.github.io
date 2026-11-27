@@ -1,0 +1,42 @@
+---
+/**
+ * The route through Umbraco's major versions, one stop per version, on a vertical line like the timeline's.
+ * Each stop shows its .NET version and a one-sentence summary; the full list of changes sits in a native
+ * <details>, so it stays in the page for search engines, "Find in page" and the Markdown copy.
+ */
+import type { VersionStop } from '../data/upgrade-guide';
+
+interface Props {
+  /** Where the journey starts (shown as the first stop, without changes). */
+  from: { version: number; dotnet: string; label: string };
+  stops: VersionStop[];
+}
+const { from, stops } = Astro.props;
+const last = stops.at(-1)?.version;
+---
+
+<ol class="hmd-journey">
+  <li class="hmd-journey__stop hmd-journey__stop--start">
+    <p class="hmd-journey__version"><span class="hmd-journey__num">Umbraco {from.version}</span> <span class="hmd-journey__dotnet">{from.dotnet}</span></p>
+    <p class="hmd-journey__summary">{from.label}</p>
+  </li>
+  {stops.map((stop) => (
+    <li class:list={['hmd-journey__stop', { 'hmd-journey__stop--end': stop.version === last }]}>
+      <h3 class="hmd-journey__version" id={`umbraco-${stop.version}`}>
+        <span class="hmd-journey__num">Umbraco {stop.version}</span> <span class="hmd-journey__dotnet">{stop.dotnet}</span>
+      </h3>
+      <p class="hmd-journey__summary">{stop.summary}</p>
+      <details class="hmd-journey__details">
+        <summary>What changed in Umbraco {stop.version} ({stop.changes.length})</summary>
+        <ul class="hmd-journey__changes">
+          {stop.changes.map((change) => (
+            <li>
+              <strong set:html={change.title} /> <span set:html={change.html} />
+            </li>
+          ))}
+        </ul>
+        <p class="hmd-journey__source"><a href={stop.href}>Umbraco {stop.version} breaking changes ↗</a></p>
+      </details>
+    </li>
+  ))}
+</ol>

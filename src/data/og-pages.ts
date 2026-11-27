@@ -11,6 +11,7 @@ export const OG_PAGES: { slug: string; card: OgImageOptions }[] = [
   { slug: 'umbraco-freelancer', card: { eyebrow: 'Hire', title: 'Umbraco Freelancer' } },
   { slug: 'umbraco-contractor', card: { eyebrow: 'Hire', title: 'Umbraco Contractor' } },
   { slug: 'umbraco-upgrades', card: { eyebrow: 'Hire', title: 'Umbraco Upgrades' } },
+  { slug: 'umbraco-upgrades/13-to-17', card: { eyebrow: 'Guide', title: 'How to upgrade Umbraco 13 to 17' } },
   { slug: 'about', card: { eyebrow: 'About', title: 'Warren Buckley' } },
   { slug: 'work', card: { eyebrow: 'Work', title: 'Client work and open source' } },
   { slug: 'work/council-of-the-european-union', card: { eyebrow: 'Client work', title: 'Council of the European Union' } },

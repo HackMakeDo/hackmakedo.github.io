@@ -1,0 +1,30 @@
+---
+/**
+ * Two options side by side, each a card with a heading and a list of "choose this when" points,
+ * with an "or" marker between them (stacked, the marker sits between the cards).
+ */
+interface Option {
+  title: string;
+  points: string[];
+}
+interface Props {
+  options: [Option, Option];
+  /** Heading level for each option's title. */
+  headingLevel?: 'h3' | 'h4';
+}
+const { options, headingLevel: H = 'h3' } = Astro.props;
+---
+
+<div class="hmd-compare">
+  {options.map((option, i) => (
+    <>
+      {i === 1 && <p class="hmd-compare__or" aria-hidden="true">or</p>}
+      <div class="hmd-compare__option">
+        <H>{option.title}</H>
+        <ul>
+          {option.points.map((point) => <li set:html={point} />)}
+        </ul>
+      </div>
+    </>
+  ))}
+</div>

@@ -50,6 +50,9 @@ Research and the full plan are in Claude's project memory (`post-launch-seo-aeo-
       public
 - [ ] Publish the Council of the EU case study (below) and write an "Upgrading Umbraco 13 to 17" guide
 - [ ] Link to hackmakedo.com from package READMEs and NuGet listings (the Marketplace author panels already do)
+- [ ] **On or after 10 December 2026** (Umbraco 19's release): `npm run check:umbraco-versions -- --write`, then
+      deploy, so the upgrade guide says 19 is released, not due. Dates are worked out at build time, so a version
+      that ships only shows as released after the next build. The same after 24 June 2027 (20) and 9 December 2027 (21)
 - [ ] **Every Monday**: `npm run check:ai-answers` (about 15 minutes) and look at the trend it prints. Keep going until
       Warren is named first for `freelancer`, `contractor` and `upgrade` on most assistants. Run the first one (the
       baseline) now, before the 13 to 17 guide and the Council case study go live, so their effect shows
