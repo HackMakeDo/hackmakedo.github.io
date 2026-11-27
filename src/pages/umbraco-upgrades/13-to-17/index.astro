@@ -49,7 +49,7 @@ const toc = [
   { id: 'rebuild-h', label: 'Upgrade or rebuild?' },
   { id: 'stages-h', label: 'The upgrade in four stages' },
   { id: 'gotchas-h', label: 'What catches people out' },
-  { id: 'me-h', label: 'How I’d do your upgrade' },
+  { id: 'me-h', label: "How I'd do your upgrade" },
   { id: 'faq-h', label: 'Questions' },
 ];
 ---
@@ -101,7 +101,7 @@ const toc = [
           <Prose>
             <p>
               Because Umbraco 13 stops getting security fixes on <strong>{formatDate(v13.endOfLife)}</strong>, and the <a href="https://devblogs.microsoft.com/dotnet/dotnet-8-9-end-of-support/">.NET 8 it runs on
-              is already out of support</a>. The site won’t stop working that day, but any vulnerability found after it stays
+              is already out of support</a>. The site won't stop working that day, but any vulnerability found after it stays
               open on your site. And vulnerabilities are being found faster, now that AI tools are used to look for them.
               With more public cyber attacks on companies and governments in the public eye, staying secure is more important than ever.
             </p>
@@ -134,7 +134,7 @@ const toc = [
               {isReleased(v21)
                 ? 'the move to Umbraco 21, the next long-term support release,'
                 : `when Umbraco 21, the next long-term support release, arrives (due ${formatDate(v21.released)}), the move to it`}
-              {' '}won’t be so much work.
+              {' '}won't be so much work.
             </p>
             <p>
               Long-term releases are supported for three years, and standard-term releases for one.
@@ -174,7 +174,7 @@ const toc = [
           <SectionHeading lead="What changed from" boxed="13 to 17" id="changes-h" />
           <Prose>
             <p>
-              Four major versions sit between 13 and 17. You don’t install each one, but you do take on the changes each
+              Four major versions sit between 13 and 17. You don't install each one, but you do take on the changes each
               one brings. Umbraco 14 contained the most significant changes with the introduction of the new backoffice
               interface and architecture.
             </p>
@@ -188,7 +188,7 @@ const toc = [
           <SectionHeading lead="How big is your" boxed="upgrade?" id="checklist-h" />
           <Prose>
             <p>
-              Tick off what applies to your site (ticks aren’t saved). The more you tick, the bigger the upgrade, and the
+              Tick off what applies to your site (ticks aren't saved). The more you tick, the bigger the upgrade, and the
               more it pays to plan it properly.
             </p>
           </Prose>
@@ -202,11 +202,11 @@ const toc = [
                 it, and do it for you if you like.
               </p>
               <p>
-                Every Umbraco site is built differently, with its own packages and customisations, so I won’t guess at a
+                Every Umbraco site is built differently, with its own packages and customisations, so I won't guess at a
                 number of days.
               </p>
               <p>
-                Let’s have a call, or send me an email about your site, and I’ll look into what your
+                Let's have a call, or send me an email about your site, and I'll look into what your
                 upgrade needs. After that, I can give you an estimate of how long it will take and what it will cost.
               </p>
             </CtaCard>
@@ -247,11 +247,11 @@ const toc = [
           <Prose class="hmd-mt-8">
             <p>
               Either way, an upgrade is a good time to look again at the content model. It can be better to reshape the
-              document types and data types around features Umbraco 13 didn’t have, rather than carry the old structure
+              document types and data types around features Umbraco 13 didn't have, rather than carry the old structure
               forward. From Umbraco 18, for example, <a href={ELEMENTS_DOCS_URL}>Elements</a> let editors create content
               once in the new Library section and reuse it on as many pages as they need. Umbraco 19
               ({isReleased(v19) ? 'released' : 'due'} {formatDate(v19.released)}) adds reusable blocks from the Library
-              too; I’ve been trying them out in its release candidates.
+              too; I've been trying them out in its release candidates.
             </p>
           </Prose>
         </section>
@@ -290,11 +290,11 @@ const toc = [
         </section>
 
         <section aria-labelledby="me-h">
-          <SectionHeading lead="How I’d do your" boxed="upgrade" id="me-h" />
+          <SectionHeading lead="How I'd do your" boxed="upgrade" id="me-h" />
           <Prose>
             <p>
-              I’m an Umbraco Certified Master and nine-time Umbraco MVP, and I build extensions for the new backoffice
-              myself. When I upgraded the Council of the European Union’s site from Umbraco 13 to 16, about 90% of the
+              I'm an Umbraco Certified Master and nine-time Umbraco MVP, and I build extensions for the new backoffice
+              myself. When I upgraded the Council of the European Union's site from Umbraco 13 to 16, about 90% of the
               work was rebuilding its integrations and extensions as web components.
             </p>
             <p>
@@ -306,7 +306,7 @@ const toc = [
             <p>
               After that first call, I can give you an estimate of how long the upgrade will take and what it will cost.
             </p>
-            <p>I’ve also written about <a href="/blog/topic/bellissima/">building for the new backoffice</a> on my blog.</p>
+            <p>I've also written about <a href="/blog/topic/bellissima/">building for the new backoffice</a> on my blog.</p>
           </Prose>
           <div class="hmd-mt-8">
             <Testimonial
