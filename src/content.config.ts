@@ -8,6 +8,11 @@ const posts = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/posts' }),
   schema: z.object({
     title: z.string(),
+    /**
+     * Optional shorter title for search results (the <title> tag) when `title` is over 70 characters.
+     * Written by Warren, never generated. Also used for og:title; the page heading, the OG image and structured data keep `title`.
+     */
+    seoTitle: z.string().max(70).optional(),
     date: z.date(),
     updated: z.date().optional(),
     topics: z.array(z.string()),

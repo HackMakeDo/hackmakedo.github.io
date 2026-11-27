@@ -253,7 +253,7 @@ I created a hosted [HTTP Trigger Azure Function](https://learn.microsoft.com/en-
 So my for scenario in IIS Express for VSCode every time a user launches a website from VSCode with my extension will keep a track of the number times it has been launched along with if the authenticated GitHub user is a valid sponsor or not by making a HTTP POST request to my Azure function. If the threshold is met and they are not a valid sponsor then I am displaying a friendly sponsorware message to encourage users to become a GitHub sponsor to remove the message.
 
 <figure class="hmd-figure">
-  <img src="/images/blog/how-to-use-github-sponsors-to-help-monetize-your-software/github-sponsorwaremessage.png" alt="" loading="lazy" />
+  <img src="/images/blog/how-to-use-github-sponsors-to-help-monetize-your-software/github-sponsorwaremessage.png" alt="The IIS Express extension in VS Code showing its sponsorware message: you have used IIS Express 24 times, with buttons to sponsor Warren Buckley on GitHub or log in to GitHub" loading="lazy" />
   <figcaption>An example of the sponsorware message shown to users who are not GitHub sponsors of the IIS Express for VSCode extension</figcaption>
 </figure>
 

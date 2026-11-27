@@ -13,7 +13,7 @@ Following up from my [last blog post on using a Powershell script to automate cr
 You can visit the r[epository I setup to be a GitHub Template and click the Use this template green button top right of the repository page](https://github.com/warrenbuckley/Umbraco-Repo-Template), where this will kick off the GitHub Action which will create the .NET Solution, Umbraco RCL project, Umbraco test website project and the TypeScript project setup with Vite and the Umbraco CMS dev dependency all ready to go.
 
 <figure class="hmd-figure">
-  <img src="/images/blog/automate-umbraco-project-setup-using-github-template-repositories-and-actions/image-3.png" alt="" loading="lazy" />
+  <img src="/images/blog/automate-umbraco-project-setup-using-github-template-repositories-and-actions/image-3.png" alt="The Umbraco-Repo-Template repository on GitHub, with arrows pointing to Use this template and Create a new repository" loading="lazy" />
   <figcaption>A screenshot of where to find the Use this template button on GitHub</figcaption>
 </figure>
 

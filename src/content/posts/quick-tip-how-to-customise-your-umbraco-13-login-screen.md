@@ -23,7 +23,7 @@ So you may be wondering what can you customise of this new Umbraco backoffice lo
 You can see from the screenshot below what we can customise with the pink outlined boxes.
 
 <figure class="hmd-figure">
-  <img src="/images/blog/quick-tip-how-to-customise-your-umbraco-13-login-screen/umbraco-v13-new-login-screen-annotated.png" alt="" loading="lazy" />
+  <img src="/images/blog/quick-tip-how-to-customise-your-umbraco-13-login-screen/umbraco-v13-new-login-screen-annotated.png" alt="The default Umbraco 13 login screen, with the background image and the Umbraco logo outlined in pink" loading="lazy" />
   <figcaption>The pink outlined boxes show what we can easily customise on the new Umbraco login screen</figcaption>
 </figure>
 
@@ -50,7 +50,7 @@ I have set the three properties under the **Umbraco:CMS:Content** configuration 
 ```
 
 <figure class="hmd-figure">
-  <img src="/images/blog/quick-tip-how-to-customise-your-umbraco-13-login-screen/umbraco-v13-customised.png" alt="" loading="lazy" />
+  <img src="/images/blog/quick-tip-how-to-customise-your-umbraco-13-login-screen/umbraco-v13-customised.png" alt="The customised Umbraco 13 login screen, with an illustration of unicorns working at a laptop in place of the default image and logo" loading="lazy" />
   <figcaption>A customised V13+ Umbraco login screen for Coding Unicorns</figcaption>
 </figure>
 

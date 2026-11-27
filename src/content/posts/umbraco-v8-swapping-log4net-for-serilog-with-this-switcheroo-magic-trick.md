@@ -9,7 +9,7 @@ draft: false
 So in this blog post I will perform a switcheroo trick and swap the logging framework used in Umbraco V8 from Log4Net to use Serilog, however I will be one of those awful magicians from that crumby late 90's show that revealed magician's secrets to tricks.
 
 <figure class="hmd-figure">
-  <img src="/images/blog/umbraco-v8-swapping-log4net-for-serilog-with-this-switcheroo-magic-trick/secret-magician1.jpg" alt="" width="1200" height="675" loading="lazy" />
+  <img src="/images/blog/umbraco-v8-swapping-log4net-for-serilog-with-this-switcheroo-magic-trick/secret-magician1.jpg" alt="A masked magician in a dark suit, about to reveal how a trick is done" width="1200" height="675" loading="lazy" />
   <figcaption>That 90&#x27;s show where the magician would show how tricks were done</figcaption>
 </figure>
 
@@ -28,7 +28,7 @@ For example you could find all Log messages from a given class/type very quickly
 If you use Serilog's Sinks, a term which is a datastore for logs, then you are able to output the logs to several places at once such as traditional text files, databases or perhaps more useful tools like ElasticSearch or even [Serilog's author companion tool Seq](https://datalust.co/) which allows you to visually, perform complex searches & queries to get an insight into your logs.
 
 <figure class="hmd-figure">
-  <img src="/images/blog/umbraco-v8-swapping-log4net-for-serilog-with-this-switcheroo-magic-trick/seq-screenshot.png" alt="" width="1400" height="723" loading="lazy" />
+  <img src="/images/blog/umbraco-v8-swapping-log4net-for-serilog-with-this-switcheroo-magic-trick/seq-screenshot.png" alt="The Seq log viewer: a query box, a bar chart of events over time and a list of structured log messages with highlighted values" width="1400" height="723" loading="lazy" />
   <figcaption>A screenshot from Seq, a tool to visually filter &amp; query logs</figcaption>
 </figure>
 
@@ -176,7 +176,7 @@ namespace MyProject
 With all magic tricks there is some skepticism, so to be fully transparent and to ensure you its working here is a view of logs coming from Umbraco V8 in my local copy of Seq.
 
 <figure class="hmd-figure">
-  <img src="/images/blog/umbraco-v8-swapping-log4net-for-serilog-with-this-switcheroo-magic-trick/seq-umbraco-screenshot.png" alt="" width="1307" height="822" loading="lazy" />
+  <img src="/images/blog/umbraco-v8-swapping-log4net-for-serilog-with-this-switcheroo-magic-trick/seq-umbraco-screenshot.png" alt="Seq showing Umbraco 8 boot log messages filtered by ProcessName, with an arrow pointing to the properties logged with one message" width="1307" height="822" loading="lazy" />
   <figcaption>A quick screenshot of my local copy of Seq with Umbraco V8 logs and additional properties pushed in</figcaption>
 </figure>
 

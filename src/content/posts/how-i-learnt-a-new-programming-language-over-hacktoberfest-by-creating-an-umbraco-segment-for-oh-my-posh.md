@@ -25,7 +25,7 @@ I almost gave up on the idea of contributing and remembered what I saw in the vi
 
 Creating the [GitHub CodeSpace](https://github.com/features/codespaces) was as simple as clicking the green **Code** button on the GitHub repository page and clicking the **Codespaces **tab to Create a new codespace.
 
-![](/images/blog/how-i-learnt-a-new-programming-language-over-hacktoberfest-by-creating-an-umbraco-segment-for-oh-my-posh/image.png)
+![The Codespaces tab of the Code menu on a GitHub repository, with a Create codespace on main button](/images/blog/how-i-learnt-a-new-programming-language-over-hacktoberfest-by-creating-an-umbraco-segment-for-oh-my-posh/image.png)
 
 In doing so, the GitHub CodeSpace (DevContainer) configuration would configure a machine in the cloud and open up the project inside Visual Studio Code within the browser. What it had done for me magically behind the scenes was ensure I had the tooling and dependencies for writing with Go.
 

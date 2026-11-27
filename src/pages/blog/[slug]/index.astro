@@ -40,6 +40,12 @@ const relatedPosts = allPosts
   .sort((a, b) => b.shared - a.shared || b.post.data.date.valueOf() - a.post.data.date.valueOf())
   .slice(0, relatedWork ? 1 : 2)
   .map((r) => r.post);
+// The <title>: the post's title plus " — Hack Make Do", unless that goes over 70 characters (where Bing and
+// Google cut titles off), when the site name is dropped rather than any of the post's own words. `seoTitle`, set
+// by hand per post, is a shorter title for search results only; the page heading always shows `title`.
+const SITE_SUFFIX = ' — Hack Make Do';
+const searchTitle = post.data.seoTitle ?? post.data.title;
+const pageTitle = (searchTitle + SITE_SUFFIX).length <= 70 ? searchTitle + SITE_SUFFIX : searchTitle;
 const article = articleSchema({
   title: post.data.title,
   description: post.data.excerpt,
@@ -51,7 +57,7 @@ const article = articleSchema({
 ---
 
 <BaseLayout
-  title={`${post.data.title} — Hack Make Do`}
+  title={pageTitle}
   description={post.data.excerpt}
   ogImage={`/og/blog/${post.id}.png`}
   currentPath="/blog/"
