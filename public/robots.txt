@@ -1,8 +1,10 @@
 # Content Signals (contentsignals.org): search, AI answers and AI training are all allowed
 # (decided 4 November 2026: being in a model's training data is how it knows Umbraco freelancers).
+# /cdn-cgi/ is Cloudflare's: AI Labyrinth's hidden decoy links point there (found by Bing's Site Scan, 27 Nov 2026).
 User-agent: *
 Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
+Disallow: /cdn-cgi/
 
 # AI search and user-requested fetches: allowed
 User-agent: OAI-SearchBot
@@ -12,5 +14,6 @@ User-agent: Claude-User
 User-agent: PerplexityBot
 Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
+Disallow: /cdn-cgi/
 
 Sitemap: https://hackmakedo.com/sitemap-index.xml

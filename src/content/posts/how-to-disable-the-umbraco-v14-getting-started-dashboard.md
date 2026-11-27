@@ -9,7 +9,7 @@ draft: false
 With Umbraco V14 fast approaching its release date, I wanted to share a quick tip with the wider Umbraco community on how you can disable/remove the '**Getting Started**' dashboard from Umbraco that is typically used to push marketing material, such as training or upcoming events. Whilst this is OK for us developers and agencies whilst developing a solution for a client, we typically don't want to show this information and marketing material to the end client that we deliver our solution to.
 
 <figure class="hmd-figure">
-  <img src="/images/blog/how-to-disable-the-umbraco-v14-getting-started-dashboard/image-3.png" alt="" loading="lazy" />
+  <img src="/images/blog/how-to-disable-the-umbraco-v14-getting-started-dashboard/image-3.png" alt="The Umbraco Content section with the Getting Started dashboard tab and its content circled in red" loading="lazy" />
   <figcaption>A screenshot of a default Umbraco V14 install showing the getting started dashboard built into Umbraco.</figcaption>
 </figure>
 
@@ -57,7 +57,7 @@ export const onInit = (_host, extensionRegistry) => {
 And with that simple bit of magic, our party to trick to remove the marketing focused dashboard is complete.
 
 <figure class="hmd-figure">
-  <img src="/images/blog/how-to-disable-the-umbraco-v14-getting-started-dashboard/image-7.png" alt="" loading="lazy" />
+  <img src="/images/blog/how-to-disable-the-umbraco-v14-getting-started-dashboard/image-7.png" alt="The Umbraco Content section showing the Redirect URL Management dashboard instead, after the Getting Started dashboard is removed" loading="lazy" />
   <figcaption>A screenshot of Umbraco V14 after our code is applied to show the &#x27;Getting Started&#x27; dashaboard has been removed.</figcaption>
 </figure>
 

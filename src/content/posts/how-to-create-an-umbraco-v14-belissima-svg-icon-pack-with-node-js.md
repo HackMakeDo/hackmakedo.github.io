@@ -197,7 +197,7 @@ So with this hopefully you understand the approach on how I created an icon pack
 So with this I created the first icon pack for Umbraco V14 using the [Open Source MIT licensed SVG icons from Iconoir](https://iconoir.com) and you can go and grab it for Umbraco V14 now to have some more icons and choice for setting a document type icon.
 
 <figure class="hmd-figure">
-  <img src="/images/blog/how-to-create-an-umbraco-v14-belissima-svg-icon-pack-with-node-js/iconoir-sample.png" alt="" loading="lazy" />
+  <img src="/images/blog/how-to-create-an-umbraco-v14-belissima-svg-icon-pack-with-node-js/iconoir-sample.png" alt="A grid of 20 line icons from the Iconoir set, each labelled with its name, from apple-swift and asana to puzzle and slash" loading="lazy" />
   <figcaption>A sample of icons from the Iconoir icon set</figcaption>
 </figure>
 
