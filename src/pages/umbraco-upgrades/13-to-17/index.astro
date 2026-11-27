@@ -41,20 +41,6 @@ const targets = [17, 18, 19, 20, 21].map((n) => findVersion(n)!);
 
 const simone = (await getCollection('testimonials')).find((t) => t.id === 'simone-chiaretta')!;
 
-/** Warren's posts about building for the new backoffice, newest first: proof of expertise, not a tutorial path. */
-const BACKOFFICE_POSTS = [
-  'my-first-umbraco-bellissima-package',
-  'scaffold-umbraco-v14-package-development-project-with-vite-typescript-lit',
-  'creating-a-custom-condition-for-umbraco-bellissima-aka-v14',
-  'how-to-overwrite-the-save-publish-button-and-more-in-umbraco-v14',
-  'how-to-refresh-the-umbraco-v14-bellissima-content-tree-with-code',
-  'how-to-create-an-umbraco-v14-belissima-svg-icon-pack-with-node-js',
-  'using-signalr-ioptionsmonitor-with-umbraco-bellissima-for-reactive-net-options',
-];
-const backofficePosts = (await getCollection('posts', ({ id, data }) => BACKOFFICE_POSTS.includes(id) && !data.draft)).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
-
 const toc = [
   { id: 'why-h', label: 'Why upgrade now' },
   { id: 'target-h', label: 'Umbraco 17, 18 or 19?' },
@@ -320,12 +306,7 @@ const toc = [
             <p>
               After that first call, I can give you an estimate of how long the upgrade will take and what it will cost.
             </p>
-            <p>I’ve written about building for the new backoffice:</p>
-            <ul>
-              {backofficePosts.map((post) => (
-                <li><a href={`/blog/${post.id}/`}>{post.data.title}</a></li>
-              ))}
-            </ul>
+            <p>I’ve also written about <a href="/blog/topic/bellissima/">building for the new backoffice</a> on my blog.</p>
           </Prose>
           <div class="hmd-mt-8">
             <Testimonial
