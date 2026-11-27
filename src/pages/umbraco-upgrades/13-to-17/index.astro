@@ -102,15 +102,14 @@ const toc = [
             <p>
               Because Umbraco 13 stops getting security fixes on <strong>{formatDate(v13.endOfLife)}</strong>, and the <a href="https://devblogs.microsoft.com/dotnet/dotnet-8-9-end-of-support/">.NET 8 it runs on
               is already out of support</a>. The site won't stop working that day, but any vulnerability found after it stays
-              open on your site. And vulnerabilities are being found faster, now that AI tools are used to look for them.
-              With more public cyber attacks on companies and governments in the public eye, staying secure is more important than ever.
+              open on your site.
             </p>
             <p>
               Umbraco 17 has security fixes until <strong>{formatDate(v17.endOfLife)}</strong>, so an upgrade now covers you for the next
               two years.
             </p>
             <p>
-              Does the thought of upgrading from 13 to 17 feel overwhelming, or perhaps you're short on time? I can do it for you as a <a href="/umbraco-freelancer/">freelancer</a> or <a href="/umbraco-contractor/">contractor</a>.
+              I can do the upgrade for you, as a <a href="/umbraco-freelancer/">freelancer</a> or <a href="/umbraco-contractor/">contractor</a>.
             </p>
           </Prose>
         </section>
@@ -125,7 +124,7 @@ const toc = [
               release, with security fixes until <strong>{formatDate(v17.endOfLife)}</strong>.
             </p>
             <p>
-              If you are able to, I recommend upgrading to the standard-term releases, Umbraco 18, 19 and 20, rather
+              If you can, keep going with the standard-term releases, Umbraco 18, 19 and 20, rather
               than sit on 17 until the next big LTS jump. Each one is a much smaller step, and Umbraco marks code as obsolete before
               it removes it, so taking each release shows you what to fix before it breaks.
             </p>
@@ -164,7 +163,7 @@ const toc = [
                 Keeping up with each Umbraco release, and the upgrade that comes with it, takes time.
               </p>
               <p>
-                Don't forget the regular Umbraco security patches too! I can do it for you.
+                Don't forget the regular Umbraco security patches too! I can handle both for you.
               </p>
             </CtaCard>
           </div>
@@ -175,8 +174,7 @@ const toc = [
           <Prose>
             <p>
               Four major versions sit between 13 and 17. You don't install each one, but you do take on the changes each
-              one brings. Umbraco 14 contained the most significant changes with the introduction of the new backoffice
-              interface and architecture.
+              one brings. Most of them are in Umbraco 14, which replaced the whole backoffice.
             </p>
           </Prose>
           <div class="hmd-mt-8">
@@ -200,14 +198,6 @@ const toc = [
               <p>
                 If you ticked more than a couple of items, the upgrade is likely to be a bigger job. I can help you plan
                 it, and do it for you if you like.
-              </p>
-              <p>
-                Every Umbraco site is built differently, with its own packages and customisations, so I won't guess at a
-                number of days.
-              </p>
-              <p>
-                Let's have a call, or send me an email about your site, and I'll look into what your
-                upgrade needs. After that, I can give you an estimate of how long it will take and what it will cost.
               </p>
             </CtaCard>
           </div>
@@ -280,7 +270,7 @@ const toc = [
         <section aria-labelledby="gotchas-h">
           <SectionHeading lead="What catches people" boxed="out" id="gotchas-h" />
           <Prose>
-            <p>These are the problems worth planning for before you start, not discovering on the day.</p>
+            <p>Plan for these before you start.</p>
             <ul>
               {GOTCHAS.map((g) => (
                 <li><strong>{g.title}.</strong> <span set:html={g.html} /></li>
