@@ -24,7 +24,7 @@ import ContactCard from '../../../components/ContactCard.astro';
 import { getCollection } from 'astro:content';
 import { articleSchema, faqPageSchema } from '../../../lib/structured-data';
 import { findVersion, formatDate, isReleased } from '../../../data/umbraco-versions';
-import { GUIDE_UPDATED, VERSION_STOPS, CHECKLIST, STAGES, GOTCHAS, FAQ_ITEMS, BREAKING_CHANGES_URL, ELEMENTS_DOCS_URL, whichVersionAnswer } from '../../../data/upgrade-guide';
+import { GUIDE_UPDATED, VERSION_STOPS, CHECKLIST, STAGES, GOTCHAS, FAQ_ITEMS, ELEMENTS_DOCS_URL, whichVersionAnswer } from '../../../data/upgrade-guide';
 
 const TITLE = 'How to upgrade Umbraco 13 to 17';
 const DESCRIPTION =
@@ -89,12 +89,12 @@ const toc = [
     trail={[{ label: 'Home', href: '/' }, { label: 'Umbraco upgrades', href: '/umbraco-upgrades/' }, { label: '13 to 17 guide' }]}
     eyebrow="Guide"
     title={TITLE}
-    lead={`Umbraco 13 reaches end of life on ${formatDate(v13.endOfLife)}. You can upgrade straight to Umbraco 17, the current long-term support release, and the database migrations run for you. Most of the work is in what Umbraco 14 removed: the AngularJS backoffice, Nested Content, the old grid and macros.`}
+    lead={`Umbraco 13 reaches end of life on ${formatDate(v13.endOfLife)}.`}
   >
+    <p class="hmd-pagehead__lead">You can upgrade straight to Umbraco 17. Most of the work is in what Umbraco 14 removed: the AngularJS backoffice, Nested Content, the old grid and macros. Feeling overwhelmed, or short on time? As an Umbraco freelancer, I can upgrade your site for you.</p>
     <p class="hmd-meta guide__meta">
-      By <a href="/about/">Warren Buckley</a>, Umbraco Certified Master and nine-time Umbraco MVP · Updated{' '}
-      <time datetime={GUIDE_UPDATED}>{formatDate(GUIDE_UPDATED)}</time>, checked against{' '}
-      <a href={BREAKING_CHANGES_URL}>Umbraco’s breaking changes</a>
+      By <a href="/about/">Warren Buckley</a> · Updated{' '}
+      <time datetime={GUIDE_UPDATED}>{formatDate(GUIDE_UPDATED)}</time>
     </p>
     <div class="hmd-hero__actions hmd-mt-8">
       <Button href="#contact-h">Get help with your upgrade</Button>
